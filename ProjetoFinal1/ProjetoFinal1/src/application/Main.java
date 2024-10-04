@@ -3,19 +3,96 @@ package application;
 import java.sql.Connection;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import packageConnection.ConnectionDatabase;
 
 public class Main extends Application {
 
+	private static Stage stage;
+	private static Scene Login;
+	private static Scene main;
+	private static Scene Vendedores;
+	private static Scene Clientes;
+	private static Scene Produtos;
+	private static Scene Fornecedores;
+	private static Scene RegistrarVendas;
+	private static Scene TelaRelatorios;
+
 	@Override
 	public void start(Stage primaryStage) {
 
 		try {
+
+			stage = primaryStage;
+
+			primaryStage.setTitle("Artigos Esportivos");
+
+			Parent fxmlLogin = FXMLLoader.load(getClass().getResource("/packageView/viewLogin.fxml"));
+			Login = new Scene(fxmlLogin);
+
+			Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
+			main = new Scene(fxmlMain);
+
+			Parent fxmlVendedor = FXMLLoader.load(getClass().getResource("/packageView/viewVendedores.fxml"));
+			Vendedores = new Scene(fxmlVendedor);
+
+			Parent fxmlCliente = FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
+			Clientes = new Scene(fxmlCliente);
+
+			Parent fxmlProduto = FXMLLoader.load(getClass().getResource("/packageView/viewProdutos.fxml"));
+			Produtos = new Scene(fxmlProduto);
+
+			Parent fxmlFornecedor = FXMLLoader.load(getClass().getResource("/packageView/viewFornecedores.fxml"));
+			Fornecedores = new Scene(fxmlFornecedor);
+
+			Parent fxmlRegistrarVenda = FXMLLoader
+					.load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
+			RegistrarVendas = new Scene(fxmlRegistrarVenda);
+
+			Parent fxmlTelaRelatorio = FXMLLoader.load(getClass().getResource("/packageView/viewTelaRelatorios.fxml"));
+			TelaRelatorios = new Scene(fxmlTelaRelatorio);
+
+			primaryStage.setScene(Login);
+			primaryStage.show();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	}
+
+	public static void changeScreen(String tela) {
+		if (tela.equals("login")) {
+			stage.setScene(Login);
+			stage.centerOnScreen();
+		} else if (tela.equals("main")) {
+			stage.setScene(main);
+			stage.centerOnScreen();
+		} else if (tela.equals("Vendedores")) {
+			stage.setScene(Vendedores);
+			stage.centerOnScreen();
+		} else if (tela.equals("Clientes")) {
+			stage.setScene(Clientes);
+			stage.centerOnScreen();
+		} else if (tela.equals("Produtos")) {
+			stage.setScene(Produtos);
+			stage.centerOnScreen();
+		} else if (tela.equals("Fornecedores")) {
+			stage.setScene(Fornecedores);
+			stage.centerOnScreen();
+		} else if (tela.equals("RegistrarVendas")) {
+			stage.setScene(RegistrarVendas);
+			stage.centerOnScreen();
+		} else if (tela.equals("TelaRelatorios")) {
+			stage.setScene(TelaRelatorios);
+			stage.centerOnScreen();
+		}
+	}
+
 	public static void main(String[] args) {
 //
 		Connection con = ConnectionDatabase.getConnection();
