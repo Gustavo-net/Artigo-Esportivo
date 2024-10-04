@@ -63,7 +63,8 @@ public class Main extends Application {
 		}
 	}
 
-	}
+
+
 
 	public static void changeScreen(String tela) {
 		if (tela.equals("login")) {
