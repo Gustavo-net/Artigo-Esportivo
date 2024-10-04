@@ -16,7 +16,6 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-// teste de commit
 	public static void main(String[] args) {
 //
 		Connection con = ConnectionDatabase.getConnection();
