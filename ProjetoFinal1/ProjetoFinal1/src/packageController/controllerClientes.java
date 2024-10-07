@@ -1,4 +1,4 @@
-package package_Controller;
+package packageController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import packageModel.Clientes;
 import package_controle.ClienteDAO;
 
-public class ControllerClientes implements Initializable {
+public class controllerClientes implements Initializable {
 
     @FXML
     private Button btnVoltar;
