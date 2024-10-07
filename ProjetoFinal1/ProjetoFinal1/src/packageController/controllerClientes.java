@@ -16,73 +16,72 @@ import package_controle.ClienteDAO;
 
 public class controllerClientes implements Initializable {
 
-    @FXML
-    private Button btnVoltar;
+	@FXML
+	private Button btnVoltar;
 
-    @FXML
-    private Button btnEditar;
+	@FXML
+	private Button btnEditar;
 
-    @FXML
-    private Text idButtonVendedor;
+	@FXML
+	private Text idButtonVendedor;
 
-    @FXML
-    private Text idButtonFornecedor;
+	@FXML
+	private Text idButtonFornecedor;
 
-    @FXML
-    private Text idButtonProduto;
+	@FXML
+	private Text idButtonProduto;
 
-    @FXML
-    private Button btnPesquisar;
+	@FXML
+	private Button btnPesquisar;
 
-    @FXML
-    private TextField labelPesquisar;
+	@FXML
+	private TextField labelPesquisar;
 
-    @FXML
-    private Text btnButton; // Corrigido o nome
+	@FXML
+	private Text btnButton;
+	
+	@FXML
+	private Button btnDeletar;
 
-    @FXML
-    private Button btnDeletar;
+	@FXML
+	private TableColumn<Clientes, String> columnCPF_CNPJ;
 
-    @FXML
-    private TableColumn<Clientes, String> columnCPF_CNPJ;
+	@FXML
+	private TableColumn<Clientes, String> columnDataNasc;
 
-    @FXML
-    private TableColumn<Clientes, String> columnDataNasc;
+	@FXML
+	private TableColumn<Clientes, String> columnDataPrimComp;
 
-    @FXML
-    private TableColumn<Clientes, String> columnDataPrimComp;
+	@FXML
+	private TableColumn<Clientes, String> columnEmail;
 
-    @FXML
-    private TableColumn<Clientes, String> columnEmail;
+	@FXML
+	private TableColumn<Clientes, String> columnEndereco; 
+	
+	@FXML
+	private TableColumn<Clientes, String> columnID;
 
-    @FXML
-    private TableColumn<Clientes, String> columnEndereco; // Corrigido para evitar acentuação
+	@FXML
+	private TableColumn<Clientes, String> columnNome;
 
-    @FXML
-    private TableColumn<Clientes, String> columnID;
+	@FXML
+	private TableColumn<Clientes, String> columnTelefone;
 
-    @FXML
-    private TableColumn<Clientes, String> columnNome;
+	@FXML
+	private TableColumn<Clientes, String> columnTipoJuridico; 
+	@FXML
+	private TextField txtPesquisar;
 
-    @FXML
-    private TableColumn<Clientes, String> columnTelefone;
+	@FXML
+	private TableView<Clientes> tableCliente;
 
-    @FXML
-    private TableColumn<Clientes, String> columnTipoJuridico; // Corrigido para evitar acentuação
+	private ObservableList<Clientes> arrayCliente;
+	private ClienteDAO clienteDAO = new ClienteDAO();
 
-    @FXML
-    private TextField txtPesquisar;
+	public static Clientes clienteEditor = new Clientes();
 
-    @FXML
-    private TableView<Clientes> tableCliente;
-
-    private ObservableList<Clientes> arrayCliente;
-    private ClienteDAO clienteDAO = new ClienteDAO();
-
-    public static Clientes clienteEditor = new Clientes();
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // Implementação da inicialização, se necessário
-    }
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// Implementação da inicialização, se necessário
+	}
 }
