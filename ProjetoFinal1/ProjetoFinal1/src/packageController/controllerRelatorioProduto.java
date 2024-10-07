@@ -60,7 +60,7 @@ public class controllerRelatorioProduto {
 	    @FXML
 	    private TextField textFieldPesquisar;
 
-	    @FXML
+	    @FXML 
 	    void OnBtnPesquisarRelatorio(ActionEvent event) {
 	    	ArrayVendas = FXCollections.observableArrayList(Vendas.search(textFieldPesquisar.getText()));
 			columnID.setCellValueFactory(new PropertyValueFactory<>("id_compra"));
