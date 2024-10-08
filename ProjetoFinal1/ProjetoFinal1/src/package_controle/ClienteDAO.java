@@ -34,7 +34,7 @@ public class ClienteDAO {
         }
     }
 
-    public ArrayList<Clientes> read() {
+    public static ArrayList<Clientes> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
