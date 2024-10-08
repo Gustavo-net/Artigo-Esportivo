@@ -83,17 +83,15 @@ public class controllerClientes implements Initializable {
 	public static Clientes clienteEditor = new Clientes();
 
 	public void carregarTableCliente() {
-		arrayCliente = FXCollections.observableArrayList(clienteDAO.read());
+		arrayCliente = FXCollections.observableArrayList(ClienteDAO.read());
 
-		columnidCliente.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
-		columncpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-		columnnomeCliente.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		columndataNasc.setCellValueFactory(new PropertyValueFactory<>("email"));
+		columnID.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
+		columnCPF_CNPJ.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("email"));
 		columnid_Endereço.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
 		columnemail.setCellValueFactory(new PropertyValueFactory<>("DataNasc"));
 		columntelefone.setCellValueFactory(new PropertyValueFactory<>("DataPrimCom"));
-		columnprogramaFidelidade.setCellValueFactory(new PropertyValueFactory<>("programaFidelidade"));
-		columnpontosFidelidade.setCellValueFactory(new PropertyValueFactory<>("pontosFidelidade")))
 
 		tableCliente.setItems(arrayCliente);
 	}
