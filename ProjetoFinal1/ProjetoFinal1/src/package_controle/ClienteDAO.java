@@ -8,111 +8,150 @@ import java.util.ArrayList;
 
 import packageConnection.ConnectionDatabase;
 import packageModel.Clientes;
+import package_model.Cliente;
 
 public class ClienteDAO {
-    public void create(Clientes c) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
+	public void create(Clientes c) {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
 
-        try {
-            stmt = con.prepareStatement(
-                    "INSERT INTO Cliente (idEndereco, nome, cpf, id_Endereck, email, telefone, programaFidelidade, pontosFidelidade, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, c.getIdCliente());
-            stmt.setString(2, c.getNomeCliente());
-            stmt.setString(3, c.getCpf());
-            stmt.setString(4, c.getId_Endereço());
-            stmt.setString(5, c.getEmail());
-            stmt.setString(6, c.getTelefone());
-            stmt.setString(7, c.getProgramaFidelidade());
-            stmt.setString(8, c.getPontosFidelidade());
-            stmt.setString(9, c.getDataNasc());
+		try {
+			stmt = con.prepareStatement(
+					"INSERT INTO Cliente (idEndereco, nome, cpf, id_Endereck, email, telefone, programaFidelidade, pontosFidelidade, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			stmt.setString(1, c.getIdCliente());
+			stmt.setString(2, c.getNomeCliente());
+			stmt.setString(3, c.getCpf());
+			stmt.setString(4, c.getId_Endereço());
+			stmt.setString(5, c.getEmail());
+			stmt.setString(6, c.getTelefone());
+			stmt.setString(7, c.getProgramaFidelidade());
+			stmt.setString(8, c.getPontosFidelidade());
+			stmt.setString(9, c.getDataNasc());
 
-            stmt.executeUpdate();
+			stmt.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt);
+		}
+	}
 
-    public ArrayList<Clientes> search(String string) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        ArrayList<Clientes> clientes = new ArrayList<>();
+	public ArrayList<Clientes> read() {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Clientes> cliente = new ArrayList<>();
 
-        try {
-            stmt = con.prepareStatement("SELECT * FROM Cliente WHERE nome LIKE ? or cpf LIKE ?"); 
-            stmt.setString(1, "%" + string + "%");
-            rs = stmt.executeQuery();
+		try {
+			stmt = con.prepareStatement("SELECT * FROM Cliente");
+			rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                Clientes c = new Clientes();
-                c.setIdCliente(rs.getString("idCliente"));
-                c.setNomeCliente(rs.getString("nome"));
-                c.setCpf(rs.getString("cpf"));
-                c.setEmail(rs.getString("email"));
-                c.setTelefone(rs.getString("telefone"));
-                c.setProgramaFidelidade("programaFidelidade");
-                c.setPontosFidelidade("pontosFidelidade");
-                c.setDataNasc(rs.getString("dataNasc"));
-                clientes.add(c);
-            }
-            
-        } catch (SQLException e) {
-            e.printStackTrace(); 
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt, rs);
-        }
-        
-        return clientes;
-    }
-    
-    public void update(Clientes c) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
+			while (rs.next()) {
+				Clientes c = new Clientes();
+				c.setIdCliente(rs.getString(1));
+				c.setNomeCliente(rs.getString(2));
+				c.setCpf(rs.getString(3));
+				c.setDataNasc(rs.getString(4));
+				c.setId_Endereço(rs.getString(5));
+				c.setEmail(rs.getString(6));
+				c.setTelefone(rs.getString(7));
+				c.setProgramaFidelidade(rs.getString(8));
+				c.setPontosFidelidade(rs.getString(9));
 
-        try {
-            stmt = con.prepareStatement("UPDATE Cliente SET nome = ?, cpf = ?, id_Endereco = ?, email = ?, telefone = ?, programaFidelidade = ?, pontosFidelidade = ?, dataNasc = ? WHERE idCliente = ?");
-            
-            stmt.setString(1, c.getNomeCliente());
-            stmt.setString(2, c.getCpf());
-            stmt.setString(3, c.getId_Endereço());
-            stmt.setString(4, c.getEmail());
-            stmt.setString(5, c.getTelefone());
-            stmt.setString(6, c.getProgramaFidelidade());
-            stmt.setString(7, c.getPontosFidelidade());
-            stmt.setString(8, c.getDataNasc());
-            stmt.setString(9, c.getIdCliente());
+				cliente.add(c);
 
-            stmt.executeUpdate();
+			}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
 
-    public void delete(String idCliente) {
-    	
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
+		}
 
-        try {
-            stmt = con.prepareStatement("DELETE FROM Cliente WHERE idCliente = ?");
-            stmt.setString(1, idCliente);
+		return cliente;
+	}
 
-            stmt.executeUpdate();
+	public ArrayList<Clientes> search(String string) {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Clientes> clientes = new ArrayList<>();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Erro ao excluir o cliente: " + e.getMessage(), e);
+		try {
+			stmt = con.prepareStatement("SELECT * FROM Cliente WHERE nome LIKE ? or cpf LIKE ?");
+			stmt.setString(1, "%" + string + "%");
+			rs = stmt.executeQuery();
 
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
-  
+			while (rs.next()) {
+				Clientes c = new Clientes();
+				c.setIdCliente(rs.getString("idCliente"));
+				c.setNomeCliente(rs.getString("nome"));
+				c.setCpf(rs.getString("cpf"));
+				c.setEmail(rs.getString("email"));
+				c.setTelefone(rs.getString("telefone"));
+				c.setProgramaFidelidade("programaFidelidade");
+				c.setPontosFidelidade("pontosFidelidade");
+				c.setDataNasc(rs.getString("dataNasc"));
+				clientes.add(c);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}
+
+		return clientes;
+	}
+
+	public void update(Clientes c) {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+
+		try {
+			stmt = con.prepareStatement(
+					"UPDATE Cliente SET nome = ?, cpf = ?, id_Endereco = ?, email = ?, telefone = ?, programaFidelidade = ?, pontosFidelidade = ?, dataNasc = ? WHERE idCliente = ?");
+
+			stmt.setString(1, c.getNomeCliente());
+			stmt.setString(2, c.getCpf());
+			stmt.setString(3, c.getId_Endereço());
+			stmt.setString(4, c.getEmail());
+			stmt.setString(5, c.getTelefone());
+			stmt.setString(6, c.getProgramaFidelidade());
+			stmt.setString(7, c.getPontosFidelidade());
+			stmt.setString(8, c.getDataNasc());
+			stmt.setString(9, c.getIdCliente());
+
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt);
+		}
+	}
+
+	public void delete(String idCliente) {
+
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+
+		try {
+			stmt = con.prepareStatement("DELETE FROM Cliente WHERE idCliente = ?");
+			stmt.setString(1, idCliente);
+
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Erro ao excluir o cliente: " + e.getMessage(), e);
+
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt);
+		}
+	}
+
 }
