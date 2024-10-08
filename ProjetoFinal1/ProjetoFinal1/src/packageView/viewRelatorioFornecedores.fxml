@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,8 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="474.0" layoutX="232.0" layoutY="165.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="652.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="121.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="940.0" />
@@ -106,7 +107,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Text fill="#f18c16" layoutX="254.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Relatório" wrappingWidth="87.781982421875">
+      <Text fill="#f18c16" layoutX="261.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Relatório" wrappingWidth="87.781982421875">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -116,6 +117,28 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Text>
-      <Text layoutX="272.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar a tabela view de Fornecedores com todas as colunas necessarias e tmb adicionar os botões com opacidade 0 sobre cadastro, cliente sair e tals, adicionar tmb os botões de editar e excluir e procurar e tmb um combobox para escolher a categoria" wrappingWidth="430.42266845703125" />
+      <Text layoutX="378.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar a tabela view de Fornecedores com todas as colunas necessarias e tmb adicionar os botões com opacidade 0 sobre cadastro, cliente sair e tals, adicionar tmb os botões de editar e excluir e procurar e tmb um combobox para escolher a categoria" wrappingWidth="430.42266845703125" />
+      <TableView layoutX="245.0" layoutY="225.0" prefHeight="405.0" prefWidth="626.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" />
+            <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Rectangle arcHeight="19.0" arcWidth="20.0" fill="#f0891a" height="25.0" layoutX="470.0" layoutY="131.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="88.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Text fill="#f18c16" layoutX="490.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salvar" wrappingWidth="48.58197021484375">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
