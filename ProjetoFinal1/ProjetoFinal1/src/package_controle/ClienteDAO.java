@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import packageConnection.ConnectionDatabase;
 import packageModel.Clientes;
-import package_model.Cliente;
 
 public class ClienteDAO {
     public void create(Clientes c) {
@@ -36,39 +35,7 @@ public class ClienteDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
-    
-    public ArrayList<Clientes> read() {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        ArrayList<Clientes> clientes = new ArrayList<>();
 
-        try {
-            stmt = con.prepareStatement("SELECT * FROM Cliente");
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Clientes c = new Clientes();
-                c.setIdCliente(rs.getString("idCliente")); // Corrigido para corresponder ao nome correto
-                c.setNomeCliente(rs.getString("nomeCliente"));
-                c.setCpf(rs.getString("cpf"));
-                c.setDataNasc(rs.getString("dataNasc"));
-                c.setId_Endereço(rs.getString("id_Endereço"));
-                c.setEmail(rs.getString("email"));
-                c.setTelefone(rs.getString("telefone")); // Certifique-se de que esse campo existe na tabela
-                c.setProgramaFidelidade(rs.getString("programaFidelidade")); // Corrigido para idEndereco
-                c.setPontosFidelidade(rs.getString("pontosFidelidade")); // Certifique-se de que esse campo existe na tabela
-
-                clientes.add(c);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt, rs);
-        }
-
-        return clientes;
-    }
     public ArrayList<Clientes> search(String string) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;

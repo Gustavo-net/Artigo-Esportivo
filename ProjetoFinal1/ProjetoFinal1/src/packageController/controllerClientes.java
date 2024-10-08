@@ -41,8 +41,7 @@ public class controllerClientes implements Initializable {
 
 	@FXML
 	private Text btnButton;
-	
-+
+
 	@FXML
 	private Button btnDeletar;
 
