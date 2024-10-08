@@ -34,6 +34,10 @@ public class ClienteDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
+    
+    	
+    	
+    
 
     public ArrayList<Clientes> search(String string) {
         Connection con = ConnectionDatabase.getConnection();
