@@ -118,9 +118,7 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Text>
-<<<<<<< HEAD
       <Text layoutX="239.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar a tabela view de produtos com todas as colunas necessarias e tmb adicionar os botões com opacidade 0 sobre cadastro, cliente sair e tals, adicionar tmb os botões de editar e excluir e procurar e tmb um combobox para escolher a categoria" wrappingWidth="638.4226684570312" />
-=======
       <TableView fx:id="ViewProdutos" layoutX="231.0" layoutY="164.0" prefHeight="474.0" prefWidth="693.0">
         <columns>
           <TableColumn fx:id="columnidProduto" prefWidth="75.0" text="idProduto" />
@@ -154,6 +152,5 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
->>>>>>> branch 'master' of https://github.com/Gustavo-net/Artigo-Esportivo.git
    </children>
 </AnchorPane>
