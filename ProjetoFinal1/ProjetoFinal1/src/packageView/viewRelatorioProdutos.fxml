@@ -118,7 +118,6 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Text>
-      <Text layoutX="343.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar a tabela view de produtos com todas as colunas necessarias e tmb adicionar os botões com opacidade 0 sobre cadastro, cliente sair e tals, adicionar tmb os botões de editar e excluir e procurar e tmb um combobox para escolher a categoria" wrappingWidth="430.42266845703125" />
       <TableView fx:id="ViewProdutos" layoutX="231.0" layoutY="164.0" prefHeight="474.0" prefWidth="693.0">
         <columns>
           <TableColumn fx:id="columnidProduto" prefWidth="75.0" text="idProduto" />
@@ -132,17 +131,22 @@
             <TableColumn fx:id="columnEstoqueMax" prefWidth="75.0" text="EstoqueMax" />
         </columns>
       </TableView>
-      <Button fx:id="btnSalvar" layoutX="561.0" layoutY="125.0" mnemonicParsing="false" onAction="#btnActionSalvar" prefHeight="26.0" prefWidth="95.0" style="-fx-background-radius: 60; -fx-background-color: ffdb95;" text="Salvar">
+      <Button fx:id="btnSalvar" layoutX="402.0" layoutY="123.0" mnemonicParsing="false" onAction="#btnActionSalvar" prefHeight="36.0" prefWidth="88.0" style="-fx-background-radius: 60; -fx-background-color: ffdb95;" text="Salvar">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditar" layoutX="666.0" layoutY="125.0" mnemonicParsing="false" onAction="#btnActionEditar" prefHeight="26.0" prefWidth="95.0" style="-fx-background-radius: 60; -fx-background-color: ffdb95;" text="Editar">
+      <Button fx:id="btnEditar" layoutX="528.0" layoutY="123.0" mnemonicParsing="false" onAction="#btnActionEditar" prefHeight="36.0" prefWidth="88.0" style="-fx-background-radius: 60; -fx-background-color: ffdb95;" text="Editar">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnExcluir" layoutX="770.0" layoutY="125.0" mnemonicParsing="false" onAction="#btnActionExcluir" prefHeight="26.0" prefWidth="95.0" style="-fx-background-radius: 60; -fx-background-color: ffdb95;" text="Excluir">
+      <Button fx:id="btnExcluir" layoutX="652.0" layoutY="124.0" mnemonicParsing="false" onAction="#btnActionExcluir" prefHeight="36.0" prefWidth="85.0" style="-fx-background-radius: 60; -fx-background-color: ffdb95;" text="Excluir">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnPesquisar" layoutX="810.0" layoutY="123.0" mnemonicParsing="false" onAction="#brn" prefHeight="38.0" prefWidth="95.0" style="-fx-background-radius: 60; -fx-background-color: ffdb95;" text="Pesquisar">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
