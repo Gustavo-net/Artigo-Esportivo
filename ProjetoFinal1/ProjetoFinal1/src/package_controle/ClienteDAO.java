@@ -36,11 +36,12 @@ public class ClienteDAO {
 		}
 	}
 
-	public static ArrayList<Clientes> read() {
-		Connection con = ConnectionDatabase.getConnection();
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		ArrayList<Clientes> clientes = new ArrayList<>();
+    public static ArrayList<Clientes> read() {
+        Connection con = ConnectionDatabase.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Clientes> clientes = new ArrayList<>();
+
 
 		try {
 			stmt = con.prepareStatement("SELECT * FROM Cliente");
