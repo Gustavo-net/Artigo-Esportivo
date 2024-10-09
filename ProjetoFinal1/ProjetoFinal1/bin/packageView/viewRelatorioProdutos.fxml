@@ -33,35 +33,38 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <ImageView fitHeight="25.0" fitWidth="85.0" layoutX="827.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="25.0" fitWidth="85.0" layoutX="827.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../packageIcons/iconSair.png" />
+         </image></ImageView>
       <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="26.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/C:/Users/vsistema/git/Artigo-Esportivo/Artigo-Esportivo/ProjetoFinal1/ProjetoFinal1/src/packageIcons/iconCadastroPreto.png" />
+            <Image url="@../packageIcons/iconCadastroPreto.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="20.0" fitWidth="27.0" layoutX="18.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/C:/Users/vsistema/git/Artigo-Esportivo/Artigo-Esportivo/ProjetoFinal1/ProjetoFinal1/src/packageIcons/iconClientesPreto.png" />
+            <Image url="@../packageIcons/iconClientesPreto.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="21.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/C:/Users/vsistema/git/Artigo-Esportivo/Artigo-Esportivo/ProjetoFinal1/ProjetoFinal1/src/packageIcons/iconFornecedoresPreto.png" />
+            <Image url="@../packageIcons/iconFornecedoresPreto.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="19.0" fitWidth="27.0" layoutX="21.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/C:/Users/vsistema/git/Artigo-Esportivo/Artigo-Esportivo/ProjetoFinal1/ProjetoFinal1/src/packageIcons/iconFuncionariosPreto.png" />
+            <Image url="@../packageIcons/iconFuncionariosPreto.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="19.0" fitWidth="27.0" layoutX="43.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Downloads/projeto%20final%20imagens/Captura_de_tela_2024-10-07_160759-removebg-preview.png" />
+            <Image url="@../packageIcons/iconProdutosLaranja.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="19.0" fitWidth="27.0" layoutX="23.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Downloads/projeto%20final%20imagens/Captura_de_tela_2024-10-07_163338-removebg-preview.png" />
+            <Image url="@../packageIcons/iconVendasPreto.png" />
          </image>
       </ImageView>
       <Text fill="#333333" layoutX="47.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastros" wrappingWidth="74.1820068359375">
