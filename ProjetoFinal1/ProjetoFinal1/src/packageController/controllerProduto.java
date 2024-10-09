@@ -1,97 +1,67 @@
 package packageController;
 
-import java.io.IOException;
-
-import org.w3c.dom.Text;
-
-import application.Main;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import packageModel.Produtos;
-import package_controle.ProdutoDAO;
 
 public class controllerProduto {
 
 	@FXML
-	private Text idBtnFornecedor;
-
-	@FXML
-	private Text IdButtonCliente;
-
-	@FXML
-	private Text idButtonVendedor;
-
-	@FXML
-	private Text btnButton;
-
-	@FXML
-	private Button btnDeletar;
-
-	@FXML
-	private Button btnCadastrar;
+	private TableView<Produtos> ViewProdutos;
 
 	@FXML
 	private Button btnEditar;
 
 	@FXML
+	private Button btnExcluir;
+
+	@FXML
 	private Button btnSalvar;
 
 	@FXML
-	private Button Pesquisar;
+	private TableColumn<Produtos, String> columnCodigo;
 
 	@FXML
-	private Button Voltar;
+	private TableColumn<Produtos, String> columnDescrição;
 
 	@FXML
-	private TableColumn<Produtos, Integer> columnCodigo;
+	private TableColumn<Produtos, String> columnEstoqueDisp;
+
+	@FXML
+	private TableColumn<Produtos, String> columnEstoqueMax;
+
+	@FXML
+	private TableColumn<Produtos, String> columnEstoqueMin;
+
+	@FXML
+	private TableColumn<Produtos, String> columnMarca;
 
 	@FXML
 	private TableColumn<Produtos, String> columnNome;
 
 	@FXML
-	private TableColumn<Produtos, String> columnData_fab;
+	private TableColumn<Produtos, String> columnPreçoUn;
 
 	@FXML
-	private TableColumn<Produtos, String> columnData_val;
+	private TableColumn<Produtos, String> columnidProduto;
 
 	@FXML
-	private TableColumn<Produtos, Integer> columnEstoque;
+	void btnActionEditar(ActionEvent event) {
+		
+
+	}
 
 	@FXML
-	private TableColumn<Produtos, Integer> columnID;
+	void btnActionExcluir(ActionEvent event) {
+
+	}
 
 	@FXML
-	private TableColumn<Produtos, Double> columnPreço_Un;
+	void btnActionSalvar(ActionEvent event) {
 
-	@FXML
-	private TableColumn<Produtos, String> columnTipo_un;
-
-	@FXML
-	private TableView<Produtos> tableProduto;
-
-	@FXML
-	private TextField labelPesquisar;
-
-	private ObservableList<Produtos> arrayProduto;
-	private static ProdutoDAO produtoDAO = new ProdutoDAO();
-
-	@FXML
-	    void btnCadastrarProduto(ActionEvent event) throws IOException{
-	    	produtoEditor = null;
-	    	Main.telaCadastrarProdutos;
-	    }
-
-	public static Produtos produtoEditor = new Produtos();
-
-	@FXML 
-	    void btnEditarProdutos(ActionEvent event)throws IOException{
-	    	if(tableProdutos.getSelectionMode().getSelectedIndex)
-	    	
-	    }
+	}
 
 }

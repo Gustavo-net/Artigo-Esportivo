@@ -1,3 +1,4 @@
+package package_controle;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,13 +10,14 @@ import packageConnection.ConnectionDatabase;
 import packageModel.Clientes;
 
 public class ClienteDAO {
+
     public void create(Clientes c) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 
         try {
             stmt = con.prepareStatement(
-                    "INSERT INTO Cliente (idEndereco, nome, cpf, id_Endereck, email, telefone, programaFidelidade, pontosFidelidade, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Cliente (idEndereco, nome, cpf, id_Endereco, email, telefone, programaFidelidade, pontosFidelidade, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, c.getIdCliente());
             stmt.setString(2, c.getNomeCliente());
             stmt.setString(3, c.getCpf());
@@ -27,12 +29,44 @@ public class ClienteDAO {
             stmt.setString(9, c.getDataNasc());
 
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionDatabase.closeConnection(con, stmt);
         }
+    }
+
+    public static ArrayList<Clientes> read() {
+        Connection con = ConnectionDatabase.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Clientes> clientes = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM Cliente");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Clientes c = new Clientes();
+                c.setIdCliente(rs.getString("idCliente"));
+                c.setNomeCliente(rs.getString("nome"));
+                c.setCpf(rs.getString("cpf"));
+                c.setDataNasc(rs.getString("dataNasc"));
+                c.setId_Endereço(rs.getString("id_Endereco"));
+                c.setEmail(rs.getString("email"));
+                c.setTelefone(rs.getString("telefone"));
+                c.setProgramaFidelidade(rs.getString("programaFidelidade"));
+                c.setPontosFidelidade(rs.getString("pontosFidelidade"));
+
+                clientes.add(c);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDatabase.closeConnection(con, stmt, rs);
+        }
+
+        return clientes;
     }
 
     public ArrayList<Clientes> search(String string) {
@@ -42,8 +76,9 @@ public class ClienteDAO {
         ArrayList<Clientes> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Cliente WHERE nome LIKE ? or cpf LIKE ?"); 
+            stmt = con.prepareStatement("SELECT * FROM Cliente WHERE nome LIKE ? OR cpf LIKE ?");
             stmt.setString(1, "%" + string + "%");
+            stmt.setString(2, "%" + string + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -53,28 +88,29 @@ public class ClienteDAO {
                 c.setCpf(rs.getString("cpf"));
                 c.setEmail(rs.getString("email"));
                 c.setTelefone(rs.getString("telefone"));
-                c.setProgramaFidelidade("programaFidelidade");
-                c.setPontosFidelidade("pontosFidelidade");
+                c.setProgramaFidelidade(rs.getString("programaFidelidade"));
+                c.setPontosFidelidade(rs.getString("pontosFidelidade"));
                 c.setDataNasc(rs.getString("dataNasc"));
+
                 clientes.add(c);
             }
-            
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         } finally {
             ConnectionDatabase.closeConnection(con, stmt, rs);
         }
-        
+
         return clientes;
     }
-    
+
     public void update(Clientes c) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE Cliente SET nome = ?, cpf = ?, id_Endereco = ?, email = ?, telefone = ?, programaFidelidade = ?, pontosFidelidade = ?, dataNasc = ? WHERE idCliente = ?");
-            
+            stmt = con.prepareStatement(
+                    "UPDATE Cliente SET nome = ?, cpf = ?, id_Endereco = ?, email = ?, telefone = ?, programaFidelidade = ?, pontosFidelidade = ?, dataNasc = ? WHERE idCliente = ?");
+
             stmt.setString(1, c.getNomeCliente());
             stmt.setString(2, c.getCpf());
             stmt.setString(3, c.getId_Endereço());
@@ -86,7 +122,6 @@ public class ClienteDAO {
             stmt.setString(9, c.getIdCliente());
 
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -95,7 +130,6 @@ public class ClienteDAO {
     }
 
     public void delete(String idCliente) {
-    	
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 
@@ -104,14 +138,11 @@ public class ClienteDAO {
             stmt.setString(1, idCliente);
 
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao excluir o cliente: " + e.getMessage(), e);
-
         } finally {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
-  
 }

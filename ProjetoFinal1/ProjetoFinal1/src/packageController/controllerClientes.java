@@ -46,7 +46,7 @@ public class controllerClientes implements Initializable {
 	private Button btnDeletar;
 
 	@FXML
-	private TableColumn<Clientes, String> columnCPF_CNPJ;
+	private TableColumn<Clientes, String> columncpf;
 
 	@FXML
 	private TableColumn<Clientes, String> columnDataNasc;
@@ -55,10 +55,10 @@ public class controllerClientes implements Initializable {
 	private TableColumn<Clientes, String> columnDataPrimComp;
 
 	@FXML
-	private TableColumn<Clientes, String> columnEmail;
+	private TableColumn<Clientes, String> columnemail;
 
 	@FXML
-	private TableColumn<Clientes, String> columnEndereco;
+	private TableColumn<Clientes, String> columnid_Endereco;
 
 	@FXML
 	private TableColumn<Clientes, String> columnID;
@@ -67,7 +67,13 @@ public class controllerClientes implements Initializable {
 	private TableColumn<Clientes, String> columnNome;
 
 	@FXML
-	private TableColumn<Clientes, String> columnTelefone;
+	private TableColumn<Clientes, String> columntelefone;
+	
+	@FXML
+	private TableColumn<Clientes, String> columnprogramaFidelidade;
+	
+	@FXML
+	private TableColumn<Clientes, String> columnpontosFidelidade;
 
 	@FXML
 	private TableColumn<Clientes, String> columnTipoJuridico;
@@ -86,12 +92,14 @@ public class controllerClientes implements Initializable {
 		arrayCliente = FXCollections.observableArrayList(ClienteDAO.read());
 
 		columnID.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
-		columnCPF_CNPJ.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		columncpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("email"));
-		columnid_Endereço.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
+		columnid_Endereco.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
 		columnemail.setCellValueFactory(new PropertyValueFactory<>("DataNasc"));
 		columntelefone.setCellValueFactory(new PropertyValueFactory<>("DataPrimCom"));
+		columnprogramaFidelidade.setCellValueFactory(new PropertyValueFactory<>("programaFidelidade"));
+		columnpontosFidelidade.setCellValueFactory(new PropertyValueFactory<>("pontosFidelidade"));
 
 		tableCliente.setItems(arrayCliente);
 	}
