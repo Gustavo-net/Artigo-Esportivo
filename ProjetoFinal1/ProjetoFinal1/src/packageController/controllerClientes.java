@@ -106,7 +106,7 @@ public class controllerClientes implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// Implementação da inicialização, se necessáriopan
+		// Implementação da inicialização, se necessário
 	}
 
 }
