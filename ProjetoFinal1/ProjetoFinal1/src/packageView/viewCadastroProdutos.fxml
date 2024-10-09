@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -115,6 +116,64 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Text>
-      <Text layoutX="239.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar a tabela view de produtos com todas as colunas necessarias e tmb adicionar os botões com opacidade 0 sobre cadastro, cliente sair e tals, adicionar tmb os botões de editar e excluir e procurar e tmb um combobox para escolher a categoria" wrappingWidth="638.4226684570312" />
+      <Text fill="#333333" layoutX="251.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Produto" wrappingWidth="156.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField layoutX="251.0" layoutY="212.0" prefHeight="26.0" prefWidth="329.0" />
+      <Text fill="#333333" layoutX="251.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField layoutX="251.0" layoutY="267.0" prefHeight="26.0" prefWidth="157.0" />
+      <Text fill="#333333" layoutX="419.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço Unitário" wrappingWidth="94.9819946289062">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField layoutX="415.0" layoutY="267.0" prefHeight="26.0" prefWidth="165.0" />
+      <Text fill="#333333" layoutX="251.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marca" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#333333" layoutX="391.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tamanho" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#333333" layoutX="496.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cor" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField layoutX="250.0" layoutY="329.0" prefHeight="26.0" prefWidth="131.0" />
+      <TextField layoutX="389.0" layoutY="329.0" prefHeight="26.0" prefWidth="95.0" />
+      <TextField layoutX="492.0" layoutY="329.0" prefHeight="26.0" prefWidth="85.0" />
+      <Text fill="#333333" layoutX="249.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciamento de Estoque" wrappingWidth="255.781982421875">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text fill="#333333" layoutX="250.0" layoutY="401.0" opacity="0.77" strokeType="OUTSIDE" strokeWidth="0.0" text="Estoque atual" wrappingWidth="94.9819946289062">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <TextField layoutX="249.0" layoutY="406.0" prefHeight="26.0" prefWidth="110.0" />
+      <Text fill="#333333" layoutX="362.0" layoutY="401.0" opacity="0.77" strokeType="OUTSIDE" strokeWidth="0.0" text="Estoque minímo" wrappingWidth="94.9819946289062">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <TextField layoutX="362.0" layoutY="406.0" prefHeight="26.0" prefWidth="110.0" />
+      <Text fill="#333333" layoutX="480.0" layoutY="401.0" opacity="0.77" strokeType="OUTSIDE" strokeWidth="0.0" text="Estoque maxímo" wrappingWidth="94.9819946289062">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <TextField layoutX="480.0" layoutY="406.0" prefHeight="26.0" prefWidth="102.0" />
    </children>
 </AnchorPane>
