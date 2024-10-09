@@ -131,7 +131,6 @@ public class Main extends Application {
 //			System.out.print(clte.getTipoJurd());
 //		}
 //		
-
 		launch(args);
 
 	}
