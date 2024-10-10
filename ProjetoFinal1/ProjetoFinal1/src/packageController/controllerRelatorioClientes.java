@@ -21,7 +21,7 @@ import package_controle.ClienteDAO;
 
 public class controllerRelatorioClientes implements Initializable {
 	@FXML
-	private ComboBox<?> boxFiltrar;
+	private ComboBox<Clientes> boxFiltrar;
 
 	@FXML
 	private Button btnEditar;
