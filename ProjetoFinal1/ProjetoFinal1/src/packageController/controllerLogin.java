@@ -11,11 +11,12 @@ import javafx.scene.control.ToggleButton;
 import packageModel.Funcionarios;
 import package_controle.FuncionarioDAO; // Importando a classe FuncionarioDAO
 
-public class ControllerLogin {
+public class controllerLogin {
 
 	@FXML
-	private Button btnButton;
-
+	private TextField txtSenha;
+	@FXML
+	private Button btnLogar;
 	@FXML
 	private PasswordField txtPassword; // Campo de senha
 	@FXML
@@ -24,18 +25,19 @@ public class ControllerLogin {
 	private ToggleButton verSenha; // Botão para visualizar a senha
 	static Funcionarios funcionario = new Funcionarios(); // Alterado para Funcionario
 
-	@FXML
-	void btnButtonTeste(ActionEvent event) {
-		FuncionarioDAO fDAO = new FuncionarioDAO(); // Alterado para FuncionarioDAO
 
-		funcionario = fDAO.autenticarUser(txtUser.getText(), txtPassword.getText());
+	@FXML
+	void btnActionLogar(ActionEvent event) {
+		FuncionarioDAO fDAO = new FuncionarioDAO(); // Alterado para FuncionarioDAO
+		
+		Funcionarios funcionarios = fDAO.autenticarUser(txtUser.getText(), txtPassword.getText());
 
 		// Verificar se a autenticação foi bem-sucedida
-		if (funcionario.getCpf() != null && funcionario.getSenha() != null) {
+		if ( funcionarios.getCpf() != null && funcionarios.getSenha() != null) {
 			Alert saudacao = new Alert(Alert.AlertType.CONFIRMATION);
 			saudacao.setHeaderText("Saudação");
 			saudacao.setTitle("Bem-vindo");
-			saudacao.setContentText("Seja bem-vindo de volta, " + funcionario.getNomeFuncionario() + "!");
+			saudacao.setContentText("Seja bem-vindo de volta, " + funcionarios.getNomeFuncionario() + "!");
 			saudacao.show();
 			Main.changeScreen("main");
 		} else {
@@ -47,14 +49,16 @@ public class ControllerLogin {
 		}
 	}
 
-	@FXML
-	void visualizarSenha(ActionEvent event) {
-		if (verSenha.isSelected()) {
+    @FXML
+    void OnVerSenha(ActionEvent event) {
+    	if (verSenha.isSelected()) {
+    		txtSenha.setText(txtPassword.getText());
 			txtPassword.setVisible(false);
-			txtUser.setText(txtPassword.getText()); // Aqui pode ser melhor usar outro campo se necessário
+			txtSenha.setText(txtPassword.getText()); // Aqui pode ser melhor usar outro campo se necessário
 		} else {
 			txtPassword.setVisible(true);
 			txtUser.setText(""); // Limpar campo de visualização
 		}
 	}
+    
 }
