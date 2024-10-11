@@ -40,7 +40,7 @@ public class ControllerLogin {
 			Main.changeScreen("main");
 		} else {
 			Alert erro = new Alert(Alert.AlertType.ERROR);
-			erro.setTitle("Falha ao realizar o login");
+			erro.setTitle("Falha	 ao realizar o login");
 			erro.setHeaderText("Erro!");
 			erro.setContentText("Usuário ou senha incorretos! Verifique se as informações estão corretas.");
 			erro.show();
