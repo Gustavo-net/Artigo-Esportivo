@@ -13,9 +13,9 @@ public class Main extends Application {
 
 	private static Stage stage;
 	private static Scene Login;
-//	private static Scene main;
-//	private static Scene Vendedores;
-//	private static Scene Clientes;
+	private static Scene Main;
+	private static Scene Funcionarios;
+	private static Scene Clientes;
 //	private static Scene Produtos;
 //	private static Scene Fornecedores;
 //	private static Scene RegistrarVendas;
@@ -33,14 +33,14 @@ public class Main extends Application {
 			Parent fxmlLogin = FXMLLoader.load(getClass().getResource("/packageView/viewLogin.fxml"));
 			Login = new Scene(fxmlLogin);
 
-//			Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
-//			main = new Scene(fxmlMain);
-//
-//			Parent fxmlVendedor = FXMLLoader.load(getClass().getResource("/packageView/viewVendedores.fxml"));
-//			Vendedores = new Scene(fxmlVendedor);
-//
-//			Parent fxmlCliente = FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
-//			Clientes = new Scene(fxmlCliente);
+			Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
+			Main = new Scene(fxmlMain);
+
+			Parent fxmlVendedor = FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
+			Funcionarios = new Scene(fxmlVendedor);
+
+			Parent fxmlCliente = FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
+			Clientes = new Scene(fxmlCliente);
 //
 //			Parent fxmlProduto = FXMLLoader.load(getClass().getResource("/packageView/viewProdutos.fxml"));
 //			Produtos = new Scene(fxmlProduto);
@@ -68,15 +68,15 @@ public class Main extends Application {
 			stage.setScene(Login);
 			stage.centerOnScreen();
 		}
-//			else if (tela.equals("main")) {
-//			stage.setScene(main);
-//			stage.centerOnScreen();
-//		} else if (tela.equals("Vendedores")) {
-//			stage.setScene(Vendedores);
-//			stage.centerOnScreen();
-//		} else if (tela.equals("Clientes")) {
-//			stage.setScene(Clientes);
-//			stage.centerOnScreen();
+			else if (tela.equals("main")) {
+			stage.setScene(Main);
+			stage.centerOnScreen();
+		} else if (tela.equals("funcionarios")) {
+			stage.setScene(Funcionarios);
+			stage.centerOnScreen();
+		} else if (tela.equals("clientes")) {
+			stage.setScene(Clientes);
+			stage.centerOnScreen();
 //		} else if (tela.equals("Produtos")) {
 //			stage.setScene(Produtos);
 //			stage.centerOnScreen();
@@ -84,7 +84,7 @@ public class Main extends Application {
 //			stage.setScene(Fornecedores);
 //			stage.centerOnScreen();
 //		} else if (tela.equals("RegistrarVendas")) {
-//			stage.setScene(RegistrarVendas);
+//			stage.setScene();
 //			stage.centerOnScreen();
 //		} else if (tela.equals("TelaRelatorios")) {
 //			stage.setScene(TelaRelatorios);
