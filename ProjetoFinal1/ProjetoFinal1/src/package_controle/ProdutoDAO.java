@@ -38,7 +38,7 @@ public class ProdutoDAO {
         }
     }
 
-    public ArrayList<Produtos> read() {
+    public static ArrayList<Produtos> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
