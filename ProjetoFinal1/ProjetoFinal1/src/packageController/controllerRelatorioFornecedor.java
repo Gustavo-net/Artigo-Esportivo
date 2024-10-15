@@ -12,6 +12,7 @@ public class controllerRelatorioFornecedor {
     @FXML
     private TableColumn<Fornecedores, String> CEP;
 
+    
     @FXML
     private TableColumn<Fornecedores, String> CNPJ;
 
@@ -106,4 +107,5 @@ public class controllerRelatorioFornecedor {
     void OnbtnVoltar(ActionEvent event) {
 
     }
+    
 }

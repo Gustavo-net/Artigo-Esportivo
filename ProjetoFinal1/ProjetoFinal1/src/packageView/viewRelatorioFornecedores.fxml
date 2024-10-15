@@ -144,4 +144,6 @@
       <Button fx:id="btnVoltar" layoutX="378.0" layoutY="181.0" mnemonicParsing="false" onAction="#OnbtnVoltar" prefHeight="26.0" prefWidth="74.0" text="voltar" />
       <Button fx:id="btnPesquisar" layoutX="784.0" layoutY="181.0" mnemonicParsing="false" onAction="#OnbtnPesquisar" prefHeight="26.0" prefWidth="74.0" text="Pesquisar" />
    </children>
+   
+   
 </AnchorPane>
