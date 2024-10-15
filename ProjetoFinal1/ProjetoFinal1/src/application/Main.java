@@ -77,7 +77,7 @@ public class Main extends Application {
 		} else if (tela.equals("clientes")) {
 			stage.setScene(Clientes);
 			stage.centerOnScreen();
-//		} else if (tela.equals("Produtos")) {
+		}// else if (tela.equals("Produtos")) {
 //			stage.setScene(Produtos);
 //			stage.centerOnScreen();
 //		} else if (tela.equals("Fornecedores")) {
