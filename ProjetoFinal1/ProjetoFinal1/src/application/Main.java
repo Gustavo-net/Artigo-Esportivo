@@ -33,7 +33,7 @@ public class Main extends Application {
 			Parent fxmlLogin = FXMLLoader.load(getClass().getResource("/packageView/viewLogin.fxml"));
 			Login = new Scene(fxmlLogin);
 
-			// Parent fxmlMain =
+			// Parent fxmlMain = 
 			// FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
 			// Main = new Scene(fxmlMain);
 
