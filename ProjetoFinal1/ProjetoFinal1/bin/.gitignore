@@ -1,4 +1,8 @@
 /application/
-/packageView/
-/packageIcons/
+/module-info.class
+/packageConnection/
 /packageController/
+/packageIcons/
+/packageModel/
+/packageView/
+/package_controle/
