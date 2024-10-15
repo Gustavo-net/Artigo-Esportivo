@@ -13,18 +13,13 @@ public class Main extends Application {
 
 	private static Stage stage;
 	private static Scene Login;
-	private static Scene main;
-//	private static Scene Vendedores;
-//	private static Scene Clientes;
-	
 	private static Scene Main;
 	private static Scene Funcionarios;
 	private static Scene Clientes;
-	
-//	private static Scene Produtos;
-//	private static Scene Fornecedores;
-//	private static Scene RegistrarVendas;
-//	private static Scene TelaRelatorios;
+// private static Scene Produtos;
+// private static Scene Fornecedores;
+// private static Scene RegistrarVendas;
+// private static Scene TelaRelatorios;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -38,34 +33,27 @@ public class Main extends Application {
 			Parent fxmlLogin = FXMLLoader.load(getClass().getResource("/packageView/viewLogin.fxml"));
 			Login = new Scene(fxmlLogin);
 
-			Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
-			main = new Scene(fxmlMain);
-//
-//			Parent fxmlVendedor = FXMLLoader.load(getClass().getResource("/packageView/viewVendedores.fxml"));
-//			Vendedores = new Scene(fxmlVendedor);
-//
-//			Parent fxmlCliente = FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
-//			Clientes = new Scene(fxmlCliente);
-			Main = new Scene(fxmlMain);
+			//Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
+			//Main = new Scene(fxmlMain);
 
-			Parent fxmlVendedor = FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
-			Funcionarios = new Scene(fxmlVendedor);
+			//Parent fxmlVendedor = FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
+			//Funcionarios = new Scene(fxmlVendedor);
 
-			Parent fxmlCliente = FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
-			Clientes = new Scene(fxmlCliente);
-//
-//			Parent fxmlProduto = FXMLLoader.load(getClass().getResource("/packageView/viewProdutos.fxml"));
-//			Produtos = new Scene(fxmlProduto);
-//
-//			Parent fxmlFornecedor = FXMLLoader.load(getClass().getResource("/packageView/viewFornecedores.fxml"));
-//			Fornecedores = new Scene(fxmlFornecedor);
-//
-//			Parent fxmlRegistrarVenda = FXMLLoader
-//					.load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
-//			RegistrarVendas = new Scene(fxmlRegistrarVenda);
-//
-//			Parent fxmlTelaRelatorio = FXMLLoader.load(getClass().getResource("/packageView/viewTelaRelatorios.fxml"));
-//			TelaRelatorios = new Scene(fxmlTelaRelatorio);
+			//Parent fxmlCliente = FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
+			//Clientes = new Scene(fxmlCliente);
+			//
+			// Parent fxmlProduto = FXMLLoader.load(getClass().getResource("/packageView/viewProdutos.fxml"));
+			// Produtos = new Scene(fxmlProduto);
+			//
+			// Parent fxmlFornecedor = FXMLLoader.load(getClass().getResource("/packageView/viewFornecedores.fxml"));
+			// Fornecedores = new Scene(fxmlFornecedor);
+			//
+			// Parent fxmlRegistrarVenda = FXMLLoader
+			// .load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
+			// RegistrarVendas = new Scene(fxmlRegistrarVenda);
+			//
+			// Parent fxmlTelaRelatorio = FXMLLoader.load(getClass().getResource("/packageView/viewTelaRelatorios.fxml"));
+			// TelaRelatorios = new Scene(fxmlTelaRelatorio);
 
 			primaryStage.setScene(Login);
 			primaryStage.show();
@@ -89,57 +77,57 @@ public class Main extends Application {
 			stage.setScene(Clientes);
 			stage.centerOnScreen();
 		} // else if (tela.equals("Produtos")) {
-//			stage.setScene(Produtos);
-//			stage.centerOnScreen();
-//		} else if (tela.equals("Fornecedores")) {
-//			stage.setScene(Fornecedores);
-//			stage.centerOnScreen();
-//		} else if (tela.equals("RegistrarVendas")) {
-//			stage.setScene();
-//			stage.centerOnScreen();
-//		} else if (tela.equals("TelaRelatorios")) {
-//			stage.setScene(TelaRelatorios);
-//			stage.centerOnScreen();
-//		}
+		// stage.setScene(Produtos);
+		// stage.centerOnScreen();
+		// } else if (tela.equals("Fornecedores")) {
+		// stage.setScene(Fornecedores);
+		// stage.centerOnScreen();
+		// } else if (tela.equals("RegistrarVendas")) {
+		// stage.setScene();
+		// stage.centerOnScreen();
+		// } else if (tela.equals("TelaRelatorios")) {
+		// stage.setScene(TelaRelatorios);
+		// stage.centerOnScreen();
+		// }
 	}
 
 	public static void main(String[] args) {
 //
 		Connection con = ConnectionDatabase.getConnection();
-//		ConnectionDatabase.closeConnection(con);
-//		ArrayList<Cliente> cliente = new ArrayList<>();
-//		ClienteDAO cl = new ClienteDAO();
-//		Cliente c = new Cliente();
+// ConnectionDatabase.closeConnection(con);
+// ArrayList<Cliente> cliente = new ArrayList<>();
+// ClienteDAO cl = new ClienteDAO();
+// Cliente c = new Cliente();
 //
-//		c.setNome("Pedro");
-//		c.setCPF_CNPJ("12345698709");
-//		c.setDataNasc("1987-04-03");
-//		c.setDataPrimCom("2024-02-23");
-//		c.setEmail("pedro@teste.com");
-//		c.setEndereco("Rua tal, numero tal");
-//		c.setTipoJurd("PF");
-//		c.setTelefone("6399205-9085");
+// c.setNome("Pedro");
+// c.setCPF_CNPJ("12345698709");
+// c.setDataNasc("1987-04-03");
+// c.setDataPrimCom("2024-02-23");
+// c.setEmail("pedro@teste.com");
+// c.setEndereco("Rua tal, numero tal");
+// c.setTipoJurd("PF");
+// c.setTelefone("6399205-9085");
 //
-//		ClienteDAO clt = new ClienteDAO();
+// ClienteDAO clt = new ClienteDAO();
 //
-//		clt.update(c);
+// clt.update(c);
 //
-//		cliente = cl.read();
+// cliente = cl.read();
 //
-//		for (int i = 0; i < cliente.size(); i++) {
-//			Cliente clte = cliente.get(i);
-//			System.out.println();
-//			System.out.print(clte.getIdCliente());
-//			System.out.print(clte.getNome());
-//			System.out.print(clte.getCPF_CNPJ());
-//			System.out.print(clte.getEmail());
-//			System.out.print(clte.getTelefone());
-//			System.out.print(clte.getDataNasc());
-//			System.out.print(clte.getDataPrimCom());
-//			System.out.print(clte.getEndereco());
-//			System.out.print(clte.getTipoJurd());
-//		}
-//		
+// for (int i = 0; i < cliente.size(); i++) {
+// Cliente clte = cliente.get(i);
+// System.out.println();
+// System.out.print(clte.getIdCliente());
+// System.out.print(clte.getNome());
+// System.out.print(clte.getCPF_CNPJ());
+// System.out.print(clte.getEmail());
+// System.out.print(clte.getTelefone());
+// System.out.print(clte.getDataNasc());
+// System.out.print(clte.getDataPrimCom());
+// System.out.print(clte.getEndereco());
+// System.out.print(clte.getTipoJurd());
+// }
+//
 		launch(args);
 
 	}
