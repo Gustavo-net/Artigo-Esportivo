@@ -17,6 +17,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SQLServer"/>
-	<classpathentry kind="lib" path="C:/Users/vsistema/Downloads/sqljdbc_12.8.0.0_ptb/sqljdbc_12.8/ptb/jars/mssql-jdbc-12.8.0.jre8.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SQLserver"/>
 	<classpathentry kind="output" path="ProjetoFinal1/bin"/>
 </classpath>

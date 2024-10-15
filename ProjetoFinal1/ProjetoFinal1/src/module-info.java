@@ -6,11 +6,11 @@ module Sistema_BluePen {
 	requires javafx.base;
 	requires java.desktop;
 	
-	exports packageController;
+	//exports packageController;
 	
-	opens packageModel to javafx.base;
+	//opens packageModel to javafx.base;
 	
-	opens packageController to javafx.fxml;
+	//opens packageController to javafx.fxml;
 	
 	opens application to javafx.graphics, javafx.fxml;
 }
