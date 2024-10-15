@@ -16,9 +16,9 @@ public class Main extends Application {
 	private static Scene Main;
 	private static Scene Funcionarios;
 	private static Scene Clientes;
-// private static Scene Produtos;
-// private static Scene Fornecedores;
-// private static Scene RegistrarVendas;
+	private static Scene Produtos;
+	private static Scene Fornecedores;
+	private static Scene RegistrarVendas;
 // private static Scene TelaRelatorios;
 
 	@Override
@@ -33,18 +33,16 @@ public class Main extends Application {
 			Parent fxmlLogin = FXMLLoader.load(getClass().getResource("/packageView/viewLogin.fxml"));
 			Login = new Scene(fxmlLogin);
 
-			// Parent fxmlMain = 
-			// FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
-			// Main = new Scene(fxmlMain);
+			Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
+			Main = new Scene(fxmlMain);
 
-			// Parent fxmlVendedor =
-			// FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
-			// Funcionarios = new Scene(fxmlVendedor);
+			//Parent fxmlFuncionarios = FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
+			//Funcionarios = new Scene(fxmlFuncionarios);
 
 			// Parent fxmlCliente =
 			// FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
 			// Clientes = new Scene(fxmlCliente);
-			//
+
 			// Parent fxmlProduto =
 			// FXMLLoader.load(getClass().getResource("/packageView/viewProdutos.fxml"));
 			// Produtos = new Scene(fxmlProduto);
