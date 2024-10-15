@@ -30,7 +30,7 @@ public class ProdutoDAO {
             stmt.setString(11, prod.getIdVariação());
 
             stmt.executeUpdate();
-
+//tt
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
