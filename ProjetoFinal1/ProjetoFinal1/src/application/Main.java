@@ -33,26 +33,32 @@ public class Main extends Application {
 			Parent fxmlLogin = FXMLLoader.load(getClass().getResource("/packageView/viewLogin.fxml"));
 			Login = new Scene(fxmlLogin);
 
-			//Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
-			//Main = new Scene(fxmlMain);
+			// Parent fxmlMain =
+			// FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
+			// Main = new Scene(fxmlMain);
 
-			//Parent fxmlVendedor = FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
-			//Funcionarios = new Scene(fxmlVendedor);
+			// Parent fxmlVendedor =
+			// FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
+			// Funcionarios = new Scene(fxmlVendedor);
 
-			//Parent fxmlCliente = FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
-			//Clientes = new Scene(fxmlCliente);
+			// Parent fxmlCliente =
+			// FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
+			// Clientes = new Scene(fxmlCliente);
 			//
-			// Parent fxmlProduto = FXMLLoader.load(getClass().getResource("/packageView/viewProdutos.fxml"));
+			// Parent fxmlProduto =
+			// FXMLLoader.load(getClass().getResource("/packageView/viewProdutos.fxml"));
 			// Produtos = new Scene(fxmlProduto);
 			//
-			// Parent fxmlFornecedor = FXMLLoader.load(getClass().getResource("/packageView/viewFornecedores.fxml"));
+			// Parent fxmlFornecedor =
+			// FXMLLoader.load(getClass().getResource("/packageView/viewFornecedores.fxml"));
 			// Fornecedores = new Scene(fxmlFornecedor);
 			//
 			// Parent fxmlRegistrarVenda = FXMLLoader
 			// .load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
 			// RegistrarVendas = new Scene(fxmlRegistrarVenda);
 			//
-			// Parent fxmlTelaRelatorio = FXMLLoader.load(getClass().getResource("/packageView/viewTelaRelatorios.fxml"));
+			// Parent fxmlTelaRelatorio =
+			// FXMLLoader.load(getClass().getResource("/packageView/viewTelaRelatorios.fxml"));
 			// TelaRelatorios = new Scene(fxmlTelaRelatorio);
 
 			primaryStage.setScene(Login);
@@ -77,18 +83,18 @@ public class Main extends Application {
 			stage.setScene(Clientes);
 			stage.centerOnScreen();
 		} // else if (tela.equals("Produtos")) {
-		// stage.setScene(Produtos);
-		// stage.centerOnScreen();
-		// } else if (tela.equals("Fornecedores")) {
-		// stage.setScene(Fornecedores);
-		// stage.centerOnScreen();
-		// } else if (tela.equals("RegistrarVendas")) {
-		// stage.setScene();
-		// stage.centerOnScreen();
-		// } else if (tela.equals("TelaRelatorios")) {
-		// stage.setScene(TelaRelatorios);
-		// stage.centerOnScreen();
-		// }
+			// stage.setScene(Produtos);
+			// stage.centerOnScreen();
+			// } else if (tela.equals("Fornecedores")) {
+			// stage.setScene(Fornecedores);
+			// stage.centerOnScreen();
+			// } else if (tela.equals("RegistrarVendas")) {
+			// stage.setScene();
+			// stage.centerOnScreen();
+			// } else if (tela.equals("TelaRelatorios")) {
+			// stage.setScene(TelaRelatorios);
+			// stage.centerOnScreen();
+			// }
 	}
 
 	public static void main(String[] args) {
