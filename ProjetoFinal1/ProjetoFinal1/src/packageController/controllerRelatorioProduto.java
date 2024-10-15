@@ -1,3 +1,4 @@
+package packageController;
 
 import application.Main;
 import javafx.event.ActionEvent;
@@ -91,9 +92,10 @@ public class controllerRelatorioProduto {
 	}
 
 	@FXML
-    void OnbtnPesquisar(ActionEvent event) {
+	void OnbtnPesquisar(ActionEvent event) {
 
-    }
+	}
+
 	@FXML
 	void btnActionEditar(ActionEvent event) {
 

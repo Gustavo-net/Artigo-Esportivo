@@ -13,7 +13,7 @@ public class Main extends Application {
 
 	private static Stage stage;
 	private static Scene Login;
-//	private static Scene main;
+	private static Scene main;
 //	private static Scene Vendedores;
 //	private static Scene Clientes;
 //	private static Scene Produtos;
@@ -33,8 +33,8 @@ public class Main extends Application {
 			Parent fxmlLogin = FXMLLoader.load(getClass().getResource("/packageView/viewLogin.fxml"));
 			Login = new Scene(fxmlLogin);
 
-//			Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
-//			main = new Scene(fxmlMain);
+			Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
+			main = new Scene(fxmlMain);
 //
 //			Parent fxmlVendedor = FXMLLoader.load(getClass().getResource("/packageView/viewVendedores.fxml"));
 //			Vendedores = new Scene(fxmlVendedor);
