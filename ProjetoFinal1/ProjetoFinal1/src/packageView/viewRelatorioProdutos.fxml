@@ -1,25 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?> <?import javafx.scene.Cursor?> <?import javafx.scene.control.Button?> <?import javafx.scene.control.ComboBox?> <?import javafx.scene.control.TableColumn?> <?import javafx.scene.control.TableView?> <?import javafx.scene.control.TextField?> <?import javafx.scene.effect.DropShadow?> <?import javafx.scene.image.Image?> <?import javafx.scene.image.ImageView?> <?import javafx.scene.layout.AnchorPane?> <?import javafx.scene.paint.Color?> <?import javafx.scene.shape.Rectangle?> <?import javafx.scene.text.Font?> <?import javafx.scene.text.Text?>
-<AnchorPane maxHeight="661.0" maxWidth="932.0"
-	prefHeight="661.0" prefWidth="932.0"
-	xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="packageController.controllerRelatorioProduto">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioProduto">
 	<children>
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE"
-			height="474.0" layoutX="232.0" layoutY="165.0" stroke="BLACK"
-			strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"
-			style="-fx-arc-height: 15; -fx-arc-width: 15;" width="652.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16"
-			height="121.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0"
-			strokeType="INSIDE" strokeWidth="0.0"
-			style="-fx-arc-height: 0; -fx-arc-width: 0;" width="940.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16"
-			height="66.0" layoutX="2.0" stroke="BLACK" strokeMiterLimit="0.0"
-			strokeType="INSIDE" strokeWidth="0.0"
-			style="-fx-arc-height: 0; -fx-arc-width: 0;" width="936.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16"
-			height="60.0" layoutX="1.0" layoutY="-2.0" stroke="BLACK"
-			strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"
-			style="-fx-arc-height: 0; -fx-arc-width: 0;" width="939.0">
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="474.0" layoutX="232.0" layoutY="165.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="652.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="121.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="940.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="66.0" layoutX="2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="936.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="60.0" layoutX="1.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="939.0">
 			<effect>
 				<DropShadow height="53.75" radius="18.7725" width="23.34">
 					<color>
@@ -28,174 +29,119 @@
 				</DropShadow>
 			</effect>
 		</Rectangle>
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE"
-			height="564.0" layoutX="14.0" layoutY="77.0" stroke="BLACK"
-			strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0"
-			style="-fx-arc-height: 15; -fx-arc-width: 15;" width="206.0" />
-		<Text fill="WHITE" layoutX="24.0" layoutY="31.0"
-			strokeType="OUTSIDE" strokeWidth="0.0"
-			text="Sistema de Gestão Comercial" wrappingWidth="227.4234619140625">
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="564.0" layoutX="14.0" layoutY="77.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="206.0" />
+		<Text fill="WHITE" layoutX="24.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema de Gestão Comercial" wrappingWidth="227.4234619140625">
 			<font>
 				<Font name="System Bold" size="16.0" />
 			</font>
 		</Text>
-		<ImageView fitHeight="25.0" fitWidth="85.0" layoutX="827.0"
-			layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="25.0" fitWidth="85.0" layoutX="827.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../packageIcons/iconSair.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="25.0" fitWidth="19.0" layoutX="26.0"
-			layoutY="240.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="25.0" fitWidth="19.0" layoutX="26.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../packageIcons/iconCadastroPreto.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="20.0" fitWidth="27.0" layoutX="18.0"
-			layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="20.0" fitWidth="27.0" layoutX="18.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../packageIcons/iconClientesPreto.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="18.0" fitWidth="24.0" layoutX="21.0"
-			layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="18.0" fitWidth="24.0" layoutX="21.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../packageIcons/iconFornecedoresPreto.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="19.0" fitWidth="27.0" layoutX="21.0"
-			layoutY="345.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="19.0" fitWidth="27.0" layoutX="21.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../packageIcons/iconFuncionariosPreto.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="19.0" fitWidth="27.0" layoutX="43.0"
-			layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="19.0" fitWidth="27.0" layoutX="43.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../packageIcons/iconProdutosLaranja.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="19.0" fitWidth="27.0" layoutX="23.0"
-			layoutY="430.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="19.0" fitWidth="27.0" layoutX="23.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../packageIcons/iconVendasPreto.png" />
 			</image>
 		</ImageView>
-		<Text fill="#333333" layoutX="47.0" layoutY="254.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastros"
-			wrappingWidth="74.1820068359375">
+		<Text fill="#333333" layoutX="47.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastros" wrappingWidth="74.1820068359375">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>
 		</Text>
-		<Text fill="#333333" layoutX="47.0" layoutY="286.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Clientes"
-			wrappingWidth="74.1820068359375">
+		<Text fill="#333333" layoutX="47.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clientes" wrappingWidth="74.1820068359375">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>
 		</Text>
-		<Text fill="#333333" layoutX="48.0" layoutY="322.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Fornecedores"
-			wrappingWidth="102.1820068359375">
+		<Text fill="#333333" layoutX="48.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fornecedores" wrappingWidth="102.1820068359375">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>
 		</Text>
-		<Text fill="#333333" layoutX="47.0" layoutY="360.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Funcionários"
-			wrappingWidth="94.98199462890625">
+		<Text fill="#333333" layoutX="47.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Funcionários" wrappingWidth="94.98199462890625">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>
 		</Text>
-		<Text fill="#f0891a" layoutX="74.0" layoutY="406.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Produtos"
-			wrappingWidth="94.98199462890625">
+		<Text fill="#f0891a" layoutX="74.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produtos" wrappingWidth="94.98199462890625">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>
 		</Text>
-		<Text fill="#333333" layoutX="47.0" layoutY="445.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Vendas"
-			wrappingWidth="94.98199462890625">
+		<Text fill="#333333" layoutX="47.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendas" wrappingWidth="94.98199462890625">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>
 		</Text>
-		<Rectangle arcHeight="19.0" arcWidth="20.0" fill="#f0891a"
-			height="36.0" layoutX="25.0" layoutY="383.0" opacity="0.35"
-			stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="184.0">
+		<Rectangle arcHeight="19.0" arcWidth="20.0" fill="#f0891a" height="36.0" layoutX="25.0" layoutY="383.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="184.0">
 			<cursor>
 				<Cursor fx:constant="HAND" />
 			</cursor>
 		</Rectangle>
-		<Rectangle arcHeight="19.0" arcWidth="20.0" fill="#f0891a"
-			height="25.0" layoutX="232.0" layoutY="131.0" opacity="0.35"
-			stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="131.0">
+		<Rectangle arcHeight="19.0" arcWidth="20.0" fill="#f0891a" height="25.0" layoutX="232.0" layoutY="131.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="131.0">
 			<cursor>
 				<Cursor fx:constant="HAND" />
 			</cursor>
 		</Rectangle>
-		<Text fill="#f18c16" layoutX="254.0" layoutY="149.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Relatório"
-			wrappingWidth="87.781982421875">
+		<Text fill="#f18c16" layoutX="254.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Relatório" wrappingWidth="87.781982421875">
 			<font>
 				<Font name="System Bold" size="16.0" />
 			</font>
 		</Text>
-		<Text fill="WHITE" layoutX="255.0" layoutY="101.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Produtos"
-			wrappingWidth="215.4234619140625">
+		<Text fill="WHITE" layoutX="255.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produtos" wrappingWidth="215.4234619140625">
 			<font>
 				<Font name="System Bold" size="22.0" />
 			</font>
 		</Text>
-		<TableView fx:id="ViewProdutos" layoutX="231.0"
-			layoutY="215.0" prefHeight="425.0" prefWidth="652.0">
+		<TableView fx:id="tableRelatorioProduto" layoutX="231.0" layoutY="215.0" prefHeight="425.0" prefWidth="652.0">
 			<columns>
-				<TableColumn fx:id="columnId"
-					prefWidth="35.20001220703125" text="Id" />
-				<TableColumn fx:id="columnNome"
-					prefWidth="144.79998779296875" text="Nome" />
-				<TableColumn fx:id="columnCodigo"
-					prefWidth="94.4000244140625" text="Codigo" />
-				<TableColumn fx:id="columnMarca"
-					prefWidth="78.4000244140625" text="Marca" />
-				<TableColumn fx:id="columnDescricao"
-					prefWidth="113.60003662109375" text="Descrição" />
-				<TableColumn fx:id="columnPrecoUn" prefWidth="72.0"
-					text="PreçoUn" />
-				<TableColumn fx:id="columnEstoqueAtual"
-					prefWidth="114.39990234375" text="EstoqueAtual" />
+				<TableColumn fx:id="columnId" prefWidth="35.20001220703125" text="Id" />
+				<TableColumn fx:id="columnNome" prefWidth="144.79998779296875" text="Nome" />
+				<TableColumn fx:id="columnCodigo" prefWidth="94.4000244140625" text="Codigo" />
+				<TableColumn fx:id="columnMarca" prefWidth="78.4000244140625" text="Marca" />
+				<TableColumn fx:id="columnDescricao" prefWidth="113.60003662109375" text="Descrição" />
+				<TableColumn fx:id="columnPrecoUn" prefWidth="72.0" text="PreçoUn" />
+				<TableColumn fx:id="columnEstoqueAtual" prefWidth="114.39990234375" text="EstoqueAtual" />
 			</columns>
 		</TableView>
-		<Button fx:id="btnCadastros" layoutX="27.0" layoutY="235.0"
-			mnemonicParsing="false" onAction="#OnbtnCadastros" opacity="0.0"
-			prefHeight="26.0" prefWidth="102.0" text="Button" />
-		<Button fx:id="btnClientes" layoutX="23.0" layoutY="269.0"
-			mnemonicParsing="false" opacity="0.0" prefHeight="26.0"
-			prefWidth="102.0" text="Button" />
-		<Button fx:id="btnFornecedores" layoutX="20.0" layoutY="303.0"
-			mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0"
-			prefHeight="26.0" prefWidth="121.0" text="Button" />
-		<Button fx:id="btnFuncionários" layoutX="23.0" layoutY="346.0"
-			mnemonicParsing="false" onAction="#OnbtnFuncionários" opacity="0.0"
-			prefHeight="26.0" prefWidth="115.0" text="Button" />
-		<Button fx:id="btnVendas" layoutX="11.0" layoutY="426.0"
-			mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0"
-			prefHeight="26.0" prefWidth="115.0" text="Button" />
-		<Button fx:id="btnInserir" layoutX="250.0" layoutY="177.0"
-			mnemonicParsing="false" onAction="#OnbtnInserir" text="Inserir" />
-		<Button fx:id="btnEditar" layoutX="322.0" layoutY="177.0"
-			mnemonicParsing="false" onAction="#OnbtnEditar" text="Editar" />
-		<Button fx:id="btnVoltar" layoutX="392.0" layoutY="178.0"
-			mnemonicParsing="false" onAction="#OnbtnVoltar" text="Voltar" />
-		<ComboBox fx:id="boxFiltrar" layoutX="482.0" layoutY="178.0"
-			prefHeight="26.0" prefWidth="131.0" promptText="Filtrar" />
-		<TextField fx:id="txtPesquisar" layoutX="641.0"
-			layoutY="178.0" promptText="Pesquisar" />
-		<Button fx:id="btnPesquisar" layoutX="803.0" layoutY="178.0"
-			mnemonicParsing="false" onAction="#OnbtnPesquisar" text="Pesquisar" />
+		<Button fx:id="btnCadastros" layoutX="27.0" layoutY="235.0" mnemonicParsing="false" onAction="#OnbtnCadastros" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
+		<Button fx:id="btnClientes" layoutX="23.0" layoutY="269.0" mnemonicParsing="false" onAction="#OnbtnClientes" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
+		<Button fx:id="btnFornecedores" layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="121.0" text="Button" />
+		<Button fx:id="btnFuncionários" layoutX="23.0" layoutY="346.0" mnemonicParsing="false" onAction="#OnbtnFuncionários" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
+		<Button fx:id="btnVendas" layoutX="11.0" layoutY="426.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
+		<Button fx:id="btnInserir" layoutX="250.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnbtnInserir" text="Inserir" />
+		<Button fx:id="btnEditar" layoutX="322.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnbtnEditar" text="Editar" />
+		<Button fx:id="btnVoltar" layoutX="392.0" layoutY="178.0" mnemonicParsing="false" onAction="#OnbtnVoltar" text="Voltar" />
+		<ComboBox fx:id="boxFiltrar" layoutX="482.0" layoutY="178.0" prefHeight="26.0" prefWidth="131.0" promptText="Filtrar" />
+		<TextField fx:id="txtPesquisar" layoutX="641.0" layoutY="178.0" promptText="Pesquisar" />
+		<Button fx:id="btnPesquisar" layoutX="803.0" layoutY="178.0" mnemonicParsing="false" onAction="#OnbtnPesquisar" text="Pesquisar" />
+      <Button fx:id="btnSair" layoutX="830.0" layoutY="15.0" mnemonicParsing="false" onAction="#OnbtnSair" opacity="0.0" prefHeight="26.0" prefWidth="74.0" text="Sair" />
 	</children>
 </AnchorPane>

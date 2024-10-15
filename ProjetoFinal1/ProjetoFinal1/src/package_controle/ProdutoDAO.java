@@ -30,7 +30,7 @@ public class ProdutoDAO {
             stmt.setString(11, prod.getIdVariação());
 
             stmt.executeUpdate();
-
+//tt
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -38,7 +38,7 @@ public class ProdutoDAO {
         }
     }
 
-    public ArrayList<Produtos> read() {
+    public static ArrayList<Produtos> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
