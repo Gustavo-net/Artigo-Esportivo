@@ -1,5 +1,7 @@
 package packageController;
 
+
+
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,13 +49,7 @@ public class controllerRelatorioProduto {
 	private TableColumn<Produtos, String> columnDescrição;
 
 	@FXML
-	private TableColumn<Produtos, String> columnEstoqueDisp;
-
-	@FXML
-	private TableColumn<Produtos, String> columnEstoqueMax;
-
-	@FXML
-	private TableColumn<Produtos, String> columnEstoqueMin;
+	private TableColumn<Produtos, String> columnEstoqueAtual;
 
 	@FXML
 	private TableColumn<Produtos, String> columnMarca;
@@ -69,25 +65,25 @@ public class controllerRelatorioProduto {
 
 	@FXML
 	void OnbtnCadastros(ActionEvent event) {
-		Main.changeScreen("Cadastros");
+		Main.changeScreen("cadastros");
 
 	}
 
 	@FXML
 	void OnbtnFornecedores(ActionEvent event) {
-		Main.changeScreen("Fornecedores");
+		Main.changeScreen("fornecedores");
 
 	}
 
 	@FXML
 	void OnbtnFuncionários(ActionEvent event) {
-		Main.changeScreen("Funcionarios");
+		Main.changeScreen("funcionarios");
 
 	}
 
 	@FXML
 	void OnbtnVendas(ActionEvent event) {
-		Main.changeScreen("Vendas");
+		Main.changeScreen("vendas");
 
 	}
 

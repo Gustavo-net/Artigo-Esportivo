@@ -18,21 +18,20 @@ public class controllerLogin {
 	@FXML
 	private Button btnLogar;
 	@FXML
-	private PasswordField txtPassword; // Campo de senha
+	private PasswordField txtPassword;
 	@FXML
-	private TextField txtUser; // Campo de usuário
+	private TextField txtUser; 
 	@FXML
-	private ToggleButton verSenha; // Botão para visualizar a senha
-	static Funcionarios funcionario = new Funcionarios(); // Alterado para Funcionario
+	private ToggleButton verSenha; 
+	static Funcionarios funcionario = new Funcionarios(); 
 
 
 	@FXML
 	void btnActionLogar(ActionEvent event) {
-		FuncionarioDAO fDAO = new FuncionarioDAO(); // Alterado para FuncionarioDAO
+		FuncionarioDAO fDAO = new FuncionarioDAO(); 
 		
 		Funcionarios funcionarios = fDAO.autenticarUser(txtUser.getText(), txtPassword.getText());
 
-		// Verificar se a autenticação foi bem-sucedida
 		if ( funcionarios.getCpf() != null && funcionarios.getSenha() != null) {
 			Alert saudacao = new Alert(Alert.AlertType.CONFIRMATION);
 			saudacao.setHeaderText("Saudação");
@@ -54,10 +53,10 @@ public class controllerLogin {
     	if (verSenha.isSelected()) {
     		txtSenha.setText(txtPassword.getText());
 			txtPassword.setVisible(false);
-			txtSenha.setText(txtPassword.getText()); // Aqui pode ser melhor usar outro campo se necessário
+			txtSenha.setText(txtPassword.getText()); 
 		} else {
 			txtPassword.setVisible(true);
-			txtUser.setText(""); // Limpar campo de visualização
+			txtUser.setText(""); 
 		}
 	}
     

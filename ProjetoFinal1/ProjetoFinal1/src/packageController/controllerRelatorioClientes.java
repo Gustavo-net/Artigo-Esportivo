@@ -122,14 +122,38 @@ public class controllerRelatorioClientes implements Initializable {
 
     @FXML
     void OnbtnSair(ActionEvent event) {
-
+    	Main.changeScreen("login");
     }
 
     @FXML
     void OnbtnVoltar(ActionEvent event) {
-
+    	Main.changeScreen("main");
+    }
+    
+    @FXML
+    void OnbtnCadastros(ActionEvent event) {
+    	Main.changeScreen("cadastros");
+    }
+    
+    @FXML
+    void OnbtnFornecedores(ActionEvent event) {
+    	Main.changeScreen("fornecedores");
     }
 
+    @FXML
+    void OnbtnFuncionarios(ActionEvent event) {
+    	Main.changeScreen("funcionarios");
+    }
+    
+    @FXML
+    void OnbtnProdutos(ActionEvent event) {
+    	Main.changeScreen("produtos");
+    }
+    
+    @FXML
+    void OnbtnVendas(ActionEvent event) {
+    	Main.changeScreen("vendas");
+    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

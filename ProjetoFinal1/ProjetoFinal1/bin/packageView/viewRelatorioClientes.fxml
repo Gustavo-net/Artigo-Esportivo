@@ -158,5 +158,10 @@
          </cursor>
       </Button>
       <Button fx:id="btnSair" layoutX="827.0" layoutY="15.0" mnemonicParsing="false" onAction="#OnbtnSair" opacity="0.0" prefHeight="26.0" prefWidth="74.0" text="Button" />
+      <Button fx:id="btnCadastros" layoutX="23.0" layoutY="239.0" mnemonicParsing="false" onAction="#OnbtnCadastros" opacity="0.0" prefHeight="26.0" prefWidth="114.0" text="Button" />
+      <Button fx:id="btnFornecedores" layoutX="23.0" layoutY="317.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="114.0" text="Button" />
+      <Button fx:id="btnFuncionarios" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#OnbtnFuncionarios" opacity="0.0" prefHeight="26.0" prefWidth="114.0" text="Button" />
+      <Button fx:id="btnProdutos" layoutX="23.0" layoutY="387.0" mnemonicParsing="false" onAction="#OnbtnProdutos" opacity="0.0" prefHeight="26.0" prefWidth="114.0" text="Button" />
+      <Button fx:id="btnVendas" layoutX="23.0" layoutY="423.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="114.0" text="Button" />
    </children>
 </AnchorPane>
