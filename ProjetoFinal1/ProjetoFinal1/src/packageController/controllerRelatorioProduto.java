@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -75,12 +76,12 @@ public class controllerRelatorioProduto {
 
 	@FXML
 	private TextField txtPesquisar;
-	
+
 	private ObservableList<Produtos> arrayProduto;
 	private ProdutoDAO produtoDAO = new ProdutoDAO();
 
 	public static Produtos produtoEditor = new Produtos();
-	
+
 	public void carregarTableProduto() {
 		arrayProduto = FXCollections.observableArrayList(ProdutoDAO.read());
 
@@ -95,7 +96,6 @@ public class controllerRelatorioProduto {
 		tableRelatorioProduto.setItems(arrayProduto);
 	}
 
-
 	@FXML
 	void OnbtnCadastros(ActionEvent event) {
 		Main.changeScreen("cadastros");
@@ -106,9 +106,20 @@ public class controllerRelatorioProduto {
 		Main.changeScreen("clientes");
 	}
 
+	public static Produtos produtoEditar = new Produtos();
+
 	@FXML
 	void OnbtnEditar(ActionEvent event) {
-		
+		if (tableRelatorioProduto.getSelectionModel().getSelectedIndex() == -1) {
+			Alert mensagemDeErro = new Alert(Alert.AlertType.INFORMATION);
+			mensagemDeErro.setContentText("Selecione um Produto para Editar Primeiro!");
+			mensagemDeErro.show();
+		} else {
+			int i = tableRelatorioProduto.getSelectionModel().getSelectedIndex();
+			produtoEditar = tableRelatorioProduto.getItems().get(i);
+//    		Main.TelaCadastroProduto();
+		}
+		carregarTableProduto();
 	}
 
 	@FXML
@@ -123,26 +134,39 @@ public class controllerRelatorioProduto {
 
 	@FXML
 	void OnbtnInserir(ActionEvent event) {
-
+		produtoEditor = null;
+//    	Main.TelaCadastroProdutos();
+		carregarTableProduto();
 	}
 
 	@FXML
 	void OnbtnPesquisar(ActionEvent event) {
+		arrayProduto = FXCollections.observableArrayList(produtoDAO.search(txtPesquisar.getText()));
 
+		columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
+		columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+		columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+		columnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
+		columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
+
+		tableRelatorioProduto.setItems(arrayProduto);
+		tableRelatorioProduto.refresh();
 	}
 
 	@FXML
 	void OnbtnSair(ActionEvent event) {
 		Main.changeScreen("login");
 	}
-	
-	@FXML
-    void OnbtnVendas(ActionEvent event) {
-		Main.changeScreen("vendas");
-    }
 
-    @FXML
-    void OnbtnVoltar(ActionEvent event) {
-    	Main.changeScreen("main");
-    }
+	@FXML
+	void OnbtnVendas(ActionEvent event) {
+		Main.changeScreen("vendas");
+	}
+
+	@FXML
+	void OnbtnVoltar(ActionEvent event) {
+		Main.changeScreen("main");
+	}
 }

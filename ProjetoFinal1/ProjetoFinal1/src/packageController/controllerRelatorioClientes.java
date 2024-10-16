@@ -81,7 +81,7 @@ public class controllerRelatorioClientes implements Initializable {
 		tableRelatorioCliente.setItems(arrayCliente);
 	}
 	
-	public static Clientes produtoEditar = new Clientes();
+	public static Clientes clienteEditar = new Clientes();
 	@FXML
     void OnbtnEditar(ActionEvent event) {
 		if(tableRelatorioCliente.getSelectionModel().getSelectedIndex() == -1) {
@@ -90,7 +90,7 @@ public class controllerRelatorioClientes implements Initializable {
     		mensagemDeErro.show();
     	}else {
     		int i = tableRelatorioCliente.getSelectionModel().getSelectedIndex();
-    		produtoEditar = tableRelatorioCliente.getItems().get(i);
+    		clienteEditar = tableRelatorioCliente.getItems().get(i);
 //    		Main.TelaCadastroClientes();
     	}
     	carregarTableCliente();
@@ -98,7 +98,7 @@ public class controllerRelatorioClientes implements Initializable {
 
     @FXML
     void OnbtnInserir(ActionEvent event) {
-    	produtoEditar = null;
+    	clienteEditar = null;
 //    	Main.TelaCadastroClientes();
     	carregarTableCliente();
     }
