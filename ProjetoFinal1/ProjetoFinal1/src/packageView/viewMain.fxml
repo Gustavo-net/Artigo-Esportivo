@@ -132,9 +132,9 @@
       <Button fx:id="btnFornecedores" layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="121.0" text="Button" />
       <Button fx:id="btnFuncionários" layoutX="23.0" layoutY="346.0" mnemonicParsing="false" onAction="#OnbtnFuncionários" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
       <Button fx:id="btnVendas" layoutX="11.0" layoutY="426.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa73c" height="114.0" layoutX="244.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" width="195.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa73c" height="114.0" layoutX="457.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" width="195.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa73c" height="114.0" layoutX="670.0" layoutY="204.0" stroke="BLACK" strokeType="INSIDE" width="195.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa73c" height="114.0" layoutX="244.0" layoutY="201.0" stroke="#efeaea" strokeType="INSIDE" width="195.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa73c" height="114.0" layoutX="457.0" layoutY="201.0" stroke="WHITE" strokeType="INSIDE" width="195.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa73c" height="114.0" layoutX="670.0" layoutY="204.0" stroke="#fcf8f8" strokeType="INSIDE" width="195.0" />
       <Text fill="WHITE" layoutX="255.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" wrappingWidth="215.4234619140625">
          <font>
             <Font name="System Bold" size="22.0" />

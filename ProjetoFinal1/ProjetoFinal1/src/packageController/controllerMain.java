@@ -48,19 +48,19 @@ public class controllerMain {
 
 	@FXML
 	void OnbtnCadastros(ActionEvent event) {
-		Main.changeScreen("");
+		Main.changeScreen("cadastros");
 
 	}
 
 	@FXML
 	void OnbtnFornecedores(ActionEvent event) {
-		Main.changeScreen("Fornecedores");
+		Main.changeScreen("fornecedores");
 
 	}
 
 	@FXML
 	void OnbtnFuncionários(ActionEvent event) {
-		Main.changeScreen("Funcionarios");
+		Main.changeScreen("funcionarios");
 
 	}
 
@@ -71,7 +71,7 @@ public class controllerMain {
 
 	@FXML
 	void OnbtnClientes(ActionEvent event) {
-		Main.changeScreen("Clientes");
+		Main.changeScreen("clientes");
 
 	}
 
