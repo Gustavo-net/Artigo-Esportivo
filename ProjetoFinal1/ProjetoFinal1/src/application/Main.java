@@ -36,8 +36,9 @@ public class Main extends Application {
 			Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
 			Main = new Scene(fxmlMain);
 
-			//Parent fxmlFuncionarios = FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
-			//Funcionarios = new Scene(fxmlFuncionarios);
+			// Parent fxmlFuncionarios =
+			// FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
+			// Funcionarios = new Scene(fxmlFuncionarios);
 
 			// Parent fxmlCliente =
 			// FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
@@ -47,10 +48,9 @@ public class Main extends Application {
 			// FXMLLoader.load(getClass().getResource("/packageView/viewProdutos.fxml"));
 			// Produtos = new Scene(fxmlProduto);
 			//
-			// Parent fxmlFornecedor =
-			// FXMLLoader.load(getClass().getResource("/packageView/viewFornecedores.fxml"));
-			// Fornecedores = new Scene(fxmlFornecedor);
-			//
+			Parent fxmlFornecedor = FXMLLoader.load(getClass().getResource("/packageView/viewFornecedores.fxml"));
+			Fornecedores = new Scene(fxmlFornecedor);
+
 			// Parent fxmlRegistrarVenda = FXMLLoader
 			// .load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
 			// RegistrarVendas = new Scene(fxmlRegistrarVenda);
