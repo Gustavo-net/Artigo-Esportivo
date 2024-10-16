@@ -39,7 +39,7 @@ public class FuncionarioDAO {
         }
     }
 
-    public ArrayList<Funcionarios> read() {
+    public static ArrayList<Funcionarios> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
