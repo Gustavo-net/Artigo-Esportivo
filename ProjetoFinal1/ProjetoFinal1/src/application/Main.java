@@ -18,8 +18,7 @@ public class Main extends Application {
 	private static Scene Clientes;
 	private static Scene Produtos;
 	private static Scene Fornecedores;
-	private static Scene RegistrarVendas;
-// private static Scene TelaRelatorios;
+	private static Scene Cadastros;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -36,19 +35,20 @@ public class Main extends Application {
 			Parent fxmlMain = FXMLLoader.load(getClass().getResource("/packageView/viewMain.fxml"));
 			Main = new Scene(fxmlMain);
 
-			// Parent fxmlFuncionarios =
-			// FXMLLoader.load(getClass().getResource("/packageView/viewFuncionarios.fxml"));
-			// Funcionarios = new Scene(fxmlFuncionarios);
+			 Parent fxmlFuncionarios =
+			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioFuncionarios.fxml"));
+			 Funcionarios = new Scene(fxmlFuncionarios);
 
-			// Parent fxmlCliente =
-			// FXMLLoader.load(getClass().getResource("/packageView/viewClientes.fxml"));
-			// Clientes = new Scene(fxmlCliente);
+			 Parent fxmlCliente =
+			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioClientes.fxml"));
+			 Clientes = new Scene(fxmlCliente);
 
-			// Parent fxmlProduto =
-			// FXMLLoader.load(getClass().getResource("/packageView/viewProdutos.fxml"));
-			// Produtos = new Scene(fxmlProduto);
-			//
-			Parent fxmlFornecedor = FXMLLoader.load(getClass().getResource("/packageView/viewFornecedores.fxml"));
+			 Parent fxmlProduto =
+			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioProdutos.fxml"));
+			 Produtos = new Scene(fxmlProduto);
+			
+			Parent fxmlFornecedor = FXMLLoader
+					.load(getClass().getResource("/packageView/viewRelatorioFornecedores.fxml"));
 			Fornecedores = new Scene(fxmlFornecedor);
 
 			// Parent fxmlRegistrarVenda = FXMLLoader
@@ -80,19 +80,17 @@ public class Main extends Application {
 		} else if (tela.equals("clientes")) {
 			stage.setScene(Clientes);
 			stage.centerOnScreen();
-		} // else if (tela.equals("Produtos")) {
-			// stage.setScene(Produtos);
-			// stage.centerOnScreen();
-			// } else if (tela.equals("Fornecedores")) {
-			// stage.setScene(Fornecedores);
-			// stage.centerOnScreen();
-			// } else if (tela.equals("RegistrarVendas")) {
-			// stage.setScene();
-			// stage.centerOnScreen();
-			// } else if (tela.equals("TelaRelatorios")) {
-			// stage.setScene(TelaRelatorios);
-			// stage.centerOnScreen();
-			// }
+		} else if (tela.equals("produtos")) {
+			stage.setScene(Produtos);
+			stage.centerOnScreen();
+		} else if (tela.equals("fornecedores")) {
+			stage.setScene(Fornecedores);
+			stage.centerOnScreen();
+		} else if (tela.equals("cadastros")) {
+			stage.setScene(Cadastros);
+		}
+		
+
 	}
 
 	public static void main(String[] args) {
