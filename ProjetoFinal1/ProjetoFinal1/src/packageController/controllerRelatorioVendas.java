@@ -66,6 +66,7 @@ public class controllerRelatorioVendas implements Initializable {
     @FXML
     private TableColumn<Vendas, String> columnPreçoUn;
 
+    
     @FXML
     private TableColumn<Vendas, String> columnQuantidade;
 
