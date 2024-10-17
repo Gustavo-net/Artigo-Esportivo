@@ -42,7 +42,7 @@
             <Image url="@../packageIcons/iconCadastroPreto.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="27.0" layoutX="18.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="27.0" layoutX="18.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../packageIcons/iconClientesPreto.png" />
          </image>
@@ -57,12 +57,12 @@
             <Image url="@../packageIcons/iconFuncionariosPreto.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="19.0" fitWidth="27.0" layoutX="43.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="19.0" fitWidth="27.0" layoutX="23.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../packageIcons/iconProdutosLaranja.png" />
+            <Image url="@../packageIcons/iconProdutosPreto.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="19.0" fitWidth="27.0" layoutX="23.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="19.0" fitWidth="27.0" layoutX="24.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../packageIcons/iconVendasPreto.png" />
          </image>
@@ -72,7 +72,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text fill="#333333" layoutX="47.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clientes" wrappingWidth="74.1820068359375">
+      <Text fill="#333333" layoutX="47.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clientes" wrappingWidth="74.1820068359375">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -87,21 +87,16 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text fill="#f0891a" layoutX="74.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produtos" wrappingWidth="94.98199462890625">
+      <Text fill="#363434" layoutX="48.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produtos" wrappingWidth="94.98199462890625">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text fill="#333333" layoutX="47.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendas" wrappingWidth="94.98199462890625">
+      <Text fill="#333333" layoutX="47.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendas" wrappingWidth="94.98199462890625">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="19.0" arcWidth="20.0" fill="#f0891a" height="36.0" layoutX="25.0" layoutY="383.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="184.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Rectangle>
       <Rectangle arcHeight="19.0" arcWidth="20.0" fill="#f0891a" height="25.0" layoutX="232.0" layoutY="131.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="177.0">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -131,7 +126,7 @@
       <Button fx:id="btnClientes" layoutX="23.0" layoutY="269.0" mnemonicParsing="false" onAction="#OnbtnClientes" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
       <Button fx:id="btnFornecedores" layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="121.0" text="Button" />
       <Button fx:id="btnFuncionários" layoutX="23.0" layoutY="346.0" mnemonicParsing="false" onAction="#OnbtnFuncionários" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
-      <Button fx:id="btnVendas" layoutX="11.0" layoutY="426.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
+      <Button fx:id="btnVendas" layoutX="25.0" layoutY="419.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa73c" height="114.0" layoutX="244.0" layoutY="201.0" stroke="#efeaea" strokeType="INSIDE" width="195.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa73c" height="114.0" layoutX="457.0" layoutY="201.0" stroke="WHITE" strokeType="INSIDE" width="195.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa73c" height="114.0" layoutX="670.0" layoutY="204.0" stroke="#fcf8f8" strokeType="INSIDE" width="195.0" />
@@ -190,5 +185,6 @@
             <Font size="14.0" />
          </font>
       </Text>
+      <Button fx:id="btnProdutos" layoutX="20.0" layoutY="381.0" mnemonicParsing="false" onAction="#OnbtnProdutos" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
    </children>
 </AnchorPane>

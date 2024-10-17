@@ -8,8 +8,7 @@ public class Categorias {
 	public Categorias() {
 		super();
 	}
-	
-	
+
 	public Categorias(String idCategoria, String nomeCategoria) {
 		super();
 		this.idCategoria = idCategoria;

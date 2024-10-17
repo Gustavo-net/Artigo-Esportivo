@@ -134,6 +134,8 @@ public class Produtos {
 		this.estoqueMax = estoqueMax;
 		this.idCategoria = idCategoria;
 	}
+
+
 	
 	
 

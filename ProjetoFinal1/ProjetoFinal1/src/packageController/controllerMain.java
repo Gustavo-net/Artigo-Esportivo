@@ -27,7 +27,10 @@ public class controllerMain {
 
 	@FXML
 	private Button btnVendas;
-
+	
+	@FXML
+	private Button btnProdutos;
+	
 	@FXML
 	private TableColumn<Produtos, String> columnCategoria;
 
@@ -75,4 +78,9 @@ public class controllerMain {
 
 	}
 
+	@FXML
+	void OnbtnProdutos(ActionEvent event) {
+		Main.changeScreen("produtos");
+
+	}
 }
