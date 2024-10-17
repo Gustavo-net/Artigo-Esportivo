@@ -80,7 +80,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="btnFornecedores" fill="#151515" layoutX="52.0" layoutY="329.0" onDragDetected="#OnbntFornecedores" strokeType="OUTSIDE" strokeWidth="0.0" text="Fornecedores" wrappingWidth="102.1820068359375">
+      <Text fx:id="btnFornecedores" fill="#151515" layoutX="52.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fornecedores" wrappingWidth="102.1820068359375">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -133,12 +133,12 @@
             <TableColumn fx:id="columnSexo" prefWidth="75.0" text="Sexo" />
         </columns>
       </TableView>
-      <Button fx:id="bntCadastros" layoutX="23.0" layoutY="236.0" mnemonicParsing="false" onAction="#OnbtnCadastros" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Cadastro" />
-      <Button fx:id="bntClientes" layoutX="23.0" layoutY="275.0" mnemonicParsing="false" onAction="#OnbntClientes" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Cliente" />
-      <Button fx:id="btnProdutos" layoutX="23.0" layoutY="391.0" mnemonicParsing="false" onAction="#OnbtnProdutos" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Produtos" />
-      <Button fx:id="btnVendas" layoutX="23.0" layoutY="426.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Vendas" />
+      <Button fx:id="bntCadastros" layoutX="23.0" layoutY="236.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Cadastro" />
+      <Button fx:id="bntClientes" layoutX="23.0" layoutY="275.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Cliente" />
+      <Button fx:id="btnProdutos" layoutX="23.0" layoutY="391.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Produtos" />
+      <Button fx:id="btnVendas" layoutX="23.0" layoutY="426.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Vendas" />
       <TextField fx:id="txtProcurarFornecedores" layoutX="627.0" layoutY="181.0" promptText="Procurar Fornecedores" />
-      <Button fx:id="bntSair" layoutX="826.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnbtnSair" opacity="0.0" prefHeight="26.0" prefWidth="85.0" text="Sair" />
+      <Button fx:id="bntSair" layoutX="826.0" layoutY="14.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="85.0" text="Sair" />
       <ComboBox fx:id="boxFiltrar" layoutX="524.0" layoutY="181.0" prefHeight="26.0" prefWidth="88.0" promptText="Filtrar" />
       <Button fx:id="btnInserir" layoutX="251.0" layoutY="181.0" mnemonicParsing="false" onAction="#OnbtnInserir" text="inserir" />
       <Button fx:id="btnEditar" layoutX="314.0" layoutY="181.0" mnemonicParsing="false" onAction="#OnbtnEditar" text="editar" />

@@ -20,7 +20,7 @@ import javafx.scene.text.Text;
 import packageModel.Funcionarios;
 import package_controle.FuncionarioDAO;
 
-public class ControllerRelatorioFuncionarios implements Initializable{
+public class controllerRelatorioFuncionarios implements Initializable{
 
     @FXML
     private TableColumn<Funcionarios, String> columnCPF;
@@ -110,52 +110,52 @@ public class ControllerRelatorioFuncionarios implements Initializable{
     }
     
     @FXML
-    void onBtnClientes(ActionEvent event) {
+    void OnBtnClientes(ActionEvent event) {
         Main.changeScreen("clientes");
     }
 
     @FXML
-    void onBtnFornecedores(MouseEvent event) {
+    void OnBtnFornecedores(MouseEvent event) {
         Main.changeScreen("fornecedores");
     }
 
     @FXML
-    void onBtnCadastros(ActionEvent event) {
+    void OnbtnCadastros(ActionEvent event) {
         Main.changeScreen("cadastros");
     }
 
     @FXML
-    void onBtnEditar(ActionEvent event) {
+    void OnBtnEditar(ActionEvent event) {
         // Implementar edição
     }
 
     @FXML
-    void onBtnInserir(ActionEvent event) {
+    void OnBtnInserir(ActionEvent event) {
         // Implementar inserção
     }
 
     @FXML
-    void onBtnPesquisar(ActionEvent event) {
+    void OnBtnPesquisar(ActionEvent event) {
         // Implementar pesquisa
     }
 
     @FXML
-    void onBtnProdutos(ActionEvent event) {
+    void OnBtnProdutos(ActionEvent event) {
         Main.changeScreen("produtos");
     }
 
     @FXML
-    void onBtnSair(ActionEvent event) {
+    void OnBtnSair(ActionEvent event) {
         Main.changeScreen("login");
     }
 
     @FXML
-    void onBtnVendas(ActionEvent event) {
+    void OnBtnVendas(ActionEvent event) {
         // Implementar vendas
     }
 
     @FXML
-    void onBtnVoltar(ActionEvent event) {
+    void OnBtnVoltar(ActionEvent event) {
         // Implementar voltar
     }
 
