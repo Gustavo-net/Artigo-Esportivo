@@ -73,7 +73,7 @@ public class FuncionarioDAO {
         return funcionarios;
     }
 
-    public ArrayList<Funcionarios> search(String string) {
+    public static ArrayList<Funcionarios> search(String string) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;

@@ -122,9 +122,9 @@
       </Text>
       <TableView fx:id="tableFuncionarios" layoutX="229.0" layoutY="236.0" prefHeight="406.0" prefWidth="729.0">
         <columns>
-          <TableColumn fx:id="ID" prefWidth="35.199951171875" text="ID" />
-          <TableColumn fx:id="Nome" prefWidth="62.4000244140625" text="Nome" />
-            <TableColumn fx:id="CNPJ" prefWidth="73.60003662109375" text="CPF" />
+          <TableColumn fx:id="columnID" prefWidth="35.199951171875" text="ID" />
+          <TableColumn fx:id="columnNome" prefWidth="62.4000244140625" text="Nome" />
+            <TableColumn fx:id="columnCPF" prefWidth="73.60003662109375" text="CPF" />
             <TableColumn fx:id="columnEmail" prefWidth="81.60003662109375" text="Email" />
             <TableColumn fx:id="columnTelefone" prefWidth="77.5999755859375" text="Telefone" />
             <TableColumn fx:id="columnDataNasc" prefWidth="139.20001220703125" text="Data de Nascimento" />
@@ -137,7 +137,7 @@
       <Button fx:id="bntClientes" layoutX="23.0" layoutY="275.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Cliente" />
       <Button fx:id="btnProdutos" layoutX="23.0" layoutY="391.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Produtos" />
       <Button fx:id="btnVendas" layoutX="23.0" layoutY="426.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Vendas" />
-      <TextField fx:id="txtProcurarFornecedores" layoutX="627.0" layoutY="181.0" promptText="Procurar Fornecedores" />
+      <TextField fx:id="labelpesquisar" layoutX="627.0" layoutY="181.0" promptText="Procurar Fornecedores" />
       <Button fx:id="bntSair" layoutX="826.0" layoutY="14.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="85.0" text="Sair" />
       <ComboBox fx:id="boxFiltrar" layoutX="524.0" layoutY="181.0" prefHeight="26.0" prefWidth="88.0" promptText="Filtrar" />
       <Button fx:id="btnInserir" layoutX="251.0" layoutY="181.0" mnemonicParsing="false" onAction="#OnbtnInserir" text="inserir" />

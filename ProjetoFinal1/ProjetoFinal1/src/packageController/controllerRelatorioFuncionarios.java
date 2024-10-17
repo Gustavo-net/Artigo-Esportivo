@@ -15,154 +15,171 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import packageModel.Funcionarios;
 import package_controle.FuncionarioDAO;
 
-public class controllerRelatorioFuncionarios implements Initializable{
+public class controllerRelatorioFuncionarios implements Initializable {
 
-    @FXML
-    private TableColumn<Funcionarios, String> columnCPF;
+	@FXML
+	private Button bntCadastros;
 
-    @FXML
-    private TableColumn<Funcionarios, String> columnID;
+	@FXML
+	private Button bntClientes;
 
-    @FXML
-    private TableColumn<Funcionarios, String> columnNome;
+	@FXML
+	private Button bntSair;
 
-    @FXML
-    private Button btnCadastros;
+	@FXML
+	private ComboBox<Funcionarios> boxFiltrar;
 
-    @FXML
-    private Button btnClientes;
+	@FXML
+	private Button btnEditar;
 
-    @FXML
-    private Button btnSair;
+	@FXML
+	private Text btnFornecedores;
 
-    @FXML
-    private ComboBox<String> boxFiltrar;
+	@FXML
+	private Button btnInserir;
 
-    @FXML
-    private Button btnEditar;
+	@FXML
+	private Button btnPesquisar;
 
-    @FXML
-    private Text btnFornecedores;
+	@FXML
+	private Button btnProdutos;
 
-    @FXML
-    private Button btnInserir;
+	@FXML
+	private Button btnVendas;
 
-    @FXML
-    private Button btnPesquisar;
+	@FXML
+	private Button btnVoltar;
 
-    @FXML
-    private Button btnProdutos;
+	@FXML
+	private TableColumn<Funcionarios, String> columnCPF;
 
-    @FXML
-    private Button btnVendas;
+	@FXML
+	private TableColumn<Funcionarios, String> columnCargo;
 
-    @FXML
-    private Button btnVoltar;
+	@FXML
+	private TableColumn<Funcionarios, String> columnDataCont;
 
-    @FXML
-    private TableColumn<Funcionarios, String> columnCargo;
+	@FXML
+	private TableColumn<Funcionarios, String> columnDataNasc;
 
-    @FXML
-    private TableColumn<Funcionarios, String> columnDataCont;
+	@FXML
+	private TableColumn<Funcionarios, String> columnEmail;
 
-    @FXML
-    private TableColumn<Funcionarios, String> columnDataNasc;
+	@FXML
+	private TableColumn<Funcionarios, String> columnID;
 
-    @FXML
-    private TableColumn<Funcionarios, String> columnEmail;
+	@FXML
+	private TableColumn<Funcionarios, String> columnNome;
 
-    @FXML
-    private TableColumn<Funcionarios, String> columnSexo;
+	@FXML
+	private TableColumn<Funcionarios, String> columnSexo;
 
-    @FXML
-    private TableColumn<Funcionarios, String> columnTelefone;
+	@FXML
+	private TableColumn<Funcionarios, String> columnTelefone;
 
-    @FXML
-    private TableView<Funcionarios> tableFuncionarios;
-    
-    private ObservableList<Funcionarios> arrayFuncionario;
-    private FuncionarioDAO funcionariosDAO = new FuncionarioDAO();
+	@FXML
+	private TableView<Funcionarios> tableFuncionarios;
 
-    @FXML
-    private TextField txtProcurarFornecedores;
-    
-    public static Funcionarios funcionariosEditor = new Funcionarios();
-    
-    public void carregarTableFuncionarios(){
-        arrayFuncionario = FXCollections.observableArrayList(FuncionarioDAO.read());
-        
-        columnID.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
-        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionario"));
-        columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
-        columnDataCont.setCellValueFactory(new PropertyValueFactory<>("dataCont"));
-        columnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
-        columnSexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
-        
-        tableFuncionarios.setItems(arrayFuncionario);
-    }
-    
-    @FXML
-    void OnBtnClientes(ActionEvent event) {
-        Main.changeScreen("clientes");
-    }
+	@FXML
+	private TextField labelpesquisar;
 
-    @FXML
-    void OnBtnFornecedores(MouseEvent event) {
-        Main.changeScreen("fornecedores");
-    }
+	private ObservableList<Funcionarios> arrayFuncionario;
+	private FuncionarioDAO funcionariosDAO = new FuncionarioDAO();
 
-    @FXML
-    void OnbtnCadastros(ActionEvent event) {
-        Main.changeScreen("cadastros");
-    }
+	@FXML
+	private TextField txtProcurarFornecedores;
 
-    @FXML
-    void OnBtnEditar(ActionEvent event) {
-        // Implementar edição
-    }
+	public static Funcionarios funcionariosEditor = new Funcionarios();
 
-    @FXML
-    void OnBtnInserir(ActionEvent event) {
-        // Implementar inserção
-    }
+	public void carregarTableFuncionarios() {
+		arrayFuncionario = FXCollections.observableArrayList(FuncionarioDAO.read());
 
-    @FXML
-    void OnBtnPesquisar(ActionEvent event) {
-        // Implementar pesquisa
-    }
+		columnID.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
+		columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionario"));
+		columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+		columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+		columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
+		columnDataCont.setCellValueFactory(new PropertyValueFactory<>("dataCont"));
+		columnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
+		columnSexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
 
-    @FXML
-    void OnBtnProdutos(ActionEvent event) {
-        Main.changeScreen("produtos");
-    }
+		tableFuncionarios.setItems(arrayFuncionario);
+	}
 
-    @FXML
-    void OnBtnSair(ActionEvent event) {
-        Main.changeScreen("login");
-    }
+	@FXML
+	void OnBtnClientes(ActionEvent event) {
+		Main.changeScreen("clientes");
+	}
 
-    @FXML
-    void OnBtnVendas(ActionEvent event) {
-        // Implementar vendas
-    }
+	@FXML
+	void OnBtnFornecedores(ActionEvent event) {
+		Main.changeScreen("fornecedores");
+	}
 
-    @FXML
-    void OnBtnVoltar(ActionEvent event) {
-        // Implementar voltar
-    }
+	@FXML
+	void OnbtnCadastros(ActionEvent event) {
+		Main.changeScreen("cadastros");
+	}
+
+	@FXML
+	void OnbtnEditar(ActionEvent event) {
+
+	}
+
+	@FXML
+	void OnbtnInserir(ActionEvent event) {
+
+	}
+
+	@FXML
+	void OnbtnPesquisar(ActionEvent event) {
+
+		arrayFuncionario = FXCollections.observableArrayList(FuncionarioDAO.search(labelpesquisar.getText()));
+
+		columnID.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
+		columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionario"));
+		columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+		columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+		columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
+		columnDataCont.setCellValueFactory(new PropertyValueFactory<>("dataCont"));
+		columnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
+		columnSexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
+		
+		tableFuncionarios.setItems(arrayFuncionario);
+		tableFuncionarios.refresh();
+
+	}
+
+	@FXML
+	void OnBtnProdutos(ActionEvent event) {
+		Main.changeScreen("produtos");
+	}
+
+	@FXML
+	void OnBtnSair(ActionEvent event) {
+		Main.changeScreen("login");
+	}
+
+	@FXML
+	void OnBtnVendas(ActionEvent event) {
+		// Implementar vendas
+	}
+
+	@FXML
+	void OnbtnVoltar(ActionEvent event) {
+
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		carregarTableFuncionarios();
-		
 	}
+
 }
