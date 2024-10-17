@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioProduto">
+<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioProduto">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="474.0" layoutX="232.0" layoutY="165.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="652.0" />
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="121.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="940.0" />
@@ -122,8 +122,8 @@
 		</Text>
 		<TableView fx:id="tableRelatorioProduto" layoutX="231.0" layoutY="215.0" prefHeight="425.0" prefWidth="652.0">
 			<columns>
-				<TableColumn fx:id="columnId" prefWidth="35.20001220703125" text="Id" />
-				<TableColumn fx:id="columnNome" prefWidth="144.79998779296875" text="Nome" />
+				<TableColumn fx:id="columnId" prefWidth="28.79998779296875" text="Id" />
+				<TableColumn fx:id="columnNome" prefWidth="152.0" text="Nome" />
 				<TableColumn fx:id="columnCodigo" prefWidth="94.4000244140625" text="Codigo" />
 				<TableColumn fx:id="columnMarca" prefWidth="78.4000244140625" text="Marca" />
 				<TableColumn fx:id="columnDescricao" prefWidth="113.60003662109375" text="Descrição" />
