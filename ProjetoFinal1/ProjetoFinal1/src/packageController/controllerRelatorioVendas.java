@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import packageModel.Vendas;
+import package_controle.FuncionarioDAO;
 import package_controle.VendaDAO;
 
 public class controllerRelatorioVendas implements Initializable {
@@ -49,30 +50,30 @@ public class controllerRelatorioVendas implements Initializable {
 
 	@FXML
 	private Button btnVoltar;
+	
+    @FXML
+    private TableColumn<Vendas, String> columnDataVenda;
 
-	@FXML
-	private TableColumn<Vendas, String> columnID;
+    @FXML
+    private TableColumn<Vendas, String> columnCodigo;
 
-	@FXML
-	private TableColumn<Vendas, String> columnQuantidade;
+    @FXML
+    private TableColumn<Vendas, String> columnDescrição;
 
-	@FXML
-	private TableColumn<Vendas, String> columnPreçoUn;
+    @FXML
+    private TableColumn<Vendas, String> columnID;
 
-	@FXML
-	private TableColumn<Vendas, String> columnTotal;
+    @FXML
+    private TableColumn<Vendas, String> columnPreçoUn;
 
-	@FXML
-	private TableColumn<Vendas, String> columnDesconto;
+    @FXML
+    private TableColumn<Vendas, String> columnQuantidade;
 
-	@FXML
-	private TableColumn<Vendas, String> columnDescrição;
-
-	@FXML
-	private TableColumn<Vendas, String> columnMarca;
-
-	@FXML
-	private TableColumn<Vendas, String> columnCodigo;
+    @FXML
+    private TableColumn<Vendas, String> columnTotal;
+    
+    @FXML
+    private TableColumn<Vendas, String> columnstatus;
 
 	@FXML
 	private TextField labelpesquisar;
@@ -90,10 +91,10 @@ public class controllerRelatorioVendas implements Initializable {
 		columnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		columnPreçoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
 		columnTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
-		columnDesconto.setCellValueFactory(new PropertyValueFactory<>("desconto"));
 		columnDescrição.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-		columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
 		columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+		columnDataVenda.setCellValueFactory(new PropertyValueFactory<>("dataVenda"));
+		columnstatus.setCellValueFactory(new PropertyValueFactory<>("statusVenda"));
 
 		tableVendas.setItems(arrayVendas);
 	}
@@ -125,16 +126,18 @@ public class controllerRelatorioVendas implements Initializable {
 
 	@FXML
 	void OnbtnPesquisar(ActionEvent event) {
+		
+		arrayVendas = FXCollections.observableArrayList(VendaDAO.search(labelpesquisar.getText()));
+
 
 		columnID.setCellValueFactory(new PropertyValueFactory<>("idVenda"));
-		columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
 		columnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		columnPreçoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
 		columnTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
-		columnDesconto.setCellValueFactory(new PropertyValueFactory<>("desconto"));
 		columnDescrição.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-		columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
 		columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+		columnDataVenda.setCellValueFactory(new PropertyValueFactory<>("dataVenda"));
+		columnstatus.setCellValueFactory(new PropertyValueFactory<>("statusVenda"));
 
 		tableVendas.setItems(arrayVendas);
 	}

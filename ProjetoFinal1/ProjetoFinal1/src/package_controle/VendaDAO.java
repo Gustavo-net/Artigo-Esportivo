@@ -74,7 +74,7 @@ public class VendaDAO {
         return vendas;
     }
 
-    public ArrayList<Vendas> search(String string) {
+    public static ArrayList<Vendas> search(String string) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
