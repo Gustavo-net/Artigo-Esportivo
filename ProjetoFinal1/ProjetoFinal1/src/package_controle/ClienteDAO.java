@@ -17,16 +17,14 @@ public class ClienteDAO {
 
 		try {
 			stmt = con.prepareStatement(
-					"INSERT INTO Cliente (idEndereco, nome, cpf, id_Endereco, email, telefone, programaFidelidade, pontosFidelidade, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					"INSERT INTO Cliente (idEndereco, nome, cpf, id_Endereco, email, telefone, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?)");
 			stmt.setString(1, c.getIdCliente());
 			stmt.setString(2, c.getNomeCliente());
 			stmt.setString(3, c.getCpf());
 			stmt.setString(4, c.getId_Endereço());
 			stmt.setString(5, c.getEmail());
 			stmt.setString(6, c.getTelefone());
-			stmt.setString(7, c.getProgramaFidelidade());
-			stmt.setString(8, c.getPontosFidelidade());
-			stmt.setString(9, c.getDataNasc());
+			stmt.setString(7, c.getDataNasc());
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -44,20 +42,18 @@ public class ClienteDAO {
 
 
 		try {
-			stmt = con.prepareStatement("SELECT * FROM Cliente");
+			stmt = con.prepareStatement("SELECT * FROM Clientes");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				Clientes c = new Clientes();
 				c.setIdCliente(rs.getString("idCliente"));
-				c.setNomeCliente(rs.getString("nome"));
+				c.setNomeCliente(rs.getString("nomeCliente"));
 				c.setCpf(rs.getString("cpf"));
 				c.setDataNasc(rs.getString("dataNasc"));
 				c.setId_Endereço(rs.getString("id_Endereco"));
 				c.setEmail(rs.getString("email"));
 				c.setTelefone(rs.getString("telefone"));
-				c.setProgramaFidelidade(rs.getString("programaFidelidade"));
-				c.setPontosFidelidade(rs.getString("pontosFidelidade"));
 
 				clientes.add(c);
 			}
@@ -70,7 +66,7 @@ public class ClienteDAO {
 		return clientes;
 	}
 
-	public ArrayList<Clientes> search(String string) {
+	public static ArrayList<Clientes> search(String string) {
 		Connection con = ConnectionDatabase.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -89,8 +85,6 @@ public class ClienteDAO {
 				c.setCpf(rs.getString("cpf"));
 				c.setEmail(rs.getString("email"));
 				c.setTelefone(rs.getString("telefone"));
-				c.setProgramaFidelidade(rs.getString("programaFidelidade"));
-				c.setPontosFidelidade(rs.getString("pontosFidelidade"));
 				c.setDataNasc(rs.getString("dataNasc"));
 
 				clientes.add(c);
@@ -110,17 +104,15 @@ public class ClienteDAO {
 
 		try {
 			stmt = con.prepareStatement(
-					"UPDATE Cliente SET nome = ?, cpf = ?, id_Endereco = ?, email = ?, telefone = ?, programaFidelidade = ?, pontosFidelidade = ?, dataNasc = ? WHERE idCliente = ?");
+					"UPDATE Cliente SET nome = ?, cpf = ?, id_Endereco = ?, email = ?, telefone = ?, dataNasc = ? WHERE idCliente = ?");
 
 			stmt.setString(1, c.getNomeCliente());
 			stmt.setString(2, c.getCpf());
 			stmt.setString(3, c.getId_Endereço());
 			stmt.setString(4, c.getEmail());
 			stmt.setString(5, c.getTelefone());
-			stmt.setString(6, c.getProgramaFidelidade());
-			stmt.setString(7, c.getPontosFidelidade());
-			stmt.setString(8, c.getDataNasc());
-			stmt.setString(9, c.getIdCliente());
+			stmt.setString(6, c.getDataNasc());
+			stmt.setString(7, c.getIdCliente());
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {

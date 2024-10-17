@@ -105,7 +105,7 @@ public class controllerRelatorioClientes implements Initializable {
 
     @FXML
     void OnbtnPesquisar(ActionEvent event) {
-    	arrayCliente = FXCollections.observableArrayList(clienteDAO.search(txtPesquisar.getText()));
+    	arrayCliente = FXCollections.observableArrayList(ClienteDAO.search(txtPesquisar.getText()));
     	
     	columnID.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
 		columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
@@ -156,7 +156,7 @@ public class controllerRelatorioClientes implements Initializable {
     }
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Implementação da inicialização, se necessário
 		carregarTableCliente();
 	}
