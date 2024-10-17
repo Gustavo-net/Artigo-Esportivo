@@ -16,7 +16,7 @@ public class ProdutoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO Produtos (idProduto, nome, codigo, marca, descrição, preçoUnitario, estoqueDisp, estoqueMin, estoqueMax, idCategoria, idVariação) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt = con.prepareStatement("INSERT INTO Produtos (idProduto, nome, codigo, marca, descricao, precoUnitario, estoqueDisp, estoqueMin, estoqueMax, id_Categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, prod.getIdProduto());
             stmt.setString(2, prod.getNome());
             stmt.setString(3, prod.getCodigo());
@@ -27,10 +27,9 @@ public class ProdutoDAO {
             stmt.setString(8, prod.getEstoqueMin());
             stmt.setString(9, prod.getEstoqueMax());
             stmt.setString(10, prod.getIdCategoria());
-            stmt.setString(11, prod.getIdVariação());
 
             stmt.executeUpdate();
-//tt
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -54,16 +53,14 @@ public class ProdutoDAO {
                 prod.setNome(rs.getString("nome"));
                 prod.setCodigo(rs.getString("codigo"));
                 prod.setMarca(rs.getString("marca"));
-                prod.setDescrição(rs.getString("descrição"));
-                prod.setPreçoUnitario(rs.getString("preçoUnitario"));
+                prod.setDescrição(rs.getString("descricao"));
+                prod.setPreçoUnitario(rs.getString("precoUnitario"));
                 prod.setEstoqueDisp(rs.getString("estoqueDisp"));
                 prod.setEstoqueMin(rs.getString("estoqueMin"));
                 prod.setEstoqueMax(rs.getString("estoqueMax"));
-                prod.setIdCategoria(rs.getString("idCategoria"));
-                prod.setIdVariação(rs.getString("idVariação"));
+                prod.setIdCategoria(rs.getString("id_Categoria"));
                 produtos.add(prod);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -89,13 +86,12 @@ public class ProdutoDAO {
                 prod.setNome(rs.getString("nome"));
                 prod.setCodigo(rs.getString("codigo"));
                 prod.setMarca(rs.getString("marca"));
-                prod.setDescrição(rs.getString("descrição"));
-                prod.setPreçoUnitario(rs.getString("preçoUnitario"));
+                prod.setDescrição(rs.getString("descricao"));
+                prod.setPreçoUnitario(rs.getString("precoUnitario"));
                 prod.setEstoqueDisp(rs.getString("estoqueDisp"));
                 prod.setEstoqueMin(rs.getString("estoqueMin"));
                 prod.setEstoqueMax(rs.getString("estoqueMax"));
-                prod.setIdCategoria(rs.getString("idCategoria"));
-                prod.setIdVariação(rs.getString("idVariação"));
+                prod.setIdCategoria(rs.getString("id_Categoria"));
                 produtos.add(prod);
             }
 
@@ -112,7 +108,7 @@ public class ProdutoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE Produtos SET nome = ?, codigo = ?, marca = ?, descrição = ?, preçoUnitario = ?, estoqueDisp = ?, estoqueMin = ?, estoqueMax = ?, idCategoria = ?, idVariação = ? WHERE idProduto = ?");
+            stmt = con.prepareStatement("UPDATE Produtos SET nome = ?, codigo = ?, marca = ?, descricao = ?, precoUnitario = ?, estoqueDisp = ?, estoqueMin = ?, estoqueMax = ?, id_Categoria = ? WHERE idProduto = ?");
             stmt.setString(1, prod.getNome());
             stmt.setString(2, prod.getCodigo());
             stmt.setString(3, prod.getMarca());
@@ -122,7 +118,6 @@ public class ProdutoDAO {
             stmt.setString(7, prod.getEstoqueMin());
             stmt.setString(8, prod.getEstoqueMax());
             stmt.setString(9, prod.getIdCategoria());
-            stmt.setString(10, prod.getIdVariação());
             stmt.setString(11, prod.getIdProduto());
 
             stmt.executeUpdate();
