@@ -16,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import packageModel.Vendas;
-import package_controle.FuncionarioDAO;
 import package_controle.VendaDAO;
 
 public class controllerRelatorioVendas implements Initializable {

@@ -12,7 +12,6 @@ public class Produtos {
 	private String estoqueMin;
 	private String estoqueMax;
 	private String idCategoria;
-	private String idVariação;
 	
 	
 	public Produtos() {
@@ -120,18 +119,9 @@ public class Produtos {
 	}
 
 
-	public String getIdVariação() {
-		return idVariação;
-	}
-
-
-	public void setIdVariação(String idVariação) {
-		this.idVariação = idVariação;
-	}
-
 
 	public Produtos(String idProduto, String nome, String codigo, String marca, String descrição, String preçoUnitario,
-			String estoqueDisp, String estoqueMin, String estoqueMax, String idCategoria, String idVariação) {
+			String estoqueDisp, String estoqueMin, String estoqueMax, String idCategoria) {
 		super();
 		this.idProduto = idProduto;
 		this.nome = nome;
@@ -143,7 +133,6 @@ public class Produtos {
 		this.estoqueMin = estoqueMin;
 		this.estoqueMax = estoqueMax;
 		this.idCategoria = idCategoria;
-		this.idVariação = idVariação;
 	}
 	
 	

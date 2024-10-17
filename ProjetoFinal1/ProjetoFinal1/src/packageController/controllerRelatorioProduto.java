@@ -1,10 +1,14 @@
 package packageController;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import application.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -15,7 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import packageModel.Produtos;
 import package_controle.ProdutoDAO;
 
-public class controllerRelatorioProduto {
+public class controllerRelatorioProduto implements Initializable{
 
 	@FXML
 	private TableView<Produtos> tableRelatorioProduto;
@@ -90,7 +94,7 @@ public class controllerRelatorioProduto {
 		columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
 		columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
 		columnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-		columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
+		columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("preçoUnitario"));
 		columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
 
 		tableRelatorioProduto.setItems(arrayProduto);
@@ -168,5 +172,11 @@ public class controllerRelatorioProduto {
 	@FXML
 	void OnbtnVoltar(ActionEvent event) {
 		Main.changeScreen("main");
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		carregarTableProduto();
 	}
 }
