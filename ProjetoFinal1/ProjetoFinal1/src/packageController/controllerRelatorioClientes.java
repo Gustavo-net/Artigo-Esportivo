@@ -158,6 +158,7 @@ public class controllerRelatorioClientes implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// Implementação da inicialização, se necessário
+		carregarTableCliente();
 	}
 
 }
