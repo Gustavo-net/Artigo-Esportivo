@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioClientes">
+<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioClientes">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="474.0" layoutX="232.0" layoutY="165.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="652.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="121.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="940.0" />
@@ -155,9 +155,9 @@
       <TextField fx:id="txtMarca" layoutX="250.0" layoutY="329.0" prefHeight="26.0" prefWidth="131.0" />
       <TextField fx:id="txtTamanho" layoutX="389.0" layoutY="329.0" prefHeight="26.0" prefWidth="95.0" />
       <TextField fx:id="txtCor" layoutX="492.0" layoutY="329.0" prefHeight="26.0" prefWidth="85.0" />
-      <Text fill="#333333" layoutX="249.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciamento de Estoque" wrappingWidth="255.781982421875">
+      <Text fill="#333333" layoutX="249.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciamento de Estoque" wrappingWidth="255.781982421875">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Text>
       <Text fill="#333333" layoutX="250.0" layoutY="401.0" opacity="0.77" strokeType="OUTSIDE" strokeWidth="0.0" text="Estoque atual" wrappingWidth="94.9819946289062">

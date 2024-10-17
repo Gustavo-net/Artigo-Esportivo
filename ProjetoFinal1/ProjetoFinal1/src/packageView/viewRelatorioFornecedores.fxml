@@ -15,12 +15,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioFornecedor">
+<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioFornecedor">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="474.0" layoutX="234.0" layoutY="167.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="692.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="121.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="940.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="66.0" layoutX="2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="936.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="60.0" layoutX="1.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="939.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="60.0" layoutX="1.0" layoutY="-6.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="939.0">
          <effect>
             <DropShadow height="53.75" radius="18.7725" width="23.34">
                <color>
@@ -29,7 +29,7 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="564.0" layoutX="14.0" layoutY="77.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="206.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="564.0" layoutX="14.0" layoutY="77.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="206.0" />
       <Text fill="WHITE" layoutX="24.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema de Gestão Comercial" wrappingWidth="227.4234619140625">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -122,12 +122,12 @@
       </Text>
       <TableView fx:id="tableFornecedores" layoutX="245.0" layoutY="227.0" prefHeight="405.0" prefWidth="670.0">
         <columns>
-          <TableColumn fx:id="ID" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="Nome" prefWidth="109.60003662109375" text="Nome" />
-            <TableColumn fx:id="CNPJ" prefWidth="117.5999755859375" text="CNPJ" />
-            <TableColumn fx:id="Email" prefWidth="116.79998779296875" text="Email" />
-            <TableColumn fx:id="Telefone" prefWidth="121.5999755859375" text="Telefone" />
-            <TableColumn fx:id="CEP" prefWidth="130.4000244140625" text="CEP" />
+          <TableColumn fx:id="columnID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="columnNome" prefWidth="109.60003662109375" text="Nome" />
+            <TableColumn fx:id="columnCNPJ" prefWidth="117.5999755859375" text="CNPJ" />
+            <TableColumn fx:id="columnemail" prefWidth="116.79998779296875" text="Email" />
+            <TableColumn fx:id="columntelefone" prefWidth="121.5999755859375" text="Telefone" />
+            <TableColumn fx:id="columncep" prefWidth="130.4000244140625" text="CEP" />
         </columns>
       </TableView>
       <Button fx:id="bntCadastros" layoutX="23.0" layoutY="236.0" mnemonicParsing="false" onAction="#OnbtnCadastros" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Cadastro" />
@@ -136,7 +136,7 @@
       <Button fx:id="btnProdutos" layoutX="23.0" layoutY="391.0" mnemonicParsing="false" onAction="#OnbtnProdutos" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Produtos" />
       <Button fx:id="btnVendas" layoutX="23.0" layoutY="426.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Vendas" />
       <Button fx:id="btnFornecedores" layoutX="29.0" layoutY="312.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="184.0" text="Fornecedores" />
-      <TextField fx:id="txtProcurarFornecedores" layoutX="627.0" layoutY="181.0" promptText="Procurar Fornecedores" />
+      <TextField fx:id="labelpesquisar" layoutX="627.0" layoutY="181.0" promptText="Procurar Fornecedores" />
       <Button fx:id="bntSair" layoutX="821.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnbtnSair" opacity="0.0" prefHeight="26.0" prefWidth="85.0" text="Sair" />
       <ComboBox fx:id="boxFiltrar" layoutX="524.0" layoutY="181.0" prefHeight="26.0" prefWidth="88.0" promptText="Filtrar" />
       <Button fx:id="btnInserir" layoutX="251.0" layoutY="181.0" mnemonicParsing="false" onAction="#OnbtnInserir" text="inserir" />

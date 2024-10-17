@@ -61,7 +61,7 @@ public class FornecedoresDAO {
         return fornecedores;
     }
 
-    public ArrayList<Fornecedores> search(String string) {
+    public static ArrayList<Fornecedores> search(String string) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
