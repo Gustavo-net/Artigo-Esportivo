@@ -252,23 +252,21 @@
 
         <columns>
 
-          <TableColumn fx:id="columnID" prefWidth="53.59999084472656" text="ID" />
+          <TableColumn fx:id="columnID" prefWidth="43.2000732421875" text="ID" />
 
-          <TableColumn fx:id="columnNome" prefWidth="76.7999267578125" text="Nome" />
-
-            <TableColumn fx:id="columnCodigo" prefWidth="73.5999755859375" text="Codigo" />
+            <TableColumn fx:id="columnCodigo" prefWidth="83.99993896484375" text="Codigo" />
 
             <TableColumn fx:id="columnMarca" prefWidth="76.79998779296875" text="Marca" />
 
             <TableColumn fx:id="columnDescrição" text="Descrição" />
 
-            <TableColumn fx:id="columnPreçoUn" prefWidth="68.79998779296875" text="PreçoUn" />
+            <TableColumn fx:id="columnPreçoUn" prefWidth="88.79998779296875" text="PreçoUn" />
 
-            <TableColumn fx:id="columnQuantidade" prefWidth="85.5999755859375" text="Quantidade" />
+            <TableColumn fx:id="columnQuantidade" prefWidth="76.0" text="Quantidade" />
 
-            <TableColumn fx:id="columnDesconto" prefWidth="66.4000244140625" text="Desconto" />
+            <TableColumn fx:id="columnDesconto" prefWidth="88.00006103515625" text="Desconto" />
 
-            <TableColumn fx:id="columnTotal" prefWidth="68.7999267578125" text="Total" />
+            <TableColumn fx:id="columnTotal" prefWidth="72.0001220703125" text="Total" />
 
         </columns>
 
