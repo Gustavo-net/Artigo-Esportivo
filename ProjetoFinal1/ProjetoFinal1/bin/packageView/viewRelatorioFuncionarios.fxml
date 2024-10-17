@@ -134,8 +134,8 @@
         </columns>
       </TableView>
       <Button fx:id="bntCadastros" layoutX="23.0" layoutY="236.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Cadastro" />
-      <Button fx:id="bntClientes" layoutX="23.0" layoutY="275.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Cliente" />
-      <Button fx:id="btnProdutos" layoutX="23.0" layoutY="391.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Produtos" />
+      <Button fx:id="btnClientes" layoutX="23.0" layoutY="275.0" mnemonicParsing="false" onAction="#OnbtnClientes" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Clientes" />
+      <Button fx:id="btnProdutos" layoutX="23.0" layoutY="391.0" mnemonicParsing="false" onAction="#OnbtnProdutos" opacity="0.0" prefHeight="26.0" prefWidth="131.0" text="Produtos" />
       <Button fx:id="btnVendas" layoutX="23.0" layoutY="426.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="95.0" text="Vendas" />
       <TextField fx:id="labelpesquisar" layoutX="627.0" layoutY="181.0" promptText="Procurar Fornecedores" />
       <Button fx:id="bntSair" layoutX="826.0" layoutY="14.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="85.0" text="Sair" />
@@ -144,6 +144,7 @@
       <Button fx:id="btnEditar" layoutX="314.0" layoutY="181.0" mnemonicParsing="false" onAction="#OnbtnEditar" text="editar" />
       <Button fx:id="btnVoltar" layoutX="378.0" layoutY="181.0" mnemonicParsing="false" onAction="#OnbtnVoltar" prefHeight="26.0" prefWidth="74.0" text="voltar" />
       <Button fx:id="btnPesquisar" layoutX="784.0" layoutY="181.0" mnemonicParsing="false" onAction="#OnbtnPesquisar" prefHeight="26.0" prefWidth="74.0" text="Pesquisar" />
+      <Button fx:id="btnFornecedores" layoutX="23.0" layoutY="312.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="131.0" text="Fornecedores" />
    </children>
    
    

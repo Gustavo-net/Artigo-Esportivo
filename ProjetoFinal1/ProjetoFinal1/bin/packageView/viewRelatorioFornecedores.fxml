@@ -29,7 +29,7 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="564.0" layoutX="14.0" layoutY="77.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="206.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="564.0" layoutX="14.0" layoutY="77.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="206.0" />
       <Text fill="WHITE" layoutX="24.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema de Gestão Comercial" wrappingWidth="227.4234619140625">
          <font>
             <Font name="System Bold" size="16.0" />
