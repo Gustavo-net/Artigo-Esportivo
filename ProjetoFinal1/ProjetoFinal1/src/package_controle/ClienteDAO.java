@@ -25,7 +25,7 @@ public class ClienteDAO {
 			stmt.setString(5, c.getEmail());
 			stmt.setString(6, c.getTelefone());
 			stmt.setString(7, c.getDataNasc());
-
+//a
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
