@@ -147,5 +147,40 @@ public class ProdutoDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
+
+        public ArrayList<Produtos> buscarProdutosPorCategoria(String idCategoria) {
+            Connection con = ConnectionDatabase.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            ArrayList<Produtos> produtos = new ArrayList<>();
+
+            try {
+                stmt = con.prepareStatement("SELECT * FROM Produtos WHERE id_Categoria = ?");
+                stmt.setString(1, idCategoria);
+                rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Produtos prod = new Produtos();
+                    prod.setIdProduto(rs.getString("idProduto"));
+                    prod.setNome(rs.getString("nome"));
+                    prod.setCodigo(rs.getString("codigo"));
+                    prod.setMarca(rs.getString("marca"));
+                    prod.setDescrição(rs.getString("descricao"));
+                    prod.setPreçoUnitario(rs.getString("precoUnitario"));
+                    prod.setEstoqueDisp(rs.getString("estoqueDisp"));
+                    prod.setEstoqueMin(rs.getString("estoqueMin"));
+                    prod.setEstoqueMax(rs.getString("estoqueMax"));
+                    prod.setIdCategoria(rs.getString("id_Categoria"));
+                    produtos.add(prod);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                ConnectionDatabase.closeConnection(con, stmt, rs);
+            }
+            return produtos;
+        }
+    
+
 }
 

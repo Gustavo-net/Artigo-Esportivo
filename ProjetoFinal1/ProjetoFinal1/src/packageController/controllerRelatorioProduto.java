@@ -1,6 +1,7 @@
 package packageController;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import packageModel.Categorias;
 import packageModel.Produtos;
+import package_controle.CategoriaDAO;
 import package_controle.ProdutoDAO;
 
 public class controllerRelatorioProduto implements Initializable {
@@ -93,7 +95,7 @@ public class controllerRelatorioProduto implements Initializable {
         atualizarTabela(arrayProduto);
     }
 
-    private void atualizarTabela(ObservableList<Produtos> produtos) {
+    private void atualizarTabela(ObservableList<Produtos> arrayProduto2) {
         columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
@@ -102,7 +104,7 @@ public class controllerRelatorioProduto implements Initializable {
         columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
         columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
 
-        tableRelatorioProduto.setItems(produtos);
+        tableRelatorioProduto.setItems(arrayProduto2);
     }
 
     @FXML
@@ -172,7 +174,6 @@ public class controllerRelatorioProduto implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         carregarTableProduto();
 
-        // Adicionando as opções ao ComboBox
         ObservableList<String> categorias = FXCollections.observableArrayList(
             "Roupas Masculinas",
             "Roupas Femininas",
@@ -193,25 +194,30 @@ public class controllerRelatorioProduto implements Initializable {
 
         boxFiltrar.setItems(categorias);
 
-        // Adicionando listener ao ComboBox para filtragem
         boxFiltrar.setOnAction(event -> filtrarProdutos());
     }
+    
+    private void inicializarComboBox() {
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        ArrayList<Categorias> categorias = categoriaDAO.read();
+        
+        for (Categorias categoria : categorias) {
+            boxFiltrar.getItems().add(categoria.getNomeCategoria());
+        }
+    }
+
 
     private void filtrarProdutos() {
         String categoriaSelecionada = boxFiltrar.getValue();
         if (categoriaSelecionada == null) {
-            atualizarTabela(arrayProduto);
+            atualizarTabela(ProdutoDAO.read());
             return;
         }
+        
+        String idCategoria = obterIdCategoria(categoriaSelecionada);
 
-        ObservableList<Produtos> produtosFiltrados = FXCollections.observableArrayList();
-        for (Categorias categorias : arrayProduto) {
-            // Aqui você deve ajustar para buscar a categoria do produto através da FK
-            String categoriaProduto = categorias.getCategoria(); // Ajuste conforme sua implementação
-            if (categoriaProduto != null && categoriaProduto.equals(categoriaSelecionada)) {
-                produtosFiltrados.add(produto);
-            }
-        }
-        atualizarTabela(produtosFiltrados);
+        ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
+        atualizarTabela(FXCollections.observableArrayList(produtosFiltrados));
     }
+
 }
