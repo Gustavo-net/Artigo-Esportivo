@@ -90,7 +90,7 @@ public class controllerRelatorioProduto implements Initializable {
     public static Produtos produtoEditor = new Produtos();
 
     public void carregarTableProduto() {
-        arrayProduto = FXCollections.observableArrayList(ProdutoDAO.read());
+        arrayProduto = FXCollections.observableArrayList(produtoDAO.read()); // Alterado para instância
         tableRelatorioProduto.setItems(arrayProduto);
         atualizarTabela(arrayProduto);
     }
@@ -117,17 +117,13 @@ public class controllerRelatorioProduto implements Initializable {
         Main.changeScreen("clientes");
     }
 
-    public static Produtos produtoEditar = new Produtos();
-
     @FXML
     void OnbtnEditar(ActionEvent event) {
         if (tableRelatorioProduto.getSelectionModel().getSelectedIndex() == -1) {
-            Alert mensagemDeErro = new Alert(Alert.AlertType.INFORMATION);
-            mensagemDeErro.setContentText("Selecione um Produto para Editar Primeiro!");
-            mensagemDeErro.show();
+            showAlert("Selecione um Produto para Editar Primeiro!");
         } else {
             int i = tableRelatorioProduto.getSelectionModel().getSelectedIndex();
-            produtoEditar = tableRelatorioProduto.getItems().get(i);
+            produtoEditor = tableRelatorioProduto.getItems().get(i);
         }
         carregarTableProduto();
     }
@@ -150,9 +146,12 @@ public class controllerRelatorioProduto implements Initializable {
 
     @FXML
     void OnbtnPesquisar(ActionEvent event) {
-        arrayProduto = FXCollections.observableArrayList(produtoDAO.search(txtPesquisar.getText()));
-        atualizarTabela(arrayProduto);
-        tableRelatorioProduto.refresh();
+        try {
+            arrayProduto = FXCollections.observableArrayList(produtoDAO.search(txtPesquisar.getText()));
+            atualizarTabela(arrayProduto);
+        } catch (Exception e) {
+            showAlert("Erro ao pesquisar produtos: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -173,27 +172,7 @@ public class controllerRelatorioProduto implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         carregarTableProduto();
-
-        ObservableList<String> categorias = FXCollections.observableArrayList(
-            "Roupas Masculinas",
-            "Roupas Femininas",
-            "Calçados Masculinos",
-            "Calçados Femininos",
-            "Acessórios de Esporte",
-            "Equipamentos de Academia",
-            "Bolsas e Mochilas Esportivas",
-            "Garrafas e Squeezes",
-            "Suplementos e Nutrição",
-            "Proteção e Segurança",
-            "Natação",
-            "Ciclismo",
-            "Esportes Radicais",
-            "Futebol",
-            "Basquete"
-        );
-
-        boxFiltrar.setItems(categorias);
-
+        inicializarComboBox();
         boxFiltrar.setOnAction(event -> filtrarProdutos());
     }
     
@@ -206,18 +185,32 @@ public class controllerRelatorioProduto implements Initializable {
         }
     }
 
-
     private void filtrarProdutos() {
         String categoriaSelecionada = boxFiltrar.getValue();
         if (categoriaSelecionada == null) {
-            atualizarTabela(ProdutoDAO.read());
+            carregarTableProduto();
             return;
         }
         
         String idCategoria = obterIdCategoria(categoriaSelecionada);
-
         ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
         atualizarTabela(FXCollections.observableArrayList(produtosFiltrados));
     }
 
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private String obterIdCategoria(String nomeCategoria) {
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        ArrayList<Categorias> categorias = categoriaDAO.read();
+        
+        for (Categorias categoria : categorias) {
+            if (categoria.getNomeCategoria().equals(nomeCategoria)) {
+                return categoria.getIdCategoria(); 
+            }
+        }
+        return null; 
+    }
 }
