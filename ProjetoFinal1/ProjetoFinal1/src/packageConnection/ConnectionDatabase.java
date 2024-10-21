@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class ConnectionDatabase {
 
     private final static String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private final static String URL = "jdbc:sqlserver://192.168.70.56:57350;encrypt=false;databaseName=Artigos_Esportivos";
+    private final static String URL = "jdbc:sqlserver://192.168.50.189:57350;encrypt=false;databaseName=Artigos_Esportivos";
     private final static String USER = "SA";
     private final static String PASSWORD = "Senailab05";
 
