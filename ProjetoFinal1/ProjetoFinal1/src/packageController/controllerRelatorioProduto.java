@@ -32,52 +32,37 @@ public class controllerRelatorioProduto implements Initializable {
 
     @FXML
     private Button btnCadastros;
-
     @FXML
     private Button btnClientes;
-
     @FXML
     private Button btnEditar;
-
     @FXML
     private Button btnFornecedores;
-
     @FXML
     private Button btnFuncionários;
-
     @FXML
     private Button btnInserir;
-
     @FXML
     private Button btnPesquisar;
-
     @FXML
     private Button btnVendas;
-
     @FXML
     private Button btnVoltar;
-
     @FXML
     private Button btnSair;
 
     @FXML
     private TableColumn<Produtos, String> columnCodigo;
-
     @FXML
     private TableColumn<Produtos, String> columnDescricao;
-
     @FXML
     private TableColumn<Produtos, String> columnEstoqueAtual;
-
     @FXML
     private TableColumn<Produtos, String> columnId;
-
     @FXML
     private TableColumn<Produtos, String> columnMarca;
-
     @FXML
     private TableColumn<Produtos, String> columnNome;
-
     @FXML
     private TableColumn<Produtos, String> columnPrecoUn;
 
@@ -89,13 +74,20 @@ public class controllerRelatorioProduto implements Initializable {
 
     public static Produtos produtoEditor = new Produtos();
 
-    public void carregarTableProduto() {
-        arrayProduto = FXCollections.observableArrayList(produtoDAO.read()); // Alterado para instância
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        carregarTableProduto();
+        inicializarComboBox();
+        boxFiltrar.setOnAction(event -> filtrarProdutos());
+    }
+
+    private void carregarTableProduto() {
+        arrayProduto = FXCollections.observableArrayList(produtoDAO.read());
         tableRelatorioProduto.setItems(arrayProduto);
         atualizarTabela(arrayProduto);
     }
 
-    private void atualizarTabela(ObservableList<Produtos> arrayProduto2) {
+    private void atualizarTabela(ObservableList<Produtos> observableList) {
         columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
@@ -103,8 +95,6 @@ public class controllerRelatorioProduto implements Initializable {
         columnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
         columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
-
-        tableRelatorioProduto.setItems(arrayProduto2);
     }
 
     @FXML
@@ -124,8 +114,9 @@ public class controllerRelatorioProduto implements Initializable {
         } else {
             int i = tableRelatorioProduto.getSelectionModel().getSelectedIndex();
             produtoEditor = tableRelatorioProduto.getItems().get(i);
+            // Redirecionar para a tela de edição de produto
+            Main.changeScreen("edicaoProduto"); // Ajustar conforme o nome da tela de edição
         }
-        carregarTableProduto();
     }
 
     @FXML
@@ -141,19 +132,35 @@ public class controllerRelatorioProduto implements Initializable {
     @FXML
     void OnbtnInserir(ActionEvent event) {
         produtoEditor = null;
-        carregarTableProduto();
+        // Aqui você pode redirecionar para a tela de inserção
     }
 
     @FXML
     void OnbtnPesquisar(ActionEvent event) {
         try {
-            arrayProduto = FXCollections.observableArrayList(produtoDAO.search(txtPesquisar.getText()));
-            atualizarTabela(arrayProduto);
+            String pesquisa = txtPesquisar.getText().trim();
+            if (pesquisa.isEmpty()) {
+                carregarTableProduto(); 
+            } else {
+                arrayProduto = FXCollections.observableArrayList(produtoDAO.search(pesquisa));
+
+                columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
+                columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+                columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+                columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+                columnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+                columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
+                columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
+
+                tableRelatorioProduto.setItems(arrayProduto);
+                tableRelatorioProduto.refresh();
+            }
         } catch (Exception e) {
             showAlert("Erro ao pesquisar produtos: " + e.getMessage());
         }
     }
 
+    
     @FXML
     void OnbtnSair(ActionEvent event) {
         Main.changeScreen("login");
@@ -169,13 +176,6 @@ public class controllerRelatorioProduto implements Initializable {
         Main.changeScreen("main");
     }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        carregarTableProduto();
-        inicializarComboBox();
-        boxFiltrar.setOnAction(event -> filtrarProdutos());
-    }
-    
     private void inicializarComboBox() {
         CategoriaDAO categoriaDAO = new CategoriaDAO();
         ArrayList<Categorias> categorias = categoriaDAO.read();
@@ -191,10 +191,12 @@ public class controllerRelatorioProduto implements Initializable {
             carregarTableProduto();
             return;
         }
-        
+
         String idCategoria = obterIdCategoria(categoriaSelecionada);
-        ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
-        atualizarTabela(FXCollections.observableArrayList(produtosFiltrados));
+        if (idCategoria != null) {
+            ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
+            atualizarTabela(FXCollections.observableArrayList(produtosFiltrados));
+        }
     }
 
     private void showAlert(String message) {
@@ -202,6 +204,7 @@ public class controllerRelatorioProduto implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     private String obterIdCategoria(String nomeCategoria) {
         CategoriaDAO categoriaDAO = new CategoriaDAO();
         ArrayList<Categorias> categorias = categoriaDAO.read();
