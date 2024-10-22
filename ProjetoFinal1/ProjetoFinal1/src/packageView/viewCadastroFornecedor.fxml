@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="661.0" maxWidth="756.0" prefHeight="506.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerCadastrosFornecedor">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="513.0" layoutX="9.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="684.0">
+         <effect>
+            <ColorAdjust />
+         </effect></Rectangle>
+      <Text fill="#333333" layoutX="43.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Fornecedor" wrappingWidth="156.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtNomeProduto" layoutX="41.0" layoutY="122.0" prefHeight="26.0" prefWidth="598.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <Text fill="#333333" layoutX="42.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CNPJ" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtCNPJ" layoutX="41.0" layoutY="176.0" prefHeight="26.0" prefWidth="157.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <Text fill="#333333" layoutX="214.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="94.9819946289062">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtEmail" layoutX="213.0" layoutY="175.0" prefHeight="26.0" prefWidth="226.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <Text fill="#333333" layoutX="41.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço" wrappingWidth="73.3819580078125">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtCep" layoutX="39.0" layoutY="248.0" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <Button fx:id="btnAddProduto" layoutX="161.0" layoutY="365.0" mnemonicParsing="false" onAction="#OnbtnAddProduto" prefHeight="36.0" prefWidth="330.0" style="-fx-background-color: #f18c16;" text="Adicionar Produto" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" fill="#f78502" height="57.0" layoutY="-4.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="694.0" />
+      <Text fill="WHITE" layoutX="23.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastrar Fornecedor" wrappingWidth="209.60000000000014">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtTelefone" layoutX="454.0" layoutY="176.0" prefHeight="26.0" prefWidth="210.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <Text fill="#333333" layoutX="459.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone" wrappingWidth="94.9819946289062">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#333333" layoutX="46.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CEP" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtRua" layoutX="214.0" layoutY="248.0" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <Text fill="#333333" layoutX="219.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rua" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtNumero" layoutX="395.0" layoutY="248.0" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <Text fill="#333333" layoutX="401.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#333333" layoutX="505.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtBairro" layoutX="503.0" layoutY="248.0" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <TextField fx:id="txtComplemento" layoutX="35.0" layoutY="303.0" prefHeight="26.0" prefWidth="361.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <Text fill="#333333" layoutX="41.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Complemento" wrappingWidth="88.58196258544922">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtCidadeUF" layoutX="476.0" layoutY="303.0" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <Text fill="#333333" layoutX="479.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cidade UF" wrappingWidth="64.58197021484375">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
