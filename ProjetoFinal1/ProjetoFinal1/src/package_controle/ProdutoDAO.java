@@ -11,33 +11,7 @@ import packageModel.Produtos;
 
 public class ProdutoDAO {
 
-    public void create(Produtos prod) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement("INSERT INTO Produtos (idProduto, nome, codigo, marca, descricao, precoUnitario, estoqueDisp, estoqueMin, estoqueMax, id_Categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, prod.getIdProduto());
-            stmt.setString(2, prod.getNome());
-            stmt.setString(3, prod.getCodigo());
-            stmt.setString(4, prod.getMarca());
-            stmt.setString(5, prod.getDescrição());
-            stmt.setString(6, prod.getPreçoUnitario());
-            stmt.setString(7, prod.getEstoqueDisp());
-            stmt.setString(8, prod.getEstoqueMin());
-            stmt.setString(9, prod.getEstoqueMax());
-            stmt.setString(10, prod.getIdCategoria());
-
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
-
-    public static ArrayList<Produtos> read() {
+    public ArrayList<Produtos> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -48,19 +22,17 @@ public class ProdutoDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Produtos prod = new Produtos();
-                prod.setIdProduto(rs.getString("idProduto"));
-                prod.setNome(rs.getString("nome"));
-                prod.setCodigo(rs.getString("codigo"));
-                prod.setMarca(rs.getString("marca"));
-                prod.setDescrição(rs.getString("descricao"));
-                prod.setPreçoUnitario(rs.getString("precoUnitario"));
-                prod.setEstoqueDisp(rs.getString("estoqueDisp"));
-                prod.setEstoqueMin(rs.getString("estoqueMin"));
-                prod.setEstoqueMax(rs.getString("estoqueMax"));
-                prod.setIdCategoria(rs.getString("id_Categoria"));
-                produtos.add(prod);
+                Produtos p = new Produtos();
+                p.setIdProduto(rs.getString("idProduto"));
+                p.setNome(rs.getString("nome"));
+                p.setCodigo(rs.getString("codigo"));
+                p.setMarca(rs.getString("marca"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setPrecoUnitario(rs.getDouble("precoUnitario"));
+                p.setEstoqueDisp(rs.getInt("estoqueDisp"));
+                produtos.add(p);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -69,7 +41,7 @@ public class ProdutoDAO {
         return produtos;
     }
 
-    public ArrayList<Produtos> search(String string) {
+    public ArrayList<Produtos> search(String pesquisa) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -77,22 +49,50 @@ public class ProdutoDAO {
 
         try {
             stmt = con.prepareStatement("SELECT * FROM Produtos WHERE nome LIKE ?");
-            stmt.setString(1, "%" + string + "%");
+            stmt.setString(1, "%" + pesquisa + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Produtos prod = new Produtos();
-                prod.setIdProduto(rs.getString("idProduto"));
-                prod.setNome(rs.getString("nome"));
-                prod.setCodigo(rs.getString("codigo"));
-                prod.setMarca(rs.getString("marca"));
-                prod.setDescrição(rs.getString("descricao"));
-                prod.setPreçoUnitario(rs.getString("precoUnitario"));
-                prod.setEstoqueDisp(rs.getString("estoqueDisp"));
-                prod.setEstoqueMin(rs.getString("estoqueMin"));
-                prod.setEstoqueMax(rs.getString("estoqueMax"));
-                prod.setIdCategoria(rs.getString("id_Categoria"));
-                produtos.add(prod);
+                Produtos p = new Produtos();
+                p.setIdProduto(rs.getString("idProduto"));
+                p.setNome(rs.getString("nome"));
+                p.setCodigo(rs.getString("codigo"));
+                p.setMarca(rs.getString("marca"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setPrecoUnitario(rs.getDouble("precoUnitario"));
+                p.setEstoqueDisp(rs.getInt("estoqueDisp"));
+                produtos.add(p);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDatabase.closeConnection(con, stmt, rs);
+        }
+        return produtos;
+    }
+
+    public ArrayList<Produtos> buscarProdutosPorCategoria(String idCategoria) {
+        Connection con = ConnectionDatabase.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Produtos> produtos = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM Produtos WHERE idCategoria = ?");
+            stmt.setString(1, idCategoria);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produtos p = new Produtos();
+                p.setIdProduto(rs.getString("idProduto"));
+                p.setNome(rs.getString("nome"));
+                p.setCodigo(rs.getString("codigo"));
+                p.setMarca(rs.getString("marca"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setPrecoUnitario(rs.getDouble("precoUnitario"));
+                p.setEstoqueDisp(rs.getInt("estoqueDisp"));
+                produtos.add(p);
             }
 
         } catch (SQLException e) {
@@ -108,17 +108,14 @@ public class ProdutoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE Produtos SET nome = ?, codigo = ?, marca = ?, descricao = ?, precoUnitario = ?, estoqueDisp = ?, estoqueMin = ?, estoqueMax = ?, id_Categoria = ? WHERE idProduto = ?");
+            stmt = con.prepareStatement("UPDATE Produtos SET nome = ?, codigo = ?, marca = ?, descricao = ?, precoUnitario = ?, estoqueDisp = ? WHERE idProduto = ?");
             stmt.setString(1, prod.getNome());
             stmt.setString(2, prod.getCodigo());
             stmt.setString(3, prod.getMarca());
-            stmt.setString(4, prod.getDescrição());
-            stmt.setString(5, prod.getPreçoUnitario());
-            stmt.setString(6, prod.getEstoqueDisp());
-            stmt.setString(7, prod.getEstoqueMin());
-            stmt.setString(8, prod.getEstoqueMax());
-            stmt.setString(9, prod.getIdCategoria());
-            stmt.setString(11, prod.getIdProduto());
+            stmt.setString(4, prod.getDescricao());
+            stmt.setDouble(5, prod.getPrecoUnitario());
+            stmt.setInt(6, prod.getEstoqueDisp());
+            stmt.setString(7, prod.getIdProduto()); // Corrigido
 
             stmt.executeUpdate();
 
@@ -141,46 +138,8 @@ public class ProdutoDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Erro ao excluir o produto: " + e.getMessage(), e);
-
         } finally {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
-
-        public ArrayList<Produtos> buscarProdutosPorCategoria(String idCategoria) {
-            Connection con = ConnectionDatabase.getConnection();
-            PreparedStatement stmt = null;
-            ResultSet rs = null;
-            ArrayList<Produtos> produtos = new ArrayList<>();
-
-            try {
-                stmt = con.prepareStatement("SELECT * FROM Produtos WHERE id_Categoria = ?");
-                stmt.setString(1, idCategoria);
-                rs = stmt.executeQuery();
-
-                while (rs.next()) {
-                    Produtos prod = new Produtos();
-                    prod.setIdProduto(rs.getString("idProduto"));
-                    prod.setNome(rs.getString("nome"));
-                    prod.setCodigo(rs.getString("codigo"));
-                    prod.setMarca(rs.getString("marca"));
-                    prod.setDescrição(rs.getString("descricao"));
-                    prod.setPreçoUnitario(rs.getString("precoUnitario"));
-                    prod.setEstoqueDisp(rs.getString("estoqueDisp"));
-                    prod.setEstoqueMin(rs.getString("estoqueMin"));
-                    prod.setEstoqueMax(rs.getString("estoqueMax"));
-                    prod.setIdCategoria(rs.getString("id_Categoria"));
-                    produtos.add(prod);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                ConnectionDatabase.closeConnection(con, stmt, rs);
-            }
-            return produtos;
-        }
-    
-
 }
-

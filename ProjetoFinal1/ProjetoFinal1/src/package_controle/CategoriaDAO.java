@@ -16,7 +16,7 @@ public class CategoriaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO Categoria (idCliente, nomeCategoria) VALUES (?, ?)");
+            stmt = con.prepareStatement("INSERT INTO Categorias (idCategoria, nomeCategoria) VALUES (?, ?)");
             stmt.setString(1, c.getIdCategoria());
             stmt.setString(2, c.getNomeCategoria());
 
@@ -36,7 +36,7 @@ public class CategoriaDAO {
         ArrayList<Categorias> categoria = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Categoria");
+            stmt = con.prepareStatement("SELECT * FROM Categorias");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -61,7 +61,7 @@ public class CategoriaDAO {
         ArrayList<Categorias> categoria = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Categoria WHERE nomeCategoria LIKE ?"); 
+            stmt = con.prepareStatement("SELECT * FROM Categorias WHERE nomeCategoria LIKE ?"); 
             stmt.setString(1, "%" + string + "%");
             rs = stmt.executeQuery();
 
@@ -85,8 +85,9 @@ public class CategoriaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE Categoria SET nomeCategoria = ?");
+            stmt = con.prepareStatement("UPDATE Categorias SET nomeCategoria = ? WHERE idCategoria = ?");
             stmt.setString(1, c.getNomeCategoria());
+            stmt.setString(2, c.getIdCategoria());
 
             stmt.executeUpdate();
 
@@ -98,20 +99,17 @@ public class CategoriaDAO {
     }
 
     public void delete(String idCategoria) {
-    	
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM Categoria WHERE idCategoria = ?");
+            stmt = con.prepareStatement("DELETE FROM Categorias WHERE idCategoria = ?");
             stmt.setString(1, idCategoria);
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Erro ao excluir a categoria: " + e.getMessage(), e);
-
         } finally {
             ConnectionDatabase.closeConnection(con, stmt);
         }
