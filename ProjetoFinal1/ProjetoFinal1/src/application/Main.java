@@ -113,7 +113,7 @@ public class Main extends Application {
 	
 	public static void TelaCadastroFornecedores() throws IOException {
 		FXMLLoader FornecedoresCadastro = new FXMLLoader();
-		FornecedoresCadastro.setLocation(Main.class.getResource("/packageView/viewCadastroFornecedores.fxml"));
+		FornecedoresCadastro.setLocation(Main.class.getResource("/packageView/viewCadastroFornecedor.fxml"));
 		Parent cadastrarFornecedores = FornecedoresCadastro.load();
 		Scene scene2 = new Scene(cadastrarFornecedores);
 		
