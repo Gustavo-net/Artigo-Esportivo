@@ -1,11 +1,13 @@
 package application;
 
+import java.io.IOException;
 import java.sql.Connection;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packageConnection.ConnectionDatabase;
 
@@ -92,7 +94,36 @@ public class Main extends Application {
 		
 
 	}
-
+	private static Stage cadastroProdutos;
+	
+	public static void TelaCadastroProduto() throws IOException {
+		FXMLLoader ProdutoCadastro = new FXMLLoader();
+		ProdutoCadastro.setLocation(Main.class.getResource("/packageView/viewCadastroProdutos.fxml"));
+		Parent cadastrarProduto = ProdutoCadastro.load();
+		Scene scene1 = new Scene(cadastrarProduto);
+		
+		cadastroProdutos = new Stage();
+		cadastroProdutos.setTitle("Cadastro de Produtos - Artigos Esportivos");
+		cadastroProdutos.initModality(Modality.WINDOW_MODAL);
+		cadastroProdutos.setScene(scene1);
+		cadastroProdutos.showAndWait();
+	}
+	
+	private static Stage cadastroFornecedores;
+	
+	public static void TelaCadastroFornecedores() throws IOException {
+		FXMLLoader FornecedoresCadastro = new FXMLLoader();
+		FornecedoresCadastro.setLocation(Main.class.getResource("/packageView/viewCadastroFornecedores.fxml"));
+		Parent cadastrarFornecedores = FornecedoresCadastro.load();
+		Scene scene2 = new Scene(cadastrarFornecedores);
+		
+		cadastroFornecedores = new Stage();
+		cadastroFornecedores.setTitle("Cadastro de Fornecedores - Artigos Esportivos");
+		cadastroFornecedores.initModality(Modality.WINDOW_MODAL);
+		cadastroFornecedores.setScene(scene2);
+		cadastroFornecedores.showAndWait();
+	}
+	
 	public static void main(String[] args) {
 //
 		Connection con = ConnectionDatabase.getConnection();

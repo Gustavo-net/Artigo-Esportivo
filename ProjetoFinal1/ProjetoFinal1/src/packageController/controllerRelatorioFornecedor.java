@@ -108,7 +108,7 @@ public class controllerRelatorioFornecedor implements Initializable {
 
 	@FXML
 	void OnbtnEditar(ActionEvent event) {
-		// Implementar edição de fornecedor
+		//Main.changeScreen("");
 	}
 
 	@FXML
@@ -123,7 +123,7 @@ public class controllerRelatorioFornecedor implements Initializable {
 
 	@FXML
 	void OnbtnInserir(ActionEvent event) {
-		// Implementar inserção de fornecedor
+		Main.changeScreen("Cadastro de Fornecedores - Artigos Esportivos");
 	}
 	
     public static Fornecedores FornecedoresEditor = new Fornecedores();

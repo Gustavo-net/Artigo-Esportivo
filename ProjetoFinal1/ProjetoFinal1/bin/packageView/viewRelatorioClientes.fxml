@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -146,12 +145,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="txtPesquisar" layoutX="665.0" layoutY="180.0" prefHeight="26.0" prefWidth="131.0">
+      <TextField fx:id="txtPesquisar" layoutX="487.0" layoutY="180.0" prefHeight="26.0" prefWidth="309.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </TextField>
-      <ComboBox fx:id="boxFiltrar" layoutX="460.0" layoutY="180.0" prefWidth="150.0" promptText="Filtrar" />
       <Button fx:id="btnPesquisar" layoutX="804.0" layoutY="180.0" mnemonicParsing="false" onAction="#OnbtnPesquisar" text="Pesquisar">
          <cursor>
             <Cursor fx:constant="HAND" />
