@@ -7,24 +7,26 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="531.0" prefWidth="771.0" style="-fx-background-color: #F18C16; -fx-background-image: \@..\packageIcons\top-view-composition-with-neatly-arranged-organized-sport-items.jpg;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerLogin">
    <children>
+      <Pane layoutX="241.0" layoutY="55.0" opacity="0.83" prefHeight="353.0" prefWidth="334.0" style="-fx-border-color: black; -fx-region-background: black;" />
       <ImageView fitHeight="531.0" fitWidth="849.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../packageIcons/top-view-composition-with-neatly-arranged-organized-sport-items.jpg" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f1f1f1" height="358.0" layoutX="248.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="298.0" />
-      <Text layoutX="276.0" layoutY="158.0" opacity="0.33" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha os dados do login para ter o acesso" />
+      <Text layoutX="276.0" layoutY="165.0" opacity="0.33" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha os dados do login para ter o acesso">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
       <Text layoutX="300.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuário" />
       <Button fx:id="btnLogar" layoutX="266.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnActionLogar" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: orange; -fx-background-radius: 60;" text="ENTRAR" />
-      <Text fill="#1e1d1d" layoutX="274.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem vindo ao" wrappingWidth="246.13665771484375">
+      <Text fill="#1e1d1d" layoutX="274.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem vindo ao" wrappingWidth="246.13665771484375">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
@@ -34,7 +36,7 @@
       <TextField fx:id="txtUser" layoutX="301.0" layoutY="205.0" promptText="Informe o CPF        👤" style="-fx-text-fill: #b1b1b1;" />
       <Text layoutX="304.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha" />
       <Line endX="53.5999755859375" endY="0.600006103515625" layoutX="397.0" layoutY="230.0" startX="-96.0" startY="0.600006103515625" />
-      <Text fill="#ec7906" layoutX="414.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema" wrappingWidth="102.9366455078125">
+      <Text fill="#ff7d04" layoutX="414.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema" wrappingWidth="102.9366455078125">
          <font>
             <Font name="Calibri Italic" size="24.0" />
          </font>
