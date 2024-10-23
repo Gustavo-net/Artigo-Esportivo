@@ -1,5 +1,6 @@
 package packageController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -95,6 +96,8 @@ public class controllerRelatorioFornecedor implements Initializable {
 
 		tableFornecedores.setItems(arrayFornecedores);
 	}
+	
+	
 
 	@FXML
 	void OnbntClientes(ActionEvent event) {
@@ -122,8 +125,10 @@ public class controllerRelatorioFornecedor implements Initializable {
 	}
 
 	@FXML
-	void OnbtnInserir(ActionEvent event) {
-		Main.changeScreen("Cadastro de Fornecedores - Artigos Esportivos");
+	void OnbtnInserir(ActionEvent event) throws IOException {
+		FornecedoresEditor = null;
+		Main.TelaCadastroFornecedores();
+		carregarTableFornecedores();
 	}
 	
     public static Fornecedores FornecedoresEditor = new Fornecedores();
