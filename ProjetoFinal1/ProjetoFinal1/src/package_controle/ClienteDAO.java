@@ -17,7 +17,7 @@ public class ClienteDAO {
 
 		try {
 			stmt = con.prepareStatement(
-					"INSERT INTO Cliente (idEndereco, nome, cpf, id_Endereco, email, telefone, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?)");
+					"INSERT INTO Clientes (idEndereco, nomeCliente, cpf, id_Endereco, email, telefone, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?)");
 			stmt.setString(1, c.getIdCliente());
 			stmt.setString(2, c.getNomeCliente());
 			stmt.setString(3, c.getCpf());
@@ -73,7 +73,7 @@ public class ClienteDAO {
 		ArrayList<Clientes> clientes = new ArrayList<>();
 
 		try {
-			stmt = con.prepareStatement("SELECT * FROM Cliente WHERE nome LIKE ? OR cpf LIKE ?");
+			stmt = con.prepareStatement("SELECT * FROM Clientes WHERE nomeCliente LIKE ? OR cpf LIKE ?");
 			stmt.setString(1, "%" + string + "%");
 			stmt.setString(2, "%" + string + "%");
 			rs = stmt.executeQuery();
@@ -81,7 +81,7 @@ public class ClienteDAO {
 			while (rs.next()) {
 				Clientes c = new Clientes();
 				c.setIdCliente(rs.getString("idCliente"));
-				c.setNomeCliente(rs.getString("nome"));
+				c.setNomeCliente(rs.getString("nomeCliente"));
 				c.setCpf(rs.getString("cpf"));
 				c.setEmail(rs.getString("email"));
 				c.setTelefone(rs.getString("telefone"));
@@ -104,7 +104,7 @@ public class ClienteDAO {
 
 		try {
 			stmt = con.prepareStatement(
-					"UPDATE Cliente SET nome = ?, cpf = ?, id_Endereco = ?, email = ?, telefone = ?, dataNasc = ? WHERE idCliente = ?");
+					"UPDATE Clientes SET nomeCliente = ?, cpf = ?, id_Endereco = ?, email = ?, telefone = ?, dataNasc = ? WHERE idCliente = ?");
 
 			stmt.setString(1, c.getNomeCliente());
 			stmt.setString(2, c.getCpf());
@@ -127,7 +127,7 @@ public class ClienteDAO {
 		PreparedStatement stmt = null;
 
 		try {
-			stmt = con.prepareStatement("DELETE FROM Cliente WHERE idCliente = ?");
+			stmt = con.prepareStatement("DELETE FROM Clientes WHERE idCliente = ?");
 			stmt.setString(1, idCliente);
 
 			stmt.executeUpdate();

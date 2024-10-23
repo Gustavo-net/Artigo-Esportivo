@@ -20,145 +20,145 @@ import packageModel.Clientes;
 import package_controle.ClienteDAO;
 
 public class controllerRelatorioClientes implements Initializable {
-	@FXML
-	private ComboBox<Clientes> boxFiltrar;
+    
+    @FXML
+    private TableView<Clientes> tableRelatorioCliente;
 
-	@FXML
-	private Button btnEditar;
+    @FXML
+    private ComboBox<String> boxFiltrar;
 
-	@FXML
-	private Button btnInserir;
+    @FXML
+    private Button btnCadastros;
+    @FXML
+    private Button btnFornecedores;
+    @FXML
+    private Button btnFuncionarios;
+    @FXML
+    private Button btnProdutos;
+    @FXML
+    private Button btnVendas;
+    @FXML
+    private Button btnVoltar;
+    @FXML
+    private Button btnSair;
+    @FXML
+    private Button btnEditar;
+    @FXML
+    private Button btnInserir;
+    @FXML
+    private Button btnPesquisar;
 
-	@FXML
-	private Button btnPesquisar;
+    @FXML
+    private TableColumn<Clientes, String> columnID;
+    @FXML
+    private TableColumn<Clientes, String> columnNome;
+    @FXML
+    private TableColumn<Clientes, String> columnCPF;
+    @FXML
+    private TableColumn<Clientes, String> columnCEP;
+    @FXML
+    private TableColumn<Clientes, String> columnEmail;
+    @FXML
+    private TableColumn<Clientes, String> columnTelefone;
+    @FXML
+    private TableColumn<Clientes, String> columnDataNasc;
 
-	@FXML
-	private Button btnVoltar;
+    @FXML
+    private TextField txtPesquisar;
 
-	@FXML
-	private TableColumn<Clientes, String> columnCEP;
+    private ObservableList<Clientes> arrayCliente;
+    private ClienteDAO clienteDAO = new ClienteDAO();
 
-	@FXML
-	private TableColumn<Clientes, String> columnCPF;
+    public static Clientes clienteEditor = new Clientes();
 
-	@FXML
-	private TableColumn<Clientes, String> columnDataNasc;
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        carregarTableCliente();
+    }
 
-	@FXML
-	private TableColumn<Clientes, String> columnEmail;
+    private void carregarTableCliente() {
+        arrayCliente = FXCollections.observableArrayList(ClienteDAO.read());
+        tableRelatorioCliente.setItems(arrayCliente);
+        atualizarTabela(arrayCliente);
+    }
 
-	@FXML
-	private TableColumn<Clientes, String> columnID;
+    private void atualizarTabela(ObservableList<Clientes> observableList) {
+        columnID.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
+        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
+        columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        columnCEP.setCellValueFactory(new PropertyValueFactory<>("id_Endereco"));
+        columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
+    }
 
-	@FXML
-	private TableColumn<Clientes, String> columnNome;
-
-	@FXML
-	private TableColumn<Clientes, String> columnTelefone;
-
-	@FXML
-	private TextField txtPesquisar;
-
-	@FXML
-	private TableView<Clientes> tableRelatorioCliente;
-
-	private ObservableList<Clientes> arrayCliente;
-	private ClienteDAO clienteDAO = new ClienteDAO();
-
-	public static Clientes clienteEditor = new Clientes();
-
-	public void carregarTableCliente() {
-		arrayCliente = FXCollections.observableArrayList(ClienteDAO.read());
-
-		columnID.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
-		columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
-		columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-		columnCEP.setCellValueFactory(new PropertyValueFactory<>("id_Endereco"));
-		columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-		columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-		columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
-
-		tableRelatorioCliente.setItems(arrayCliente);
-	}
-	
-	public static Clientes clienteEditar = new Clientes();
-	@FXML
+    @FXML
     void OnbtnEditar(ActionEvent event) {
-		if(tableRelatorioCliente.getSelectionModel().getSelectedIndex() == -1) {
-    		Alert mensagemDeErro = new Alert(Alert.AlertType.INFORMATION);
-    		mensagemDeErro.setContentText("Selecione um Cliente para Editar Primeiro!");
-    		mensagemDeErro.show();
-    	}else {
-    		int i = tableRelatorioCliente.getSelectionModel().getSelectedIndex();
-    		clienteEditar = tableRelatorioCliente.getItems().get(i);
-//    		Main.TelaCadastroClientes();
-    	}
-    	carregarTableCliente();
+        if (tableRelatorioCliente.getSelectionModel().getSelectedIndex() == -1) {
+            showAlert("Selecione um Cliente para Editar Primeiro!");
+        } else {
+            int i = tableRelatorioCliente.getSelectionModel().getSelectedIndex();
+            clienteEditor = tableRelatorioCliente.getItems().get(i);
+            //Main.changeScreen("cadastroCliente"); 
+        }
     }
 
     @FXML
     void OnbtnInserir(ActionEvent event) {
-    	clienteEditar = null;
-//    	Main.TelaCadastroClientes();
-    	carregarTableCliente();
+        clienteEditor = null;
+       // Main.changeScreen("cadastroCliente"); 
     }
 
     @FXML
     void OnbtnPesquisar(ActionEvent event) {
-    	arrayCliente = FXCollections.observableArrayList(ClienteDAO.search(txtPesquisar.getText()));
-    	
-    	columnID.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
-		columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
-		columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-		columnCEP.setCellValueFactory(new PropertyValueFactory<>("id_Endereco"));
-		columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-		columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-		columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
-		
-		tableRelatorioCliente.setItems(arrayCliente);
-		tableRelatorioCliente.refresh();
-
+        String pesquisa = txtPesquisar.getText().trim();
+        if (pesquisa.isEmpty()) {
+            carregarTableCliente();
+        } else {
+            arrayCliente = FXCollections.observableArrayList(ClienteDAO.search(pesquisa));
+            tableRelatorioCliente.setItems(arrayCliente);
+            tableRelatorioCliente.refresh();
+        }
     }
 
     @FXML
     void OnbtnSair(ActionEvent event) {
-    	Main.changeScreen("login");
+        Main.changeScreen("login");
     }
 
     @FXML
     void OnbtnVoltar(ActionEvent event) {
-    	Main.changeScreen("main");
+        Main.changeScreen("main");
     }
-    
+
     @FXML
     void OnbtnCadastros(ActionEvent event) {
-    	Main.changeScreen("cadastros");
+        Main.changeScreen("cadastros");
     }
-    
+
     @FXML
     void OnbtnFornecedores(ActionEvent event) {
-    	Main.changeScreen("fornecedores");
+        Main.changeScreen("fornecedores");
     }
 
     @FXML
     void OnbtnFuncionarios(ActionEvent event) {
-    	Main.changeScreen("funcionarios");
+        Main.changeScreen("funcionarios");
     }
-    
+
     @FXML
     void OnbtnProdutos(ActionEvent event) {
-    	Main.changeScreen("produtos");
+        Main.changeScreen("produtos");
     }
-    
+
     @FXML
     void OnbtnVendas(ActionEvent event) {
-    	Main.changeScreen("vendas");
+        Main.changeScreen("vendas");
     }
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// Implementação da inicialização, se necessário
-		carregarTableCliente();
-	}
-
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
