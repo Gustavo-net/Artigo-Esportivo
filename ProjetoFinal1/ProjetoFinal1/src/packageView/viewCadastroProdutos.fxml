@@ -92,5 +92,11 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
+      <Text fill="#333333" layoutX="143.0" layoutY="466.0" opacity="0.77" strokeType="OUTSIDE" strokeWidth="0.0" text="Cancelar Produto" wrappingWidth="110.39999999999986">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnCancelar" layoutX="139.0" layoutY="453.0" mnemonicParsing="false" onAction="#OnbtnCancelar" opacity="0.0" prefHeight="26.0" prefWidth="123.0" />
    </children>
 </AnchorPane>

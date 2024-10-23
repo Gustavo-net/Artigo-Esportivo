@@ -80,6 +80,8 @@ public class controllerRelatorioFornecedor implements Initializable {
 
 	private ObservableList<Fornecedores> arrayFornecedores;
 	private FornecedoresDAO fornecedorDAO = new FornecedoresDAO();
+	
+	
 
 	public void carregarTableFornecedores() {
 		arrayFornecedores = FXCollections.observableArrayList(fornecedorDAO.read());
@@ -123,6 +125,9 @@ public class controllerRelatorioFornecedor implements Initializable {
 	void OnbtnInserir(ActionEvent event) {
 		// Implementar inserção de fornecedor
 	}
+	
+    public static Fornecedores FornecedoresEditor = new Fornecedores();
+
 
 	@FXML
 	void OnbtnPesquisar(ActionEvent event) {

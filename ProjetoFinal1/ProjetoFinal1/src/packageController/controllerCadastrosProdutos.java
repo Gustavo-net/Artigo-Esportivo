@@ -15,6 +15,9 @@ public class controllerCadastrosProdutos {
     private Button btnAddProduto;
 
     @FXML
+    private Button btnCancelar;
+
+    @FXML
     private TextField txtCodigo;
 
     @FXML
@@ -46,6 +49,11 @@ public class controllerCadastrosProdutos {
 
     @FXML
     void OnbtnAddProduto(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnbtnCancelar(ActionEvent event) {
 
     }
 
