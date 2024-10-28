@@ -82,15 +82,15 @@ public class  controllerCadastrosClientes implements Initializable{
 	if (controllerRelatorioFornecedor.FornecedoresEditor == null) {
 		Fornecedores fornecedor1 = new Fornecedores();
 		fornecedor1.setNomeClientes(txtNomeCliente.getText());
-		fornecedor1.setCnpj(txtCNPJ.getText());
+		fornecedor1.setCnpj(txtCPF.getText());
 		fornecedor1.setEmail(txtEmail.getText());
 		fornecedor1.setTelefone(txtTelefone.getText());
 		FornecedoresDAO forn = new FornecedoresDAO();
 
 	} else {
 		Fornecedores fornecedor1 = new Fornecedores();
-		fornecedor1.setNomeFornecedor(txtNomeFornecedor.getText());
-		fornecedor1.setCnpj(txtCNPJ.getText());
+		fornecedor1.setNomeFornecedor(txtNomeCliente.getText());
+		fornecedor1.setCnpj(txtCPF.getText());
 		fornecedor1.setEmail(txtEmail.getText());
 		fornecedor1.setTelefone(txtTelefone.getText());
 		FornecedoresDAO forn = new FornecedoresDAO();
