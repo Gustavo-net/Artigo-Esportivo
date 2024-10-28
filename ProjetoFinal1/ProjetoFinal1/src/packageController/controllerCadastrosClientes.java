@@ -60,6 +60,7 @@ public class  controllerCadastrosClientes implements Initializable{
     @FXML
     void OnbtnAddCliente(ActionEvent event) {
     	
+    	//criação do objeto endereço
     	Enderecos endereco = new Enderecos();
 		endereco.setCep(txtCep.getText());
 		endereco.setRua(txtRua.getText());
@@ -68,8 +69,10 @@ public class  controllerCadastrosClientes implements Initializable{
 		endereco.setComplemento(txtComplemento.getText());
 		endereco.setCidadeUF("Estado");
 		
+		//salvar endereço
 		EnderecoDAO.create(endereco);
 		
+		//criação do objeto cliente
 		Clientes clientes = new Clientes();
 		clientes.setNomeCliente(txtNomeCliente.getText());
 		clientes.setCpf(txtCPF.getText());
@@ -77,24 +80,27 @@ public class  controllerCadastrosClientes implements Initializable{
 		clientes.setTelefone(txtTelefone.getText());
 		clientes.setId_Endereço(endereco.getIdEndereço());
         
-		ClienteDAO.create(endereco);
+		ClienteDAO.create(clientes);
 
-	if (controllerRelatorioFornecedor.FornecedoresEditor == null) {
-		Fornecedores fornecedor1 = new Fornecedores();
-		fornecedor1.setNomeClientes(txtNomeCliente.getText());
-		fornecedor1.setCnpj(txtCPF.getText());
-		fornecedor1.setEmail(txtEmail.getText());
-		fornecedor1.setTelefone(txtTelefone.getText());
-		FornecedoresDAO forn = new FornecedoresDAO();
+	if (controllerRelatorioClientes.clienteEditor == null) {
+		Clientes clientes1 = new Clientes();
+		clientes1.setNomeCliente(txtNomeCliente.getText());
+		clientes1.setCpf(txtCPF.getText());
+		clientes1.setEmail(txtEmail.getText());
+		clientes1.setTelefone(txtTelefone.getText());
+		clientes1.setId_Endereço(endereco.getIdEndereço());
+		ClienteDAO client = new ClienteDAO();
 
 	} else {
-		Fornecedores fornecedor1 = new Fornecedores();
-		fornecedor1.setNomeFornecedor(txtNomeCliente.getText());
-		fornecedor1.setCnpj(txtCPF.getText());
-		fornecedor1.setEmail(txtEmail.getText());
-		fornecedor1.setTelefone(txtTelefone.getText());
-		FornecedoresDAO forn = new FornecedoresDAO();
-		forn.update(fornecedor1);
+		Clientes clientes1 = new Clientes();
+		clientes1.setNomeCliente(txtNomeCliente.getText());
+		clientes1.setCpf(txtCPF.getText());
+		clientes1.setEmail(txtEmail.getText());
+		clientes1.setTelefone(txtTelefone.getText());
+		clientes1.setId_Endereço(endereco.getIdEndereço());
+
+		ClienteDAO client = new ClienteDAO();
+		client.update(clientes1);
 
 		Stage stage = (Stage) btnCancelar.getScene().getWindow();
 		stage.close();
@@ -104,11 +110,29 @@ public class  controllerCadastrosClientes implements Initializable{
     @FXML
     void OnbtnCancelar(ActionEvent event) {
 
+    	txtNomeCliente.setText("");
+    	txtCPF.setText("");
+    	txtEmail.setText("");
+    	txtTelefone.setText("");
+    	
+    	controllerRelatorioClientes.clienteEditor = null;
+    	
+    	Stage stage = (Stage) btnCancelar.getScene().getWindow() ;
+    	stage.close();
     }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ClienteDAO clientes = new ClienteDAO();
 		// TODO Auto-generated method stub
+		
+		if(controllerRelatorioClientes.clienteEditor != null) {
+			txtNomeCliente.setText(controllerRelatorioClientes.clienteEditor.getNomeCliente());
+			txtCPF.setText(controllerRelatorioClientes.clienteEditor.getCpf());
+			txtEmail.setText(controllerRelatorioClientes.clienteEditor.getEmail());
+			txtTelefone.setText(controllerRelatorioClientes.clienteEditor.getTelefone());
+
+		}
 		
 	}
 

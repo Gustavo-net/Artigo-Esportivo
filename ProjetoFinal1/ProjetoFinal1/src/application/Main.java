@@ -123,6 +123,20 @@ public class Main extends Application {
 		cadastroFornecedores.setScene(scene2);
 		cadastroFornecedores.showAndWait();
 	}
+	private static Stage cadastroClientes;
+	
+	public static void TelaCcadastroClientes() throws IOException {
+		FXMLLoader ClientesCadastro = new FXMLLoader();
+		ClientesCadastro.setLocation(Main.class.getResource("/packageView/viewCadastroClientes.fxml"));
+		Parent cadastrarFornecedores = ClientesCadastro.load();
+		Scene scene3 = new Scene(cadastrarFornecedores);
+		
+		cadastroClientes = new Stage();
+		cadastroClientes.setTitle("Cadastro de Clientes - Artigos Esportivos");
+		cadastroClientes.initModality(Modality.WINDOW_MODAL);
+		cadastroClientes.setScene(scene3);
+		cadastroClientes.showAndWait();
+	}
 	
 	public static void main(String[] args) {
 		

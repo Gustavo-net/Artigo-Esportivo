@@ -84,10 +84,8 @@ public class controllerRelatorioClientes implements Initializable {
     }
 
     private void atualizarTabela(ObservableList<Clientes> observableList) {
-        columnID.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
         columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        columnCEP.setCellValueFactory(new PropertyValueFactory<>("id_Endereco"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
@@ -107,7 +105,7 @@ public class controllerRelatorioClientes implements Initializable {
     @FXML
     void OnbtnInserir(ActionEvent event) {
         clienteEditor = null;
-       // Main.changeScreen("cadastroCliente"); 
+    //   Main. 
     }
 
     @FXML
