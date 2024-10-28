@@ -1,11 +1,14 @@
 package packageController;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -16,123 +19,157 @@ import package_controle.FornecedoresDAO;
 
 public class controllerCadastrosFornecedor implements Initializable {
 
-	@FXML
-	private Button btnAddProduto;
+    @FXML
+    private Button btnAddFornecedor;
 
-	@FXML
-	private TextField txtBairro;
+    @FXML
+    private Button btnCancelar;
 
-	@FXML
-	private TextField txtCNPJ;
+    @FXML
+    private TextField txtBairro;
 
-	@FXML
-	private TextField txtCep;
+    @FXML
+    private TextField txtCNPJ;
 
-	@FXML
-	private TextField txtCidadeUF;
+    @FXML
+    private TextField txtCep;
 
-	@FXML
-	private TextField txtComplemento;
+    @FXML
+    private TextField txtCidadeUF;
 
-	@FXML
-	private TextField txtEmail;
+    @FXML
+    private TextField txtComplemento;
 
-	@FXML
-	private TextField txtNomeFornecedor;
+    @FXML
+    private TextField txtEmail;
 
-	@FXML
-	private TextField txtNumero;
+    @FXML
+    private TextField txtNomeFornecedor;
 
-	@FXML
-	private TextField txtRua;
+    @FXML
+    private TextField txtNumero;
 
-	@FXML
-	private Button btnCancelar;
+    @FXML
+    private TextField txtRua;
 
-	@FXML
-	private TextField txtTelefone;
-	
-	private FornecedoresDAO fornecedoresDAO = new FornecedoresDAO();
-	private EnderecoDAO enderecoDAO = new EnderecoDAO();
-	
-	
+    @FXML
+    private TextField txtTelefone;
 
-	@FXML
-	void OnbtnAddFornecedores(ActionEvent event) {
-		
-		// Criação do Objeto Endereços
-		
-		Enderecos endereco = new Enderecos();
-		endereco.setCep(txtCep.getText());
-		endereco.setRua(txtRua.getText());
-		endereco.setNumero(txtNumero.getText());
-		endereco.setBairro(txtBairro.getText());
-		endereco.setComplemento(txtComplemento.getText());
-		endereco.setCidadeUF("Estado");
-		
-		//Salvar Endereço e obter o ID gerado
-		EnderecoDAO.create(endereco);
-		
-		// Criação do Objeto Fornecedores
-		
-		  Fornecedores fornecedor = new Fornecedores();
-	        fornecedor.setNomeFornecedor(txtNomeFornecedor.getText());
-	        fornecedor.setCnpj(txtCNPJ.getText());
-	        fornecedor.setEmail(txtEmail.getText());
-	        fornecedor.setTelefone(txtTelefone.getText());
-	        fornecedor.setId_Endereço(endereco.getIdEndereço());
-	        
-	        fornecedoresDAO.create(fornecedor);
+    private FornecedoresDAO fornecedoresDAO = new FornecedoresDAO();
+    private EnderecoDAO enderecoDAO = new EnderecoDAO();
 
-		if (controllerRelatorioFornecedor.FornecedoresEditor == null) {
-			Fornecedores fornecedor1 = new Fornecedores();
-			fornecedor1.setNomeFornecedor(txtNomeFornecedor.getText());
-			fornecedor1.setCnpj(txtCNPJ.getText());
-			fornecedor1.setEmail(txtEmail.getText());
-			fornecedor1.setTelefone(txtTelefone.getText());
-			FornecedoresDAO forn = new FornecedoresDAO();
+    @FXML
+    public void OnbtnAddFornecedores(ActionEvent event) {
+        // Verificar se todos os campos obrigatórios estão preenchidos
+        if (validarCampos()) {
+            Enderecos endereco = new Enderecos();
+            preencherEndereco(endereco);
 
-		} else {
-			Fornecedores fornecedor1 = new Fornecedores();
-			fornecedor1.setNomeFornecedor(txtNomeFornecedor.getText());
-			fornecedor1.setCnpj(txtCNPJ.getText());
-			fornecedor1.setEmail(txtEmail.getText());
-			fornecedor1.setTelefone(txtTelefone.getText());
-			FornecedoresDAO forn = new FornecedoresDAO();
-			forn.update(fornecedor1);
+            // Criar o endereço
+            enderecoDAO.create(endereco);
 
-			Stage stage = (Stage) btnCancelar.getScene().getWindow();
-			stage.close();
-		}
+            Fornecedores fornecedor = new Fornecedores();
+            preencherFornecedor(fornecedor, endereco.getIdEndereço());
 
-	}
+            // Criar ou atualizar fornecedor
+            if (controllerRelatorioFornecedor.FornecedoresEditor == null) {
+                fornecedoresDAO.create(fornecedor);
+                mostrarMensagem("Fornecedor cadastrado com sucesso!", Alert.AlertType.INFORMATION);
+            } else {
+                fornecedoresDAO.update(fornecedor);
+                mostrarMensagem("Fornecedor atualizado com sucesso!", Alert.AlertType.INFORMATION);
+            }
 
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		FornecedoresDAO fornecedor = new FornecedoresDAO();
+            if (confirmarCadastroOutro()) {
+                limparCampos();
+            } else {
+                fecharJanela();
+            }
+        } else {
+            mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", Alert.AlertType.WARNING);
+        }
+    }
 
-		// TODO Auto-generated method stub
-		if (controllerRelatorioFornecedor.FornecedoresEditor != null) {
-			txtNomeFornecedor.setText(controllerRelatorioFornecedor.FornecedoresEditor.getNomeFornecedor());
-			txtCNPJ.setText(controllerRelatorioFornecedor.FornecedoresEditor.getCnpj());
-			txtEmail.setText(controllerRelatorioFornecedor.FornecedoresEditor.getEmail());
-			txtTelefone.setText(controllerRelatorioFornecedor.FornecedoresEditor.getTelefone());
+    private boolean validarCampos() {
+        return !txtNomeFornecedor.getText().isEmpty() &&
+               !txtCNPJ.getText().isEmpty() &&
+               !txtEmail.getText().isEmpty() &&
+               !txtTelefone.getText().isEmpty() &&
+               !txtRua.getText().isEmpty() &&
+               !txtNumero.getText().isEmpty() &&
+               !txtBairro.getText().isEmpty() &&
+               !txtCidadeUF.getText().isEmpty() &&
+               !txtCep.getText().isEmpty();
+    }
 
-		}
-	}
+    private void mostrarMensagem(String mensagem, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setContentText(mensagem);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
 
-	@FXML
-	void OnbtnCancelar(ActionEvent event) {
+    private boolean confirmarCadastroOutro() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cadastrar Novo Fornecedor");
+        alert.setHeaderText("Deseja cadastrar outro fornecedor?");
+        ButtonType simButton = new ButtonType("Sim");
+        ButtonType naoButton = new ButtonType("Não");
+        alert.getButtonTypes().setAll(simButton, naoButton);
 
-		txtNomeFornecedor.setText("");
-		txtCNPJ.setText("");
-		txtEmail.setText("");
-		txtTelefone.setText("");
-		txtCep.setText("");
-		controllerRelatorioFornecedor.FornecedoresEditor = null;
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == simButton;
+    }
 
-		Stage stage = (Stage) btnCancelar.getScene().getWindow();
-		stage.close();
+    private void preencherEndereco(Enderecos endereco) {
+        endereco.setCep(txtCep.getText());
+        endereco.setRua(txtRua.getText());
+        endereco.setNumero(txtNumero.getText());
+        endereco.setBairro(txtBairro.getText());
+        endereco.setComplemento(txtComplemento.getText());
+        endereco.setCidadeUF(txtCidadeUF.getText());
+    }
 
-	}
+    private void preencherFornecedor(Fornecedores fornecedor, String idEndereco) {
+        fornecedor.setNomeFornecedor(txtNomeFornecedor.getText());
+        fornecedor.setCnpj(txtCNPJ.getText());
+        fornecedor.setEmail(txtEmail.getText());
+        fornecedor.setTelefone(txtTelefone.getText());
+        fornecedor.setId_Endereço(idEndereco);
+    }
 
+    @FXML
+    public void OnbtnCancelar(ActionEvent event) {
+        limparCampos();
+        fecharJanela();
+    }
+
+    private void limparCampos() {
+        txtNomeFornecedor.setText("");
+        txtCNPJ.setText("");
+        txtEmail.setText("");
+        txtTelefone.setText("");
+        txtRua.setText("");
+        txtNumero.setText("");
+        txtBairro.setText("");
+        txtCidadeUF.setText("");
+        txtCep.setText("");
+        txtComplemento.setText("");
+        controllerRelatorioFornecedor.FornecedoresEditor = null;
+    }
+
+    private void fecharJanela() {
+        Stage stage = (Stage) btnCancelar.getScene().getWindow();
+        stage.close();
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        if (controllerRelatorioFornecedor.FornecedoresEditor != null) {
+            txtNomeFornecedor.setText(controllerRelatorioFornecedor.FornecedoresEditor.getNomeFornecedor());
+            txtCNPJ.setText(controllerRelatorioFornecedor.FornecedoresEditor.getCnpj());
+            txtEmail.setText(controllerRelatorioFornecedor.FornecedoresEditor.getEmail());
+            txtTelefone.setText(controllerRelatorioFornecedor.FornecedoresEditor.getTelefone());
+        }
+    }
 }
