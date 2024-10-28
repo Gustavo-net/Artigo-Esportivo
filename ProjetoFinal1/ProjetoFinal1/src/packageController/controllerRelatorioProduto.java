@@ -72,7 +72,8 @@ public class controllerRelatorioProduto implements Initializable {
     private ObservableList<Produtos> arrayProduto;
     private ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    public static Produtos produtoEditor = new Produtos();
+    @SuppressWarnings("exports")
+	public static Produtos produtoEditor = new Produtos();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {

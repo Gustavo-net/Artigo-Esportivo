@@ -69,7 +69,8 @@ public class controllerRelatorioClientes implements Initializable {
     private ObservableList<Clientes> arrayCliente;
     private ClienteDAO clienteDAO = new ClienteDAO();
 
-    public static Clientes clienteEditor = new Clientes();
+    @SuppressWarnings("exports")
+	public static Clientes clienteEditor = new Clientes();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {

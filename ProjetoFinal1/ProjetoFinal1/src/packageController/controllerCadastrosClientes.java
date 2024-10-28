@@ -79,12 +79,6 @@ public class controllerCadastrosClientes {
             cliente.setCpf(txtCPF.getText());
             cliente.setEmail(txtEmail.getText());
             cliente.setTelefone(txtTelefone.getText());
-            cliente.setBairro(txtBairro.getText());
-            cliente.setCep(txtCep.getText());
-            cliente.setCidadeUF(txtCidadeUF.getText());
-            cliente.setComplemento(txtComplemento.getText());
-            cliente.setRua(txtRua.getText());
-            cliente.setNumero(txtNumero.getText());
             
             cliDAO.update(cliente); // Atualiza o cliente existente
         }

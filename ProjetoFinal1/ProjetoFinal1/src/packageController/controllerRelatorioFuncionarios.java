@@ -90,6 +90,7 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	@FXML
 	private TextField txtProcurarFornecedores;
 
+	@SuppressWarnings("exports")
 	public static Funcionarios funcionariosEditor = new Funcionarios();
 
 	public void carregarTableFuncionarios() {

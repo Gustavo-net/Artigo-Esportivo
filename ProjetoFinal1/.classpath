@@ -6,6 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SQL_Sever"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SQLServer"/>
 	<classpathentry kind="src" path="ProjetoFinal1/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
 		<attributes>

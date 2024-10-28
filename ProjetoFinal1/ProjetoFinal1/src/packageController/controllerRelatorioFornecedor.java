@@ -131,7 +131,8 @@ public class controllerRelatorioFornecedor implements Initializable {
 		carregarTableFornecedores();
 	}
 	
-    public static Fornecedores FornecedoresEditor = new Fornecedores();
+    @SuppressWarnings("exports")
+	public static Fornecedores FornecedoresEditor = new Fornecedores();
 
 
 	@FXML

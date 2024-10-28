@@ -125,8 +125,8 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-//
-		Connection con = ConnectionDatabase.getConnection();
+		
+	Connection con = ConnectionDatabase.getConnection();
 // ConnectionDatabase.closeConnection(con);
 // ArrayList<Cliente> cliente = new ArrayList<>();
 // ClienteDAO cl = new ClienteDAO();
