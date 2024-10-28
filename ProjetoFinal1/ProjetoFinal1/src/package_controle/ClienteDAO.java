@@ -11,7 +11,7 @@ import packageModel.Clientes;
 
 public class ClienteDAO {
 
-	public void create(Clientes c) {
+	public static void create(Clientes c) {
 		Connection con = ConnectionDatabase.getConnection();
 		PreparedStatement stmt = null;
 

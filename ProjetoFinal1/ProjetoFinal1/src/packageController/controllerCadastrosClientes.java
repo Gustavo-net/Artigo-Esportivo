@@ -5,13 +5,18 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import packageModel.Clientes;
+import packageModel.Enderecos;
+import packageModel.Fornecedores;
 import package_controle.ClienteDAO;
+import package_controle.EnderecoDAO;
+import package_controle.FornecedoresDAO;
 
-public class controllerCadastrosClientes {
+public class  controllerCadastrosClientes implements Initializable{
 
     @FXML
     private Button btnAddCliente;
@@ -48,88 +53,63 @@ public class controllerCadastrosClientes {
 
     @FXML
     private TextField txtTelefone;
-
-    // Variável para armazenar cliente editado
-    public static Clientes ClienteEditor;
+    
+    private ClienteDAO clienteDAO = new ClienteDAO();
+	private EnderecoDAO enderecoDAO = new EnderecoDAO();
 
     @FXML
     void OnbtnAddCliente(ActionEvent event) {
-        ClienteDAO cliDAO = new ClienteDAO();
-        Clientes cliente = new Clientes();
+    	
+    	Enderecos endereco = new Enderecos();
+		endereco.setCep(txtCep.getText());
+		endereco.setRua(txtRua.getText());
+		endereco.setNumero(txtNumero.getText());
+		endereco.setBairro(txtBairro.getText());
+		endereco.setComplemento(txtComplemento.getText());
+		endereco.setCidadeUF("Estado");
+		
+		EnderecoDAO.create(endereco);
+		
+		Clientes clientes = new Clientes();
+		clientes.setNomeCliente(txtNomeCliente.getText());
+		clientes.setCpf(txtCPF.getText());
+		clientes.setEmail(txtEmail.getText());
+		clientes.setTelefone(txtTelefone.getText());
+		clientes.setId_Endereço(endereco.getIdEndereço());
+        
+		ClienteDAO.create(endereco);
 
-        if (controllerRelatorioClientes.clienteEditor == null) {
-            // Adicionando um novo cliente
-            cliente.setNomeCliente(txtNomeCliente.getText());
-            cliente.setCpf(txtCPF.getText());
-            cliente.setEmail(txtEmail.getText());
-            cliente.setTelefone(txtTelefone.getText());
-            cliente.setBairro(txtBairro.getText());
-            cliente.setCep(txtCep.getText());
-            cliente.setCidadeUF(txtCidadeUF.getText());
-            cliente.setComplemento(txtComplemento.getText());
-            cliente.setRua(txtRua.getText());
-            cliente.setNumero(txtNumero.getText());
-            
-            cliDAO.save(cliente); // Salva o novo cliente
+	if (controllerRelatorioFornecedor.FornecedoresEditor == null) {
+		Fornecedores fornecedor1 = new Fornecedores();
+		fornecedor1.setNomeClientes(txtNomeCliente.getText());
+		fornecedor1.setCnpj(txtCNPJ.getText());
+		fornecedor1.setEmail(txtEmail.getText());
+		fornecedor1.setTelefone(txtTelefone.getText());
+		FornecedoresDAO forn = new FornecedoresDAO();
 
-        } else {
-            // Atualizando um cliente existente
-            cliente.setId(ClienteEditor.getId()); // Presumindo que a classe Clientes tenha um método getId
-            cliente.setNomeCliente(txtNomeCliente.getText());
-            cliente.setCpf(txtCPF.getText());
-            cliente.setEmail(txtEmail.getText());
-            cliente.setTelefone(txtTelefone.getText());
-            
-            cliDAO.update(cliente); // Atualiza o cliente existente
-        }
+	} else {
+		Fornecedores fornecedor1 = new Fornecedores();
+		fornecedor1.setNomeFornecedor(txtNomeFornecedor.getText());
+		fornecedor1.setCnpj(txtCNPJ.getText());
+		fornecedor1.setEmail(txtEmail.getText());
+		fornecedor1.setTelefone(txtTelefone.getText());
+		FornecedoresDAO forn = new FornecedoresDAO();
+		forn.update(fornecedor1);
 
-        // Fecha a janela após a operação
-        Stage stage = (Stage) btnAddCliente.getScene().getWindow();
-        stage.close();
+		Stage stage = (Stage) btnCancelar.getScene().getWindow();
+		stage.close();
+	}
     }
 
     @FXML
     void OnbtnCancelar(ActionEvent event) {
-    	
-    	txtNomeCliente.setText("");
-    	txtCPF.setText("");
-    	txtEmail.setText("");
-    	txtTelefone.setText("");
-    	txtCep.setText("");
-    	
-    	controllerRelatorioClientes.clienteEditor = null;
-    	
-    	Stage stage = (Stage) btnCancelar.getScene().getWindow();
-		stage.close();
 
-       
     }
 
-    public void initialize(URL location, ResourceBundle resources) {
-        if (ClienteEditor != null) {
-            txtNomeCliente.setText(ClienteEditor.getNomeCliente());
-            txtCPF.setText(ClienteEditor.getCpf());
-            txtEmail.setText(ClienteEditor.getEmail());
-            txtTelefone.setText(ClienteEditor.getTelefone());
-            txtBairro.setText(ClienteEditor.getBairro());
-            txtCep.setText(ClienteEditor.getCep());
-            txtCidadeUF.setText(ClienteEditor.getCidadeUF());
-            txtComplemento.setText(ClienteEditor.getComplemento());
-            txtRua.setText(ClienteEditor.getRua());
-            txtNumero.setText(ClienteEditor.getNumero());
-        }
-    }
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    private void clearFields() {
-        txtNomeCliente.setText("");
-        txtCPF.setText("");
-        txtEmail.setText("");
-        txtTelefone.setText("");
-        txtBairro.setText("");
-        txtCep.setText("");
-        txtCidadeUF.setText("");
-        txtComplemento.setText("");
-        txtRua.setText("");
-        txtNumero.setText("");
-    }
 }
