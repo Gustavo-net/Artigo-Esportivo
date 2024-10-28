@@ -89,7 +89,7 @@ public class controllerRelatorioClientes implements Initializable {
         columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
+
     }
 
     @FXML
@@ -99,9 +99,16 @@ public class controllerRelatorioClientes implements Initializable {
         } else {
             int i = tableRelatorioCliente.getSelectionModel().getSelectedIndex();
             clienteEditor = tableRelatorioCliente.getItems().get(i);
-            //Main.changeScreen("cadastroCliente"); 
+            
+            try {
+                Main.TelaCcadastroClientes();
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Erro ao abrir a tela de edição!");
+            }
         }
     }
+
 
     @FXML
     void OnbtnInserir(ActionEvent event) throws IOException {
