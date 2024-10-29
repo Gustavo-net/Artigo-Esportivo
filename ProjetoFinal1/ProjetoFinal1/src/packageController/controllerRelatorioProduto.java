@@ -1,5 +1,6 @@
 package packageController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -131,9 +132,9 @@ public class controllerRelatorioProduto implements Initializable {
     }
 
     @FXML
-    void OnbtnInserir(ActionEvent event) {
+    void OnbtnInserir(ActionEvent event) throws IOException {
         produtoEditor = null;
-        // Aqui você pode redirecionar para a tela de inserção
+        Main.TelaCadastroProduto();
     }
 
     @FXML

@@ -11,6 +11,28 @@ import packageModel.Produtos;
 
 public class ProdutoDAO {
 
+	public void create(Produtos prod) {
+	    Connection con = ConnectionDatabase.getConnection();
+	    PreparedStatement stmt = null;
+
+	    try {
+	        stmt = con.prepareStatement("INSERT INTO Produtos (nome, codigo, marca, descricao, precoUnitario, estoqueDisp) VALUES (?, ?, ?, ?, ?, ?)");
+	        stmt.setString(1, prod.getNome());
+	        stmt.setString(2, prod.getCodigo());
+	        stmt.setString(3, prod.getMarca());
+	        stmt.setString(4, prod.getDescricao());
+	        stmt.setDouble(5, prod.getPrecoUnitario());
+	        stmt.setInt(6, prod.getEstoqueDisp());
+
+	        stmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        ConnectionDatabase.closeConnection(con, stmt);
+	    }
+	} 
+	
     public ArrayList<Produtos> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
