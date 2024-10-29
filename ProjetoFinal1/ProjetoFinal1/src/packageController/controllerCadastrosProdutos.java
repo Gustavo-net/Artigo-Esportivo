@@ -1,6 +1,7 @@
 package packageController;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -13,7 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import packageModel.Categorias;
 import packageModel.Produtos;
+import package_controle.CategoriaDAO;
 import package_controle.ProdutoDAO;
 
 public class controllerCadastrosProdutos implements Initializable {
@@ -61,35 +64,55 @@ public class controllerCadastrosProdutos implements Initializable {
 
     @FXML
     public void OnbtnAddProduto(ActionEvent event) {
-        if (validarCampos()) {
-            Produtos produto = new Produtos();
-            preencherProduto(produto);
-            
-            produtoDAO.create(produto);
-            mostrarMensagem("Produto cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-            
-            if (confirmarCadastroOutro()) {
-                limparCampos();
+        try {
+            if (validarCampos()) {
+                Produtos produto = new Produtos();
+                preencherProduto(produto);
+                produtoDAO.create(produto);
+                mostrarMensagem("Produto cadastrado com sucesso!", Alert.AlertType.INFORMATION);
+                
+                if (confirmarCadastroOutro()) {
+                    limparCampos();
+                } else {
+                    fecharJanela();
+                }
             } else {
-                fecharJanela();
+                mostrarMensagem("Por favor, preencha todos os campos obrigatórios e certifique-se de que os dados são válidos.", Alert.AlertType.WARNING);
             }
-        } else {
-            mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", Alert.AlertType.WARNING);
+        } catch (NumberFormatException e) {
+            mostrarMensagem("Erro na conversão de dados: " + e.getMessage(), Alert.AlertType.ERROR);
+        } catch (Exception e) {
+            mostrarMensagem("Erro ao cadastrar produto: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
+
     private boolean validarCampos() {
-        return !txtNomeProduto.getText().isEmpty() &&
-               !txtCodigo.getText().isEmpty() &&
-               !txtPreco.getText().isEmpty() &&
-               !txtMarca.getText().isEmpty() &&
-               !txtEstoqueAtual.getText().isEmpty() &&
-               !txtEstoqueMinimo.getText().isEmpty() &&
-               !txtCor.getText().isEmpty() &&
-               !txtTamanho.getText().isEmpty() &&
-               !txtTamanhoMaximo.getText().isEmpty() &&
-               !txtDescricao.getText().isEmpty();
+        if (txtNomeProduto.getText().isEmpty() ||
+            txtCodigo.getText().isEmpty() ||
+            txtPreco.getText().isEmpty() ||
+            txtMarca.getText().isEmpty() ||
+            txtEstoqueAtual.getText().isEmpty() ||
+            txtEstoqueMinimo.getText().isEmpty() ||
+            txtCor.getText().isEmpty() ||
+            txtTamanho.getText().isEmpty() ||
+            txtTamanhoMaximo.getText().isEmpty() ||
+            txtDescricao.getText().isEmpty() ||
+            boxCategoria.getSelectionModel().isEmpty()) {
+            return false; 
+        }
+        
+        try {
+            Double.parseDouble(txtPreco.getText());
+            Integer.parseInt(txtEstoqueAtual.getText());
+            Integer.parseInt(txtEstoqueMinimo.getText());
+
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true; 
     }
+
 
     private void mostrarMensagem(String mensagem, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
@@ -117,7 +140,14 @@ public class controllerCadastrosProdutos implements Initializable {
         produto.setMarca(txtMarca.getText());
         produto.setEstoqueDisp(Integer.parseInt(txtEstoqueAtual.getText()));
         produto.setDescricao(txtDescricao.getText());
+
+        String categoriaSelecionada = boxCategoria.getSelectionModel().getSelectedItem();
+        if (categoriaSelecionada != null) {
+            String idCategoria = categoriaSelecionada.split(" - ")[0]; 
+            produto.setId_Categoria(idCategoria);
+        }
     }
+
 
     @FXML
     public void OnbtnCancelar(ActionEvent event) {
@@ -145,6 +175,11 @@ public class controllerCadastrosProdutos implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        ArrayList<Categorias> categorias = CategoriaDAO.read(); 
+        for (Categorias categoria : categorias) {
+            boxCategoria.getItems().add(categoria.getIdCategoria() + " - " + categoria.getNomeCategoria());
+        }
+
         if (controllerRelatorioProduto.produtoEditor != null) {
             txtNomeProduto.setText(controllerRelatorioProduto.produtoEditor.getNome());
             txtCodigo.setText(controllerRelatorioProduto.produtoEditor.getCodigo());
@@ -152,6 +187,8 @@ public class controllerCadastrosProdutos implements Initializable {
             txtDescricao.setText(controllerRelatorioProduto.produtoEditor.getDescricao());
             txtPreco.setText(Double.toString(controllerRelatorioProduto.produtoEditor.getPrecoUnitario()));
             txtEstoqueAtual.setText(Integer.toString(controllerRelatorioProduto.produtoEditor.getEstoqueDisp()));
+            boxCategoria.getSelectionModel().select(controllerRelatorioProduto.produtoEditor.getId_Categoria()); 
         }
-    }    
+    }
+
 }

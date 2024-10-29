@@ -66,15 +66,15 @@ public class controllerRelatorioProduto implements Initializable {
     private TableColumn<Produtos, String> columnNome;
     @FXML
     private TableColumn<Produtos, String> columnPrecoUn;
-
+    @FXML
+    private TableColumn<Produtos, String> columnCategoria; 
     @FXML
     private TextField txtPesquisar;
 
     private ObservableList<Produtos> arrayProduto;
     private ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    @SuppressWarnings("exports")
-	public static Produtos produtoEditor = new Produtos();
+    public static Produtos produtoEditor = new Produtos();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -90,13 +90,14 @@ public class controllerRelatorioProduto implements Initializable {
     }
 
     private void atualizarTabela(ObservableList<Produtos> observableList) {
-        columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
+    	columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         columnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
         columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
+        columnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoriaNome")); 
     }
 
     @FXML
@@ -116,8 +117,7 @@ public class controllerRelatorioProduto implements Initializable {
         } else {
             int i = tableRelatorioProduto.getSelectionModel().getSelectedIndex();
             produtoEditor = tableRelatorioProduto.getItems().get(i);
-            // Redirecionar para a tela de edição de produto
-            Main.changeScreen("edicaoProduto"); // Ajustar conforme o nome da tela de edição
+         //   Main.changeScreen("edicaoProduto"); 
         }
     }
 
@@ -137,30 +137,40 @@ public class controllerRelatorioProduto implements Initializable {
         Main.TelaCadastroProduto();
     }
 
+    
     @FXML
     void OnbtnPesquisar(ActionEvent event) {
         try {
+            // Obter a pesquisa do TextField
             String pesquisa = txtPesquisar.getText().trim();
-            if (pesquisa.isEmpty()) {
-                carregarTableProduto(); 
-            } else {
+            
+            // Obter a categoria selecionada no ComboBox
+            String categoriaSelecionada = boxFiltrar.getValue();
+            
+            // Se o campo de pesquisa estiver vazio, mas uma categoria estiver selecionada
+            if (pesquisa.isEmpty() && categoriaSelecionada != null) {
+                // Filtrar produtos pela categoria
+                String idCategoria = new CategoriaDAO().obterIdCategoria(categoriaSelecionada);
+                if (idCategoria != null) {
+                    ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
+                    atualizarTabela(FXCollections.observableArrayList(produtosFiltrados));
+                } else {
+                    showAlert("Categoria não encontrada.");
+                    carregarTableProduto();
+                }
+            } else if (!pesquisa.isEmpty()) {
+                // Se houver texto no campo de pesquisa, buscar produtos por pesquisa
                 arrayProduto = FXCollections.observableArrayList(produtoDAO.search(pesquisa));
-
-                columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
-                columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-                columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-                columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
-                columnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-                columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
-                columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
-
-                tableRelatorioProduto.setItems(arrayProduto);
-                tableRelatorioProduto.refresh();
+                atualizarTabela(arrayProduto);
+            } else {
+                // Se ambos estiverem vazios, carregar todos os produtos
+                carregarTableProduto();
             }
         } catch (Exception e) {
             showAlert("Erro ao pesquisar produtos: " + e.getMessage());
         }
     }
+
 
     
     @FXML
@@ -185,21 +195,30 @@ public class controllerRelatorioProduto implements Initializable {
         for (Categorias categoria : categorias) {
             boxFiltrar.getItems().add(categoria.getNomeCategoria());
         }
+      
+        if (!categorias.isEmpty()) {
+            boxFiltrar.setValue(categorias.get(0).getNomeCategoria()); 
+            filtrarProdutos();
+        }
     }
 
     private void filtrarProdutos() {
         String categoriaSelecionada = boxFiltrar.getValue();
-        if (categoriaSelecionada == null) {
-            carregarTableProduto();
+        if (categoriaSelecionada == null || categoriaSelecionada.isEmpty()) {
+            carregarTableProduto(); 
             return;
         }
 
-        String idCategoria = obterIdCategoria(categoriaSelecionada);
+        String idCategoria = new CategoriaDAO().obterIdCategoria(categoriaSelecionada);
         if (idCategoria != null) {
             ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
             atualizarTabela(FXCollections.observableArrayList(produtosFiltrados));
+        } else {
+            showAlert("Categoria não encontrada.");
+            carregarTableProduto(); 
         }
     }
+
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

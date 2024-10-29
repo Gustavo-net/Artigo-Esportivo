@@ -29,7 +29,7 @@ public class CategoriaDAO {
         }
     }
 
-    public ArrayList<Categorias> read() {
+    public static ArrayList<Categorias> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -114,4 +114,18 @@ public class CategoriaDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
+    
+    public String obterIdCategoria(String nomeCategoria) {
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        ArrayList<Categorias> categorias = categoriaDAO.read();
+        
+        for (Categorias categoria : categorias) {
+            if (categoria.getNomeCategoria().equals(nomeCategoria)) {
+                return categoria.getIdCategoria();
+            }
+        }
+        return null; 
+    }
+
+    
 }

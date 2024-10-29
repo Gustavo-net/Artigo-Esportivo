@@ -8,13 +8,35 @@ public class Produtos {
     private String descricao;
     private Double precoUnitario;
     private Integer estoqueDisp;
+    private String id_Categoria;
+    
+    private String categoriaNome; //Atributo para armazenar o nome da categoria
 
     // Getters e Setters
+
+    public String getCategoriaNome() {
+        return categoriaNome;
+    }
+
+    public void setCategoriaNome(String categoriaNome) {
+        this.categoriaNome = categoriaNome;
+    }
+    
+    
     public String getIdProduto() {
         return idProduto;
     }
+    
 
-    public void setIdProduto(String idProduto) {
+	public void setId_Categoria(String id_Categoria) {
+		this.id_Categoria = id_Categoria;
+	}
+
+	 public String getId_Categoria() {
+	        return id_Categoria;
+	    }
+
+	public void setIdProduto(String idProduto) {
         this.idProduto = idProduto;
     }
 
