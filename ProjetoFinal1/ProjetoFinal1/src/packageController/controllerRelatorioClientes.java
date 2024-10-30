@@ -1,5 +1,6 @@
 package packageController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -69,7 +70,8 @@ public class controllerRelatorioClientes implements Initializable {
     private ObservableList<Clientes> arrayCliente;
     private ClienteDAO clienteDAO = new ClienteDAO();
 
-    public static Clientes clienteEditor = new Clientes();
+    @SuppressWarnings("exports")
+	public static Clientes clienteEditor = new Clientes();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -83,13 +85,11 @@ public class controllerRelatorioClientes implements Initializable {
     }
 
     private void atualizarTabela(ObservableList<Clientes> observableList) {
-        columnID.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
         columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        columnCEP.setCellValueFactory(new PropertyValueFactory<>("id_Endereco"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
+
     }
 
     @FXML
@@ -99,14 +99,21 @@ public class controllerRelatorioClientes implements Initializable {
         } else {
             int i = tableRelatorioCliente.getSelectionModel().getSelectedIndex();
             clienteEditor = tableRelatorioCliente.getItems().get(i);
-            //Main.changeScreen("cadastroCliente"); 
+            
+            try {
+                Main.TelaCcadastroClientes();
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Erro ao abrir a tela de edição!");
+            }
         }
     }
 
+
     @FXML
-    void OnbtnInserir(ActionEvent event) {
+    void OnbtnInserir(ActionEvent event) throws IOException {
         clienteEditor = null;
-       // Main.changeScreen("cadastroCliente"); 
+      Main.TelaCcadastroClientes();
     }
 
     @FXML

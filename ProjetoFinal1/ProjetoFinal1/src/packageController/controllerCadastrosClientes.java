@@ -12,15 +12,15 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import packageModel.Clientes;
 import packageModel.Enderecos;
-import packageModel.Fornecedores;
+import package_controle.ClienteDAO;
 import package_controle.EnderecoDAO;
-import package_controle.FornecedoresDAO;
 
-public class controllerCadastrosFornecedor implements Initializable {
+public class controllerCadastrosClientes implements Initializable {
 
     @FXML
-    private Button btnAddFornecedor;
+    private Button btnAddCliente;
 
     @FXML
     private Button btnCancelar;
@@ -29,7 +29,7 @@ public class controllerCadastrosFornecedor implements Initializable {
     private TextField txtBairro;
 
     @FXML
-    private TextField txtCNPJ;
+    private TextField txtCPF;
 
     @FXML
     private TextField txtCep;
@@ -44,7 +44,7 @@ public class controllerCadastrosFornecedor implements Initializable {
     private TextField txtEmail;
 
     @FXML
-    private TextField txtNomeFornecedor;
+    private TextField txtNomeCliente;
 
     @FXML
     private TextField txtNumero;
@@ -55,11 +55,11 @@ public class controllerCadastrosFornecedor implements Initializable {
     @FXML
     private TextField txtTelefone;
 
-    private FornecedoresDAO fornecedoresDAO = new FornecedoresDAO();
+    private ClienteDAO clienteDAO = new ClienteDAO();
     private EnderecoDAO enderecoDAO = new EnderecoDAO();
 
     @FXML
-    public void OnbtnAddFornecedores(ActionEvent event) {
+    public void OnbtnAddCliente(ActionEvent event) {
         // Verificar se todos os campos obrigatórios estão preenchidos
         if (validarCampos()) {
             Enderecos endereco = new Enderecos();
@@ -68,18 +68,17 @@ public class controllerCadastrosFornecedor implements Initializable {
             // Criar o endereço
             enderecoDAO.create(endereco);
 
-            Fornecedores fornecedor = new Fornecedores();
-            preencherFornecedor(fornecedor, endereco.getIdEndereço());
+            Clientes cliente = new Clientes();
+            preencherCliente(cliente, endereco.getIdEndereço());
 
-            // Criar ou atualizar fornecedor
-            if (controllerRelatorioFornecedor.FornecedoresEditor == null) {
-                fornecedoresDAO.create(fornecedor);
-                mostrarMensagem("Fornecedor cadastrado com sucesso!", Alert.AlertType.INFORMATION);
+            // Criar ou atualizar cliente
+            if (controllerRelatorioClientes.clienteEditor == null) {
+                clienteDAO.create(cliente);
             } else {
-                fornecedoresDAO.update(fornecedor);
-                mostrarMensagem("Fornecedor atualizado com sucesso!", Alert.AlertType.INFORMATION);
+                clienteDAO.update(cliente);
             }
 
+            mostrarMensagem("Cliente cadastrado com sucesso!", Alert.AlertType.INFORMATION);
             if (confirmarCadastroOutro()) {
                 limparCampos();
             } else {
@@ -91,8 +90,8 @@ public class controllerCadastrosFornecedor implements Initializable {
     }
 
     private boolean validarCampos() {
-        return !txtNomeFornecedor.getText().isEmpty() &&
-               !txtCNPJ.getText().isEmpty() &&
+        return !txtNomeCliente.getText().isEmpty() &&
+               !txtCPF.getText().isEmpty() &&
                !txtEmail.getText().isEmpty() &&
                !txtTelefone.getText().isEmpty() &&
                !txtRua.getText().isEmpty() &&
@@ -111,8 +110,8 @@ public class controllerCadastrosFornecedor implements Initializable {
 
     private boolean confirmarCadastroOutro() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Cadastrar Novo Fornecedor");
-        alert.setHeaderText("Deseja cadastrar outro fornecedor?");
+        alert.setTitle("Cadastrar Novo Cliente");
+        alert.setHeaderText("Deseja cadastrar outro cliente?");
         ButtonType simButton = new ButtonType("Sim");
         ButtonType naoButton = new ButtonType("Não");
         alert.getButtonTypes().setAll(simButton, naoButton);
@@ -130,12 +129,12 @@ public class controllerCadastrosFornecedor implements Initializable {
         endereco.setCidadeUF(txtCidadeUF.getText());
     }
 
-    private void preencherFornecedor(Fornecedores fornecedor, String idEndereco) {
-        fornecedor.setNomeFornecedor(txtNomeFornecedor.getText());
-        fornecedor.setCnpj(txtCNPJ.getText());
-        fornecedor.setEmail(txtEmail.getText());
-        fornecedor.setTelefone(txtTelefone.getText());
-        fornecedor.setId_Endereço(idEndereco);
+    private void preencherCliente(Clientes cliente, String string) {
+        cliente.setNomeCliente(txtNomeCliente.getText());
+        cliente.setCpf(txtCPF.getText());
+        cliente.setEmail(txtEmail.getText());
+        cliente.setTelefone(txtTelefone.getText());
+        cliente.setId_Endereço(string);
     }
 
     @FXML
@@ -145,8 +144,8 @@ public class controllerCadastrosFornecedor implements Initializable {
     }
 
     private void limparCampos() {
-        txtNomeFornecedor.setText("");
-        txtCNPJ.setText("");
+        txtNomeCliente.setText("");
+        txtCPF.setText("");
         txtEmail.setText("");
         txtTelefone.setText("");
         txtRua.setText("");
@@ -155,7 +154,7 @@ public class controllerCadastrosFornecedor implements Initializable {
         txtCidadeUF.setText("");
         txtCep.setText("");
         txtComplemento.setText("");
-        controllerRelatorioFornecedor.FornecedoresEditor = null;
+        controllerRelatorioClientes.clienteEditor = null;
     }
 
     private void fecharJanela() {
@@ -165,11 +164,11 @@ public class controllerCadastrosFornecedor implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        if (controllerRelatorioFornecedor.FornecedoresEditor != null) {
-            txtNomeFornecedor.setText(controllerRelatorioFornecedor.FornecedoresEditor.getNomeFornecedor());
-            txtCNPJ.setText(controllerRelatorioFornecedor.FornecedoresEditor.getCnpj());
-            txtEmail.setText(controllerRelatorioFornecedor.FornecedoresEditor.getEmail());
-            txtTelefone.setText(controllerRelatorioFornecedor.FornecedoresEditor.getTelefone());
+        if (controllerRelatorioClientes.clienteEditor != null) {
+            txtNomeCliente.setText(controllerRelatorioClientes.clienteEditor.getNomeCliente());
+            txtCPF.setText(controllerRelatorioClientes.clienteEditor.getCpf());
+            txtEmail.setText(controllerRelatorioClientes.clienteEditor.getEmail());
+            txtTelefone.setText(controllerRelatorioClientes.clienteEditor.getTelefone());
         }
     }
 }

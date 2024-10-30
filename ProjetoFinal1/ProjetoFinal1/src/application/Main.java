@@ -49,9 +49,9 @@ public class Main extends Application {
 			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioProdutos.fxml"));
 			 Produtos = new Scene(fxmlProduto);
 			
-			Parent fxmlFornecedor = FXMLLoader
-					.load(getClass().getResource("/packageView/viewRelatorioFornecedores.fxml"));
-			Fornecedores = new Scene(fxmlFornecedor);
+			 Parent fxmlFornecedores = 
+			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioFornecedores.fxml"));
+			 Fornecedores = new Scene(fxmlFornecedores);
 
 			// Parent fxmlRegistrarVenda = FXMLLoader
 			// .load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
@@ -123,10 +123,24 @@ public class Main extends Application {
 		cadastroFornecedores.setScene(scene2);
 		cadastroFornecedores.showAndWait();
 	}
+	private static Stage cadastroClientes;
+	
+	public static void TelaCcadastroClientes() throws IOException {
+		FXMLLoader ClientesCadastro = new FXMLLoader();
+		ClientesCadastro.setLocation(Main.class.getResource("/packageView/viewCadastroClientes.fxml"));
+		Parent cadastrarFornecedores = ClientesCadastro.load();
+		Scene scene3 = new Scene(cadastrarFornecedores);
+		
+		cadastroClientes = new Stage();
+		cadastroClientes.setTitle("Cadastro de Clientes - Artigos Esportivos");
+		cadastroClientes.initModality(Modality.WINDOW_MODAL);
+		cadastroClientes.setScene(scene3);
+		cadastroClientes.showAndWait();
+	}
 	
 	public static void main(String[] args) {
-//
-		Connection con = ConnectionDatabase.getConnection();
+		
+	Connection con = ConnectionDatabase.getConnection();
 // ConnectionDatabase.closeConnection(con);
 // ArrayList<Cliente> cliente = new ArrayList<>();
 // ClienteDAO cl = new ClienteDAO();

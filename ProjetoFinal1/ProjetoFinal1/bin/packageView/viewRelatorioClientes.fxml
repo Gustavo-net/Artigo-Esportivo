@@ -119,15 +119,13 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Text>
-      <TableView fx:id="tableRelatorioCliente" layoutX="244.0" layoutY="221.0" prefHeight="410.0" prefWidth="626.0">
+      <TableView fx:id="tableRelatorioCliente" layoutX="231.0" layoutY="221.0" prefHeight="422.0" prefWidth="652.0">
         <columns>
-          <TableColumn fx:id="columnID" prefWidth="38.40003967285156" text="ID" />
-          <TableColumn fx:id="columnNome" prefWidth="123.20001220703125" text="Nome" />
-            <TableColumn fx:id="columnCPF" prefWidth="87.2000732421875" text="CPF" />
-            <TableColumn fx:id="columnDataNasc" prefWidth="85.5999755859375" text="Data Nasc." />
-            <TableColumn fx:id="columnCEP" prefWidth="84.0" text="CEP" />
-            <TableColumn fx:id="columnEmail" prefWidth="120.00006103515625" text="Email" />
-            <TableColumn fx:id="columnTelefone" prefWidth="84.0" text="Telefone" />
+          <TableColumn fx:id="columnNome" prefWidth="114.4000244140625" text="Nome" />
+            <TableColumn fx:id="columnCPF" prefWidth="97.5999755859375" text="CPF" />
+            <TableColumn fx:id="columnEmail" prefWidth="84.0" text="Email" />
+            <TableColumn fx:id="columnTelefone" prefWidth="120.00006103515625" text="Telefone" />
+            <TableColumn prefWidth="104.00006103515625" text="CEP" />
         </columns>
       </TableView>
       <Button fx:id="btnInserir" layoutX="246.0" layoutY="180.0" mnemonicParsing="false" onAction="#OnbtnInserir" text="Inserir">

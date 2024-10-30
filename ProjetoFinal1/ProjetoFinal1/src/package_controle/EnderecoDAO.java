@@ -11,27 +11,35 @@ import packageModel.Enderecos;
 
 public class EnderecoDAO {
 
-    public static void create(Enderecos end) {
+    public static String create(Enderecos end) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String generatedId = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO Enderecos (idEndereco, cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, end.getIdEndereço());
-            stmt.setString(2, end.getCep());
-            stmt.setString(3, end.getRua());
-            stmt.setString(4, end.getNumero());
-            stmt.setString(5, end.getBairro());
-            stmt.setString(6, end.getComplemento());
-            stmt.setString(7, end.getCidadeUF());
+            stmt = con.prepareStatement("INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, end.getCep());
+            stmt.setString(2, end.getRua());
+            stmt.setString(3, end.getNumero());
+            stmt.setString(4, end.getBairro());
+            stmt.setString(5, end.getComplemento());
+            stmt.setString(6, end.getCidadeUF());
 
             stmt.executeUpdate();
+
+            // Obter o ID gerado
+            rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getString(1); // 1 é o índice da primeira coluna
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
+            ConnectionDatabase.closeConnection(con, stmt, rs);
         }
+        return generatedId;
     }
 
     public ArrayList<Enderecos> read() {
@@ -45,7 +53,7 @@ public class EnderecoDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-            	Enderecos end = new Enderecos();
+                Enderecos end = new Enderecos();
                 end.setIdEndereço(rs.getString("idEndereco"));
                 end.setCep(rs.getString("cep"));
                 end.setRua(rs.getString("rua"));
@@ -76,8 +84,8 @@ public class EnderecoDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-            	Enderecos end = new Enderecos();
-            	end.setIdEndereço(rs.getString("idEndereco"));
+                Enderecos end = new Enderecos();
+                end.setIdEndereço(rs.getString("idEndereco"));
                 end.setCep(rs.getString("cep"));
                 end.setRua(rs.getString("rua"));
                 end.setNumero(rs.getString("numero"));
@@ -119,7 +127,6 @@ public class EnderecoDAO {
     }
 
     public void delete(String idEnderecos) {
-    	
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 
@@ -131,10 +138,9 @@ public class EnderecoDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Erro ao excluir o endereco: " + e.getMessage(), e);
-
+            throw new RuntimeException("Erro ao excluir o endereço: " + e.getMessage(), e);
         } finally {
             ConnectionDatabase.closeConnection(con, stmt);
         }
-}
+    }
 }

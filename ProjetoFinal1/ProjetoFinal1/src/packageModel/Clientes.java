@@ -17,19 +17,13 @@ public class Clientes {
 		
 	}
 	
-	
-
 	public String getDataNasc() {
 		return dataNasc;
 	}
 
-
-
 	public void setDataNasc(String dataNasc) {
 		this.dataNasc = dataNasc;
 	}
-
-
 
 	public String getIdCliente() {
 		return idCliente;
