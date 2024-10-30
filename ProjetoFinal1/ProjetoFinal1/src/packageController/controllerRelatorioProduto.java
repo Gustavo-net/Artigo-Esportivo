@@ -58,8 +58,8 @@ public class controllerRelatorioProduto implements Initializable {
     private TableColumn<Produtos, String> columnDescricao;
     @FXML
     private TableColumn<Produtos, String> columnEstoqueAtual;
-    @FXML
-    private TableColumn<Produtos, String> columnId;
+//    @FXML
+//    private TableColumn<Produtos, String> columnId;
     @FXML
     private TableColumn<Produtos, String> columnMarca;
     @FXML
@@ -90,7 +90,7 @@ public class controllerRelatorioProduto implements Initializable {
     }
 
     private void atualizarTabela(ObservableList<Produtos> observableList) {
-    	columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
+//    	columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
@@ -111,13 +111,13 @@ public class controllerRelatorioProduto implements Initializable {
     }
 
     @FXML
-    void OnbtnEditar(ActionEvent event) {
+    void OnbtnEditar(ActionEvent event) throws IOException {
         if (tableRelatorioProduto.getSelectionModel().getSelectedIndex() == -1) {
             showAlert("Selecione um Produto para Editar Primeiro!");
         } else {
             int i = tableRelatorioProduto.getSelectionModel().getSelectedIndex();
             produtoEditor = tableRelatorioProduto.getItems().get(i);
-         //   Main.changeScreen("edicaoProduto"); 
+            Main.TelaCadastroProduto();
         }
     }
 

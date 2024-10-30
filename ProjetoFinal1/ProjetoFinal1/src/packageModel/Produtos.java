@@ -9,8 +9,7 @@ public class Produtos {
     private Double precoUnitario;
     private Integer estoqueDisp;
     private String id_Categoria;
-    
-    private String categoriaNome; //Atributo para armazenar o nome da categoria
+    private String categoriaNome; 
 
     // Getters e Setters
 

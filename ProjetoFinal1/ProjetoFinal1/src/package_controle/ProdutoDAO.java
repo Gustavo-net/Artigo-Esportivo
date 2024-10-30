@@ -41,7 +41,6 @@ public class ProdutoDAO {
 	    ResultSet rs = null;
 
 	    try {
-	        // A consulta SQL deve ser a correta, referenciando corretamente as colunas
 	        stmt = con.prepareStatement("SELECT p.*, c.nomeCategoria FROM Produtos p JOIN Categorias c ON p.id_Categoria = c.idCategoria");
 	        rs = stmt.executeQuery();
 
