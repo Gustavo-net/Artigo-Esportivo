@@ -4,46 +4,29 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.effect.ColorInput?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="531.0" prefWidth="771.0" style="-fx-background-color: #ffffff; -fx-background-image: \@..\packageIcons\top-view-composition-with-neatly-arranged-organized-sport-items.jpg;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerLogin">
    <children>
-      <Pane layoutX="241.0" layoutY="55.0" opacity="0.83" prefHeight="353.0" prefWidth="334.0" style="-fx-border-color: black; -fx-region-background: black;" />
-      <Text layoutX="276.0" layoutY="165.0" opacity="0.33" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha os dados do login para ter o acesso">
+      <Button fx:id="btnLogar" layoutX="43.0" layoutY="306.0" mnemonicParsing="false" onAction="#btnActionLogar" prefHeight="26.0" prefWidth="254.0" text="Entrar" />
+      <TextField fx:id="txtSenha" layoutX="43.0" layoutY="253.0" prefHeight="26.0" prefWidth="254.0" />
+      <PasswordField fx:id="txtPassword" layoutX="43.0" layoutY="253.0" prefHeight="26.0" prefWidth="254.0" promptText="Informe a senha" />
+      <TextField fx:id="txtUser" layoutX="43.0" layoutY="201.0" prefHeight="26.0" prefWidth="253.0" promptText="Informe o CPF  " />
+      <ToggleButton fx:id="verSenha" layoutX="273.0" layoutY="253.0" mnemonicParsing="false" onAction="#OnVerSenha" opacity="0.8" prefHeight="17.0" prefWidth="24.0" textFill="#e77d0c" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0891a" height="531.0" layoutX="375.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="396.0" />
+      <Text layoutX="43.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faça seu Login ">
          <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Text>
-      <Text layoutX="300.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuário" />
-      <Button fx:id="btnLogar" layoutX="266.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnActionLogar" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: orange; -fx-background-radius: 60;" text="ENTRAR" />
-      <Text fill="#1e1d1d" layoutX="274.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem vindo ao" wrappingWidth="246.13665771484375">
-         <font>
-            <Font name="Calibri" size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="txtSenha" layoutX="299.0" layoutY="265.0" />
-      <PasswordField fx:id="txtPassword" layoutX="299.0" layoutY="264.0" prefHeight="33.0" prefWidth="151.0" promptText="Informe a senha" style="-fx-background-color: #ffffff; -fx-text-fill: #b1b1b1; -fx-border-color: #b1b1b1;" />
-      <TextField fx:id="txtUser" layoutX="301.0" layoutY="205.0" promptText="Informe o CPF        👤" style="-fx-text-fill: #b1b1b1;" />
-      <Text layoutX="304.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha" />
-      <Line endX="53.5999755859375" endY="0.600006103515625" layoutX="397.0" layoutY="230.0" startX="-96.0" startY="0.600006103515625" />
-      <Text fill="#ff7d04" layoutX="414.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema" wrappingWidth="102.9366455078125">
-         <font>
-            <Font name="Calibri Italic" size="24.0" />
-         </font>
+      <Text layoutX="51.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: #ffffff;" text="Usuario">
+         <effect>
+            <ColorInput />
+         </effect>
       </Text>
-      <Line endX="53.5999755859375" endY="0.600006103515625" layoutX="395.0" layoutY="295.0" startX="-96.0" startY="0.600006103515625" />
-      <ToggleButton fx:id="verSenha" layoutX="408.0" layoutY="269.0" mnemonicParsing="false" onAction="#OnVerSenha" opacity="0.8" prefHeight="17.0" prefWidth="24.0" style="-fx-background-color: #C0C0C0; -fx-background-radius: 60;" textFill="#e77d0c">
-         <graphic>
-            <ImageView fitHeight="9.0" fitWidth="13.0" opacity="0.48" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../packageIcons/icons8-visível-30.png" />
-               </image>
-            </ImageView>
-         </graphic></ToggleButton>
    </children>
 </AnchorPane>

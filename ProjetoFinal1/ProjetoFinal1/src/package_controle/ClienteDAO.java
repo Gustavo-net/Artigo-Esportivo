@@ -10,17 +10,9 @@ import packageConnection.ConnectionDatabase;
 import packageModel.Clientes;
 
 public class ClienteDAO {
-
-<<<<<<< HEAD
 	public static void create(Clientes c) {
-		Connection con = ConnectionDatabase.getConnection();
-		PreparedStatement stmt = null;
-=======
-    public static void create(Clientes c) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
->>>>>>> branch 'master' of https://github.com/Gustavo-net/Artigo-Esportivo.git
-
         try {
             stmt = con.prepareStatement(
                     "INSERT INTO Clientes (nomeCliente, cpf, email, telefone, dataNasc, id_Endereco) VALUES (?, ?, ?, ?, ?, ?)");
@@ -30,7 +22,6 @@ public class ClienteDAO {
             stmt.setString(4, c.getTelefone());
             stmt.setString(5, c.getDataNasc());
             stmt.setString(6, c.getId_Endereço());
-
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,7 +29,6 @@ public class ClienteDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
-
     public static ArrayList<Clientes> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
