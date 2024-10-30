@@ -11,9 +11,15 @@ import packageModel.Clientes;
 
 public class ClienteDAO {
 
+<<<<<<< HEAD
+	public static void create(Clientes c) {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+=======
     public static void create(Clientes c) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
+>>>>>>> branch 'master' of https://github.com/Gustavo-net/Artigo-Esportivo.git
 
         try {
             stmt = con.prepareStatement(
