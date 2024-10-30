@@ -23,7 +23,7 @@ public class Main extends Application {
 	private static Scene Cadastros;
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start( Stage primaryStage) {
 
 		try {
 
@@ -91,9 +91,9 @@ public class Main extends Application {
 		} else if (tela.equals("cadastros")) {
 			stage.setScene(Cadastros);
 		}
-		
 
 	}
+	
 	private static Stage cadastroProdutos;
 	
 	public static void TelaCadastroProduto() throws IOException {
@@ -113,7 +113,7 @@ public class Main extends Application {
 	
 	public static void TelaCadastroFornecedores() throws IOException {
 		FXMLLoader FornecedoresCadastro = new FXMLLoader();
-		FornecedoresCadastro.setLocation(Main.class.getResource("/packageView/viewCadastroFornecedor.fxml"));
+		FornecedoresCadastro.setLocation(Main.class.getResource("/packageView/viewCadastrosFornecedor.fxml"));
 		Parent cadastrarFornecedores = FornecedoresCadastro.load();
 		Scene scene2 = new Scene(cadastrarFornecedores);
 		
@@ -123,6 +123,7 @@ public class Main extends Application {
 		cadastroFornecedores.setScene(scene2);
 		cadastroFornecedores.showAndWait();
 	}
+	
 	private static Stage cadastroClientes;
 	
 	public static void TelaCcadastroClientes() throws IOException {
@@ -178,5 +179,6 @@ public class Main extends Application {
 		launch(args);
 
 	}
+
 
 }

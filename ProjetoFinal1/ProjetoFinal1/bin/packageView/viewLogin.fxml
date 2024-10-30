@@ -12,14 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="531.0" prefWidth="771.0" style="-fx-background-color: #F18C16; -fx-background-image: \@..\packageIcons\top-view-composition-with-neatly-arranged-organized-sport-items.jpg;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerLogin">
+<AnchorPane prefHeight="531.0" prefWidth="771.0" style="-fx-background-color: #ffffff; -fx-background-image: \@..\packageIcons\top-view-composition-with-neatly-arranged-organized-sport-items.jpg;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerLogin">
    <children>
       <Pane layoutX="241.0" layoutY="55.0" opacity="0.83" prefHeight="353.0" prefWidth="334.0" style="-fx-border-color: black; -fx-region-background: black;" />
-      <ImageView fitHeight="531.0" fitWidth="849.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../packageIcons/top-view-composition-with-neatly-arranged-organized-sport-items.jpg" />
-         </image>
-      </ImageView>
       <Text layoutX="276.0" layoutY="165.0" opacity="0.33" strokeType="OUTSIDE" strokeWidth="0.0" text="Preencha os dados do login para ter o acesso">
          <font>
             <Font name="System Bold" size="12.0" />

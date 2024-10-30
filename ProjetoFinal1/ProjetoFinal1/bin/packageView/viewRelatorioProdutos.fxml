@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioProduto">
+<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioProduto">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="474.0" layoutX="232.0" layoutY="165.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="652.0" />
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="121.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="940.0" />
@@ -123,15 +123,15 @@
 		<TableView fx:id="tableRelatorioProduto" layoutX="231.0" layoutY="215.0" prefHeight="425.0" prefWidth="652.0">
 			<columns>
 				<TableColumn fx:id="columnId" prefWidth="28.79998779296875" text="Id" />
-				<TableColumn fx:id="columnNome" prefWidth="152.0" text="Nome" />
-				<TableColumn fx:id="columnCodigo" prefWidth="94.4000244140625" text="Codigo" />
-				<TableColumn fx:id="columnMarca" prefWidth="78.4000244140625" text="Marca" />
-				<TableColumn fx:id="columnDescricao" prefWidth="113.60003662109375" text="Descrição" />
-				<TableColumn fx:id="columnPrecoUn" prefWidth="72.0" text="PreçoUn" />
-				<TableColumn fx:id="columnEstoqueAtual" prefWidth="114.39990234375" text="EstoqueAtual" />
+				<TableColumn fx:id="columnNome" prefWidth="112.0" text="Nome" />
+				<TableColumn fx:id="columnCodigo" prefWidth="99.20001220703125" text="Codigo" />
+				<TableColumn fx:id="columnMarca" prefWidth="84.0" text="Marca" />
+				<TableColumn fx:id="columnDescricao" prefWidth="52.0" text="Descrição" />
+				<TableColumn fx:id="columnPrecoUn" minWidth="0.0" prefWidth="87.99993896484375" text="PreçoUn" />
+				<TableColumn fx:id="columnEstoqueAtual" prefWidth="76.79998779296875" text="EstoqueAtual" />
+            <TableColumn fx:id="columnCategoria" prefWidth="239.2000732421875" text="Categoria" />
 			</columns>
 		</TableView>
-		<Button fx:id="btnCadastros" layoutX="27.0" layoutY="235.0" mnemonicParsing="false" onAction="#OnbtnCadastros" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
 		<Button fx:id="btnClientes" layoutX="23.0" layoutY="269.0" mnemonicParsing="false" onAction="#OnbtnClientes" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
 		<Button fx:id="btnFornecedores" layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="121.0" text="Button" />
 		<Button fx:id="btnFuncionários" layoutX="23.0" layoutY="346.0" mnemonicParsing="false" onAction="#OnbtnFuncionários" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
