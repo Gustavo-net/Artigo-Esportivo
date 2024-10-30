@@ -52,34 +52,43 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	private Button btnVoltar;
 
 	@FXML
-	private TableColumn<Funcionarios, String> columnCPF;
+    private TableColumn<Funcionarios, String> columnBairro;
 
-	@FXML
-	private TableColumn<Funcionarios, String> columnCargo;
+    @FXML
+    private TableColumn<Funcionarios, String> columnCEP;
 
-	@FXML
-	private TableColumn<Funcionarios, String> columnDataCont;
+    @FXML
+    private TableColumn<Funcionarios, String> columnCPF;
 
-	@FXML
-	private TableColumn<Funcionarios, String> columnDataNasc;
+    @FXML
+    private TableColumn<Funcionarios, String> columnCargo;
 
-	@FXML
-	private TableColumn<Funcionarios, String> columnEmail;
+    @FXML
+    private TableView<Funcionarios> tableFuncionarios;
 
-	@FXML
-	private TableColumn<Funcionarios, String> columnID;
+    @FXML
+    private TableColumn<Funcionarios, String> columnCidadeUF;
 
-	@FXML
-	private TableColumn<Funcionarios, String> columnNome;
+    @FXML
+    private TableColumn<Funcionarios, String> columnDataCont;
 
-	@FXML
-	private TableColumn<Funcionarios, String> columnSexo;
+    @FXML
+    private TableColumn<Funcionarios, String> columnDataNasc;
 
-	@FXML
-	private TableColumn<Funcionarios, String> columnTelefone;
+    @FXML
+    private TableColumn<Funcionarios, String> columnEmail;
 
-	@FXML
-	private TableView<Funcionarios> tableFuncionarios;
+    @FXML
+    private TableColumn<Funcionarios, String> columnNome;
+
+    @FXML
+    private TableColumn<Funcionarios, String> columnRua;
+
+    @FXML
+    private TableColumn<Funcionarios, String> columnSexo;
+
+    @FXML
+    private TableColumn<Funcionarios, String> columnTelefone;
 
 	@FXML
 	private TextField labelpesquisar;
@@ -96,7 +105,6 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	public void carregarTableFuncionarios() {
 		arrayFuncionario = FXCollections.observableArrayList(FuncionarioDAO.read());
 
-		columnID.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
 		columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionario"));
 		columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -139,7 +147,6 @@ public class controllerRelatorioFuncionarios implements Initializable {
 
 		arrayFuncionario = FXCollections.observableArrayList(FuncionarioDAO.search(labelpesquisar.getText()));
 
-		columnID.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
 		columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionario"));
 		columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -166,7 +173,6 @@ public class controllerRelatorioFuncionarios implements Initializable {
 
 	@FXML
 	void OnBtnVendas(ActionEvent event) {
-		// Implementar vendas
 	}
 
 	@FXML
