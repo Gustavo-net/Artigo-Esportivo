@@ -1,5 +1,6 @@
 package packageController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -132,19 +134,32 @@ public class controllerRelatorioFuncionarios implements Initializable {
 
 	@FXML
 	void OnbtnEditar(ActionEvent event) {
-
+		if (tableFuncionarios.getSelectionModel().getSelectedIndex() == -1) {
+            showAlert("Selecione um Cliente para Editar Primeiro!");
+        } else {
+            int i = tableFuncionarios.getSelectionModel().getSelectedIndex();
+            funcionariosEditor = tableFuncionarios.getItems().get(i);
+            
+            try {
+                Main.TelaCcadastroClientes();
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Erro ao abrir a tela de edição!");
+            }
+        }
 	}
 
 	@FXML
-	void OnbtnInserir(ActionEvent event) {
-	//
+	void OnbtnInserir(ActionEvent event) throws IOException {
+		funcionariosEditor = null;
+		Main.TelaCadastroFuncionarios();
 	}
 
 	public void OnbtnVendas(ActionEvent event) {
 	   
 	}
 	public void OnbtnSair(ActionEvent event) {
-		   
+		   Main.changeScreen("login");
 	}
 	public void OnbtnExcluir(ActionEvent event) {
 		   
@@ -190,7 +205,12 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	void OnbtnVoltar(ActionEvent event) {
 
 	}
-	
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
