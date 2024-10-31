@@ -16,6 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import packageModel.Fornecedores;
 import package_controle.FornecedoresDAO;
 
@@ -41,7 +43,6 @@ public class controllerRelatorioFornecedor implements Initializable {
 
 //    @FXML
 //    private TableColumn<Fornecedores, String> columnEndereco;
-
     @FXML
     private Button btnCadastros;
     @FXML
@@ -53,14 +54,13 @@ public class controllerRelatorioFornecedor implements Initializable {
     @FXML
     private Button btnInserir;
     @FXML
-    private Button btnPesquisar;
-    @FXML
     private Button btnProdutos;
     @FXML
     private Button btnVendas;
     @FXML
     private Button btnVoltar;
-
+    @FXML
+    private ImageView lupaPesquisar;
     @FXML
     private TextField txtPesquisar;
 
@@ -92,8 +92,9 @@ public class controllerRelatorioFornecedor implements Initializable {
 
     @FXML
     void OnbtnInserir(ActionEvent event) throws IOException {
-        FornecedoresEditor = null;
-        Main.TelaCadastroFornecedores();
+        	FornecedoresEditor = null;
+            Main.TelaCadastroFornecedores();
+        
     }
 
     @FXML
@@ -114,7 +115,7 @@ public class controllerRelatorioFornecedor implements Initializable {
     }
 
     @FXML
-    void OnbtnPesquisar(ActionEvent event) {
+    void OnPesquisarImagem(MouseEvent event) {
         String pesquisa = txtPesquisar.getText().trim();
         if (pesquisa.isEmpty()) {
             carregarTableFornecedores();
@@ -144,7 +145,7 @@ public class controllerRelatorioFornecedor implements Initializable {
     void OnbtnProdutos(ActionEvent event) {
         Main.changeScreen("produtos");
     }
-
+    
     @FXML
     void OnbtnVendas(ActionEvent event) {
         // Implementar vendas

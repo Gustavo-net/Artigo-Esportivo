@@ -131,7 +131,7 @@
          </font></Button>
 		<ComboBox fx:id="boxFiltrar" layoutX="493.0" layoutY="178.0" prefHeight="27.0" prefWidth="155.0" promptText="Filtrar" style="-fx-background-color: #Ffffff; -fx-background-radius: 10; -fx-border-color: #b1b1b1; -fx-border-radius: 10;" />
 		<TextField fx:id="txtPesquisar" layoutX="659.0" layoutY="178.0" prefHeight="26.0" prefWidth="238.0" promptText="Pesquisar" style="-fx-background-radius: 10;" />
-		<Button fx:id="btnPesquisar" layoutX="872.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnbtnPesquisar" prefHeight="26.0" prefWidth="38.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" />
+		<Button layoutX="872.0" layoutY="177.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="38.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" />
       <Button fx:id="btnSair" layoutX="830.0" layoutY="15.0" mnemonicParsing="false" onAction="#OnbtnSair" opacity="0.0" prefHeight="26.0" prefWidth="74.0" text="Sair" />
       <Button fx:id="btnExcluir" layoutX="326.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnbtnExcluir" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" text="Excluir" textFill="WHITE">
          <font>
@@ -145,17 +145,17 @@
       </Button>
       <TableView fx:id="tableRelatorioProduto" layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" style="-fx-background-color: #ffffff;">
     <columns>
-        <TableColumn fx:id="columnNome" prefWidth="75.0" style="-fx-background-color: #ffffff;" text="Nome" />
-        <TableColumn fx:id="columnCodigo" prefWidth="75.0" style="-fx-background-color: #ffffff;" text="Codigo" />
-        <TableColumn fx:id="columnCategoria" prefWidth="109.6" style="-fx-background-color: #ffffff;" text="Categoria" />
-        <TableColumn fx:id="columnMarca" prefWidth="101.6" style="-fx-background-color: #ffffff;" text="Marca" />
-        <TableColumn fx:id="columnPrecoUn" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Preço Unit." />
-        <TableColumn fx:id="columnEstoqueAtual" prefWidth="114.4" style="-fx-background-color: #ffffff;" text="Estoque Disponível" />
-        <TableColumn fx:id="columnDescricao" prefWidth="115.20001220703125" style="-fx-background-color: #ffffff;" text="Descrição" />
+        <TableColumn fx:id="columnNome" prefWidth="126.39996337890625" style="-fx-background-color: #ffffff;" text="Nome" />
+        <TableColumn fx:id="columnCodigo" prefWidth="71.20001220703125" style="-fx-background-color: #ffffff;" text="Codigo" />
+        <TableColumn fx:id="columnCategoria" prefWidth="137.5999755859375" style="-fx-background-color: #ffffff;" text="Categoria" />
+        <TableColumn fx:id="columnMarca" prefWidth="69.60003662109375" style="-fx-background-color: #ffffff;" text="Marca" />
+        <TableColumn fx:id="columnPrecoUn" prefWidth="97.5999755859375" style="-fx-background-color: #ffffff;" text="Preço Unit." />
+        <TableColumn fx:id="columnEstoqueAtual" prefWidth="86.4000244140625" style="-fx-background-color: #ffffff;" text="Estoque Disp" />
+        <TableColumn fx:id="columnDescricao" prefWidth="175.199951171875" style="-fx-background-color: #ffffff;" text="Descrição" />
     </columns>
 </TableView>
       <Line endX="638.0" layoutX="267.0" layoutY="247.0" opacity="0.35" startX="-15.399978637695312" />
-      <ImageView fitHeight="19.0" fitWidth="38.0" layoutX="875.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lupaPesquisar" fitHeight="19.0" fitWidth="38.0" layoutX="875.0" layoutY="181.0" onMouseClicked="#OnPesquisarImagem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../packageIcons/iconPesquisa.png" />
          </image>

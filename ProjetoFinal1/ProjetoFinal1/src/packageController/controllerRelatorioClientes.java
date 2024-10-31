@@ -17,6 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import packageModel.Clientes;
 import package_controle.ClienteDAO;
 
@@ -46,9 +48,10 @@ public class controllerRelatorioClientes implements Initializable {
     private Button btnEditar;
     @FXML
     private Button btnInserir;
-    @FXML
-    private Button btnPesquisar;
 
+    @FXML
+    private ImageView lupaPesquisa;
+    
     @FXML
     private TableColumn<Clientes, String> columnNome;
     @FXML
@@ -117,8 +120,8 @@ public class controllerRelatorioClientes implements Initializable {
     }
 
     @FXML
-    void OnbtnPesquisar(ActionEvent event) {
-        String pesquisa = txtPesquisar.getText().trim();
+    void OnPesquisarImagem(MouseEvent event) {
+    	String pesquisa = txtPesquisar.getText().trim();
         if (pesquisa.isEmpty()) {
             carregarTableCliente();
         } else {
@@ -127,7 +130,6 @@ public class controllerRelatorioClientes implements Initializable {
             tableRelatorioCliente.refresh();
         }
     }
-
     @FXML
     void OnbtnSair(ActionEvent event) {
         Main.changeScreen("login");

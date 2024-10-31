@@ -59,7 +59,7 @@ public class controllerCadastrosFornecedor implements Initializable {
     private EnderecoDAO enderecoDAO = new EnderecoDAO();
 
     @FXML
-    public void OnbtnAddFornecedores(ActionEvent event) {
+    public void OnbtnAddFornecedor(ActionEvent event) {
         // Verificar se todos os campos obrigatórios estão preenchidos
         if (validarCampos()) {
             Enderecos endereco = new Enderecos();

@@ -18,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import packageModel.Categorias;
 import packageModel.Produtos;
 import package_controle.CategoriaDAO;
@@ -42,8 +43,6 @@ public class controllerRelatorioProduto implements Initializable {
     private Button btnFuncionários;
     @FXML
     private Button btnInserir;
-    @FXML
-    private Button btnPesquisar;
     @FXML
     private Button btnVendas;
     @FXML
@@ -152,19 +151,15 @@ public class controllerRelatorioProduto implements Initializable {
         Main.TelaCadastroProduto();
     }
 
-    
+
     @FXML
-    void OnbtnPesquisar(ActionEvent event) {
+    void OnPesquisarImagem(MouseEvent event) {
         try {
-            // Obter a pesquisa do TextField
             String pesquisa = txtPesquisar.getText().trim();
             
-            // Obter a categoria selecionada no ComboBox
             String categoriaSelecionada = boxFiltrar.getValue();
             
-            // Se o campo de pesquisa estiver vazio, mas uma categoria estiver selecionada
             if (pesquisa.isEmpty() && categoriaSelecionada != null) {
-                // Filtrar produtos pela categoria
                 String idCategoria = new CategoriaDAO().obterIdCategoria(categoriaSelecionada);
                 if (idCategoria != null) {
                     ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
@@ -174,11 +169,9 @@ public class controllerRelatorioProduto implements Initializable {
                     carregarTableProduto();
                 }
             } else if (!pesquisa.isEmpty()) {
-                // Se houver texto no campo de pesquisa, buscar produtos por pesquisa
                 arrayProduto = FXCollections.observableArrayList(produtoDAO.search(pesquisa));
                 atualizarTabela(arrayProduto);
             } else {
-                // Se ambos estiverem vazios, carregar todos os produtos
                 carregarTableProduto();
             }
         } catch (Exception e) {

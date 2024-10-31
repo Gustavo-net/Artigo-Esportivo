@@ -11,24 +11,29 @@ import packageModel.Clientes;
 
 public class ClienteDAO {
 	public static void create(Clientes c) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        try {
-            stmt = con.prepareStatement(
-                    "INSERT INTO Clientes (nomeCliente, cpf, email, telefone, dataNasc, id_Endereco) VALUES (?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, c.getNomeCliente());
-            stmt.setString(2, c.getCpf());
-            stmt.setString(3, c.getEmail());
-            stmt.setString(4, c.getTelefone());
-            stmt.setString(5, c.getDataNasc());
-            stmt.setString(6, c.getId_Endereço());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
+	    if (validarExistente(c.getCpf())) {
+	        throw new IllegalArgumentException("Cliente com CPF " + c.getCpf() + " já existe.");
+	    }
+
+	    Connection con = ConnectionDatabase.getConnection();
+	    PreparedStatement stmt = null;
+	    try {
+	        stmt = con.prepareStatement(
+	                "INSERT INTO Clientes (nomeCliente, cpf, email, telefone, dataNasc, id_Endereco) VALUES (?, ?, ?, ?, ?, ?)");
+	        stmt.setString(1, c.getNomeCliente());
+	        stmt.setString(2, c.getCpf());
+	        stmt.setString(3, c.getEmail());
+	        stmt.setString(4, c.getTelefone());
+	        stmt.setString(5, c.getDataNasc());
+	        stmt.setString(6, c.getId_Endereço());
+	        stmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        ConnectionDatabase.closeConnection(con, stmt);
+	    }
+	}
+
     public static ArrayList<Clientes> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
@@ -58,6 +63,26 @@ public class ClienteDAO {
         }
 
         return clientes;
+    }
+    public static boolean validarExistente(String cpf) {
+        Connection con = ConnectionDatabase.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT COUNT(*) FROM Clientes WHERE cpf = ?");
+            stmt.setString(1, cpf);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDatabase.closeConnection(con, stmt, rs);
+        }
+        return false;
     }
 
     public static ArrayList<Clientes> search(String string) {

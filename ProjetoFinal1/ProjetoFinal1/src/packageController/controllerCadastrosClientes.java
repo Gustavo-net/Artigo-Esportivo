@@ -59,33 +59,32 @@ public class controllerCadastrosClientes implements Initializable {
     private EnderecoDAO enderecoDAO = new EnderecoDAO();
 
     @FXML
-    public void OnbtnAddCliente(ActionEvent event) {
-        // Verificar se todos os campos obrigatórios estão preenchidos
-        if (validarCampos()) {
-            Enderecos endereco = new Enderecos();
-            preencherEndereco(endereco);
+    void OnbtnAddCliente(ActionEvent event) {
+        if (!validarCampos()) {
+            showAlert("Por favor, preencha todos os campos obrigatórios.");
+            return;
+        }
 
-            // Criar o endereço
-            enderecoDAO.create(endereco);
+        Clientes novoCliente = coletarDadosDoCliente();
 
-            Clientes cliente = new Clientes();
-            preencherCliente(cliente, endereco.getIdEndereço());
-
-            // Criar ou atualizar cliente
-            if (controllerRelatorioClientes.clienteEditor == null) {
-                clienteDAO.create(cliente);
-            } else {
-                clienteDAO.update(cliente);
+        try {
+            // Verifica se já existe um cliente com o CPF antes de adiciona-lo
+            if (ClienteDAO.validarExistente(novoCliente.getCpf())) {
+                showAlert("Erro: Cliente com CPF " + novoCliente.getCpf() + " já existe.");
+                return; 
             }
+            
+            clienteDAO.create(novoCliente);
+            showAlert("Cliente adicionado com sucesso!");
 
-            mostrarMensagem("Cliente cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-            if (confirmarCadastroOutro()) {
-                limparCampos();
-            } else {
-                fecharJanela();
-            }
-        } else {
-            mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", Alert.AlertType.WARNING);
+            limparCampos();
+            carregarTabelaClientes();
+            
+        } catch (IllegalArgumentException e) {
+            showAlert(e.getMessage()); 
+        } catch (Exception e) {
+            e.printStackTrace(); 
+            showAlert("Erro ao adicionar cliente: " + e.getMessage());
         }
     }
 
@@ -129,12 +128,12 @@ public class controllerCadastrosClientes implements Initializable {
         endereco.setCidadeUF(txtCidadeUF.getText());
     }
 
-    private void preencherCliente(Clientes cliente, String string) {
+    private void preencherCliente(Clientes cliente) {
         cliente.setNomeCliente(txtNomeCliente.getText());
         cliente.setCpf(txtCPF.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setTelefone(txtTelefone.getText());
-        cliente.setId_Endereço(string);
+        
     }
 
     @FXML
@@ -144,22 +143,33 @@ public class controllerCadastrosClientes implements Initializable {
     }
 
     private void limparCampos() {
-        txtNomeCliente.setText("");
-        txtCPF.setText("");
-        txtEmail.setText("");
-        txtTelefone.setText("");
-        txtRua.setText("");
-        txtNumero.setText("");
-        txtBairro.setText("");
-        txtCidadeUF.setText("");
-        txtCep.setText("");
-        txtComplemento.setText("");
-        controllerRelatorioClientes.clienteEditor = null;
+        txtNomeCliente.clear();
+        txtCPF.clear();
+        txtEmail.clear();
+        txtTelefone.clear();
+        txtRua.clear();
+        txtNumero.clear();
+        txtBairro.clear();
+        txtCidadeUF.clear();
+        txtCep.clear();
+        txtComplemento.clear();
     }
 
     private void fecharJanela() {
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
         stage.close();
+    }
+    
+    private Clientes coletarDadosDoCliente() {
+        Clientes cliente = new Clientes();
+        preencherCliente(cliente); 
+        return cliente;
+    }
+    
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @Override
@@ -170,5 +180,8 @@ public class controllerCadastrosClientes implements Initializable {
             txtEmail.setText(controllerRelatorioClientes.clienteEditor.getEmail());
             txtTelefone.setText(controllerRelatorioClientes.clienteEditor.getTelefone());
         }
+    }
+
+    private void carregarTabelaClientes() {
     }
 }

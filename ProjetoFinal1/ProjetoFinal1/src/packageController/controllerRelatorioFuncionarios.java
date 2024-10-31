@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import packageModel.Funcionarios;
 import package_controle.FuncionarioDAO;
@@ -38,9 +39,6 @@ public class controllerRelatorioFuncionarios implements Initializable {
 
 	@FXML
 	private Button btnInserir;
-
-	@FXML
-	private Button btnPesquisar;
 
 	@FXML
 	private Button btnProdutos;
@@ -155,7 +153,7 @@ public class controllerRelatorioFuncionarios implements Initializable {
 		   
 	}
 	@FXML
-	void OnbtnPesquisar(ActionEvent event) {
+	void OnPesquisarImagem(MouseEvent event) {
 
 		arrayFuncionario = FXCollections.observableArrayList(FuncionarioDAO.search(labelpesquisar.getText()));
 
