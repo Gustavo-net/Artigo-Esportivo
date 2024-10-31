@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>ProjetoFinal1/src/packageIcons/LogoLoja.png</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Downloads/logo%20da%20loja/3.png</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
