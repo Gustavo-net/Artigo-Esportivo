@@ -91,7 +91,6 @@ public class Main extends Application {
 		} else if (tela.equals("cadastros")) {
 			stage.setScene(Cadastros);
 		}
-
 	}
 	
 	private static Stage cadastroProdutos;
@@ -139,6 +138,20 @@ public class Main extends Application {
 		cadastroClientes.showAndWait();
 	}
 	
+	private static Stage cadastroFuncionarios;
+	
+	public static void TelaCadastroFuncionarios() throws IOException {
+		FXMLLoader FuncionariosCadastro = new FXMLLoader();
+		FuncionariosCadastro.setLocation(Main.class.getResource("/packageView/viewCadastroFuncionarios.fxml"));
+		Parent cadastrarFuncionarios = FuncionariosCadastro.load();
+		Scene scene3 = new Scene(cadastrarFuncionarios);
+		
+		cadastroFuncionarios = new Stage();
+		cadastroFuncionarios.setTitle("Cadastro de Funcionarios - Artigos Esportivos");
+		cadastroFuncionarios.initModality(Modality.WINDOW_MODAL);
+		cadastroFuncionarios.setScene(scene3);
+		cadastroFuncionarios.showAndWait();
+	}
 	public static void main(String[] args) {
 		
 	Connection con = ConnectionDatabase.getConnection();

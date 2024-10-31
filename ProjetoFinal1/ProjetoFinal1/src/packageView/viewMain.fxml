@@ -138,5 +138,20 @@
       </Text>
       <Button fx:id="btnProdutos" layoutX="20.0" layoutY="381.0" mnemonicParsing="false" onAction="#OnbtnProdutos" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
       <Line endX="615.4000244140625" layoutX="243.0" layoutY="399.0" opacity="0.23" startX="13.800033569335938" />
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="30.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../packageIcons/LogoLoja.png" />
+         </image>
+      </ImageView>
+      <Text fill="#009c08" layoutX="69.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adiministrador" wrappingWidth="74.39999999999986">
+         <font>
+            <Font name="Calibri" size="12.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="19.0" arcWidth="20.0" fill="#3ca13a" height="17.0" layoutX="53.0" layoutY="203.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="109.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
    </children>
 </AnchorPane>

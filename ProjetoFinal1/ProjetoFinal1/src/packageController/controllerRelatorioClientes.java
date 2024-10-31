@@ -50,13 +50,9 @@ public class controllerRelatorioClientes implements Initializable {
     private Button btnPesquisar;
 
     @FXML
-    private TableColumn<Clientes, String> columnID;
-    @FXML
     private TableColumn<Clientes, String> columnNome;
     @FXML
     private TableColumn<Clientes, String> columnCPF;
-    @FXML
-    private TableColumn<Clientes, String> columnCEP;
     @FXML
     private TableColumn<Clientes, String> columnEmail;
     @FXML
@@ -81,6 +77,10 @@ public class controllerRelatorioClientes implements Initializable {
     private void carregarTableCliente() {
         arrayCliente = FXCollections.observableArrayList(ClienteDAO.read());
         tableRelatorioCliente.setItems(arrayCliente);
+        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
+        columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         atualizarTabela(arrayCliente);
     }
 
@@ -162,7 +162,10 @@ public class controllerRelatorioClientes implements Initializable {
     void OnbtnVendas(ActionEvent event) {
         Main.changeScreen("vendas");
     }
-
+    @FXML
+    void OnbtnExcluir(ActionEvent event) {
+        
+    }
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);

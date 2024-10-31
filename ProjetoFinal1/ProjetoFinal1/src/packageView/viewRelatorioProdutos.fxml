@@ -143,22 +143,52 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" style="-fx-background-color: #ffffff;">
-        <columns>
-          <TableColumn fx:id="columnNome" prefWidth="75.0" style="-fx-background-color: #ffffff;" text="Nome" />
-            <TableColumn fx:id="columnCodigo" prefWidth="75.0" style="-fx-background-color: #ffffff;" text="Codigo" />
-            <TableColumn fx:id="columnMarca" prefWidth="101.60003662109375" style="-fx-background-color: #ffffff;" text="Marca" />
-            <TableColumn fx:id="columnCategoria" prefWidth="109.5999755859375" style="-fx-background-color: #ffffff;" text="Categoria" />
-            <TableColumn fx:id="columnPrecoUn" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Preço Unit." />
-            <TableColumn fx:id="columnEstoqueAtual" prefWidth="114.39996337890625" style="-fx-background-color: #ffffff;" text="Estoque Disponível" />
-            <TableColumn fx:id="columnDescricao" prefWidth="119.199951171875" style="-fx-background-color: #ffffff;" text="Descrição" />
-        </columns>
-      </TableView>
-      <Line endX="638.0" layoutX="267.0" layoutY="251.0" opacity="0.35" startX="-15.399978637695312" />
+      <TableView fx:id="tableRelatorioProduto" layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" style="-fx-background-color: #ffffff;">
+    <columns>
+        <TableColumn fx:id="columnNome" prefWidth="75.0" style="-fx-background-color: #ffffff;" text="Nome" />
+        <TableColumn fx:id="columnCodigo" prefWidth="75.0" style="-fx-background-color: #ffffff;" text="Codigo" />
+        <TableColumn fx:id="columnCategoria" prefWidth="109.6" style="-fx-background-color: #ffffff;" text="Categoria" />
+        <TableColumn fx:id="columnMarca" prefWidth="101.6" style="-fx-background-color: #ffffff;" text="Marca" />
+        <TableColumn fx:id="columnPrecoUn" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="Preço Unit." />
+        <TableColumn fx:id="columnEstoqueAtual" prefWidth="114.4" style="-fx-background-color: #ffffff;" text="Estoque Disponível" />
+        <TableColumn fx:id="columnDescricao" prefWidth="115.20001220703125" style="-fx-background-color: #ffffff;" text="Descrição" />
+    </columns>
+</TableView>
+      <Line endX="638.0" layoutX="267.0" layoutY="247.0" opacity="0.35" startX="-15.399978637695312" />
       <ImageView fitHeight="19.0" fitWidth="38.0" layoutX="875.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../packageIcons/iconPesquisa.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="30.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Downloads/logo%20da%20loja/3.png" />
+         </image>
+      </ImageView>
+      <Text fill="#009c08" layoutX="69.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adiministrador" wrappingWidth="74.39999999999986">
+         <font>
+            <Font name="Calibri" size="12.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="19.0" arcWidth="20.0" fill="#3ca13a" height="17.0" layoutX="53.0" layoutY="203.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="109.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="30.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../packageIcons/LogoLoja.png" />
+         </image>
+      </ImageView>
+      <Text fill="#009c08" layoutX="69.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adiministrador" wrappingWidth="74.39999999999986">
+         <font>
+            <Font name="Calibri" size="12.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="19.0" arcWidth="20.0" fill="#3ca13a" height="17.0" layoutX="53.0" layoutY="203.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="109.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
 	</children>
 </AnchorPane>

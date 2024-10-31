@@ -24,8 +24,8 @@ public class controllerRelatorioFornecedor implements Initializable {
     @FXML
     private TableView<Fornecedores> tableFornecedores;
 
-    @FXML
-    private TableColumn<Fornecedores, String> columnID;
+//    @FXML
+//    private TableColumn<Fornecedores, String> columnID;
 
     @FXML
     private TableColumn<Fornecedores, String> columnNome;
@@ -39,8 +39,8 @@ public class controllerRelatorioFornecedor implements Initializable {
     @FXML
     private TableColumn<Fornecedores, String> columnTelefone;
 
-    @FXML
-    private TableColumn<Fornecedores, String> columnEndereco;
+//    @FXML
+//    private TableColumn<Fornecedores, String> columnEndereco;
 
     @FXML
     private Button btnCadastros;
@@ -82,7 +82,7 @@ public class controllerRelatorioFornecedor implements Initializable {
     }
 
     private void atualizarTabela() {
-        columnID.setCellValueFactory(new PropertyValueFactory<>("idFornecedor"));
+ //       columnID.setCellValueFactory(new PropertyValueFactory<>("idFornecedor"));
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFornecedor"));
         columnCNPJ.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -153,6 +153,10 @@ public class controllerRelatorioFornecedor implements Initializable {
     @FXML
     void OnbtnVoltar(ActionEvent event) {
         Main.changeScreen("main");
+    }
+    
+    @FXML
+    void OnbtnExcluir(ActionEvent event) {
     }
 
     private void showAlert(String message) {

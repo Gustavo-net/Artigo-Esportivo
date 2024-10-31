@@ -24,7 +24,6 @@ import package_controle.CategoriaDAO;
 import package_controle.ProdutoDAO;
 
 public class controllerRelatorioProduto implements Initializable {
-
     @FXML
     private TableView<Produtos> tableRelatorioProduto;
 
@@ -78,7 +77,7 @@ public class controllerRelatorioProduto implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        carregarTableProduto();
+    	carregarTableProduto();
         inicializarComboBox();
         boxFiltrar.setOnAction(event -> filtrarProdutos());
     }
@@ -86,6 +85,13 @@ public class controllerRelatorioProduto implements Initializable {
     private void carregarTableProduto() {
         arrayProduto = FXCollections.observableArrayList(produtoDAO.read());
         tableRelatorioProduto.setItems(arrayProduto);
+        columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        columnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
+        columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
+        columnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoriaNome")); 
         atualizarTabela(arrayProduto);
     }
 
@@ -109,7 +115,16 @@ public class controllerRelatorioProduto implements Initializable {
     void OnbtnClientes(ActionEvent event) {
         Main.changeScreen("clientes");
     }
-
+    
+    @FXML
+    void OnbtnExcluir(ActionEvent event) {
+    } 
+    @FXML
+    void OnbtnProdutos (ActionEvent event) {
+    }
+    @FXML
+    void OnbtnFuncionarios(ActionEvent event) {
+    }
     @FXML
     void OnbtnEditar(ActionEvent event) throws IOException {
         if (tableRelatorioProduto.getSelectionModel().getSelectedIndex() == -1) {

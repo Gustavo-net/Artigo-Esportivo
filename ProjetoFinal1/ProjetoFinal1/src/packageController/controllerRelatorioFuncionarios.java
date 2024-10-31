@@ -142,6 +142,18 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	//
 	}
 
+	public void OnbtnVendas(ActionEvent event) {
+	   
+	}
+	public void OnbtnSair(ActionEvent event) {
+		   
+	}
+	public void OnbtnExcluir(ActionEvent event) {
+		   
+	}
+	public void OnbtnFuncionarios(ActionEvent event) {
+		   
+	}
 	@FXML
 	void OnbtnPesquisar(ActionEvent event) {
 
@@ -173,13 +185,14 @@ public class controllerRelatorioFuncionarios implements Initializable {
 
 	@FXML
 	void OnBtnVendas(ActionEvent event) {
+		
 	}
 
 	@FXML
 	void OnbtnVoltar(ActionEvent event) {
 
 	}
-
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
