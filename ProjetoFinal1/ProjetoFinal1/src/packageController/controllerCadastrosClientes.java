@@ -66,16 +66,22 @@ public class controllerCadastrosClientes implements Initializable {
         }
 
         Clientes novoCliente = coletarDadosDoCliente();
-
+        
         try {
-            // Verifica se já existe um cliente com o CPF antes de adiciona-lo
-            if (ClienteDAO.validarExistente(novoCliente.getCpf())) {
-                showAlert("Erro: Cliente com CPF " + novoCliente.getCpf() + " já existe.");
-                return; 
+            // Se estamos editando um cliente, atualizamos
+            if (controllerRelatorioClientes.clienteEditor != null) {
+                novoCliente.setIdCliente(controllerRelatorioClientes.clienteEditor.getIdCliente()); // Garantindo que o ID do cliente seja mantido
+                clienteDAO.update(novoCliente);
+                showAlert("Cliente atualizado com sucesso!");
+            } else {
+                // Verifica se já existe um cliente com o CPF antes de adiciona-lo
+                if (ClienteDAO.validarExistente(novoCliente.getCpf())) {
+                    showAlert("Erro: Cliente com CPF " + novoCliente.getCpf() + " já existe.");
+                    return; 
+                }
+                clienteDAO.create(novoCliente);
+                showAlert("Cliente adicionado com sucesso!");
             }
-            
-            clienteDAO.create(novoCliente);
-            showAlert("Cliente adicionado com sucesso!");
 
             limparCampos();
             carregarTabelaClientes();
@@ -84,9 +90,10 @@ public class controllerCadastrosClientes implements Initializable {
             showAlert(e.getMessage()); 
         } catch (Exception e) {
             e.printStackTrace(); 
-            showAlert("Erro ao adicionar cliente: " + e.getMessage());
+            showAlert("Erro ao adicionar/atualizar cliente: " + e.getMessage());
         }
     }
+
 
     private boolean validarCampos() {
         return !txtNomeCliente.getText().isEmpty() &&

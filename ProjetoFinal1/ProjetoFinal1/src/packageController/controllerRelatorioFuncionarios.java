@@ -17,15 +17,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import packageModel.Funcionarios;
+import package_controle.ClienteDAO;
 import package_controle.FuncionarioDAO;
 
 public class controllerRelatorioFuncionarios implements Initializable {
 
 	@FXML
 	private Button bntCadastros;
+	
+	@FXML
+	private ImageView lupaPesquisar;
 
 	@FXML
 	private Button btnClientes;
@@ -90,14 +95,11 @@ public class controllerRelatorioFuncionarios implements Initializable {
     @FXML
     private TableColumn<Funcionarios, String> columnTelefone;
 
-	@FXML
-	private TextField labelpesquisar;
-
 	private ObservableList<Funcionarios> arrayFuncionario;
 	private FuncionarioDAO funcionariosDAO = new FuncionarioDAO();
 
 	@FXML
-	private TextField txtProcurarFornecedores;
+	private TextField txtPesquisar;
 
 	@SuppressWarnings("exports")
 	public static Funcionarios funcionariosEditor = new Funcionarios();
@@ -115,6 +117,7 @@ public class controllerRelatorioFuncionarios implements Initializable {
 		columnSexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
 
 		tableFuncionarios.setItems(arrayFuncionario);
+		
 	}
 
 	@FXML
@@ -169,20 +172,14 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	}
 	@FXML
 	void OnPesquisarImagem(MouseEvent event) {
-
-		arrayFuncionario = FXCollections.observableArrayList(FuncionarioDAO.search(labelpesquisar.getText()));
-
-		columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionario"));
-		columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-		columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-		columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-		columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
-		columnDataCont.setCellValueFactory(new PropertyValueFactory<>("dataCont"));
-		columnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
-		columnSexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
-
-		tableFuncionarios.setItems(arrayFuncionario);
-		tableFuncionarios.refresh();
+		String pesquisa = txtPesquisar.getText().trim();
+        if (pesquisa.isEmpty()) {
+            carregarTableFuncionarios();
+        } else {
+            arrayFuncionario = FXCollections.observableArrayList(FuncionarioDAO.search(pesquisa));
+            tableFuncionarios.setItems(arrayFuncionario);
+            tableFuncionarios.refresh();
+        }
 
 	}
 

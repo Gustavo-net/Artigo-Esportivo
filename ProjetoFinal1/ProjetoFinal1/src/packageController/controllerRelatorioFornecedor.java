@@ -73,6 +73,7 @@ public class controllerRelatorioFornecedor implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         carregarTableFornecedores();
+            
     }
 
     private void carregarTableFornecedores() {
@@ -82,7 +83,7 @@ public class controllerRelatorioFornecedor implements Initializable {
     }
 
     private void atualizarTabela() {
- //       columnID.setCellValueFactory(new PropertyValueFactory<>("idFornecedor"));
+ //     columnID.setCellValueFactory(new PropertyValueFactory<>("idFornecedor"));
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFornecedor"));
         columnCNPJ.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -120,7 +121,7 @@ public class controllerRelatorioFornecedor implements Initializable {
         if (pesquisa.isEmpty()) {
             carregarTableFornecedores();
         } else {
-            arrayFornecedores = FXCollections.observableArrayList(fornecedorDAO.search(pesquisa));
+            arrayFornecedores = FXCollections.observableArrayList(FornecedoresDAO.search(pesquisa));
             tableFornecedores.setItems(arrayFornecedores);
             tableFornecedores.refresh();
         }
