@@ -13,13 +13,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import packageModel.Categorias;
+import packageModel.Clientes;
 import packageModel.Produtos;
 import package_controle.CategoriaDAO;
 import package_controle.ProdutoDAO;
@@ -76,12 +79,42 @@ public class controllerRelatorioProduto implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-    	carregarTableProduto();
+        carregarTableProduto();
         inicializarComboBox();
         boxFiltrar.setOnAction(event -> filtrarProdutos());
+
+        tableRelatorioProduto.setRowFactory(tv -> new TableRow<Produtos>() {
+            @Override
+            protected void updateItem(Produtos item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setStyle("");
+                } else if (isSelected()) {
+                    setStyle("-fx-background-color: #D3D3D3;"); 
+                } else {
+                    setStyle("");
+                }
+            }
+        });
     }
 
-    private void carregarTableProduto() {
+    private void inicializarComboBox() {
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        ArrayList<Categorias> categorias = categoriaDAO.read();
+        
+       boxFiltrar.getItems().clear();
+
+       for (Categorias categoria : categorias) {
+            boxFiltrar.getItems().add(categoria.getNomeCategoria());
+        }
+        
+        if (!categorias.isEmpty()) {
+            boxFiltrar.setValue(categorias.get(0).getNomeCategoria());
+            filtrarProdutos(); 
+        }
+    }
+
+	private void carregarTableProduto() {
         arrayProduto = FXCollections.observableArrayList(produtoDAO.read());
         tableRelatorioProduto.setItems(arrayProduto);
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -104,23 +137,41 @@ public class controllerRelatorioProduto implements Initializable {
         columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
         columnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoriaNome")); 
     }
-
     @FXML
     void OnbtnCadastros(ActionEvent event) {
         Main.changeScreen("cadastros");
     }
-
     @FXML
     void OnbtnClientes(ActionEvent event) {
         Main.changeScreen("clientes");
     }
-    
     @FXML
     void OnbtnExcluir(ActionEvent event) {
+    	int i = tableRelatorioProduto.getSelectionModel().getSelectedIndex();
+        if (i == -1) {
+            showAlert("Selecione um Produto para Excluir Primeiro!");
+            return;
+        }
+
+        Produtos produtoSelecionado = tableRelatorioProduto.getItems().get(i);
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Exclusão");
+        alert.setHeaderText("Você tem certeza que deseja excluir este produto?");
+        alert.setContentText("Produto: " + produtoSelecionado.getNome());
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    produtoDAO.delete(produtoSelecionado.getIdProduto());
+                    carregarTableProduto();
+                    showAlert("Produto excluído com sucesso!");
+                } catch (Exception e) {
+                    showAlert("Erro ao excluir o produtp: " + e.getMessage());
+                }
+            }
+        });
     } 
-    @FXML
-    void OnbtnProdutos (ActionEvent event) {
-    }
     @FXML
     void OnbtnFuncionarios(ActionEvent event) {
     }
@@ -134,45 +185,51 @@ public class controllerRelatorioProduto implements Initializable {
             Main.TelaCadastroProduto();
         }
     }
-
     @FXML
     void OnbtnFornecedores(ActionEvent event) {
         Main.changeScreen("fornecedores");
     }
-
     @FXML
     void OnbtnFuncionários(ActionEvent event) {
         Main.changeScreen("funcionarios");
     }
-
     @FXML
     void OnbtnInserir(ActionEvent event) throws IOException {
         produtoEditor = null;
         Main.TelaCadastroProduto();
     }
-
-
+    
     @FXML
     void OnPesquisarImagem(MouseEvent event) {
         try {
             String pesquisa = txtPesquisar.getText().trim();
-            
             String categoriaSelecionada = boxFiltrar.getValue();
             
-            if (pesquisa.isEmpty() && categoriaSelecionada != null) {
+            if (!pesquisa.isEmpty() && categoriaSelecionada != null) {
                 String idCategoria = new CategoriaDAO().obterIdCategoria(categoriaSelecionada);
-                if (idCategoria != null) {
-                    ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
-                    atualizarTabela(FXCollections.observableArrayList(produtosFiltrados));
-                } else {
-                    showAlert("Categoria não encontrada.");
-                    carregarTableProduto();
+                ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
+                
+                // Filtrar ainda mais pelos produtos que correspondem à pesquisa
+                ArrayList<Produtos> produtosResultado = new ArrayList<>();
+                for (Produtos produto : produtosFiltrados) {
+                    if (produto.getNome().toLowerCase().contains(pesquisa.toLowerCase())) {
+                        produtosResultado.add(produto);
+                    }
+                }
+                
+                atualizarTabela(FXCollections.observableArrayList(produtosResultado));
+                if (produtosResultado.isEmpty()) {
+                    showAlert("Nenhum produto encontrado.");
                 }
             } else if (!pesquisa.isEmpty()) {
+                // Se a pesquisa estiver preenchida, mas a categoria não for selecionada
                 arrayProduto = FXCollections.observableArrayList(produtoDAO.search(pesquisa));
                 atualizarTabela(arrayProduto);
+                if (arrayProduto.isEmpty()) {
+                    showAlert("Nenhum produto encontrado.");
+                }
             } else {
-                carregarTableProduto();
+                carregarTableProduto(); // Caso a pesquisa esteja vazia
             }
         } catch (Exception e) {
             showAlert("Erro ao pesquisar produtos: " + e.getMessage());
@@ -180,34 +237,10 @@ public class controllerRelatorioProduto implements Initializable {
     }
 
 
-    
-    @FXML
-    void OnbtnSair(ActionEvent event) {
-        Main.changeScreen("login");
-    }
-
-    @FXML
-    void OnbtnVendas(ActionEvent event) {
-        Main.changeScreen("vendas");
-    }
-
-    @FXML
-    void OnbtnVoltar(ActionEvent event) {
-        Main.changeScreen("main");
-    }
-
-    private void inicializarComboBox() {
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
-        ArrayList<Categorias> categorias = categoriaDAO.read();
-        
-        for (Categorias categoria : categorias) {
-            boxFiltrar.getItems().add(categoria.getNomeCategoria());
-        }
-      
-        if (!categorias.isEmpty()) {
-            boxFiltrar.setValue(categorias.get(0).getNomeCategoria()); 
-            filtrarProdutos();
-        }
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void filtrarProdutos() {
@@ -227,22 +260,4 @@ public class controllerRelatorioProduto implements Initializable {
         }
     }
 
-
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private String obterIdCategoria(String nomeCategoria) {
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
-        ArrayList<Categorias> categorias = categoriaDAO.read();
-        
-        for (Categorias categoria : categorias) {
-            if (categoria.getNomeCategoria().equals(nomeCategoria)) {
-                return categoria.getIdCategoria(); 
-            }
-        }
-        return null; 
-    }
 }
