@@ -151,12 +151,12 @@
         <TableColumn fx:id="columnEmail" prefWidth="144.8" style="-fx-background-color: #ffffff;" text="Email" />
         <TableColumn fx:id="columnDataNasc" prefWidth="108.0" style="-fx-background-color: #ffffff;" text="Data Nasc" />
         <TableColumn fx:id="columnDataCont" prefWidth="111.2" style="-fx-background-color: #ffffff;" text="Data Contratação" />
-        <TableColumn fx:id="columnCargo" prefWidth="112.8" text="Cargo" />
-        <TableColumn fx:id="columnSexo" prefWidth="88.0" text="Sexo" />
-        <TableColumn fx:id="columnCEP" prefWidth="84.8" text="CEP" />
-        <TableColumn fx:id="columnRua" prefWidth="72.0" text="Rua" />
-        <TableColumn fx:id="columnBairro" prefWidth="108.8" text="Bairro" />
-        <TableColumn fx:id="columnCidadeUF" prefWidth="95.2" text="Cidade/UF" />
+        <TableColumn fx:id="columnCargo" prefWidth="112.8" style="-fx-background-color: #ffffff;" text="Cargo" />
+        <TableColumn fx:id="columnSexo" prefWidth="88.0" style="-fx-background-color: #ffffff;" text="Sexo" />
+        <TableColumn fx:id="columnCEP" prefWidth="84.8" style="-fx-background-color: #ffffff;" text="CEP" />
+        <TableColumn fx:id="columnRua" prefWidth="72.0" style="-fx-background-color: #ffffff;" text="Rua" />
+        <TableColumn fx:id="columnBairro" prefWidth="108.8" style="-fx-background-color: #ffffff;" text="Bairro" />
+        <TableColumn fx:id="columnCidadeUF" prefWidth="95.2" style="-fx-background-color: #ffffff;" text="Cidade/UF" />
     </columns>
 </TableView>
 
