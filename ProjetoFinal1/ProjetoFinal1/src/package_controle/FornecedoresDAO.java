@@ -39,7 +39,11 @@ public class FornecedoresDAO {
         ArrayList<Fornecedores> fornecedores = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Fornecedores");
+            String sql = "SELECT f.*, e.cep, e.rua, e.numero, e.bairro, e.complemento, e.cidadeUF " +
+                         "FROM Fornecedores f " +
+                         "JOIN Enderecos e ON f.id_Endereco = e.idEndereco";
+            
+            stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -50,6 +54,14 @@ public class FornecedoresDAO {
                 f.setEmail(rs.getString("email"));
                 f.setTelefone(rs.getString("telefone"));
                 f.setId_Endereço(rs.getString("id_Endereco"));
+                
+                f.setCep(rs.getString("cep"));
+                f.setRua(rs.getString("rua"));
+                f.setNumero(rs.getString("numero"));
+                f.setBairro(rs.getString("bairro"));
+                f.setComplemento(rs.getString("complemento"));
+                f.setCidadeUF(rs.getString("cidadeUF"));
+                
                 fornecedores.add(f);
             }
 

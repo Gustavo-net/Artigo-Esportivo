@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import packageModel.Fornecedores;
+import packageModel.Funcionarios;
 import package_controle.FornecedoresDAO;
 
 public class controllerRelatorioFornecedor implements Initializable {
@@ -40,6 +41,21 @@ public class controllerRelatorioFornecedor implements Initializable {
 
     @FXML
     private TableColumn<Fornecedores, String> columnTelefone;
+    
+    @FXML
+    private TableColumn<Funcionarios, String> columnCEP;
+    
+    @FXML
+    private TableColumn<Funcionarios, String> columnNumero;
+    
+    @FXML
+    private TableColumn<Funcionarios, String> columnComplemento;
+    @FXML
+    private TableColumn<Funcionarios, String> columnRua;
+    @FXML
+    private TableColumn<Funcionarios, String> columnBairro;
+    @FXML
+    private TableColumn<Funcionarios, String> columnCidadeUF;
 
 //    @FXML
 //    private TableColumn<Fornecedores, String> columnEndereco;
@@ -73,7 +89,13 @@ public class controllerRelatorioFornecedor implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         carregarTableFornecedores();
-            
+        columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
+		 columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
+		    columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+		    columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
+		    columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+		    columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
+	
     }
 
     private void carregarTableFornecedores() {
