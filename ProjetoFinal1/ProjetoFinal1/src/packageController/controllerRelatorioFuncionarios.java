@@ -58,6 +58,12 @@ public class controllerRelatorioFuncionarios implements Initializable {
 
     @FXML
     private TableColumn<Funcionarios, String> columnCEP;
+    
+    @FXML
+    private TableColumn<Funcionarios, String> columnNumero;
+    
+    @FXML
+    private TableColumn<Funcionarios, String> columnComplemento;
 
     @FXML
     private TableColumn<Funcionarios, String> columnCPF;
@@ -112,7 +118,7 @@ public class controllerRelatorioFuncionarios implements Initializable {
 		columnDataCont.setCellValueFactory(new PropertyValueFactory<>("dataCont"));
 		columnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
 		columnSexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
-
+		
 		tableFuncionarios.setItems(arrayFuncionario);
 		
 	}
@@ -205,14 +211,21 @@ public class controllerRelatorioFuncionarios implements Initializable {
         alert.showAndWait();
     }
     
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		carregarTableFuncionarios();
-		columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
-		 columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
-		    columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
-		    columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
-	}
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFornecedor"));
+        columnCPF.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
+        columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
+        columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
+        columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+        columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
+        columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
+
+        carregarTableFuncionarios();
+    }
+
 
 }

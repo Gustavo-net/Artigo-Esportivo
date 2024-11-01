@@ -90,11 +90,11 @@ public class controllerRelatorioFornecedor implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         carregarTableFornecedores();
         columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
-		 columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
-		    columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
-		    columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
-		    columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
-		    columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
+		columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
+		columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+		columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
+		columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+		columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
 	
     }
 
@@ -110,7 +110,14 @@ public class controllerRelatorioFornecedor implements Initializable {
         columnCNPJ.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-    //    columnEndereco.setCellValueFactory(new PropertyValueFactory<>("id_Endereço"));
+        columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
+		 columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
+		    columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+		    columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
+		    columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+		    columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
+
+        //    columnEndereco.setCellValueFactory(new PropertyValueFactory<>("id_Endereço"));
     }
 
     @FXML

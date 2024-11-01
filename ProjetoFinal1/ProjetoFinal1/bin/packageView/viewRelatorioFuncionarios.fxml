@@ -155,7 +155,9 @@
         <TableColumn fx:id="columnSexo" prefWidth="88.0" style="-fx-background-color: #ffffff;" text="Sexo" />
         <TableColumn fx:id="columnCEP" prefWidth="84.8" style="-fx-background-color: #ffffff;" text="CEP" />
         <TableColumn fx:id="columnRua" prefWidth="72.0" style="-fx-background-color: #ffffff;" text="Rua" />
+            <TableColumn fx:id="columnNumero" prefWidth="72.0" style="-fx-background-color: #ffffff;" text="Numero" />
         <TableColumn fx:id="columnBairro" prefWidth="108.8" style="-fx-background-color: #ffffff;" text="Bairro" />
+            <TableColumn fx:id="columnComplemento" prefWidth="108.8" style="-fx-background-color: #ffffff;" text="Complemento" />
         <TableColumn fx:id="columnCidadeUF" prefWidth="95.2" style="-fx-background-color: #ffffff;" text="Cidade/UF" />
     </columns>
 </TableView>
