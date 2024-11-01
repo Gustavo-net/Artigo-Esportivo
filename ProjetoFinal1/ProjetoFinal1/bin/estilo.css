@@ -1,0 +1,6 @@
+@charset "ISO-8859-1";
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(241, 140, 22, 0.5);
+    -fx-text-fill: white;
+}

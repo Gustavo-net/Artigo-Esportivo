@@ -68,7 +68,7 @@ public class FornecedoresDAO {
         ArrayList<Fornecedores> fornecedores = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Fornecedores WHERE nomeForncedores LIKE ?"); 
+            stmt = con.prepareStatement("SELECT * FROM Fornecedores WHERE nomeFornecedor LIKE ?"); 
             stmt.setString(1, "%" + string + "%");
             rs = stmt.executeQuery();
 

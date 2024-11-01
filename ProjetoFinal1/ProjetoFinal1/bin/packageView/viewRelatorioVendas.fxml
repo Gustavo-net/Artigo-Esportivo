@@ -143,7 +143,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" style="-fx-background-color: #ffffff;">
+      <TableView layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" style="-fx-background-color: #ffffff;" stylesheets="@../estilo.css">
         <columns>
           <TableColumn prefWidth="75.0" style="-fx-background-color: #ffffff;" text="C1" />
             <TableColumn prefWidth="75.0" style="-fx-background-color: #ffffff;" text="C1" />

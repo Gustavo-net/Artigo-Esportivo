@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -48,6 +49,8 @@ public class controllerRelatorioClientes implements Initializable {
     private Button btnEditar;
     @FXML
     private Button btnInserir;
+    @FXML
+    private Button btnExcluir;
 
     @FXML
     private ImageView lupaPesquisa;
@@ -70,7 +73,7 @@ public class controllerRelatorioClientes implements Initializable {
     private ClienteDAO clienteDAO = new ClienteDAO();
 
     @SuppressWarnings("exports")
-	public static Clientes clienteEditor = new Clientes();
+    public static Clientes clienteEditor = new Clientes();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -84,15 +87,6 @@ public class controllerRelatorioClientes implements Initializable {
         columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        atualizarTabela(arrayCliente);
-    }
-
-    private void atualizarTabela(ObservableList<Clientes> observableList) {
-        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
-        columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-
     }
 
     @FXML
@@ -105,6 +99,7 @@ public class controllerRelatorioClientes implements Initializable {
             
             try {
                 Main.TelaCcadastroClientes();
+                carregarTableCliente(); 
             } catch (IOException e) {
                 e.printStackTrace();
                 showAlert("Erro ao abrir a tela de edição!");
@@ -112,16 +107,15 @@ public class controllerRelatorioClientes implements Initializable {
         }
     }
 
-
     @FXML
     void OnbtnInserir(ActionEvent event) throws IOException {
         clienteEditor = null;
-      Main.TelaCcadastroClientes();
+        Main.TelaCcadastroClientes();
     }
 
     @FXML
     void OnPesquisarImagem(MouseEvent event) {
-    	String pesquisa = txtPesquisar.getText().trim();
+        String pesquisa = txtPesquisar.getText().trim();
         if (pesquisa.isEmpty()) {
             carregarTableCliente();
         } else {
@@ -130,6 +124,7 @@ public class controllerRelatorioClientes implements Initializable {
             tableRelatorioCliente.refresh();
         }
     }
+
     @FXML
     void OnbtnSair(ActionEvent event) {
         Main.changeScreen("login");
@@ -164,10 +159,36 @@ public class controllerRelatorioClientes implements Initializable {
     void OnbtnVendas(ActionEvent event) {
         Main.changeScreen("vendas");
     }
+
     @FXML
     void OnbtnExcluir(ActionEvent event) {
+        int i = tableRelatorioCliente.getSelectionModel().getSelectedIndex();
+        if (i == -1) {
+            showAlert("Selecione um Cliente para Excluir Primeiro!");
+            return;
+        }
+
+        Clientes clienteSelecionado = tableRelatorioCliente.getItems().get(i);
         
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Exclusão");
+        alert.setHeaderText("Você tem certeza que deseja excluir este cliente?");
+        alert.setContentText("Cliente: " + clienteSelecionado.getNomeCliente());
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    clienteDAO.delete(clienteSelecionado.getIdCliente());
+                    carregarTableCliente(); 
+                    showAlert("Cliente excluído com sucesso!");
+                } catch (Exception e) {
+                    showAlert("Erro ao excluir o cliente: " + e.getMessage());
+                }
+            }
+        });
     }
+
+
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
