@@ -87,8 +87,11 @@ public class controllerRelatorioFornecedor implements Initializable {
     public static Fornecedores FornecedoresEditor = new Fornecedores();
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        carregarTableFornecedores();
+    public void initialize(URL arg0, ResourceBundle arg1) {        
+        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFornecedor"));
+        columnCNPJ.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
+        columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
 		columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
 		columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
@@ -96,6 +99,8 @@ public class controllerRelatorioFornecedor implements Initializable {
 		columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
 		columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
 	
+        carregarTableFornecedores();
+
     }
 
     private void carregarTableFornecedores() {

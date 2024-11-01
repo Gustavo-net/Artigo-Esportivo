@@ -41,8 +41,11 @@ public class ClienteDAO {
         ArrayList<Clientes> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Clientes");
-            rs = stmt.executeQuery();
+        	String sql = "SELECT f.*, e.cep, e.rua, e.numero, e.bairro, e.complemento, e.cidadeUF " +
+                    "FROM Clientes f " +
+                    "JOIN Enderecos e ON f.id_Endereco = e.idEndereco";
+        	stmt = con.prepareStatement(sql);
+        	rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Clientes c = new Clientes();
@@ -54,6 +57,12 @@ public class ClienteDAO {
                 c.setEmail(rs.getString("email"));
                 c.setTelefone(rs.getString("telefone"));
 
+                c.setCep(rs.getString("cep"));
+                c.setRua(rs.getString("rua"));
+                c.setNumero(rs.getString("numero"));
+                c.setBairro(rs.getString("bairro"));
+                c.setComplemento(rs.getString("complemento"));
+                c.setCidadeUF(rs.getString("cidadeUF"));
                 clientes.add(c);
             }
         } catch (SQLException e) {

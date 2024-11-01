@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerMain">
+<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.ControllerMain">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="474.0" layoutX="232.0" layoutY="165.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="652.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="121.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="940.0" />
@@ -116,10 +116,10 @@
       <TableView fx:id="ViewProdutos" layoutX="232.0" layoutY="372.0" prefHeight="263.0" prefWidth="652.0" style="-fx-background-color: #ffffff; -fx-opacity: 0.90; -fx-border-color: ##f18c16;">
         <columns>
           <TableColumn fx:id="columnNome" prefWidth="186.40003967285156" style="-fx-background-color: #ffffff;" text="Nome do Produto" />
-            <TableColumn fx:id="columnCodigo" prefWidth="101.5999755859375" style="-fx-background-color: #ffffff;" text="Codigo" />
-            <TableColumn fx:id="columnMarca" prefWidth="84.800048828125" style="-fx-background-color: #ffffff;" text="Marca" />
-            <TableColumn fx:id="columnCategoria" prefWidth="65.60003662109375" style="-fx-background-color: #ffffff;" text="Categoria" />
-            <TableColumn fx:id="columnQuantidade" prefWidth="212.0" style="-fx-background-color: #ffffff;" text="Quantidade do Estoque" />
+            <TableColumn fx:id="columnCodigo" prefWidth="131.19998168945312" style="-fx-background-color: #ffffff;" text="Codigo" />
+            <TableColumn fx:id="columnMarca" prefWidth="102.39996337890625" style="-fx-background-color: #ffffff;" text="Marca" />
+            <TableColumn fx:id="columnCategoria" prefWidth="105.60003662109375" style="-fx-background-color: #ffffff;" text="Categoria" />
+            <TableColumn fx:id="columnQuantidade" prefWidth="122.4000244140625" style="-fx-background-color: #ffffff;" text="Qunt Estoque" />
         </columns>
       </TableView>
       <Button fx:id="btnClientes" layoutX="23.0" layoutY="269.0" mnemonicParsing="false" onAction="#OnbtnClientes" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
@@ -153,5 +153,35 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
+      <ImageView fitHeight="106.0" fitWidth="192.0" layoutX="454.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Pictures/Screenshots/Captura%20de%20tela%202024-11-01%20172733.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="244.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Pictures/Screenshots/Captura%20de%20tela%202024-11-01%20172744.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="192.0" layoutX="664.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Pictures/Screenshots/Captura%20de%20tela%202024-11-01%20172815.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="268.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20" wrappingWidth="39.85487747192383">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="477.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R$ 22.000" wrappingWidth="102.40000000000003">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="688.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="120" wrappingWidth="39.85487747192383">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -65,7 +65,18 @@ public class controllerRelatorioClientes implements Initializable {
     private TableColumn<Clientes, String> columnTelefone;
     @FXML
     private TableColumn<Clientes, String> columnDataNasc;
-
+    @FXML
+    private TableColumn<Clientes, String> columnCEP;
+    @FXML
+    private TableColumn<Clientes, String> columnRua;
+    @FXML
+    private TableColumn<Clientes, String> columnBairro;
+    @FXML
+    private TableColumn<Clientes, String> columnCidadeUF;
+    @FXML
+    private TableColumn<Clientes, String> columnComplemento;
+    @FXML
+    private TableColumn<Clientes, String> columnNumero;
     @FXML
     private TextField txtPesquisar;
 
@@ -77,6 +88,17 @@ public class controllerRelatorioClientes implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+    	 columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
+         columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+         columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
+         columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
+         columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+         columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
+         columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+         columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
+    	
         carregarTableCliente();
     }
 
