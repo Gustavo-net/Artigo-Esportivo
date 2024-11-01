@@ -124,7 +124,6 @@
 		<Button fx:id="btnClientes" layoutX="23.0" layoutY="269.0" mnemonicParsing="false" onAction="#OnbtnClientes" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
 		<Button fx:id="btnFornecedores" layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="121.0" text="Button" />
 		<Button fx:id="btnFuncionários" layoutX="23.0" layoutY="346.0" mnemonicParsing="false" onAction="#OnbtnFuncionários" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
-		<Button fx:id="btnVendas" layoutX="11.0" layoutY="426.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
 		<Button fx:id="btnInserir" layoutX="241.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnbtnInserir" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" text="Adicionar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />

@@ -56,9 +56,6 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	@FXML
 	private Button btnVoltar;
 
-	@FXML
-    private TableColumn<Funcionarios, String> columnBairro;
-
     @FXML
     private TableColumn<Funcionarios, String> columnCEP;
 
@@ -70,9 +67,6 @@ public class controllerRelatorioFuncionarios implements Initializable {
 
     @FXML
     private TableView<Funcionarios> tableFuncionarios;
-
-    @FXML
-    private TableColumn<Funcionarios, String> columnCidadeUF;
 
     @FXML
     private TableColumn<Funcionarios, String> columnDataCont;
@@ -87,13 +81,16 @@ public class controllerRelatorioFuncionarios implements Initializable {
     private TableColumn<Funcionarios, String> columnNome;
 
     @FXML
-    private TableColumn<Funcionarios, String> columnRua;
-
-    @FXML
     private TableColumn<Funcionarios, String> columnSexo;
 
     @FXML
     private TableColumn<Funcionarios, String> columnTelefone;
+    @FXML
+    private TableColumn<Funcionarios, String> columnRua;
+    @FXML
+    private TableColumn<Funcionarios, String> columnBairro;
+    @FXML
+    private TableColumn<Funcionarios, String> columnCidadeUF;
 
 	private ObservableList<Funcionarios> arrayFuncionario;
 	private FuncionarioDAO funcionariosDAO = new FuncionarioDAO();
@@ -212,6 +209,10 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		carregarTableFuncionarios();
+		columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
+		 columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
+		    columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+		    columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
 	}
 
 }

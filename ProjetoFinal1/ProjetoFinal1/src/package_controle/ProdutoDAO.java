@@ -67,7 +67,7 @@ public class ProdutoDAO {
 
 
 
-    public ArrayList<Produtos> search(String pesquisa) {
+    public static ArrayList<Produtos> search(String pesquisa) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;

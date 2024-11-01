@@ -46,7 +46,10 @@ public class FuncionarioDAO {
         ArrayList<Funcionarios> funcionarios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Funcionarios");
+            String sql = "SELECT f.*, e.cep, e.rua, e.numero, e.bairro, e.complemento, e.cidadeUF " +
+                         "FROM Funcionarios f " +
+                         "JOIN Enderecos e ON f.id_Endereco = e.idEndereco";
+            stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -62,6 +65,14 @@ public class FuncionarioDAO {
                 f.setSexo(rs.getString("sexo"));
                 f.setSenha(rs.getString("senha"));
                 f.setId_Endereço(rs.getString("id_Endereco"));
+                
+                f.setCep(rs.getString("cep"));
+                f.setRua(rs.getString("rua"));
+                f.setNumero(rs.getString("numero"));
+                f.setBairro(rs.getString("bairro"));
+                f.setComplemento(rs.getString("complemento"));
+                f.setCidadeUF(rs.getString("cidadeUF"));
+
                 funcionarios.add(f);
             }
 
@@ -72,6 +83,7 @@ public class FuncionarioDAO {
         }
         return funcionarios;
     }
+
 
     public static ArrayList<Funcionarios> search(String string) {
         Connection con = ConnectionDatabase.getConnection();

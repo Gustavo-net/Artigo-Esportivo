@@ -16,15 +16,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import packageModel.Categorias;
-import packageModel.Clientes;
 import packageModel.Produtos;
-import package_controle.CategoriaDAO;
 import package_controle.ProdutoDAO;
 
 public class controllerRelatorioProduto implements Initializable {
@@ -59,8 +55,6 @@ public class controllerRelatorioProduto implements Initializable {
     private TableColumn<Produtos, String> columnDescricao;
     @FXML
     private TableColumn<Produtos, String> columnEstoqueAtual;
-//    @FXML
-//    private TableColumn<Produtos, String> columnId;
     @FXML
     private TableColumn<Produtos, String> columnMarca;
     @FXML
@@ -81,73 +75,74 @@ public class controllerRelatorioProduto implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         carregarTableProduto();
         inicializarComboBox();
-        boxFiltrar.setOnAction(event -> filtrarProdutos());
-
-        tableRelatorioProduto.setRowFactory(tv -> new TableRow<Produtos>() {
-            @Override
-            protected void updateItem(Produtos item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null || empty) {
-                    setStyle("");
-                } else if (isSelected()) {
-                    setStyle("-fx-background-color: #D3D3D3;"); 
-                } else {
-                    setStyle("");
-                }
-            }
-        });
     }
 
     private void inicializarComboBox() {
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
-        ArrayList<Categorias> categorias = categoriaDAO.read();
+        boxFiltrar.getItems().clear();
         
-       boxFiltrar.getItems().clear();
+        String[] categ = {
+            "Roupas Masculinas",
+            "Roupas Femininas",
+            "Calçados Masculinos",
+            "Calçados Femininos",
+            "Acessórios de Esporte",
+            "Equipamentos de Academia",
+            "Bolsas e Mochilas Esportivas",
+            "Garrafas e Squeezes",
+            "Suplementos e Nutrição",
+            "Proteção e Segurança",
+            "Natação",
+            "Ciclismo",
+            "Esportes Radicais",
+            "Futebol",
+            "Basquete"
+        };
 
-       for (Categorias categoria : categorias) {
-            boxFiltrar.getItems().add(categoria.getNomeCategoria());
-        }
-        
-        if (!categorias.isEmpty()) {
-            boxFiltrar.setValue(categorias.get(0).getNomeCategoria());
-            filtrarProdutos(); 
+        for (String categoria : categ) {
+            boxFiltrar.getItems().add(categoria);
         }
     }
 
-	private void carregarTableProduto() {
+    private void carregarTableProduto() {
         arrayProduto = FXCollections.observableArrayList(produtoDAO.read());
-        tableRelatorioProduto.setItems(arrayProduto);
-        columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-        columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
-        columnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
-        columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
-        columnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoriaNome")); 
         atualizarTabela(arrayProduto);
     }
 
-    private void atualizarTabela(ObservableList<Produtos> observableList) {
-//    	columnId.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
+    private void atualizarTabela(ObservableList<Produtos> produtos) {
+        tableRelatorioProduto.setItems(produtos);
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         columnMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         columnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         columnPrecoUn.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
         columnEstoqueAtual.setCellValueFactory(new PropertyValueFactory<>("estoqueDisp"));
-        columnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoriaNome")); 
+        columnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoriaNome"));
     }
+
     @FXML
     void OnbtnCadastros(ActionEvent event) {
         Main.changeScreen("cadastros");
     }
     @FXML
+    void OnbtnFornecedores(ActionEvent event) {
+        Main.changeScreen("fornecedores");
+    }
+    @FXML
+    void OnbtnSair(ActionEvent event) {
+        Main.changeScreen("login");
+    }
+    @FXML
+    void OnbtnFuncionários(ActionEvent event) {
+        Main.changeScreen("funcionarios");
+    }
+    @FXML
     void OnbtnClientes(ActionEvent event) {
         Main.changeScreen("clientes");
     }
+
     @FXML
     void OnbtnExcluir(ActionEvent event) {
-    	int i = tableRelatorioProduto.getSelectionModel().getSelectedIndex();
+        int i = tableRelatorioProduto.getSelectionModel().getSelectedIndex();
         if (i == -1) {
             showAlert("Selecione um Produto para Excluir Primeiro!");
             return;
@@ -167,14 +162,12 @@ public class controllerRelatorioProduto implements Initializable {
                     carregarTableProduto();
                     showAlert("Produto excluído com sucesso!");
                 } catch (Exception e) {
-                    showAlert("Erro ao excluir o produtp: " + e.getMessage());
+                    showAlert("Erro ao excluir o produto: " + e.getMessage());
                 }
             }
         });
-    } 
-    @FXML
-    void OnbtnFuncionarios(ActionEvent event) {
     }
+
     @FXML
     void OnbtnEditar(ActionEvent event) throws IOException {
         if (tableRelatorioProduto.getSelectionModel().getSelectedIndex() == -1) {
@@ -185,33 +178,24 @@ public class controllerRelatorioProduto implements Initializable {
             Main.TelaCadastroProduto();
         }
     }
-    @FXML
-    void OnbtnFornecedores(ActionEvent event) {
-        Main.changeScreen("fornecedores");
-    }
-    @FXML
-    void OnbtnFuncionários(ActionEvent event) {
-        Main.changeScreen("funcionarios");
-    }
+    
     @FXML
     void OnbtnInserir(ActionEvent event) throws IOException {
         produtoEditor = null;
         Main.TelaCadastroProduto();
     }
-    
+
     @FXML
     void OnPesquisarImagem(MouseEvent event) {
         try {
             String pesquisa = txtPesquisar.getText().trim();
-            String categoriaSelecionada = boxFiltrar.getValue();
             
-            if (!pesquisa.isEmpty() && categoriaSelecionada != null) {
-                String idCategoria = new CategoriaDAO().obterIdCategoria(categoriaSelecionada);
-                ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
-                
-                // Filtrar ainda mais pelos produtos que correspondem à pesquisa
+            if (!pesquisa.isEmpty()) {
                 ArrayList<Produtos> produtosResultado = new ArrayList<>();
-                for (Produtos produto : produtosFiltrados) {
+                
+                // Simula a pesquisa em produtos fictícios
+                for (Produtos produto : arrayProduto) {
+                    // Verifica se o nome do produto contém a pesquisa
                     if (produto.getNome().toLowerCase().contains(pesquisa.toLowerCase())) {
                         produtosResultado.add(produto);
                     }
@@ -221,43 +205,17 @@ public class controllerRelatorioProduto implements Initializable {
                 if (produtosResultado.isEmpty()) {
                     showAlert("Nenhum produto encontrado.");
                 }
-            } else if (!pesquisa.isEmpty()) {
-                // Se a pesquisa estiver preenchida, mas a categoria não for selecionada
-                arrayProduto = FXCollections.observableArrayList(produtoDAO.search(pesquisa));
-                atualizarTabela(arrayProduto);
-                if (arrayProduto.isEmpty()) {
-                    showAlert("Nenhum produto encontrado.");
-                }
             } else {
-                carregarTableProduto(); // Caso a pesquisa esteja vazia
+                carregarTableProduto(); // Carrega todos os produtos se a pesquisa estiver vazia
             }
         } catch (Exception e) {
             showAlert("Erro ao pesquisar produtos: " + e.getMessage());
         }
     }
 
-
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    private void filtrarProdutos() {
-        String categoriaSelecionada = boxFiltrar.getValue();
-        if (categoriaSelecionada == null || categoriaSelecionada.isEmpty()) {
-            carregarTableProduto(); 
-            return;
-        }
-
-        String idCategoria = new CategoriaDAO().obterIdCategoria(categoriaSelecionada);
-        if (idCategoria != null) {
-            ArrayList<Produtos> produtosFiltrados = produtoDAO.buscarProdutosPorCategoria(idCategoria);
-            atualizarTabela(FXCollections.observableArrayList(produtosFiltrados));
-        } else {
-            showAlert("Categoria não encontrada.");
-            carregarTableProduto(); 
-        }
-    }
-
 }
