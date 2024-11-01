@@ -143,14 +143,14 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-<TableView fx:id="tableFuncionarios" layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" stylesheets="@../estilo.css">
+<TableView fx:id="tableFuncionarios" layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" style="-fx-background-color: #ffffff;" stylesheets="@../estilo.css">
     <columns>
-        <TableColumn fx:id="columnNome" prefWidth="136.0" text="Nome" />
-        <TableColumn fx:id="columnCPF" prefWidth="104.0" text="CPF" />
-        <TableColumn fx:id="columnTelefone" prefWidth="108.0" text="Telefone" />
-        <TableColumn fx:id="columnEmail" prefWidth="144.8" text="Email" />
-        <TableColumn fx:id="columnDataNasc" prefWidth="108.0" text="Data Nasc" />
-        <TableColumn fx:id="columnDataCont" prefWidth="111.2" text="Data Contratação" />
+        <TableColumn fx:id="columnNome" prefWidth="136.0" style="-fx-background-color: #ffffff;" text="Nome" />
+        <TableColumn fx:id="columnCPF" prefWidth="104.0" style="-fx-background-color: #ffffff;" text="CPF" />
+        <TableColumn fx:id="columnTelefone" prefWidth="108.0" style="-fx-background-color: #ffffff;" text="Telefone" />
+        <TableColumn fx:id="columnEmail" prefWidth="144.8" style="-fx-background-color: #ffffff;" text="Email" />
+        <TableColumn fx:id="columnDataNasc" prefWidth="108.0" style="-fx-background-color: #ffffff;" text="Data Nasc" />
+        <TableColumn fx:id="columnDataCont" prefWidth="111.2" style="-fx-background-color: #ffffff;" text="Data Contratação" />
         <TableColumn fx:id="columnCargo" prefWidth="112.8" text="Cargo" />
         <TableColumn fx:id="columnSexo" prefWidth="88.0" text="Sexo" />
         <TableColumn fx:id="columnCEP" prefWidth="84.8" text="CEP" />
