@@ -23,6 +23,8 @@ public class Main extends Application {
 	private static Scene Produtos;
 	private static Scene Fornecedores;
 	private static Scene Cadastros;
+	private static Scene Vendas;
+
 
 	@Override
 	public void start( Stage primaryStage) {
@@ -90,6 +92,9 @@ public class Main extends Application {
 		} else if (tela.equals("fornecedores")) {
 			stage.setScene(Fornecedores);
 			stage.centerOnScreen();
+		} else if (tela.equals("vendas")) {
+			stage.setScene(Vendas);
+			stage.centerOnScreen();
 		} else if (tela.equals("cadastros")) {
 			stage.setScene(Cadastros);
 		}
@@ -153,6 +158,21 @@ public class Main extends Application {
 		cadastroFuncionarios.initModality(Modality.WINDOW_MODAL);
 		cadastroFuncionarios.setScene(scene3);
 		cadastroFuncionarios.showAndWait();
+	}
+	
+	private static Stage cadastroVenda;
+	
+	public static void TelaCadastroVenda() throws IOException {
+		FXMLLoader VendaCadastro = new FXMLLoader();
+		VendaCadastro.setLocation(Main.class.getResource("/packageView/viewRegistrarVenda.fxml"));
+		Parent cadastrarVenda = VendaCadastro.load();
+		Scene scene4 = new Scene(cadastrarVenda);
+		
+		cadastroVenda = new Stage();
+		cadastroVenda.setTitle("Ponto de Venda - Artigos Esportivos");
+		cadastroVenda.initModality(Modality.WINDOW_MODAL);
+		cadastroVenda.setScene(scene4);
+		cadastroVenda.showAndWait();
 	}
 	public static void main(String[] args) {
 		

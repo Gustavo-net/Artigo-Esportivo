@@ -54,7 +54,7 @@ public class ControllerMain {
     }
 
     private void carregarProdutos() {
-        ArrayList<ProdutoBaixoEstoque> produtosBaixoEstoque = baixoEstoqueDAO.read(); // Chamar o DAO
+        ArrayList<ProdutoBaixoEstoque> produtosBaixoEstoque = baixoEstoqueDAO.read(); 
         ViewProdutos.setItems(FXCollections.observableArrayList(produtosBaixoEstoque));
     }
 
@@ -67,7 +67,7 @@ public class ControllerMain {
     void OnbtnFornecedores(ActionEvent event) {
         Main.changeScreen("fornecedores");
     }
-
+    
     @FXML
     void OnbtnFuncionários(ActionEvent event) {
         Main.changeScreen("funcionarios");
@@ -75,7 +75,7 @@ public class ControllerMain {
 
     @FXML
     void OnbtnVendas(ActionEvent event) {
-        // Implementar funcionalidade para vendas
+        Main.changeScreen("vendas");
     }
 
     @FXML

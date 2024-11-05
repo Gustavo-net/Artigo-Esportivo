@@ -5,124 +5,98 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-import packageConnection.ConnectionDatabase;
 import packageModel.Pagamentos;
 
 public class PagamentoDAO {
+    
+    private Connection connection;
 
-    public void create(Pagamentos pag) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
+    public PagamentoDAO(Connection connection) {
+        this.connection = connection;
+    }
 
-        try {
-            stmt = con.prepareStatement("INSERT INTO Pagamentos (idPagamento, metodoPagamento, statusPagamento, dataPagamento) VALUES (?, ?, ?, ?)");
-            stmt.setString(1, pag.getIdPagamento());
-            stmt.setString(2, pag.getMetodoPagamento());
-            stmt.setString(3, pag.getStatusPagamento());
-            stmt.setString(4, pag.getDataPagamento());
-
+    public void adicionarPagamento(Pagamentos pagamento) {
+        String sql = "INSERT INTO Pagamentos (idPagamento, metodoPagamento, valor, parcelas, id_Venda, status) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, pagamento.getIdPagamento());
+            stmt.setString(2, pagamento.getMetodoPagamento());
+            stmt.setDouble(3, pagamento.getValor());
+            stmt.setInt(4, pagamento.getParcelas());
+            stmt.setString(5, pagamento.getIdVenda());
+            stmt.setString(6, pagamento.getStatus());
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
         }
     }
 
-    public ArrayList<Pagamentos> read() {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        ArrayList<Pagamentos> pagamentos = new ArrayList<>();
-
-        try {
-            stmt = con.prepareStatement("SELECT * FROM Pagamentos");
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Pagamentos pag = new Pagamentos();
-                pag.setIdPagamento(rs.getString("idPagamento"));
-                pag.setMetodoPagamento(rs.getString("metodoPagamento"));
-                pag.setStatusPagamento(rs.getString("statusPagamento"));
-                pag.setDataPagamento(rs.getString("dataPagamento"));
-                pagamentos.add(pag);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt, rs);
-        }
-        return pagamentos;
-    }
-
-    public ArrayList<Pagamentos> search(String string) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        ArrayList<Pagamentos> pagamentos = new ArrayList<>();
-
-        try {
-            stmt = con.prepareStatement("SELECT * FROM Pagamentos WHERE metodoPagamento LIKE ?");
-            stmt.setString(1, "%" + string + "%");
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Pagamentos pag = new Pagamentos();
-                pag.setIdPagamento(rs.getString("idPagamento"));
-                pag.setMetodoPagamento(rs.getString("metodoPagamento"));
-                pag.setStatusPagamento(rs.getString("statusPagamento"));
-                pag.setDataPagamento(rs.getString("dataPagamento"));
-                pagamentos.add(pag);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt, rs);
-        }
-        return pagamentos;
-    }
-
-    public void update(Pagamentos pag) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement("UPDATE Pagamentos SET metodoPagamento = ?, statusPagamento = ?, dataPagamento = ? WHERE idPagamento = ?");
-            stmt.setString(1, pag.getMetodoPagamento());
-            stmt.setString(2, pag.getStatusPagamento());
-            stmt.setString(3, pag.getDataPagamento());
-            stmt.setString(4, pag.getIdPagamento());
-
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
-
-    public void delete(String idPagamento) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement("DELETE FROM Pagamentos WHERE idPagamento = ?");
+    public Pagamentos buscarPagamentoPorId(String idPagamento) {
+        String sql = "SELECT * FROM Pagamentos WHERE idPagamento = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, idPagamento);
-
-            stmt.executeUpdate();
-
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Pagamentos(
+                    rs.getString("idPagamento"),
+                    rs.getString("metodoPagamento"),
+                    rs.getDouble("valor"),
+                    rs.getInt("parcelas"),
+                    rs.getString("id_Venda"),
+                    rs.getString("status")
+                );
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Erro ao excluir o pagamento: " + e.getMessage(), e);
-
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
         }
+        return null;
+    }
+
+    public void atualizarPagamento(Pagamentos pagamento) {
+        String sql = "UPDATE Pagamentos SET metodoPagamento = ?, valor = ?, parcelas = ?, id_Venda = ?, status = ? WHERE idPagamento = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, pagamento.getMetodoPagamento());
+            stmt.setDouble(2, pagamento.getValor());
+            stmt.setInt(3, pagamento.getParcelas());
+            stmt.setString(4, pagamento.getIdVenda());
+            stmt.setString(5, pagamento.getStatus());
+            stmt.setString(6, pagamento.getIdPagamento());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletarPagamento(String idPagamento) {
+        String sql = "DELETE FROM Pagamentos WHERE idPagamento = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, idPagamento);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Pagamentos> listarPagamentos() {
+        List<Pagamentos> pagamentos = new ArrayList<>();
+        String sql = "SELECT * FROM Pagamentos";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Pagamentos pagamento = new Pagamentos(
+                    rs.getString("idPagamento"),
+                    rs.getString("metodoPagamento"),
+                    rs.getDouble("valor"),
+                    rs.getInt("parcelas"),
+                    rs.getString("id_Venda"),
+                    rs.getString("status")
+                );
+                pagamentos.add(pagamento);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pagamentos;
     }
 }
-
