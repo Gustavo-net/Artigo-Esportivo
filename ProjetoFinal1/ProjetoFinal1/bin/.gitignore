@@ -1,9 +1,6 @@
-/application/
-/estilo.css
-/packageConnection/
-/packageController/
-/packageIcons/
-/packageModel/
-/packageView/
-/package_controle/
 /module-info.class
+/packageController/
+/packageModel/
+/package_controle/
+/application/
+/packageView/

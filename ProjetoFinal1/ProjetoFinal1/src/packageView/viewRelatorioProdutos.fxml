@@ -191,5 +191,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
+      <Button fx:id="btnVendas" layoutX="22.0" layoutY="427.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="29.0" prefWidth="88.0" text="Button" />
 	</children>
 </AnchorPane>

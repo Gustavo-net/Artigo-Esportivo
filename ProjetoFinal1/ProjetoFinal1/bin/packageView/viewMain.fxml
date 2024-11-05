@@ -125,7 +125,6 @@
       <Button fx:id="btnClientes" layoutX="23.0" layoutY="269.0" mnemonicParsing="false" onAction="#OnbtnClientes" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
       <Button fx:id="btnFornecedores" layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="121.0" text="Button" />
       <Button fx:id="btnFuncionários" layoutX="23.0" layoutY="346.0" mnemonicParsing="false" onAction="#OnbtnFuncionários" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
-      <Button fx:id="btnVendas" layoutX="25.0" layoutY="419.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
       <Text fill="WHITE" layoutX="255.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" wrappingWidth="215.4234619140625">
          <font>
             <Font name="System Bold" size="22.0" />
@@ -183,5 +182,6 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
+      <Button fx:id="btnVendas" layoutX="20.0" layoutY="419.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
    </children>
 </AnchorPane>

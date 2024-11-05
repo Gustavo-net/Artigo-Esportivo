@@ -124,6 +124,10 @@ public class controllerRelatorioProduto implements Initializable {
         Main.changeScreen("cadastros");
     }
     @FXML
+    void OnbtnVendas(ActionEvent event) {
+        Main.changeScreen("vendas");
+    }
+    @FXML
     void OnbtnFornecedores(ActionEvent event) {
         Main.changeScreen("fornecedores");
     }

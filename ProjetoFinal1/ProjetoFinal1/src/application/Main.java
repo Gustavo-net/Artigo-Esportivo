@@ -56,7 +56,10 @@ public class Main extends Application {
 			 Parent fxmlFornecedores = 
 			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioFornecedores.fxml"));
 			 Fornecedores = new Scene(fxmlFornecedores);
-
+			 
+			 Parent fxmlVendas = 
+			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioVendas.fxml"));
+			 Vendas = new Scene(fxmlVendas);
 			// Parent fxmlRegistrarVenda = FXMLLoader
 			// .load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
 			// RegistrarVendas = new Scene(fxmlRegistrarVenda);
@@ -164,7 +167,7 @@ public class Main extends Application {
 	
 	public static void TelaCadastroVenda() throws IOException {
 		FXMLLoader VendaCadastro = new FXMLLoader();
-		VendaCadastro.setLocation(Main.class.getResource("/packageView/viewRegistrarVenda.fxml"));
+		VendaCadastro.setLocation(Main.class.getResource("/packageView/viewPDV.fxml"));
 		Parent cadastrarVenda = VendaCadastro.load();
 		Scene scene4 = new Scene(cadastrarVenda);
 		
