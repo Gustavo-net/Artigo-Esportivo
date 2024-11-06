@@ -71,7 +71,7 @@
 				<Image url="@../packageIcons/iconVendasPreto.png" />
 			</image>
 		</ImageView>
-		<Text fill="#333333" layoutX="47.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastros" wrappingWidth="74.1820068359375">
+		<Text fill="#333333" layoutX="47.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" wrappingWidth="74.1820068359375">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>

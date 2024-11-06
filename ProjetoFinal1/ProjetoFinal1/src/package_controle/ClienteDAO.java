@@ -10,7 +10,7 @@ import packageConnection.ConnectionDatabase;
 import packageModel.Clientes;
 
 public class ClienteDAO {
-	public static void create(Clientes c) {
+	public void create(Clientes c) {
 	    if (validarExistente(c.getCpf())) {
 	        throw new IllegalArgumentException("Cliente com CPF " + c.getCpf() + " já existe.");
 	    }

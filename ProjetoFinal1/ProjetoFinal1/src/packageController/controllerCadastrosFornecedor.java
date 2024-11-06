@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import packageModel.Enderecos;
 import packageModel.Fornecedores;
+import packageModel.Funcionarios;
 import package_controle.EnderecoDAO;
 import package_controle.FornecedoresDAO;
 
@@ -55,30 +56,26 @@ public class controllerCadastrosFornecedor implements Initializable {
     @FXML
     private TextField txtTelefone;
 
-    private FornecedoresDAO fornecedoresDAO = new FornecedoresDAO();
     private EnderecoDAO enderecoDAO = new EnderecoDAO();
+    private FornecedoresDAO fornecedoresDAO = new FornecedoresDAO();
+
 
     @FXML
     public void OnbtnAddFornecedor(ActionEvent event) {
-        // Verificar se todos os campos obrigatórios estão preenchidos
         if (validarCampos()) {
             Enderecos endereco = new Enderecos();
             preencherEndereco(endereco);
-
-            // Criar o endereço
-            enderecoDAO.create(endereco);
+            
+            // Adiciona o endereço e obtém o ID
+            enderecoDAO.create(endereco); // Supondo que este método não precise de retorno
 
             Fornecedores fornecedor = new Fornecedores();
-            preencherFornecedor(fornecedor, endereco.getIdEndereço());
+            preencherFornecedor(fornecedor, endereco.getIdEndereço()); // Passa o ID do endereço
 
-            // Criar ou atualizar fornecedor
-            if (controllerRelatorioFornecedor.FornecedoresEditor == null) {
-                fornecedoresDAO.create(fornecedor);
-                mostrarMensagem("Fornecedor cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-            } else {
-                fornecedoresDAO.update(fornecedor);
-                mostrarMensagem("Fornecedor atualizado com sucesso!", Alert.AlertType.INFORMATION);
-            }
+            // Adiciona o fornecedor
+            FornecedoresDAO.create(fornecedor); // Chama o método do DAO
+
+            mostrarMensagem("Fornecedor cadastrado com sucesso!", Alert.AlertType.INFORMATION);
 
             if (confirmarCadastroOutro()) {
                 limparCampos();
@@ -89,6 +86,8 @@ public class controllerCadastrosFornecedor implements Initializable {
             mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", Alert.AlertType.WARNING);
         }
     }
+
+
 
     private boolean validarCampos() {
         return !txtNomeFornecedor.getText().isEmpty() &&

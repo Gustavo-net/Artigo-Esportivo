@@ -68,13 +68,11 @@ public class controllerCadastrosClientes implements Initializable {
         Clientes novoCliente = coletarDadosDoCliente();
         
         try {
-            // Se estamos editando um cliente, atualizamos
             if (controllerRelatorioClientes.clienteEditor != null) {
                 novoCliente.setIdCliente(controllerRelatorioClientes.clienteEditor.getIdCliente()); // Garantindo que o ID do cliente seja mantido
                 clienteDAO.update(novoCliente);
                 showAlert("Cliente atualizado com sucesso!");
             } else {
-                // Verifica se já existe um cliente com o CPF antes de adiciona-lo
                 if (ClienteDAO.validarExistente(novoCliente.getCpf())) {
                     showAlert("Erro: Cliente com CPF " + novoCliente.getCpf() + " já existe.");
                     return; 
@@ -107,12 +105,6 @@ public class controllerCadastrosClientes implements Initializable {
                !txtCep.getText().isEmpty();
     }
 
-    private void mostrarMensagem(String mensagem, Alert.AlertType tipo) {
-        Alert alert = new Alert(tipo);
-        alert.setContentText(mensagem);
-        alert.setHeaderText(null);
-        alert.showAndWait();
-    }
 
     private boolean confirmarCadastroOutro() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

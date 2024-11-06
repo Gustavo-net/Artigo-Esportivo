@@ -213,10 +213,15 @@ public class controllerRelatorioFuncionarios implements Initializable {
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFornecedor"));
-        columnCPF.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionario"));
+		columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+		columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+		columnDataNasc.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
+		columnDataCont.setCellValueFactory(new PropertyValueFactory<>("dataCont"));
+		columnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
+
+		columnSexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
         columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
         columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
         columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));

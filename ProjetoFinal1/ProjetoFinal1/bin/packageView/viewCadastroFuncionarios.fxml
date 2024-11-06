@@ -55,7 +55,7 @@
 
 
 
-		<TextField fx:id="txtNomeCliente" layoutX="41.0" layoutY="122.0" prefHeight="26.0" prefWidth="619.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+		<TextField fx:id="txtNomeFuncionario" layoutX="41.0" layoutY="122.0" prefHeight="26.0" prefWidth="619.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
 
 
 
@@ -199,7 +199,7 @@
 
 
 
-		<Button fx:id="btnAddCliente" layoutX="177.0" layoutY="414.0" mnemonicParsing="false" onAction="#OnbtnAddCliente" prefHeight="36.0" prefWidth="330.0" style="-fx-background-color: #f18c16;" text="Adicionar funcionário" textFill="WHITE">
+		<Button fx:id="btnAddFuncionario" layoutX="177.0" layoutY="414.0" mnemonicParsing="false" onAction="#OnbtnAddFuncionario" prefHeight="36.0" prefWidth="330.0" style="-fx-background-color: #f18c16;" text="Adicionar funcionário" textFill="WHITE">
 
 
 
@@ -298,14 +298,14 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <DatePicker layoutX="41.0" layoutY="228.0" prefHeight="26.0" prefWidth="149.0" />
-      <DatePicker layoutX="202.0" layoutY="228.0" prefHeight="26.0" prefWidth="149.0" />
+      <DatePicker fx:id="dataNasc" layoutX="41.0" layoutY="228.0" onAction="#OndataNasc" prefHeight="26.0" prefWidth="149.0" />
+      <DatePicker fx:id="dataContr" layoutX="202.0" layoutY="228.0" onAction="#OndataNasc" prefHeight="26.0" prefWidth="149.0" />
       <Text fill="#333333" layoutX="202.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Contratação" wrappingWidth="126.98199462890602">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <TextField fx:id="txtTelefone1" layoutX="365.0" layoutY="228.0" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <TextField fx:id="txtCargo" layoutX="365.0" layoutY="228.0" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
       <Text fill="#333333" layoutX="366.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cargo" wrappingWidth="126.98199462890602">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -316,7 +316,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <ComboBox layoutX="524.0" layoutY="228.0" prefHeight="26.0" prefWidth="136.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+      <ComboBox fx:id="comboxSexo" layoutX="524.0" layoutY="228.0" prefHeight="26.0" prefWidth="136.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
 
 
 

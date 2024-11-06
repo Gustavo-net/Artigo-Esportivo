@@ -173,6 +173,11 @@ public class Funcionarios {
 		this.senha = senha;
 		this.id_Endereço = id_Endereço;
 	}
+
+	public void setEndereco(String text) {
+		
+		
+	}
 	
 	
 

@@ -10,18 +10,16 @@ import packageConnection.ConnectionDatabase;
 import packageModel.Fornecedores;
 
 public class FornecedoresDAO {
-	public void create(Fornecedores f) {
+	public static void create(Fornecedores f) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO Fornecedores (idFornecedor, nomeFornecedor, cnpj, email, telefone, id_Endereco) VALUES (?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, f.getIdFornecedor());
+            stmt = con.prepareStatement("INSERT INTO Fornecedores (nomeFornecedor, cnpj, email, telefone) VALUES ( ?, ?, ?, ?)");
             stmt.setString(2, f.getNomeFornecedor());
             stmt.setString(3, f.getCnpj());
             stmt.setString(4, f.getEmail());
             stmt.setString(5, f.getTelefone());
-            stmt.setString(6, f.getId_Endereço());
 
             stmt.executeUpdate();
 
