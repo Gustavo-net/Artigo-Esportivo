@@ -16,10 +16,10 @@ public class FornecedoresDAO {
 
         try {
             stmt = con.prepareStatement("INSERT INTO Fornecedores (nomeFornecedor, cnpj, email, telefone) VALUES ( ?, ?, ?, ?)");
-            stmt.setString(2, f.getNomeFornecedor());
-            stmt.setString(3, f.getCnpj());
-            stmt.setString(4, f.getEmail());
-            stmt.setString(5, f.getTelefone());
+            stmt.setString(1, f.getNomeFornecedor());
+            stmt.setString(2, f.getCnpj());
+            stmt.setString(3, f.getEmail());            
+            stmt.setString(4, f.getTelefone());
 
             stmt.executeUpdate();
 
@@ -89,7 +89,6 @@ public class FornecedoresDAO {
                 f.setCnpj(rs.getString("cnpj"));
                 f.setEmail(rs.getString("email"));
                 f.setTelefone(rs.getString("telefone"));
-                f.setId_Endereço(rs.getString("id_Endereco")); 
                 fornecedores.add(f);
             }
 
@@ -106,13 +105,12 @@ public class FornecedoresDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE Fornecedores SET nomeFornecedor = ?, cnpj = ?, email = ?, telefone = ?, id_Endereco = ? WHERE idFornecedor = ?");
+            stmt = con.prepareStatement("UPDATE Fornecedores SET nomeFornecedor = ?, cnpj = ?, email = ?, telefone = ? WHERE idFornecedor = ?");
             stmt.setString(1, f.getNomeFornecedor());
             stmt.setString(2, f.getCnpj());
             stmt.setString(3, f.getEmail());
             stmt.setString(4, f.getTelefone());
-            stmt.setString(5, f.getId_Endereço());
-            stmt.setString(6, f.getIdFornecedor());
+            stmt.setString(5, f.getIdFornecedor());
 
             stmt.executeUpdate();
 

@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import packageModel.Enderecos;
 import packageModel.Fornecedores;
-import packageModel.Funcionarios;
 import package_controle.EnderecoDAO;
 import package_controle.FornecedoresDAO;
 
@@ -56,24 +55,21 @@ public class controllerCadastrosFornecedor implements Initializable {
     @FXML
     private TextField txtTelefone;
 
-    private EnderecoDAO enderecoDAO = new EnderecoDAO();
-    private FornecedoresDAO fornecedoresDAO = new FornecedoresDAO();
-
+    private EnderecoDAO enderecoDAO = new EnderecoDAO();  
+    private FornecedoresDAO fornecedoresDAO = new FornecedoresDAO();  
 
     @FXML
     public void OnbtnAddFornecedor(ActionEvent event) {
         if (validarCampos()) {
             Enderecos endereco = new Enderecos();
             preencherEndereco(endereco);
-            
-            // Adiciona o endereço e obtém o ID
-            enderecoDAO.create(endereco); // Supondo que este método não precise de retorno
+
+            EnderecoDAO.create(endereco);  
 
             Fornecedores fornecedor = new Fornecedores();
-            preencherFornecedor(fornecedor, endereco.getIdEndereço()); // Passa o ID do endereço
+            preencherFornecedor(fornecedor, endereco.getIdEndereço()); 
 
-            // Adiciona o fornecedor
-            FornecedoresDAO.create(fornecedor); // Chama o método do DAO
+            FornecedoresDAO.create(fornecedor);  
 
             mostrarMensagem("Fornecedor cadastrado com sucesso!", Alert.AlertType.INFORMATION);
 
@@ -86,8 +82,6 @@ public class controllerCadastrosFornecedor implements Initializable {
             mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", Alert.AlertType.WARNING);
         }
     }
-
-
 
     private boolean validarCampos() {
         return !txtNomeFornecedor.getText().isEmpty() &&
@@ -134,7 +128,6 @@ public class controllerCadastrosFornecedor implements Initializable {
         fornecedor.setCnpj(txtCNPJ.getText());
         fornecedor.setEmail(txtEmail.getText());
         fornecedor.setTelefone(txtTelefone.getText());
-        fornecedor.setId_Endereço(idEndereco);
     }
 
     @FXML
@@ -154,7 +147,6 @@ public class controllerCadastrosFornecedor implements Initializable {
         txtCidadeUF.setText("");
         txtCep.setText("");
         txtComplemento.setText("");
-        controllerRelatorioFornecedor.FornecedoresEditor = null;
     }
 
     private void fecharJanela() {
@@ -169,6 +161,12 @@ public class controllerCadastrosFornecedor implements Initializable {
             txtCNPJ.setText(controllerRelatorioFornecedor.FornecedoresEditor.getCnpj());
             txtEmail.setText(controllerRelatorioFornecedor.FornecedoresEditor.getEmail());
             txtTelefone.setText(controllerRelatorioFornecedor.FornecedoresEditor.getTelefone());
+            txtCep.setText(controllerRelatorioFornecedor.FornecedoresEditor.getCep());
+            txtBairro.setText(controllerRelatorioFornecedor.FornecedoresEditor.getBairro());
+            txtCidadeUF.setText(controllerRelatorioFornecedor.FornecedoresEditor.getCidadeUF());
+            txtComplemento.setText(controllerRelatorioFornecedor.FornecedoresEditor.getComplemento());
+            txtNumero.setText(controllerRelatorioFornecedor.FornecedoresEditor.getNumero());
+            txtRua.setText(controllerRelatorioFornecedor.FornecedoresEditor.getRua());
         }
     }
 }
