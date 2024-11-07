@@ -94,21 +94,20 @@ public class controllerRelatorioFornecedor implements Initializable {
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
-		columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
-		columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
-		columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
-		columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
-		columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
-		atualizarTabela();
+        columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
+        columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+        columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
+        columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
+        
         carregarTableFornecedores();
-
     }
 
     private void carregarTableFornecedores() {
         arrayFornecedores = FXCollections.observableArrayList(fornecedorDAO.read());
-        tableFornecedores.setItems(arrayFornecedores);
-        atualizarTabela();
+        tableFornecedores.setItems(arrayFornecedores); // Vincula a lista à TableView
     }
+
 
     private void atualizarTabela() {
  //     columnID.setCellValueFactory(new PropertyValueFactory<>("idFornecedor"));
@@ -128,10 +127,9 @@ public class controllerRelatorioFornecedor implements Initializable {
 
     @FXML
     void OnbtnInserir(ActionEvent event) throws IOException {
-        	FornecedoresEditor = null;
-            Main.TelaCadastroFornecedores();
-            atualizarTabela();
-        
+        FornecedoresEditor = null; 
+        Main.TelaCadastroFornecedores(); 
+        carregarTableFornecedores(); 
     }
 
     @FXML
@@ -155,13 +153,14 @@ public class controllerRelatorioFornecedor implements Initializable {
     void OnPesquisarImagem(MouseEvent event) {
         String pesquisa = txtPesquisar.getText().trim();
         if (pesquisa.isEmpty()) {
-            carregarTableFornecedores();
+            carregarTableFornecedores(); 
         } else {
             arrayFornecedores = FXCollections.observableArrayList(FornecedoresDAO.search(pesquisa));
-            tableFornecedores.setItems(arrayFornecedores);
+            tableFornecedores.setItems(arrayFornecedores); 
             tableFornecedores.refresh();
         }
     }
+
 
     @FXML
     void OnbtnClientes(ActionEvent event) {
@@ -195,8 +194,7 @@ public class controllerRelatorioFornecedor implements Initializable {
     
     @FXML
     void OnbtnExcluir(ActionEvent event) {
-    	
-    	int i = tableFornecedores.getSelectionModel().getSelectedIndex();
+        int i = tableFornecedores.getSelectionModel().getSelectedIndex();
         if (i == -1) {
             showAlert("Selecione um Fornecedor para Excluir Primeiro!");
             return;
@@ -207,12 +205,12 @@ public class controllerRelatorioFornecedor implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmação de Exclusão");
         alert.setHeaderText("Você tem certeza que deseja excluir este Fornecedor?");
-        alert.setContentText("Funcionario: " + fornecedoresSelecionado.getNomeFornecedor());
+        alert.setContentText("Fornecedor: " + fornecedoresSelecionado.getNomeFornecedor());
 
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
-                    fornecedorDAO.delete(fornecedoresSelecionado.getIdFornecedor());
+                    fornecedorDAO.delete(fornecedoresSelecionado.getIdFornecedor()); 
                     carregarTableFornecedores(); 
                     showAlert("Fornecedor excluído com sucesso!");
                 } catch (Exception e) {
@@ -221,6 +219,7 @@ public class controllerRelatorioFornecedor implements Initializable {
             }
         });
     }
+
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
