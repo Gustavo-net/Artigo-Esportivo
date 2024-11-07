@@ -99,7 +99,7 @@ public class controllerRelatorioFornecedor implements Initializable {
 		columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
 		columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
 		columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
-	
+		atualizarTabela();
         carregarTableFornecedores();
 
     }
@@ -130,6 +130,7 @@ public class controllerRelatorioFornecedor implements Initializable {
     void OnbtnInserir(ActionEvent event) throws IOException {
         	FornecedoresEditor = null;
             Main.TelaCadastroFornecedores();
+            atualizarTabela();
         
     }
 
