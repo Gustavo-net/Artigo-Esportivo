@@ -63,12 +63,11 @@ public class controllerCadastrosFuncionario {
 
     @FXML
     public void OnbtnAddFuncionario(ActionEvent event) {
-        // Verificar se todos os campos obrigatórios estão preenchidos
         if (validarCampos()) {
             Funcionarios funcionario = new Funcionarios();
             preencherFuncionario(funcionario);
 
-            // Criar ou atualizar funcionário
+           
             if (controllerRelatorioFuncionarios.funcionariosEditor == null) {
                 funcionariosDAO.create(funcionario);
                 mostrarMensagem("Funcionário cadastrado com sucesso!", Alert.AlertType.INFORMATION);

@@ -51,7 +51,7 @@ public class controllerRelatorioFuncionarios implements Initializable {
 
 	@FXML
 	private Button btnProdutos;
-
+	
 	@FXML
 	private Button btnVendas;
 
@@ -162,10 +162,12 @@ public class controllerRelatorioFuncionarios implements Initializable {
 		funcionariosEditor = null;
 		Main.TelaCadastroFuncionarios();
 	}
+	
 	@FXML
 	public void OnbtnVendas(ActionEvent event) {
 	   
 	}
+
 	@FXML
 	public void OnbtnSair(ActionEvent event) {
 		   Main.changeScreen("login");
@@ -229,12 +231,12 @@ public class controllerRelatorioFuncionarios implements Initializable {
 
 	@FXML
 	void OnBtnVendas(ActionEvent event) {
-		
+		Main.changeScreen("vendas");
 	}
 
 	@FXML
 	void OnbtnVoltar(ActionEvent event) {
-
+		Main.changeScreen("main");
 	}
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
