@@ -81,6 +81,7 @@ public class controllerCadastrosFornecedor implements Initializable {
         } else {
             mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", Alert.AlertType.WARNING);
         }
+
     }
 
     private boolean validarCampos() {

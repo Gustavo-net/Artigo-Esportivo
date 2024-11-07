@@ -24,7 +24,7 @@ import packageModel.Clientes;
 import package_controle.ClienteDAO;
 
 public class controllerRelatorioClientes implements Initializable {
-    
+
     @FXML
     private TableView<Clientes> tableRelatorioCliente;
 
@@ -54,7 +54,7 @@ public class controllerRelatorioClientes implements Initializable {
 
     @FXML
     private ImageView lupaPesquisa;
-    
+
     @FXML
     private TableColumn<Clientes, String> columnNome;
     @FXML
@@ -88,27 +88,23 @@ public class controllerRelatorioClientes implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-    	 columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
-         columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-         columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
-         columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
-         columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
-         columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
-         columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
-         columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
-    	
-        carregarTableCliente();
+        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
+        columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
+        columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
+        columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+        columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
+        columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
+
+        carregarTableCliente();  
     }
 
     private void carregarTableCliente() {
         arrayCliente = FXCollections.observableArrayList(ClienteDAO.read());
         tableRelatorioCliente.setItems(arrayCliente);
-        columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
-        columnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
     }
 
     @FXML
@@ -118,10 +114,10 @@ public class controllerRelatorioClientes implements Initializable {
         } else {
             int i = tableRelatorioCliente.getSelectionModel().getSelectedIndex();
             clienteEditor = tableRelatorioCliente.getItems().get(i);
-            
+
             try {
-                Main.TelaCcadastroClientes();
-                carregarTableCliente(); 
+                Main.TelaCcadastroClientes();  
+                carregarTableCliente();
             } catch (IOException e) {
                 e.printStackTrace();
                 showAlert("Erro ao abrir a tela de edição!");
@@ -131,15 +127,15 @@ public class controllerRelatorioClientes implements Initializable {
 
     @FXML
     void OnbtnInserir(ActionEvent event) throws IOException {
-        clienteEditor = null;
-        Main.TelaCcadastroClientes();
+        clienteEditor = null; 
+        Main.TelaCcadastroClientes();  
     }
 
     @FXML
     void OnPesquisarImagem(MouseEvent event) {
         String pesquisa = txtPesquisar.getText().trim();
         if (pesquisa.isEmpty()) {
-            carregarTableCliente();
+            carregarTableCliente(); 
         } else {
             arrayCliente = FXCollections.observableArrayList(ClienteDAO.search(pesquisa));
             tableRelatorioCliente.setItems(arrayCliente);
@@ -149,17 +145,17 @@ public class controllerRelatorioClientes implements Initializable {
 
     @FXML
     void OnbtnSair(ActionEvent event) {
-        Main.changeScreen("login");
+        Main.changeScreen("login");  
     }
 
     @FXML
     void OnbtnVoltar(ActionEvent event) {
-        Main.changeScreen("main");
+        Main.changeScreen("main");  
     }
 
     @FXML
     void OnbtnCadastros(ActionEvent event) {
-        Main.changeScreen("cadastros");
+        Main.changeScreen("cadastros");  
     }
 
     @FXML
@@ -169,17 +165,17 @@ public class controllerRelatorioClientes implements Initializable {
 
     @FXML
     void OnbtnFuncionarios(ActionEvent event) {
-        Main.changeScreen("funcionarios");
+        Main.changeScreen("funcionarios"); 
     }
 
     @FXML
     void OnbtnProdutos(ActionEvent event) {
-        Main.changeScreen("produtos");
+        Main.changeScreen("produtos");  
     }
 
     @FXML
     void OnbtnVendas(ActionEvent event) {
-        Main.changeScreen("vendas");
+        Main.changeScreen("vendas"); 
     }
 
     @FXML
@@ -191,7 +187,7 @@ public class controllerRelatorioClientes implements Initializable {
         }
 
         Clientes clienteSelecionado = tableRelatorioCliente.getItems().get(i);
-        
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmação de Exclusão");
         alert.setHeaderText("Você tem certeza que deseja excluir este cliente?");
@@ -209,7 +205,6 @@ public class controllerRelatorioClientes implements Initializable {
             }
         });
     }
-
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
