@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import packageModel.Clientes;
 import packageModel.Funcionarios;
 import package_controle.ClienteDAO;
 import package_controle.FuncionarioDAO;
@@ -160,16 +162,45 @@ public class controllerRelatorioFuncionarios implements Initializable {
 		funcionariosEditor = null;
 		Main.TelaCadastroFuncionarios();
 	}
-
+	@FXML
 	public void OnbtnVendas(ActionEvent event) {
 	   
 	}
+	@FXML
 	public void OnbtnSair(ActionEvent event) {
 		   Main.changeScreen("login");
 	}
+	@FXML
 	public void OnbtnExcluir(ActionEvent event) {
+		
+	    int i = tableFuncionarios.getSelectionModel().getSelectedIndex();
+        if (i == -1) {
+            showAlert("Selecione um Funcionario para Excluir Primeiro!");
+            return;
+        }
+
+        Funcionarios funcionarioSelecionado = tableFuncionarios.getItems().get(i);
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Exclusão");
+        alert.setHeaderText("Você tem certeza que deseja excluir este Funcionario?");
+        alert.setContentText("Funcionario: " + funcionarioSelecionado.getNomeFuncionario());
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    funcionariosDAO.delete(funcionarioSelecionado.getIdFuncionario());
+                    carregarTableFuncionarios(); 
+                    showAlert("Funcionario excluído com sucesso!");
+                } catch (Exception e) {
+                    showAlert("Erro ao excluir o funcionario: " + e.getMessage());
+                }
+            }
+        });
+    }
+
 		   
-	}
+	@FXML
 	public void OnbtnFuncionarios(ActionEvent event) {
 		   
 	}

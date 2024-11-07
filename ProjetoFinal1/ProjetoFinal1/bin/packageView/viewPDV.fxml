@@ -12,16 +12,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="701.0" maxWidth="930.0" prefHeight="701.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerPDV">
+<AnchorPane maxHeight="702.0" maxWidth="930.0" prefHeight="639.0" prefWidth="563.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerPDV">
 
 <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="701.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="950.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="639.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="562.0">
             <effect>
                 <ColorAdjust />
             </effect>
         </Rectangle>
 
-        <Rectangle arcHeight="5.0" fill="#f78502" height="75.0" layoutY="-4.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="950.0" />
+        <Rectangle arcHeight="5.0" fill="#f78502" height="72.0" layoutY="-1.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="563.0" />
 
         <Text fill="WHITE" layoutX="20.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ponto de Venda" wrappingWidth="224.80003662109357">
             <font>
@@ -29,55 +29,55 @@
             </font>
         </Text>
 
-        <Text layoutX="269.0" layoutY="104.0" text="Data da Venda:" />
+        <Text layoutX="214.0" layoutY="104.0" text="Data da Venda:" />
 
-        <Text layoutX="26.0" layoutY="184.0" text="Código do Produto:" />
-        <TextField fx:id="codigoProdutoField" layoutX="23.0" layoutY="195.0" prefHeight="26.0" prefWidth="205.0" promptText="Código do Produto" />
+        <Text layoutX="26.0" layoutY="172.0" text="Código do Produto:" />
+        <TextField fx:id="codigoProdutoField" layoutX="23.0" layoutY="182.0" prefHeight="26.0" prefWidth="182.0" promptText="Código do Produto" />
 
-        <Text layoutX="237.0" layoutY="184.0" text="Quantidade:" />
-        <TextField fx:id="quantidadeField" layoutX="235.0" layoutY="195.0" prefHeight="26.0" prefWidth="91.0" promptText="Quantidade" />
+        <Text layoutX="239.0" layoutY="174.0" text="Quantidade:" />
+        <TextField fx:id="quantidadeField" layoutX="236.0" layoutY="184.0" prefHeight="26.0" prefWidth="118.0" promptText="Quantidade" />
 
-        <Text layoutX="336.0" layoutY="184.0" text="Desconto:" />
-        <TextField fx:id="descontoField" layoutX="337.0" layoutY="195.0" prefHeight="26.0" prefWidth="105.0" promptText="Desconto" />
+        <Text layoutX="393.0" layoutY="178.0" text="Desconto:" />
+        <TextField fx:id="descontoField" layoutX="388.0" layoutY="184.0" prefHeight="26.0" prefWidth="139.0" promptText="Desconto" />
 
-        <Text layoutX="22.0" layoutY="355.0" text="Subtotal:" />
-        <TextField fx:id="subtotalField" layoutX="20.0" layoutY="361.0" prefHeight="26.0" prefWidth="139.0" promptText="Subtotal" />
+        <Text layoutX="24.0" layoutY="364.0" text="Subtotal:" />
+        <TextField fx:id="subtotalField" layoutX="23.0" layoutY="376.0" prefHeight="26.0" prefWidth="139.0" promptText="Subtotal" />
 
-        <Text layoutX="420.0" layoutY="315.0" text="Valor Total:" />
-        <TextField fx:id="valorTotalField" layoutX="430.0" layoutY="323.0" prefHeight="26.0" prefWidth="139.0" promptText="Valor Total" />
+        <Text layoutX="386.0" layoutY="307.0" text="Valor Total:" />
+        <TextField fx:id="valorTotalField" layoutX="384.0" layoutY="315.0" prefHeight="26.0" prefWidth="139.0" promptText="Valor Total" />
 
-        <Text layoutX="22.0" layoutY="418.0" text="Status da Venda:" />
-        <ComboBox fx:id="statusVendaCombo" layoutX="21.0" layoutY="431.0" promptText="Selecione o Status" />
+        <Text layoutX="179.0" layoutY="365.0" text="Status da Venda:" />
+        <ComboBox fx:id="statusVendaCombo" layoutX="175.0" layoutY="376.0" promptText="Selecione o Status" />
 
-        <Text layoutX="21.0" layoutY="250.0" text="Canal de Vendas:" />
-        <ComboBox fx:id="canalVendasCombo" layoutX="22.0" layoutY="258.0" promptText="Selecione o Canal" />
+        <Text layoutX="21.0" layoutY="240.0" text="Canal de Vendas:" />
+        <ComboBox fx:id="canalVendasCombo" layoutX="22.0" layoutY="254.0" prefHeight="26.0" prefWidth="139.0" promptText="Selecione o Canal" />
 
-        <Text layoutX="179.0" layoutY="250.0" text="Método de Pagamento:" />
-        <ComboBox fx:id="metodoPagamentoCombo" layoutX="170.0" layoutY="257.0" prefHeight="26.0" prefWidth="264.0" promptText="Selecione o Método" />
+        <Text layoutX="190.0" layoutY="242.0" text="Método de Pagamento:" />
+        <ComboBox fx:id="metodoPagamentoCombo" layoutX="183.0" layoutY="254.0" prefHeight="26.0" prefWidth="341.0" promptText="Selecione o Método" />
 
-        <Text layoutX="170.0" layoutY="307.0" text="Valor:" />
-        <TextField fx:id="valorField" layoutX="167.0" layoutY="316.0" prefHeight="26.0" prefWidth="118.0" promptText="Valor" />
+        <Text layoutX="209.0" layoutY="307.0" text="Valor:" />
+        <TextField fx:id="valorField" layoutX="205.0" layoutY="315.0" prefHeight="26.0" prefWidth="150.0" promptText="Valor" />
 
-        <Text layoutX="20.0" layoutY="307.0" text="Parcelar ?" />
-        <TextField fx:id="parcelasField" layoutX="15.0" layoutY="316.0" prefHeight="26.0" prefWidth="136.0" promptText="Parcelas" />
+        <Text layoutX="23.0" layoutY="305.0" text="Parcelar " />
+        <TextField fx:id="parcelasField" layoutX="21.0" layoutY="315.0" prefHeight="26.0" prefWidth="150.0" promptText="Parcelas" />
 
-        <Text layoutX="467.0" layoutY="104.0" text="Cliente:" />
-        <TextField fx:id="clienteField" layoutX="467.0" layoutY="114.0" promptText="Cliente (CPF)" />
+        <Text layoutX="393.0" layoutY="104.0" text="Cliente:" />
+        <TextField fx:id="clienteField" layoutX="389.0" layoutY="113.0" prefHeight="26.0" prefWidth="139.0" promptText="Cliente (CPF)" />
 
         <Text layoutX="26.0" layoutY="104.0" text="Funcionário:" />
-        <TextField fx:id="funcionarioField" layoutX="26.0" layoutY="114.0" prefHeight="26.0" prefWidth="234.0" promptText="Funcionário (CPF)" />
+        <TextField fx:id="funcionarioField" layoutX="26.0" layoutY="114.0" prefHeight="26.0" prefWidth="158.0" promptText="Funcionário (CPF)" />
 
-        <Button layoutX="146.0" layoutY="508.0" onAction="#registrarVenda" prefHeight="35.0" prefWidth="165.0" text="Registrar Venda" />
+        <Button layoutX="324.0" layoutY="374.0" onAction="#registrarVenda" prefHeight="26.0" prefWidth="150.0" text="Registrar Venda" />
      
      
-      <DatePicker layoutX="269.0" layoutY="114.0" />
-      <TableView layoutX="372.0" layoutY="413.0" prefHeight="174.0" prefWidth="500.0">
+      <DatePicker layoutX="210.0" layoutY="113.0" prefHeight="26.0" prefWidth="150.0" />
+      <TableView layoutX="19.0" layoutY="434.0" prefHeight="172.0" prefWidth="514.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Codigo" />
-          <TableColumn prefWidth="75.0" text="Nome" />
-            <TableColumn prefWidth="75.0" text="Quantidade" />
-            <TableColumn prefWidth="126.4000244140625" text="Descontos" />
-            <TableColumn prefWidth="146.4000244140625" text="Subtotal" />
+          <TableColumn prefWidth="82.39996147155762" style="-fx-background-color: #ffffff;" text="Codigo" />
+          <TableColumn prefWidth="104.0" style="-fx-background-color: #ffffff;" text="Nome" />
+            <TableColumn prefWidth="96.80000305175781" style="-fx-background-color: #ffffff;" text="Quantidade" />
+            <TableColumn prefWidth="124.0" style="-fx-background-color: #ffffff;" text="Descontos" />
+            <TableColumn prefWidth="104.0" style="-fx-background-color: #ffffff;" text="Subtotal" />
         </columns>
       </TableView>
     </children>

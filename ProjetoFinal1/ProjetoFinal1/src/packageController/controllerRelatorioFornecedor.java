@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -193,6 +194,31 @@ public class controllerRelatorioFornecedor implements Initializable {
     
     @FXML
     void OnbtnExcluir(ActionEvent event) {
+    	
+    	int i = tableFornecedores.getSelectionModel().getSelectedIndex();
+        if (i == -1) {
+            showAlert("Selecione um Fornecedor para Excluir Primeiro!");
+            return;
+        }
+
+        Fornecedores fornecedoresSelecionado = tableFornecedores.getItems().get(i);
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Exclusão");
+        alert.setHeaderText("Você tem certeza que deseja excluir este Fornecedor?");
+        alert.setContentText("Funcionario: " + fornecedoresSelecionado.getNomeFornecedor());
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    fornecedorDAO.delete(fornecedoresSelecionado.getIdFornecedor());
+                    carregarTableFornecedores(); 
+                    showAlert("Fornecedor excluído com sucesso!");
+                } catch (Exception e) {
+                    showAlert("Erro ao excluir o Fornecedor: " + e.getMessage());
+                }
+            }
+        });
     }
 
     private void showAlert(String message) {
