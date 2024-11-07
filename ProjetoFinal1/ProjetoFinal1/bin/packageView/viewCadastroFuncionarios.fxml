@@ -79,7 +79,7 @@
 
 
 
-		<TextField fx:id="txtCPF" layoutX="41.0" layoutY="176.0" prefHeight="26.0" prefWidth="157.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
+		<TextField fx:id="txtCpf" layoutX="41.0" layoutY="176.0" prefHeight="26.0" prefWidth="157.0" style="-fx-background-color: gray; -fx-opacity: 0.30;" />
 
 
 
@@ -199,7 +199,7 @@
 
 
 
-		<Button fx:id="btnAddFuncionario" layoutX="177.0" layoutY="414.0" mnemonicParsing="false" onAction="#OnbtnAddFuncionario" prefHeight="36.0" prefWidth="330.0" style="-fx-background-color: #f18c16;" text="Adicionar funcionário" textFill="WHITE">
+		<Button fx:id="btnAddFuncionario" layoutX="177.0" layoutY="414.0" mnemonicParsing="false" onAction="#onbtnAddFuncionario" prefHeight="36.0" prefWidth="330.0" style="-fx-background-color: #f18c16;" text="Adicionar funcionário" textFill="WHITE">
 
 
 
@@ -298,8 +298,8 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <DatePicker fx:id="dataNasc" layoutX="41.0" layoutY="228.0" onAction="#OndataNasc" prefHeight="26.0" prefWidth="149.0" />
-      <DatePicker fx:id="dataContr" layoutX="202.0" layoutY="228.0" onAction="#OndataNasc" prefHeight="26.0" prefWidth="149.0" />
+      <DatePicker fx:id="dataNasc" layoutX="41.0" layoutY="228.0" prefHeight="26.0" prefWidth="149.0" />
+      <DatePicker fx:id="dataContr" layoutX="202.0" layoutY="228.0" prefHeight="26.0" prefWidth="149.0" />
       <Text fill="#333333" layoutX="202.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Contratação" wrappingWidth="126.98199462890602">
          <font>
             <Font name="System Bold" size="13.0" />

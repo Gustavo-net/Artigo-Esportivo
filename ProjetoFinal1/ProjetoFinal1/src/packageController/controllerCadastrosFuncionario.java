@@ -1,14 +1,14 @@
 package packageController;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
-import packageModel.Enderecos;
 import packageModel.Funcionarios;
 import package_controle.FuncionarioDAO;
 
@@ -17,67 +17,35 @@ import java.util.Optional;
 public class controllerCadastrosFuncionario {
 
     @FXML
-    private Button btnAddFuncionario;
+    private TextField txtNomeFuncionario, txtCpf, txtEmail, txtTelefone, txtCep, txtCidadeUF, txtComplemento, txtRua, txtNumero, txtBairro, txtCargo;
 
     @FXML
-    private Button btnCancelar;
-
+    private DatePicker dataNasc, dataContr;  
+    
     @FXML
-    private TextField txtNomeFuncionario;
-
+    private ComboBox<String> comboxSexo;
+    
     @FXML
-    private TextField txtCpf;
-
-    @FXML
-    private TextField txtEmail;
-
-    @FXML
-    private TextField txtTelefone;
-
-    @FXML
-    private TextField txtCep;
-
-    @FXML
-    private TextField txtCidadeUF;
-
-    @FXML
-    private TextField txtComplemento;
-
-
-    @FXML
-    private TextField txtNomeCliente;
-
-    @FXML
-    private TextField txtNumero;
-
-    @FXML
-    private TextField txtRua;
-
-    @FXML
-    private TextField txtBairro;
-
-    @FXML
-    private ComboBox<String> cbSexo;
-
+    private Button btnAddFuncionario, btnCancelar;
+    
     private FuncionarioDAO funcionariosDAO = new FuncionarioDAO();
 
     @FXML
-    public void OnbtnAddFuncionario(ActionEvent event) {
+    public void onbtnAddFuncionario(ActionEvent event) {
         if (validarCampos()) {
             Funcionarios funcionario = new Funcionarios();
             preencherFuncionario(funcionario);
-
-           
+            
             if (controllerRelatorioFuncionarios.funcionariosEditor == null) {
-                funcionariosDAO.create(funcionario);
+                funcionariosDAO.create(funcionario); 
                 mostrarMensagem("Funcionário cadastrado com sucesso!", Alert.AlertType.INFORMATION);
             } else {
-                funcionariosDAO.update(funcionario);
+                funcionariosDAO.update(funcionario); 
                 mostrarMensagem("Funcionário atualizado com sucesso!", Alert.AlertType.INFORMATION);
             }
 
             if (confirmarCadastroOutro()) {
-                limparCampos();
+                limparCampos(); 
             } else {
                 fecharJanela();
             }
@@ -95,8 +63,10 @@ public class controllerCadastrosFuncionario {
                !txtNumero.getText().isEmpty() &&
                !txtBairro.getText().isEmpty() &&
                !txtCidadeUF.getText().isEmpty() &&
-               !txtCep.getText().isEmpty()&&
-               cbSexo.getValue() != null;  
+               !txtCep.getText().isEmpty() &&
+               comboxSexo.getValue() != null &&
+               dataNasc.getValue() != null &&  
+               dataContr.getValue() != null;  
     }
 
     private void mostrarMensagem(String mensagem, Alert.AlertType tipo) {
@@ -123,34 +93,40 @@ public class controllerCadastrosFuncionario {
         funcionario.setCpf(txtCpf.getText());
         funcionario.setEmail(txtEmail.getText());
         funcionario.setTelefone(txtTelefone.getText());
-        funcionario.setSexo(cbSexo.getValue());  
-    }
-    private void preencherEndereco(Enderecos endereco) {
-        endereco.setCep(txtCep.getText());
-        endereco.setRua(txtRua.getText());
-        endereco.setNumero(txtNumero.getText());
-        endereco.setBairro(txtBairro.getText());
-        endereco.setComplemento(txtComplemento.getText());
-        endereco.setCidadeUF(txtCidadeUF.getText());
+        funcionario.setSexo(comboxSexo.getValue());
+        funcionario.setDataNasc(dataNasc.getValue()); 
+        funcionario.setDataCont(dataContr.getValue());
+        funcionario.setCargo(txtCargo.getText());
+
+        funcionario.setRua(txtRua.getText());
+        funcionario.setNumero(txtNumero.getText());
+        funcionario.setBairro(txtBairro.getText());
+        funcionario.setComplemento(txtComplemento.getText());
+        funcionario.setCidadeUF(txtCidadeUF.getText());
+        funcionario.setCep(txtCep.getText());
     }
 
     @FXML
     public void OnbtnCancelar(ActionEvent event) {
-        limparCampos();
-        fecharJanela();
+        limparCampos(); 
+        fecharJanela(); 
     }
 
     private void limparCampos() {
         txtNomeFuncionario.setText("");
         txtCpf.setText("");
         txtEmail.setText("");
+        txtTelefone.setText("");
         txtCep.setText("");
+        txtRua.setText("");
+        txtNumero.setText("");
+        txtBairro.setText("");
         txtCidadeUF.setText("");
         txtComplemento.setText("");
-        txtNumero.setText("");
-        txtRua.setText("");
-        txtTelefone.setText("");
-        cbSexo.setValue(null);  
+        txtCargo.setText("");  
+        comboxSexo.setValue(null);  
+        dataNasc.setValue(null); 
+        dataContr.setValue(null); 
     }
 
     private void fecharJanela() {
@@ -160,13 +136,23 @@ public class controllerCadastrosFuncionario {
 
     @FXML
     public void initialize() {
+        comboxSexo.getItems().addAll("Masculino", "Feminino");
 
         if (controllerRelatorioFuncionarios.funcionariosEditor != null) {
             txtNomeFuncionario.setText(controllerRelatorioFuncionarios.funcionariosEditor.getNomeFuncionario());
             txtCpf.setText(controllerRelatorioFuncionarios.funcionariosEditor.getCpf());
             txtEmail.setText(controllerRelatorioFuncionarios.funcionariosEditor.getEmail());
             txtTelefone.setText(controllerRelatorioFuncionarios.funcionariosEditor.getTelefone());
-            cbSexo.setValue(controllerRelatorioFuncionarios.funcionariosEditor.getSexo());
+            comboxSexo.setValue(controllerRelatorioFuncionarios.funcionariosEditor.getSexo());
+            dataNasc.setValue(controllerRelatorioFuncionarios.funcionariosEditor.getDataNasc());
+            dataContr.setValue(controllerRelatorioFuncionarios.funcionariosEditor.getDataCont());
+            txtCargo.setText(controllerRelatorioFuncionarios.funcionariosEditor.getCargo());
+            txtRua.setText(controllerRelatorioFuncionarios.funcionariosEditor.getRua());
+            txtNumero.setText(controllerRelatorioFuncionarios.funcionariosEditor.getNumero());
+            txtBairro.setText(controllerRelatorioFuncionarios.funcionariosEditor.getBairro());
+            txtComplemento.setText(controllerRelatorioFuncionarios.funcionariosEditor.getComplemento());
+            txtCidadeUF.setText(controllerRelatorioFuncionarios.funcionariosEditor.getCidadeUF());
+            txtCep.setText(controllerRelatorioFuncionarios.funcionariosEditor.getCep());
         }
     }
 }

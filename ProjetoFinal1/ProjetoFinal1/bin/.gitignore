@@ -1,10 +1,7 @@
-<<<<<<< HEAD
+/application/
+/module-info.class
+/packageConnection/
+/packageController/
 /packageModel/
 /package_controle/
-/packageController/
 /packageView/
-=======
-/packageController/
-/package_controle/
-/packageModel/
->>>>>>> branch 'master' of https://github.com/Gustavo-net/Artigo-Esportivo.git

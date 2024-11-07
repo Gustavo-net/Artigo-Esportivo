@@ -1,13 +1,15 @@
 package packageModel;
 
+import java.time.LocalDate;
+
 public class Funcionarios {
 	private String idFuncionario;
 	private String nomeFuncionario;
 	private String cpf;
 	private String email;
 	private String telefone;
-	private String dataNasc;
-	private String dataCont;
+	private LocalDate dataNasc;
+	private LocalDate dataCont;
 	private String cargo;
 	private String sexo;
 	private String senha;
@@ -110,20 +112,20 @@ public class Funcionarios {
 		this.telefone = telefone;
 	}
 
-	public String getDataNasc() {
+	public LocalDate getDataNasc() {
 		return dataNasc;
 	}
 
-	public void setDataNasc(String dataNasc) {
-		this.dataNasc = dataNasc;
+	public void setDataNasc(LocalDate string) {
+		this.dataNasc = string;
 	}
 
-	public String getDataCont() {
+	public LocalDate getDataCont() {
 		return dataCont;
 	}
 
-	public void setDataCont(String dataCont) {
-		this.dataCont = dataCont;
+	public void setDataCont(LocalDate localDate) {
+		this.dataCont = localDate;
 	}
 
 	public String getCargo() {
@@ -159,7 +161,7 @@ public class Funcionarios {
 	}
 
 	public Funcionarios(String idFuncionario, String nomeFuncionario, String cpf, String email, String telefone,
-			String dataNasc, String dataCont, String cargo, String sexo, String senha, String id_Endereço) {
+			LocalDate dataNasc, LocalDate dataCont, String cargo, String sexo, String senha, String id_Endereço) {
 		super();
 		this.idFuncionario = idFuncionario;
 		this.nomeFuncionario = nomeFuncionario;
