@@ -106,24 +106,42 @@ public class ClienteDAO {
         ArrayList<Clientes> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT idCliente, nomeCliente, cpf, email, telefone " +
-                                        "FROM Clientes WHERE nomeCliente LIKE ? OR cpf LIKE ?");
-            stmt.setString(1, "%" + string + "%");
-            stmt.setString(2, "%" + string + "%");
+            // SQL com join para obter os dados de Cliente e Endereço
+            String sql = "SELECT f.idCliente, f.nomeCliente, f.cpf, f.email, f.telefone, " +
+                         "e.cep, e.rua, e.numero, e.bairro, e.complemento, e.cidadeUF " +
+                         "FROM Clientes f " +
+                         "JOIN Enderecos e ON f.id_Endereco = e.idEndereco " +
+                         "WHERE f.nomeCliente LIKE ? OR f.cpf LIKE ?";
+
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%" + string + "%"); // Busca no nomeCliente
+            stmt.setString(2, "%" + string + "%"); // Busca no cpf
             rs = stmt.executeQuery();
 
             while (rs.next()) {
+                // Cria o objeto Clientes e preenche com os dados da consulta
                 Clientes c = new Clientes();
                 c.setIdCliente(rs.getString("idCliente"));
                 c.setNomeCliente(rs.getString("nomeCliente"));
                 c.setCpf(rs.getString("cpf"));
                 c.setEmail(rs.getString("email"));
                 c.setTelefone(rs.getString("telefone"));
+
+                // Preenche os dados do endereço, se disponíveis
+                c.setCep(rs.getString("cep"));
+                c.setRua(rs.getString("rua"));
+                c.setNumero(rs.getString("numero"));
+                c.setBairro(rs.getString("bairro"));
+                c.setComplemento(rs.getString("complemento"));
+                c.setCidadeUF(rs.getString("cidadeUF"));
+
+                // Adiciona o cliente à lista
                 clientes.add(c);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            // Fecha a conexão, preparedStatement e ResultSet
             ConnectionDatabase.closeConnection(con, stmt, rs);
         }
 
