@@ -1,8 +1,6 @@
 package packageModel;
 
-import java.math.BigDecimal;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 
 public class Venda {
@@ -10,11 +8,10 @@ public class Venda {
     private String cpfCliente;
     private String cpfFuncionario;
     private Date dataVenda;
-    private BigDecimal totalVenda;
+    private double totalVenda;  // Alterado para double
     private String formaPagamento;
     private List<ItemVenda> itensVenda;
 
-    // Getters e Setters
     public int getIdVenda() {
         return idVenda;
     }
@@ -43,17 +40,16 @@ public class Venda {
         return dataVenda;
     }
 
-    // Método para setar a dataVenda
     public void setDataVenda(java.util.Date date) {
         this.dataVenda = (Date) date;
     }
 
-    public BigDecimal getTotalVenda() {
-        return totalVenda;
+    public double getTotalVenda() {
+        return totalVenda;  
     }
 
-    public void setTotalVenda(BigDecimal totalVenda) {
-        this.totalVenda = totalVenda;
+    public void setTotalVenda(double totalVenda) {
+        this.totalVenda = totalVenda;  
     }
 
     public String getFormaPagamento() {

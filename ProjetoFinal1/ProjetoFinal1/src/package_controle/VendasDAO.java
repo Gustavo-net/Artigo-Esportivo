@@ -24,13 +24,13 @@ public class VendasDAO {
 
     public void inserirVenda(Venda venda, List<ItemVenda> itensVenda) throws SQLException {
         String insertVendaSQL = "INSERT INTO Vendas (cpfCliente, cpfFuncionario, dataVenda, totalVenda, formaPagamento) VALUES (?, ?, ?, ?, ?)";
-        String insertItemVendaSQL = "INSERT INTO ItensVenda (idVenda, codigoProduto, quantidade, precoUnitario, subtotal) VALUES (?, ?, ?, ?, ?)";
+        String insertItemVendaSQL = "INSERT INTO ItensVenda (idVenda, codigoProduto, quantidade, precoUnitario) VALUES (?, ?, ?, ?)";  
 
         try (PreparedStatement psVenda = connection.prepareStatement(insertVendaSQL, Statement.RETURN_GENERATED_KEYS)) {
             psVenda.setString(1, venda.getCpfCliente());
             psVenda.setString(2, venda.getCpfFuncionario());
             psVenda.setTimestamp(3, new Timestamp(venda.getDataVenda().getTime()));
-            psVenda.setBigDecimal(4, venda.getTotalVenda());
+            psVenda.setDouble(4, venda.getTotalVenda());  
             psVenda.setString(5, venda.getFormaPagamento());
 
             int affectedRows = psVenda.executeUpdate();
@@ -43,11 +43,10 @@ public class VendasDAO {
 
                         try (PreparedStatement psItemVenda = connection.prepareStatement(insertItemVendaSQL)) {
                             for (ItemVenda item : itensVenda) {
-                                psItemVenda.setInt(1, idVenda);
-                                psItemVenda.setString(2, item.getCodigoProduto());
-                                psItemVenda.setInt(3, item.getQuantidade());
-                                psItemVenda.setBigDecimal(4, item.getPrecoUnitario());
-                                psItemVenda.setBigDecimal(5, item.getSubtotal());
+                                psItemVenda.setInt(1, idVenda); 
+                                psItemVenda.setString(2, item.getCodigoProduto());  
+                                psItemVenda.setInt(3, item.getQuantidade()); 
+                                psItemVenda.setDouble(4, item.getPrecoUnitario());
                                 psItemVenda.executeUpdate();
                             }
                         }
@@ -56,6 +55,7 @@ public class VendasDAO {
             }
         }
     }
+
 
     public List<Venda> listarVendas() throws SQLException {
         List<Venda> vendas = new ArrayList<>();
@@ -76,10 +76,9 @@ public class VendasDAO {
                     venda.setDataVenda(new Date(timestamp.getTime()));
                 }
 
-                venda.setTotalVenda(rsVendas.getBigDecimal("totalVenda"));
+                venda.setTotalVenda(rsVendas.getDouble("totalVenda"));
                 venda.setFormaPagamento(rsVendas.getString("formaPagamento"));
 
-                // Buscar os itens da venda
                 try (PreparedStatement psItensVenda = connection.prepareStatement(queryItensVenda)) {
                     psItensVenda.setInt(1, venda.getIdVenda());
                     try (ResultSet rsItensVenda = psItensVenda.executeQuery()) {
@@ -90,8 +89,8 @@ public class VendasDAO {
                             item.setIdVenda(rsItensVenda.getInt("idVenda"));
                             item.setCodigoProduto(rsItensVenda.getString("codigoProduto"));
                             item.setQuantidade(rsItensVenda.getInt("quantidade"));
-                            item.setPrecoUnitario(rsItensVenda.getBigDecimal("precoUnitario"));
-                            item.setSubtotal(rsItensVenda.getBigDecimal("subtotal"));
+                            item.setPrecoUnitario(rsItensVenda.getDouble("precoUnitario"));  
+                            item.setSubtotal(rsItensVenda.getDouble("subtotal"));
                             itensVenda.add(item);
                         }
                         venda.setItensVenda(itensVenda);
@@ -122,7 +121,7 @@ public class VendasDAO {
                         venda.setDataVenda(new Date(timestamp.getTime()));
                     }
 
-                    venda.setTotalVenda(rsVenda.getBigDecimal("totalVenda"));
+                    venda.setTotalVenda(rsVenda.getDouble("totalVenda"));  
                     venda.setFormaPagamento(rsVenda.getString("formaPagamento"));
 
                     try (PreparedStatement psItensVenda = connection.prepareStatement(queryItensVenda)) {
@@ -135,8 +134,8 @@ public class VendasDAO {
                                 item.setIdVenda(rsItensVenda.getInt("idVenda"));
                                 item.setCodigoProduto(rsItensVenda.getString("codigoProduto"));
                                 item.setQuantidade(rsItensVenda.getInt("quantidade"));
-                                item.setPrecoUnitario(rsItensVenda.getBigDecimal("precoUnitario"));
-                                item.setSubtotal(rsItensVenda.getBigDecimal("subtotal"));
+                                item.setPrecoUnitario(rsItensVenda.getDouble("precoUnitario"));  
+                                item.setSubtotal(rsItensVenda.getDouble("subtotal")); 
                                 itensVenda.add(item);
                             }
                             venda.setItensVenda(itensVenda);
@@ -156,7 +155,7 @@ public class VendasDAO {
             ps.setString(1, venda.getCpfCliente());
             ps.setString(2, venda.getCpfFuncionario());
             ps.setTimestamp(3, new Timestamp(venda.getDataVenda().getTime()));
-            ps.setBigDecimal(4, venda.getTotalVenda());
+            ps.setDouble(4, venda.getTotalVenda());
             ps.setString(5, venda.getFormaPagamento());
             ps.setInt(6, venda.getIdVenda());
             ps.executeUpdate();
@@ -177,21 +176,26 @@ public class VendasDAO {
             psDeleteVenda.executeUpdate();
         }
     }
-    public Produtos buscarProdutoPorCodigo(String codigo) throws SQLException {
-        String query = "SELECT * FROM Produtos WHERE codigoProduto = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, codigo);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    Produtos produto = new Produtos();
-                    produto.setCodigo(rs.getString("codigoProduto"));
-                    produto.setDescricao(rs.getString("descricao"));
-                    produto.setPrecoUnitario(rs.getBigDecimal("preco"));
-                    return produto;
-                }
-            }
+
+    public Produtos buscarProdutoPorCodigo(String codigoProduto) throws SQLException {
+        Produtos produto = null;
+        Connection conn = ConnectionDatabase.getConnection();
+        String sql = "SELECT * FROM produtos WHERE codigo = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, codigoProduto); 
+
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            produto = new Produtos();
+            produto.setCodigo(rs.getString("codigo"));
+            produto.setDescricao(rs.getString("descricao"));
+            produto.setPrecoUnitario(rs.getDouble("precoUnitario"));
         }
-        return null;
+        rs.close();
+        stmt.close();
+        conn.close();
+        
+        return produto;
     }
 
 }

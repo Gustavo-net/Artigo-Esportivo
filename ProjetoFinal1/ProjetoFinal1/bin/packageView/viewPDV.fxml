@@ -65,7 +65,7 @@
       </TableView>
       <Button fx:id="btnCancelar" layoutX="285.0" layoutY="558.0" onAction="#OnbtnCancelar" prefHeight="26.0" prefWidth="254.0" text="Cancelar Venda" />
       <Label fx:id="labelValorTotal" layoutX="446.0" layoutY="310.0" prefHeight="18.0" prefWidth="72.0" />
-      <Button layoutX="389.0" layoutY="182.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" text="Add mais" />
+      <Button fx:id="bntAdicionar" layoutX="389.0" layoutY="182.0" mnemonicParsing="false" onAction="#OnbtnAdicionarProduto" prefHeight="26.0" prefWidth="139.0" text="Add mais" />
       <ComboBox fx:id="comboxParcelar" layoutX="23.0" layoutY="316.0" prefHeight="26.0" prefWidth="139.0" />
     </children>
 </AnchorPane>

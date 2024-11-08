@@ -1,6 +1,5 @@
 package package_controle;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,65 +10,63 @@ import packageConnection.ConnectionDatabase;
 import packageModel.Produtos;
 
 public class ProdutoDAO {
-	public void create(Produtos prod) {
-	    Connection con = ConnectionDatabase.getConnection();
-	    PreparedStatement stmt = null;
 
-	    try {
-	        stmt = con.prepareStatement("INSERT INTO Produtos (nome, codigo, marca, descricao, precoUnitario, estoqueDisp, id_Categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
-	        stmt.setString(1, prod.getNome());
-	        stmt.setString(2, prod.getCodigo());
-	        stmt.setString(3, prod.getMarca());
-	        stmt.setString(4, prod.getDescricao());
-	        stmt.setDouble(5, prod.getPrecoUnitario().doubleValue()); 
-	        stmt.setInt(6, prod.getEstoqueDisp());
-	        stmt.setString(7, prod.getId_Categoria()); 
+    public void create(Produtos prod) {
+        Connection con = ConnectionDatabase.getConnection();
+        PreparedStatement stmt = null;
 
-	        stmt.executeUpdate();
-	        
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        ConnectionDatabase.closeConnection(con, stmt);
-	    }
-	}
+        try {
+            stmt = con.prepareStatement("INSERT INTO Produtos (nome, codigo, marca, descricao, precoUnitario, estoqueDisp, id_Categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            stmt.setString(1, prod.getNome());
+            stmt.setString(2, prod.getCodigo());
+            stmt.setString(3, prod.getMarca());
+            stmt.setString(4, prod.getDescricao());
+            stmt.setDouble(5, prod.getPrecoUnitario());  
+            stmt.setInt(6, prod.getEstoqueDisp());
+            stmt.setString(7, prod.getId_Categoria());
 
-	
-	public ArrayList<Produtos> read() {
-	    ArrayList<Produtos> produtos = new ArrayList<>();
-	    Connection con = ConnectionDatabase.getConnection();
-	    PreparedStatement stmt = null;
-	    ResultSet rs = null;
+            stmt.executeUpdate();
 
-	    try {
-	        stmt = con.prepareStatement("SELECT p.*, c.nomeCategoria FROM Produtos p JOIN Categorias c ON p.id_Categoria = c.idCategoria");
-	        rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDatabase.closeConnection(con, stmt);
+        }
+    }
 
-	        while (rs.next()) {
-	            Produtos p = new Produtos();
-	            p.setIdProduto(rs.getString("idProduto"));
-	            p.setNome(rs.getString("nome"));
-	            p.setCodigo(rs.getString("codigo"));
-	            p.setMarca(rs.getString("marca"));
-	            p.setDescricao(rs.getString("descricao"));
-	        
-	            p.setPrecoUnitario(BigDecimal.valueOf(rs.getDouble("precoUnitario")));
-	            
-	            p.setEstoqueDisp(rs.getInt("estoqueDisp"));
-	            p.setId_Categoria(rs.getString("id_Categoria"));
-	            p.setCategoriaNome(rs.getString("nomeCategoria"));
-	            
-	            produtos.add(p);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        ConnectionDatabase.closeConnection(con, stmt, rs);
-	    }
-	    return produtos;
-	}
+    public ArrayList<Produtos> read() {
+        ArrayList<Produtos> produtos = new ArrayList<>();
+        Connection con = ConnectionDatabase.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
+        try {
+            stmt = con.prepareStatement("SELECT p.*, c.nomeCategoria FROM Produtos p JOIN Categorias c ON p.id_Categoria = c.idCategoria");
+            rs = stmt.executeQuery();
 
+            while (rs.next()) {
+                Produtos p = new Produtos();
+                p.setIdProduto(rs.getString("idProduto"));
+                p.setNome(rs.getString("nome"));
+                p.setCodigo(rs.getString("codigo"));
+                p.setMarca(rs.getString("marca"));
+                p.setDescricao(rs.getString("descricao"));
+                
+                p.setPrecoUnitario(rs.getDouble("precoUnitario"));  // Usando double diretamente
+
+                p.setEstoqueDisp(rs.getInt("estoqueDisp"));
+                p.setId_Categoria(rs.getString("id_Categoria"));
+                p.setCategoriaNome(rs.getString("nomeCategoria"));
+
+                produtos.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDatabase.closeConnection(con, stmt, rs);
+        }
+        return produtos;
+    }
 
     public static ArrayList<Produtos> search(String pesquisa) {
         Connection con = ConnectionDatabase.getConnection();
@@ -89,7 +86,7 @@ public class ProdutoDAO {
                 p.setCodigo(rs.getString("codigo"));
                 p.setMarca(rs.getString("marca"));
                 p.setDescricao(rs.getString("descricao"));
-	            p.setPrecoUnitario(BigDecimal.valueOf(rs.getDouble("precoUnitario")));
+                p.setPrecoUnitario(rs.getDouble("precoUnitario"));  // Usando double diretamente
                 p.setEstoqueDisp(rs.getInt("estoqueDisp"));
                 produtos.add(p);
             }
@@ -120,7 +117,7 @@ public class ProdutoDAO {
                 p.setCodigo(rs.getString("codigo"));
                 p.setMarca(rs.getString("marca"));
                 p.setDescricao(rs.getString("descricao"));
-	            p.setPrecoUnitario(BigDecimal.valueOf(rs.getDouble("precoUnitario")));
+                p.setPrecoUnitario(rs.getDouble("precoUnitario"));  // Usando double diretamente
                 p.setEstoqueDisp(rs.getInt("estoqueDisp"));
                 produtos.add(p);
             }
@@ -143,9 +140,9 @@ public class ProdutoDAO {
             stmt.setString(2, prod.getCodigo());
             stmt.setString(3, prod.getMarca());
             stmt.setString(4, prod.getDescricao());
-            stmt.setDouble(5, prod.getPrecoUnitario().doubleValue());
+            stmt.setDouble(5, prod.getPrecoUnitario());  
             stmt.setInt(6, prod.getEstoqueDisp());
-            stmt.setString(7, prod.getIdProduto()); 
+            stmt.setString(7, prod.getIdProduto());
 
             stmt.executeUpdate();
 
@@ -155,7 +152,6 @@ public class ProdutoDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
-
 
     public void delete(String idProduto) {
         Connection con = ConnectionDatabase.getConnection();
@@ -173,6 +169,7 @@ public class ProdutoDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
+
     public Produtos buscarProdutoPorCodigo(String codigoProduto) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
@@ -181,9 +178,8 @@ public class ProdutoDAO {
 
         try {
             stmt = con.prepareStatement("SELECT * FROM Produtos WHERE codigo = ?");
-            stmt.setString(1, codigoProduto);  
+            stmt.setString(1, codigoProduto);
             rs = stmt.executeQuery();
-
 
             if (rs.next()) {
                 produto = new Produtos();
@@ -192,7 +188,7 @@ public class ProdutoDAO {
                 produto.setCodigo(rs.getString("codigo"));
                 produto.setMarca(rs.getString("marca"));
                 produto.setDescricao(rs.getString("descricao"));
-	            produto.setPrecoUnitario(BigDecimal.valueOf(rs.getDouble("precoUnitario")));
+                produto.setPrecoUnitario(rs.getDouble("precoUnitario"));  
                 produto.setEstoqueDisp(rs.getInt("estoqueDisp"));
             }
 
@@ -201,10 +197,7 @@ public class ProdutoDAO {
         } finally {
             ConnectionDatabase.closeConnection(con, stmt, rs);
         }
-        
+
         return produto;
     }
-
-
-    
 }
