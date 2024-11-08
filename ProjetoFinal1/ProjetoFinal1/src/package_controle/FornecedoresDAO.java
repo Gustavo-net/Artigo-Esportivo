@@ -128,8 +128,6 @@ public class FornecedoresDAO {
 	}
 
 
-
-
 	public static ArrayList<Fornecedores> search(String string) {
 	    Connection con = ConnectionDatabase.getConnection();
 	    PreparedStatement stmt = null;
