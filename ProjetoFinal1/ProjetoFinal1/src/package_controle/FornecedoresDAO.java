@@ -79,6 +79,8 @@ public class FornecedoresDAO {
 
 
 
+
+
 	public ArrayList<Fornecedores> read() {
 	    Connection con = ConnectionDatabase.getConnection();
 	    PreparedStatement stmt = null;
@@ -123,34 +125,55 @@ public class FornecedoresDAO {
 
 
 
-    public static ArrayList<Fornecedores> search(String string) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        ArrayList<Fornecedores> fornecedores = new ArrayList<>();
+	public static ArrayList<Fornecedores> search(String string) {
+	    Connection con = ConnectionDatabase.getConnection();
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    ArrayList<Fornecedores> fornecedores = new ArrayList<>();
 
-        try {
-            stmt = con.prepareStatement("SELECT * FROM Fornecedores WHERE nomeFornecedor LIKE ?"); 
-            stmt.setString(1, "%" + string + "%");
-            rs = stmt.executeQuery();
+	    try {
+	        // SQL agora inclui a junção com a tabela Enderecos
+	        String sql = "SELECT f.*, e.cep, e.rua, e.numero, e.bairro, e.complemento, e.cidadeUF " +
+	                     "FROM Fornecedores f " +
+	                     "LEFT JOIN Enderecos e ON f.id_Endereco = e.idEndereco " +
+	                     "WHERE f.nomeFornecedor LIKE ?";
 
-            while (rs.next()) {
-                Fornecedores f = new Fornecedores();
-                f.setIdFornecedor(rs.getString("idFornecedor"));
-                f.setNomeFornecedor(rs.getString("nomeFornecedor"));
-                f.setCnpj(rs.getString("cnpj"));
-                f.setEmail(rs.getString("email"));
-                f.setTelefone(rs.getString("telefone"));
-                fornecedores.add(f);
-            }
+	        stmt = con.prepareStatement(sql);
+	        stmt.setString(1, "%" + string + "%"); // Busca com o nome do fornecedor
+	        rs = stmt.executeQuery();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt, rs);
-        }
-        return fornecedores;
-    }
+	        while (rs.next()) {
+	            // Cria o objeto Fornecedores e preenche com os dados da consulta
+	            Fornecedores f = new Fornecedores();
+	            f.setIdFornecedor(rs.getString("idFornecedor"));
+	            f.setNomeFornecedor(rs.getString("nomeFornecedor"));
+	            f.setCnpj(rs.getString("cnpj"));
+	            f.setEmail(rs.getString("email"));
+	            f.setTelefone(rs.getString("telefone"));
+	            f.setId_Endereço(rs.getString("id_Endereco"));
+
+	            // Preenche os dados do endereço, se disponíveis
+	            f.setCep(rs.getString("cep"));
+	            f.setRua(rs.getString("rua"));
+	            f.setNumero(rs.getString("numero"));
+	            f.setBairro(rs.getString("bairro"));
+	            f.setComplemento(rs.getString("complemento"));
+	            f.setCidadeUF(rs.getString("cidadeUF"));
+
+	            // Adiciona o fornecedor à lista
+	            fornecedores.add(f);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        // Fecha a conexão, preparedStatement e ResultSet
+	        ConnectionDatabase.closeConnection(con, stmt, rs);
+	    }
+
+	    return fornecedores;
+	}
+
 
     public void update(Fornecedores f) {
         Connection con = ConnectionDatabase.getConnection();
