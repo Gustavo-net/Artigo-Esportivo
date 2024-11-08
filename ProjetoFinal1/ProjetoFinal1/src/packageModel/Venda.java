@@ -41,7 +41,8 @@ public class Venda {
     }
 
     public void setDataVenda(java.util.Date date) {
-        this.dataVenda = (Date) date;
+    	java.util.Date utilDate = date;  
+    	java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
     }
 
     public double getTotalVenda() {
