@@ -11,37 +11,44 @@ import packageModel.Enderecos;
 
 public class EnderecoDAO {
 
-	public static String create(Enderecos end) {
+	public static String create(Enderecos endereco) {
+	    String idEndereco = null;
 	    Connection con = ConnectionDatabase.getConnection();
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
-	    String generatedId = null;
 
 	    try {
-	        stmt = con.prepareStatement("INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
-	        stmt.setString(1, end.getCep());
-	        stmt.setString(2, end.getRua());
-	        stmt.setString(3, end.getNumero());
-	        stmt.setString(4, end.getBairro());
-	        stmt.setString(5, end.getComplemento());
-	        stmt.setString(6, end.getCidadeUF());
+	        String sql = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
+	        stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+	        stmt.setString(1, endereco.getCep());
+	        stmt.setString(2, endereco.getRua());
+	        stmt.setString(3, endereco.getNumero());
+	        stmt.setString(4, endereco.getBairro());
+	        stmt.setString(5, endereco.getComplemento());
+	        stmt.setString(6, endereco.getCidadeUF());
 
-	        stmt.executeUpdate();
-
-	        rs = stmt.getGeneratedKeys();
-	        if (rs.next()) {
-	            generatedId = rs.getString(1); 
-	            end.setIdEndereço(generatedId);
+	        int affectedRows = stmt.executeUpdate();
+	        if (affectedRows > 0) {
+	            rs = stmt.getGeneratedKeys();
+	            if (rs.next()) {
+	                idEndereco = rs.getString(1);  
+	            }
 	        }
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
-	        ConnectionDatabase.closeConnection(con, stmt, rs);
+	        try {
+	            if (rs != null) rs.close();
+	            if (stmt != null) stmt.close();
+	            if (con != null) con.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 	    }
-	    return generatedId;
-	}
 
+	    return idEndereco;
+	}
 
 
 	public ArrayList<Enderecos> read() {
