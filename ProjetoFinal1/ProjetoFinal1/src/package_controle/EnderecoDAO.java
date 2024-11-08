@@ -11,7 +11,7 @@ import packageModel.Enderecos;
 
 public class EnderecoDAO {
 
-	public static String create(Enderecos endereco) {
+	public String create(Enderecos endereco) {
 	    String idEndereco = null;
 	    Connection con = ConnectionDatabase.getConnection();
 	    PreparedStatement stmt = null;
