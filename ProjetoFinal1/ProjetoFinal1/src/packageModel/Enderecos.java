@@ -3,7 +3,7 @@ package packageModel;
 public class Enderecos {
 	
 	private String idEndereço;
-	private String cep;
+	private static String cep;
 	private String rua;
 	private String numero;
 	private String bairro;
@@ -26,7 +26,7 @@ public class Enderecos {
 	}
 
 
-	public String getCep() {
+	public static String getCep() {
 		return cep;
 	}
 

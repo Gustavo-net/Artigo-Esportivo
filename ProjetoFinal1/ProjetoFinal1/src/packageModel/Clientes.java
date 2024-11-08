@@ -14,7 +14,11 @@ public class Clientes {
     private String complemento;
     private String cidadeUF;
 
-    public String getIdCliente() {
+    public Clientes() {
+		super();
+	}
+
+	public String getIdCliente() {
         return idCliente;
     }
 

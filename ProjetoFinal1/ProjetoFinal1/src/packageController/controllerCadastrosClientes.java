@@ -1,6 +1,8 @@
 package packageController;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -12,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import packageConnection.ConnectionDatabase;
 import packageModel.Clientes;
 import packageModel.Enderecos;
 import package_controle.ClienteDAO;
@@ -60,34 +63,62 @@ public class controllerCadastrosClientes implements Initializable {
 
     @FXML
     public void OnbtnAddCliente(ActionEvent event) {
+        Connection con = null;  // Inicializando a conexão com o banco de dados
         try {
             if (validarCampos()) {
-                // Criar um novo endereço e preencher
+                // Preencher objeto de Endereço
                 Enderecos endereco = new Enderecos();
                 preencherEndereco(endereco);
-                
-                // Salvar o endereço no banco de dados
-                enderecoDAO.create(endereco);
 
-                // Agora, criar um novo cliente
+                // Estabelece conexão e inicia transação
+                con = ConnectionDatabase.getConnection();
+                con.setAutoCommit(false); 
+
+                String idEndereco = EnderecoDAO.create(endereco);
+                if (idEndereco == null) {
+                    throw new SQLException("Erro ao inserir endereço.");
+                }
+
                 Clientes novoCliente = new Clientes();
-                preencherCliente(novoCliente, endereco);  // Passar o endereço já salvo como objeto
-                
-                // Salvar o cliente no banco de dados
-                clienteDAO.create(novoCliente);
-                
+                preencherCliente(novoCliente, idEndereco);  
+
+                String idCliente = ClienteDAO.create(novoCliente);
+                if (idCliente == null) {
+                    throw new SQLException("Erro ao inserir cliente.");
+                }
+
+                con.commit(); 
+
                 mostrarMensagem("Cliente cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-                
+
                 if (confirmarCadastroOutro()) {
                     limparCampos();
                 } else {
                     fecharJanela();
                 }
             } else {
-                mostrarMensagem("Por favor, preencha todos os campos obrigatórios e certifique-se de que os dados são válidos.", Alert.AlertType.WARNING);
+                mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", Alert.AlertType.WARNING);
             }
-        } catch (Exception e) {
-            mostrarMensagem("Erro ao cadastrar cliente: " + e.getMessage(), Alert.AlertType.ERROR);
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();  
+                } catch (SQLException rollbackEx) {
+                    rollbackEx.printStackTrace();
+                }
+            }
+
+            e.printStackTrace();
+            mostrarMensagem("Erro ao cadastrar cliente. Tente novamente.", Alert.AlertType.ERROR);
+        } finally {
+            if (con != null) {
+                try {
+                    con.setAutoCommit(true);  
+                    con.close();  
+                } catch (SQLException closeEx) {
+                    closeEx.printStackTrace();
+                }
+            }
         }
     }
 
@@ -131,14 +162,12 @@ public class controllerCadastrosClientes implements Initializable {
         endereco.setCidadeUF(txtCidadeUF.getText());
     }
 
-
-    private void preencherCliente(Clientes cliente, Enderecos endereco) {
+    private void preencherCliente(Clientes cliente, String idEndereco) {
         cliente.setNomeCliente(txtNomeCliente.getText());
         cliente.setCpf(txtCPF.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setTelefone(txtTelefone.getText());
-        
-        cliente.setId_Endereco(endereco);  
+        cliente.setId_Endereco(idEndereco);  // Atribuindo o id do endereço ao cliente
     }
 
     @FXML
@@ -172,17 +201,12 @@ public class controllerCadastrosClientes implements Initializable {
             txtCPF.setText(controllerRelatorioClientes.clienteEditor.getCpf());
             txtEmail.setText(controllerRelatorioClientes.clienteEditor.getEmail());
             txtTelefone.setText(controllerRelatorioClientes.clienteEditor.getTelefone());
-
-            if (controllerRelatorioClientes.clienteEditor.getId_Endereco() != null) {
-                Enderecos endereco = controllerRelatorioClientes.clienteEditor.getId_Endereco();
-                txtRua.setText(endereco.getRua());
-                txtNumero.setText(endereco.getNumero());
-                txtBairro.setText(endereco.getBairro());
-                txtCidadeUF.setText(endereco.getCidadeUF());
-                txtCep.setText(endereco.getCep());
-                txtComplemento.setText(endereco.getComplemento());
-            }
+            txtRua.setText(controllerRelatorioClientes.clienteEditor.getRua());
+            txtNumero.setText(controllerRelatorioClientes.clienteEditor.getNumero());
+            txtBairro.setText(controllerRelatorioClientes.clienteEditor.getBairro());
+            txtCidadeUF.setText(controllerRelatorioClientes.clienteEditor.getCidadeUF());
+            txtCep.setText(controllerRelatorioClientes.clienteEditor.getCep());
+            txtComplemento.setText(controllerRelatorioClientes.clienteEditor.getComplemento());
         }
     }
-
 }

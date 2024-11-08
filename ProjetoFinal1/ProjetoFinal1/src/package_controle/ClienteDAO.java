@@ -1,5 +1,6 @@
 package package_controle;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 
 import packageConnection.ConnectionDatabase;
 import packageModel.Clientes;
+import packageModel.Enderecos;
 
 public class ClienteDAO {
 
@@ -32,32 +34,67 @@ public class ClienteDAO {
         return false;
     }
 
-    public void create(Clientes c) {
-        if (validarExistente(c.getCpf())) {
-            throw new IllegalArgumentException("Cliente com CPF " + c.getCpf() + " já existe.");
-        }
+    public static String create(Clientes c) throws SQLException {
+        Connection con = null;
+        PreparedStatement stmtEndereco = null;
+        PreparedStatement stmtCliente = null;
+        ResultSet generatedKeys = null;
 
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
         try {
+            con = ConnectionDatabase.getConnection();
             if (con == null) {
                 throw new SQLException("Falha ao conectar ao banco de dados.");
             }
+            
+            con.setAutoCommit(false);  
 
-            stmt = con.prepareStatement(
-                    "INSERT INTO Clientes (nomeCliente, cpf, email, telefone, id_Endereco) VALUES (?, ?, ?, ?, ?)");
-            stmt.setString(1, c.getNomeCliente());
-            stmt.setString(2, c.getCpf());
-            stmt.setString(3, c.getEmail());
-            stmt.setString(4, c.getTelefone());
-            stmt.setString(5, c.getId_Endereco()); 
-            stmt.executeUpdate();
+            String sqlEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
+            stmtEndereco = con.prepareStatement(sqlEndereco, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmtEndereco.setString(1, c.getCep());
+            stmtEndereco.setString(2, c.getRua());
+            stmtEndereco.setString(3, c.getNumero());
+            stmtEndereco.setString(4, c.getBairro());
+            stmtEndereco.setString(5, c.getComplemento());
+            stmtEndereco.setString(6, c.getCidadeUF());
+            stmtEndereco.executeUpdate();  
+
+            generatedKeys = stmtEndereco.getGeneratedKeys();
+            if (!generatedKeys.next()) {
+                throw new SQLException("Erro ao recuperar ID do endereço.");
+            }
+            String idEndereco = generatedKeys.getString(1);  
+
+            String sqlCliente = "INSERT INTO Clientes (nomeCliente, cpf, id_Endereco, email, telefone, dataNasc) VALUES (?, ?, ?, ?, ?, ?)";
+            stmtCliente = con.prepareStatement(sqlCliente);
+            stmtCliente.setString(1, c.getNomeCliente());
+            stmtCliente.setString(2, c.getCpf());
+            stmtCliente.setString(3, idEndereco); 
+            stmtCliente.setString(4, c.getEmail());
+            stmtCliente.setString(5, c.getTelefone());
+
+            stmtCliente.executeUpdate();
+
+            con.commit(); 
+
+            return idEndereco; 
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            if (con != null) {
+                try {
+                    con.rollback();  
+                } catch (SQLException rollbackEx) {
+                    rollbackEx.printStackTrace();
+                }
+            }
+            throw e;  
         } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
+            if (stmtEndereco != null) stmtEndereco.close();
+            if (stmtCliente != null) stmtCliente.close();
+            if (generatedKeys != null) generatedKeys.close();
+            if (con != null) con.close();
         }
     }
+
 
     public static ArrayList<Clientes> read() {
         Connection con = ConnectionDatabase.getConnection();

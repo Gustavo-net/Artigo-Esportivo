@@ -11,44 +11,49 @@ import packageModel.Enderecos;
 
 public class EnderecoDAO {
 
-	public String create(Enderecos endereco) {
-	    String idEndereco = null;
-	    Connection con = ConnectionDatabase.getConnection();
-	    PreparedStatement stmt = null;
-	    ResultSet rs = null;
+    public static String create(Enderecos endereco) {
+        String idEndereco = null;  
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-	    try {
-	        String sql = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
-	        stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-	        stmt.setString(1, endereco.getCep());
-	        stmt.setString(2, endereco.getRua());
-	        stmt.setString(3, endereco.getNumero());
-	        stmt.setString(4, endereco.getBairro());
-	        stmt.setString(5, endereco.getComplemento());
-	        stmt.setString(6, endereco.getCidadeUF());
+        try {
+            con = ConnectionDatabase.getConnection();
 
-	        int affectedRows = stmt.executeUpdate();
-	        if (affectedRows > 0) {
-	            rs = stmt.getGeneratedKeys();
-	            if (rs.next()) {
-	                idEndereco = rs.getString(1);  
-	            }
-	        }
+            String sql = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
+            stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS); 
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if (rs != null) rs.close();
-	            if (stmt != null) stmt.close();
-	            if (con != null) con.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
+            stmt.setString(1, endereco.getCep());
+            stmt.setString(2, endereco.getRua());
+            stmt.setString(3, endereco.getNumero());
+            stmt.setString(4, endereco.getBairro());
+            stmt.setString(5, endereco.getComplemento());
+            stmt.setString(6, endereco.getCidadeUF());
 
-	    return idEndereco;
-	}
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                rs = stmt.getGeneratedKeys();
+
+                if (rs.next()) {
+                    idEndereco = rs.getString(1);  
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace(); 
+            }
+        }
+
+        return idEndereco;  
+    }
 
 
 	public ArrayList<Enderecos> read() {
