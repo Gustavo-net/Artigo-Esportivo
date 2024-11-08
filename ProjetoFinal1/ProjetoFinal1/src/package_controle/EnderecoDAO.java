@@ -11,66 +11,69 @@ import packageModel.Enderecos;
 
 public class EnderecoDAO {
 
-    public static String create(Enderecos end) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String generatedId = null;
+	public static String create(Enderecos end) {
+	    Connection con = ConnectionDatabase.getConnection();
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    String generatedId = null;
 
-        try {
-            stmt = con.prepareStatement("INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, end.getCep());
-            stmt.setString(2, end.getRua());
-            stmt.setString(3, end.getNumero());
-            stmt.setString(4, end.getBairro());
-            stmt.setString(5, end.getComplemento());
-            stmt.setString(6, end.getCidadeUF());
+	    try {
+	        stmt = con.prepareStatement("INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+	        stmt.setString(1, end.getCep());
+	        stmt.setString(2, end.getRua());
+	        stmt.setString(3, end.getNumero());
+	        stmt.setString(4, end.getBairro());
+	        stmt.setString(5, end.getComplemento());
+	        stmt.setString(6, end.getCidadeUF());
 
-            stmt.executeUpdate();
+	        stmt.executeUpdate();
 
-            // Obter o ID gerado
-            rs = stmt.getGeneratedKeys();
-            if (rs.next()) {
-                generatedId = rs.getString(1); // 1 é o índice da primeira coluna
-            }
+	        rs = stmt.getGeneratedKeys();
+	        if (rs.next()) {
+	            generatedId = rs.getString(1); 
+	            end.setIdEndereço(generatedId);
+	        }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt, rs);
-        }
-        return generatedId;
-    }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        ConnectionDatabase.closeConnection(con, stmt, rs);
+	    }
+	    return generatedId;
+	}
 
-    public ArrayList<Enderecos> read() {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        ArrayList<Enderecos> enderecos = new ArrayList<>();
 
-        try {
-            stmt = con.prepareStatement("SELECT * FROM Enderecos");
-            rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                Enderecos end = new Enderecos();
-                end.setIdEndereço(rs.getString("idEndereco"));
-                end.setCep(rs.getString("cep"));
-                end.setRua(rs.getString("rua"));
-                end.setNumero(rs.getString("numero"));
-                end.setBairro(rs.getString("bairro"));
-                end.setComplemento(rs.getString("complemento"));
-                end.setCidadeUF(rs.getString("cidadeUF")); 
-                enderecos.add(end);
-            }
+	public ArrayList<Enderecos> read() {
+	    Connection con = ConnectionDatabase.getConnection();
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    ArrayList<Enderecos> enderecos = new ArrayList<>();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt, rs);
-        }
-        return enderecos;
-    }
+	    try {
+	        stmt = con.prepareStatement("SELECT * FROM Enderecos");
+	        rs = stmt.executeQuery();
+
+	        while (rs.next()) {
+	            Enderecos end = new Enderecos();
+	            end.setIdEndereço(rs.getString("idEndereco")); 
+	            end.setCep(rs.getString("cep"));
+	            end.setRua(rs.getString("rua"));
+	            end.setNumero(rs.getString("numero"));
+	            end.setBairro(rs.getString("bairro"));
+	            end.setComplemento(rs.getString("complemento"));
+	            end.setCidadeUF(rs.getString("cidadeUF"));
+	            enderecos.add(end);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        ConnectionDatabase.closeConnection(con, stmt, rs);
+	    }
+	    return enderecos;
+	}
+
 
     public ArrayList<Enderecos> search(String string) {
         Connection con = ConnectionDatabase.getConnection();

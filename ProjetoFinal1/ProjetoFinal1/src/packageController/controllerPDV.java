@@ -170,20 +170,17 @@ public class controllerPDV implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Inicializa os ComboBoxes
         statusVendaCombo.setItems(FXCollections.observableArrayList("Pendente", "Pago", "Cancelado"));
         canalVendasCombo.setItems(FXCollections.observableArrayList("Online", "Loja Física", "Telemarketing"));
         metodoPagamentoCombo.setItems(FXCollections.observableArrayList("Dinheiro", "Cartão de Crédito", "Cartão de Débito", "Boleto"));
         comboxParcelar.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6"));
 
-        // Configura as colunas da TableView
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoProduto"));
         colProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
         colQuantidade.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantidade())));
         colDesconto.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getDesconto())));
         colSubtotal.setCellValueFactory(cellData -> new SimpleStringProperty(new DecimalFormat("###,##0.00").format(cellData.getValue().getSubtotal())));
 
-        // Inicializa a lista de vendas e associa à TableView
         vendasList = FXCollections.observableArrayList();
         tableView.setItems(vendasList);
         updateValorTotal();
