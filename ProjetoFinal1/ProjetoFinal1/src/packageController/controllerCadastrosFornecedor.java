@@ -1,6 +1,8 @@
 package packageController;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -12,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import packageConnection.ConnectionDatabase;
 import packageModel.Enderecos;
 import packageModel.Fornecedores;
 import package_controle.EnderecoDAO;
@@ -64,28 +67,56 @@ public class controllerCadastrosFornecedor implements Initializable {
             Enderecos endereco = new Enderecos();
             preencherEndereco(endereco);
 
-            String idEndereco = EnderecoDAO.create(endereco);
+            Connection con = null;
 
-            if (idEndereco == null) {
-                mostrarMensagem("Erro ao cadastrar o endereço. Tente novamente.", Alert.AlertType.ERROR);
-                return;
-            }
+            try {
+                con = ConnectionDatabase.getConnection(); 
+                con.setAutoCommit(false);
 
-            Fornecedores fornecedor = new Fornecedores();
-            preencherFornecedor(fornecedor, idEndereco); 
+                String idEndereco = EnderecoDAO.create(endereco); 
 
-            String idFornecedor = FornecedoresDAO.create(fornecedor);
+                if (idEndereco == null) {
+                    throw new SQLException("Erro ao inserir endereço");
+                }
 
-            if (idFornecedor != null) {
+                Fornecedores fornecedor = new Fornecedores();
+                preencherFornecedor(fornecedor, idEndereco); 
+
+                String idFornecedor = FornecedoresDAO.create(fornecedor);
+
+                if (idFornecedor == null) {
+                    throw new SQLException("Erro ao inserir fornecedor");
+                }
+
+                con.commit(); 
+
                 mostrarMensagem("Fornecedor cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-            } else {
-                mostrarMensagem("Erro ao cadastrar o fornecedor. Tente novamente.", Alert.AlertType.ERROR);
-            }
 
-            if (confirmarCadastroOutro()) {
-                limparCampos();
-            } else {
-                fecharJanela();
+                if (confirmarCadastroOutro()) {
+                    limparCampos();
+                } else {
+                    fecharJanela();
+                }
+            } catch (SQLException e) {
+                if (con != null) {
+                    try {
+                        con.rollback(); 
+                    } catch (SQLException rollbackEx) {
+                        rollbackEx.printStackTrace();
+                    }
+                }
+
+                e.printStackTrace();
+                mostrarMensagem("Erro ao cadastrar fornecedor. Tente novamente.", Alert.AlertType.ERROR);
+            } finally {
+                if (con != null) {
+                    try {
+                        con.setAutoCommit(true); 
+                        con.close();
+                    } catch (SQLException closeEx) {
+                        closeEx.printStackTrace();
+                    }
+                }
             }
         } else {
             mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", Alert.AlertType.WARNING);
@@ -140,7 +171,9 @@ public class controllerCadastrosFornecedor implements Initializable {
         fornecedor.setCnpj(txtCNPJ.getText());
         fornecedor.setEmail(txtEmail.getText());
         fornecedor.setTelefone(txtTelefone.getText());
+        fornecedor.setId_Endereço(idEndereco);  
     }
+
 
     @FXML
     public void OnbtnCancelar(ActionEvent event) {
