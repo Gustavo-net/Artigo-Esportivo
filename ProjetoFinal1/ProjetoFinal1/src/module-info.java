@@ -4,8 +4,8 @@ module Sistema_BluePen {
 	requires java.sql;
 	requires javafx.fxml;
 	requires javafx.graphics;
-	requires javafx.base;
 	requires java.desktop;
+	requires transitive javafx.base;
 	
 	exports packageController;
 	
