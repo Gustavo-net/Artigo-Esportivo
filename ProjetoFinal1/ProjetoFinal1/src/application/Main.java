@@ -56,10 +56,10 @@ public class Main extends Application {
 			 Parent fxmlFornecedores = 
 			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioFornecedores.fxml"));
 			 Fornecedores = new Scene(fxmlFornecedores);
-			 
-			 Parent fxmlVendas = 
-			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioVendas.fxml"));
-			 Vendas = new Scene(fxmlVendas);
+//			 
+//			 Parent fxmlVendas = 
+//			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioVendas.fxml"));
+//			 Vendas = new Scene(fxmlVendas);
 			// Parent fxmlRegistrarVenda = FXMLLoader
 			// .load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
 			// RegistrarVendas = new Scene(fxmlRegistrarVenda);
