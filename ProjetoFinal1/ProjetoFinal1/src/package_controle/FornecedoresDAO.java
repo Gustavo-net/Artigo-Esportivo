@@ -17,10 +17,8 @@ public class FornecedoresDAO {
 	    ResultSet rsEndereco = null;
 
 	    try {
-	        // Iniciar uma transação para garantir que ambos os inserts sejam feitos de forma atômica
 	        con.setAutoCommit(false);
 
-	        // 1. Inserir o endereço na tabela Enderecos
 	        String sqlEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) " +
 	                             "VALUES (?, ?, ?, ?, ?, ?)";
 	        stmtEndereco = con.prepareStatement(sqlEndereco, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -37,7 +35,7 @@ public class FornecedoresDAO {
 	            rsEndereco = stmtEndereco.getGeneratedKeys();
 	            if (rsEndereco.next()) {
 	                int idEndereco = rsEndereco.getInt(1);
-	                
+
 	                String sqlFornecedor = "INSERT INTO Fornecedores (nomeFornecedor, cnpj, email, telefone, id_Endereco) " +
 	                                       "VALUES (?, ?, ?, ?, ?)";
 	                stmtFornecedor = con.prepareStatement(sqlFornecedor);
@@ -55,27 +53,30 @@ public class FornecedoresDAO {
 	            throw new SQLException("Falha ao inserir o endereço.");
 	        }
 
-	        con.commit();
-	        
+	        con.commit(); 
+
 	    } catch (SQLException e) {
 	        try {
 	            if (con != null) {
-	                con.rollback();
+	                con.rollback(); 
 	            }
 	        } catch (SQLException ex) {
-	            ex.printStackTrace();
+	            ex.printStackTrace(); 
 	        }
-	        e.printStackTrace();
+	        e.printStackTrace(); 
 	    } finally {
 	        try {
-	            con.setAutoCommit(true);
+	            if (rsEndereco != null) rsEndereco.close(); 
+	            if (stmtFornecedor != null) stmtFornecedor.close(); 
+	            if (stmtEndereco != null) stmtEndereco.close(); 
+	            if (con != null) con.setAutoCommit(true);
+	            if (con != null) con.close(); 
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            e.printStackTrace(); 
 	        }
-	        ConnectionDatabase.closeConnection(con, stmtEndereco, rsEndereco);
-	        ConnectionDatabase.closeConnection(null, stmtFornecedor, null);
 	    }
 	}
+
 
 
 	public ArrayList<Fornecedores> read() {
@@ -107,7 +108,7 @@ public class FornecedoresDAO {
 	            f.setBairro(rs.getString("bairro"));
 	            f.setComplemento(rs.getString("complemento"));
 	            f.setCidadeUF(rs.getString("cidadeUF"));
-	            
+
 	            fornecedores.add(f);
 	        }
 
@@ -118,6 +119,8 @@ public class FornecedoresDAO {
 	    }
 	    return fornecedores;
 	}
+
+
 
 
     public static ArrayList<Fornecedores> search(String string) {

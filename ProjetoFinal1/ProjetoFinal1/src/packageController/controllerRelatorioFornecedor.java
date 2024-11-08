@@ -93,6 +93,7 @@ public class controllerRelatorioFornecedor implements Initializable {
         columnCNPJ.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        
         columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
         columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
         columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
@@ -105,8 +106,9 @@ public class controllerRelatorioFornecedor implements Initializable {
 
     private void carregarTableFornecedores() {
         arrayFornecedores = FXCollections.observableArrayList(fornecedorDAO.read());
-        tableFornecedores.setItems(arrayFornecedores); // Vincula a lista à TableView
+        tableFornecedores.setItems(arrayFornecedores); 
     }
+
 
 
     private void atualizarTabela() {
