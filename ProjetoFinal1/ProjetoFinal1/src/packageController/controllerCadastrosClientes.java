@@ -8,8 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import packageModel.Clientes;
@@ -59,38 +59,34 @@ public class controllerCadastrosClientes implements Initializable {
     private EnderecoDAO enderecoDAO = new EnderecoDAO();
 
     @FXML
-    void OnbtnAddCliente(ActionEvent event) {
-        if (!validarCampos()) {
-            showAlert("Por favor, preencha todos os campos obrigatórios.");
-            return;
-        }
-
-        Clientes novoCliente = coletarDadosDoCliente();
-        
+    public void OnbtnAddCliente(ActionEvent event) {
         try {
-            if (controllerRelatorioClientes.clienteEditor != null) {
-                novoCliente.setIdCliente(controllerRelatorioClientes.clienteEditor.getIdCliente()); // Garantindo que o ID do cliente seja mantido
-                clienteDAO.update(novoCliente);
-                showAlert("Cliente atualizado com sucesso!");
-            } else {
-                if (ClienteDAO.validarExistente(novoCliente.getCpf())) {
-                    showAlert("Erro: Cliente com CPF " + novoCliente.getCpf() + " já existe.");
-                    return; 
-                }
+            if (validarCampos()) {
+                Clientes novoCliente = new Clientes();
+                preencherCliente(novoCliente);
                 clienteDAO.create(novoCliente);
-                showAlert("Cliente adicionado com sucesso!");
+                mostrarMensagem("Cliente cadastrado com sucesso!", Alert.AlertType.INFORMATION);
+                
+                if (confirmarCadastroOutro()) {
+                    limparCampos();
+                } else {
+                    fecharJanela();
+                }
+            } else {
+                mostrarMensagem("Por favor, preencha todos os campos obrigatórios e certifique-se de que os dados são válidos.", Alert.AlertType.WARNING);
             }
-
-            limparCampos();
-            carregarTabelaClientes();
-            
-        } catch (IllegalArgumentException e) {
-            showAlert(e.getMessage()); 
         } catch (Exception e) {
-            e.printStackTrace(); 
-            showAlert("Erro ao adicionar/atualizar cliente: " + e.getMessage());
+            mostrarMensagem("Erro ao cadastrar cliente: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+    
+    private void mostrarMensagem(String mensagem, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setContentText(mensagem);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
+
 
 
     private boolean validarCampos() {
@@ -133,6 +129,9 @@ public class controllerCadastrosClientes implements Initializable {
         cliente.setEmail(txtEmail.getText());
         cliente.setTelefone(txtTelefone.getText());
         
+        // Aqui você deve criar o endereço para o cliente
+        Enderecos endereco = new Enderecos();
+        preencherEndereco(endereco);
     }
 
     @FXML
