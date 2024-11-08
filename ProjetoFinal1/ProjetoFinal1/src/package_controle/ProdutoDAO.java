@@ -1,5 +1,6 @@
 package package_controle;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ public class ProdutoDAO {
 	        stmt.setString(2, prod.getCodigo());
 	        stmt.setString(3, prod.getMarca());
 	        stmt.setString(4, prod.getDescricao());
-	        stmt.setDouble(5, prod.getPrecoUnitario());
+	        stmt.setDouble(5, prod.getPrecoUnitario().doubleValue()); 
 	        stmt.setInt(6, prod.getEstoqueDisp());
 	        stmt.setString(7, prod.getId_Categoria()); 
 
@@ -51,10 +52,13 @@ public class ProdutoDAO {
 	            p.setCodigo(rs.getString("codigo"));
 	            p.setMarca(rs.getString("marca"));
 	            p.setDescricao(rs.getString("descricao"));
-	            p.setPrecoUnitario(rs.getDouble("precoUnitario"));
+	        
+	            p.setPrecoUnitario(BigDecimal.valueOf(rs.getDouble("precoUnitario")));
+	            
 	            p.setEstoqueDisp(rs.getInt("estoqueDisp"));
 	            p.setId_Categoria(rs.getString("id_Categoria"));
-	            p.setCategoriaNome(rs.getString("nomeCategoria")); 
+	            p.setCategoriaNome(rs.getString("nomeCategoria"));
+	            
 	            produtos.add(p);
 	        }
 	    } catch (SQLException e) {
@@ -85,7 +89,7 @@ public class ProdutoDAO {
                 p.setCodigo(rs.getString("codigo"));
                 p.setMarca(rs.getString("marca"));
                 p.setDescricao(rs.getString("descricao"));
-                p.setPrecoUnitario(rs.getDouble("precoUnitario"));
+	            p.setPrecoUnitario(BigDecimal.valueOf(rs.getDouble("precoUnitario")));
                 p.setEstoqueDisp(rs.getInt("estoqueDisp"));
                 produtos.add(p);
             }
@@ -116,7 +120,7 @@ public class ProdutoDAO {
                 p.setCodigo(rs.getString("codigo"));
                 p.setMarca(rs.getString("marca"));
                 p.setDescricao(rs.getString("descricao"));
-                p.setPrecoUnitario(rs.getDouble("precoUnitario"));
+	            p.setPrecoUnitario(BigDecimal.valueOf(rs.getDouble("precoUnitario")));
                 p.setEstoqueDisp(rs.getInt("estoqueDisp"));
                 produtos.add(p);
             }
@@ -139,9 +143,9 @@ public class ProdutoDAO {
             stmt.setString(2, prod.getCodigo());
             stmt.setString(3, prod.getMarca());
             stmt.setString(4, prod.getDescricao());
-            stmt.setDouble(5, prod.getPrecoUnitario());
+            stmt.setDouble(5, prod.getPrecoUnitario().doubleValue());
             stmt.setInt(6, prod.getEstoqueDisp());
-            stmt.setString(7, prod.getIdProduto()); // Corrigido
+            stmt.setString(7, prod.getIdProduto()); 
 
             stmt.executeUpdate();
 
@@ -151,6 +155,7 @@ public class ProdutoDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
+
 
     public void delete(String idProduto) {
         Connection con = ConnectionDatabase.getConnection();
@@ -187,7 +192,7 @@ public class ProdutoDAO {
                 produto.setCodigo(rs.getString("codigo"));
                 produto.setMarca(rs.getString("marca"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setPrecoUnitario(rs.getDouble("precoUnitario"));
+	            produto.setPrecoUnitario(BigDecimal.valueOf(rs.getDouble("precoUnitario")));
                 produto.setEstoqueDisp(rs.getInt("estoqueDisp"));
             }
 

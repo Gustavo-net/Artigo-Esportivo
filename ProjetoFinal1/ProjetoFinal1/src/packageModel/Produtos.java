@@ -1,12 +1,14 @@
 package packageModel;
 
+import java.math.BigDecimal;
+
 public class Produtos {
     private String idProduto;
     private String nome;
     private String codigo;
     private String marca;
     private String descricao;
-    private Double precoUnitario;
+    private BigDecimal precoUnitario;
     private Integer estoqueDisp;
     private String id_Categoria;
     private String categoriaNome; 
@@ -71,12 +73,12 @@ public class Produtos {
         this.descricao = descricao;
     }
 
-    public Double getPrecoUnitario() {
+    public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(Double precoUnitario) {
-        this.precoUnitario = precoUnitario;
+    public void setPrecoUnitario(BigDecimal bigDecimal) {
+        this.precoUnitario = bigDecimal;
     }
 
     public Integer getEstoqueDisp() {

@@ -3,16 +3,23 @@ package package_controle;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import packageConnection.ConnectionDatabase;
+
 import java.util.Date;
 
 import packageModel.ItemVenda;
+import packageModel.Produtos;
 import packageModel.Venda;
 
 public class VendasDAO {
     private Connection connection;
 
-    public VendasDAO(Connection connection) {
-        this.connection = connection;
+    public VendasDAO() {
+        this.connection = ConnectionDatabase.getConnection();
+        if (this.connection == null) {
+            throw new IllegalStateException("A conexão com o banco de dados não pôde ser estabelecida.");
+        }
     }
 
     public void inserirVenda(Venda venda, List<ItemVenda> itensVenda) throws SQLException {
@@ -20,7 +27,6 @@ public class VendasDAO {
         String insertItemVendaSQL = "INSERT INTO ItensVenda (idVenda, codigoProduto, quantidade, precoUnitario, subtotal) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement psVenda = connection.prepareStatement(insertVendaSQL, Statement.RETURN_GENERATED_KEYS)) {
-            // Inserir a venda
             psVenda.setString(1, venda.getCpfCliente());
             psVenda.setString(2, venda.getCpfFuncionario());
             psVenda.setTimestamp(3, new Timestamp(venda.getDataVenda().getTime()));
@@ -33,15 +39,15 @@ public class VendasDAO {
                 try (ResultSet generatedKeys = psVenda.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int idVenda = generatedKeys.getInt(1);
-                        venda.setIdVenda(idVenda); 
+                        venda.setIdVenda(idVenda);
 
                         try (PreparedStatement psItemVenda = connection.prepareStatement(insertItemVendaSQL)) {
                             for (ItemVenda item : itensVenda) {
-                                psItemVenda.setInt(1, idVenda);  
+                                psItemVenda.setInt(1, idVenda);
                                 psItemVenda.setString(2, item.getCodigoProduto());
                                 psItemVenda.setInt(3, item.getQuantidade());
                                 psItemVenda.setBigDecimal(4, item.getPrecoUnitario());
-                                psItemVenda.setBigDecimal(5, item.getSubtotal()); 
+                                psItemVenda.setBigDecimal(5, item.getSubtotal());
                                 psItemVenda.executeUpdate();
                             }
                         }
@@ -65,10 +71,9 @@ public class VendasDAO {
                 venda.setCpfCliente(rsVendas.getString("cpfCliente"));
                 venda.setCpfFuncionario(rsVendas.getString("cpfFuncionario"));
 
-                // Conversão de Timestamp para Date
                 Timestamp timestamp = rsVendas.getTimestamp("dataVenda");
                 if (timestamp != null) {
-                    venda.setDataVenda(new Date(timestamp.getTime())); 
+                    venda.setDataVenda(new Date(timestamp.getTime()));
                 }
 
                 venda.setTotalVenda(rsVendas.getBigDecimal("totalVenda"));
@@ -89,7 +94,7 @@ public class VendasDAO {
                             item.setSubtotal(rsItensVenda.getBigDecimal("subtotal"));
                             itensVenda.add(item);
                         }
-                        venda.setItensVenda(itensVenda);  
+                        venda.setItensVenda(itensVenda);
                     }
                 }
 
@@ -114,7 +119,7 @@ public class VendasDAO {
 
                     Timestamp timestamp = rsVenda.getTimestamp("dataVenda");
                     if (timestamp != null) {
-                        venda.setDataVenda(new Date(timestamp.getTime()));  
+                        venda.setDataVenda(new Date(timestamp.getTime()));
                     }
 
                     venda.setTotalVenda(rsVenda.getBigDecimal("totalVenda"));
@@ -134,7 +139,7 @@ public class VendasDAO {
                                 item.setSubtotal(rsItensVenda.getBigDecimal("subtotal"));
                                 itensVenda.add(item);
                             }
-                            venda.setItensVenda(itensVenda);  
+                            venda.setItensVenda(itensVenda);
                         }
                     }
                     return venda;
@@ -150,7 +155,7 @@ public class VendasDAO {
         try (PreparedStatement ps = connection.prepareStatement(updateSQL)) {
             ps.setString(1, venda.getCpfCliente());
             ps.setString(2, venda.getCpfFuncionario());
-            ps.setTimestamp(3, new Timestamp(venda.getDataVenda().getTime()));  
+            ps.setTimestamp(3, new Timestamp(venda.getDataVenda().getTime()));
             ps.setBigDecimal(4, venda.getTotalVenda());
             ps.setString(5, venda.getFormaPagamento());
             ps.setInt(6, venda.getIdVenda());
@@ -172,4 +177,21 @@ public class VendasDAO {
             psDeleteVenda.executeUpdate();
         }
     }
+    public Produtos buscarProdutoPorCodigo(String codigo) throws SQLException {
+        String query = "SELECT * FROM Produtos WHERE codigoProduto = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, codigo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Produtos produto = new Produtos();
+                    produto.setCodigo(rs.getString("codigoProduto"));
+                    produto.setDescricao(rs.getString("descricao"));
+                    produto.setPrecoUnitario(rs.getBigDecimal("preco"));
+                    return produto;
+                }
+            }
+        }
+        return null;
+    }
+
 }

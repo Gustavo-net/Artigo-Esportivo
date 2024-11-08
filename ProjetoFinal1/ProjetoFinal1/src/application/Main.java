@@ -12,6 +12,7 @@ import javafx.scene.control.Dialog;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packageConnection.ConnectionDatabase;
+import packageModel.Venda;
 
 public class Main extends Application {
 
@@ -56,10 +57,10 @@ public class Main extends Application {
 			 Parent fxmlFornecedores = 
 			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioFornecedores.fxml"));
 			 Fornecedores = new Scene(fxmlFornecedores);
-//			 
-//			 Parent fxmlVendas = 
-//			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioVendas.fxml"));
-//			 Vendas = new Scene(fxmlVendas);
+		 
+			 Parent fxmlVendas = 
+			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioVendas.fxml"));
+			 Vendas = new Scene(fxmlVendas);
 			// Parent fxmlRegistrarVenda = FXMLLoader
 			// .load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
 			// RegistrarVendas = new Scene(fxmlRegistrarVenda);
@@ -165,7 +166,7 @@ public class Main extends Application {
 	
 	private static Stage cadastroVenda;
 	
-	public static void TelaCadastroVenda() throws IOException {
+	public static void TelaCadastroVenda(Venda vendaSelecionada) throws IOException {
 		FXMLLoader VendaCadastro = new FXMLLoader();
 		VendaCadastro.setLocation(Main.class.getResource("/packageView/viewPDV.fxml"));
 		Parent cadastrarVenda = VendaCadastro.load();
