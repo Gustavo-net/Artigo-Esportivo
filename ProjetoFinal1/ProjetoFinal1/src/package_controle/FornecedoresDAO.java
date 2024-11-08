@@ -17,8 +17,10 @@ public class FornecedoresDAO {
 	    ResultSet rsEndereco = null;
 
 	    try {
+	        // Inicia a transação
 	        con.setAutoCommit(false);
 
+	        // SQL para inserir o endereço
 	        String sqlEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) " +
 	                             "VALUES (?, ?, ?, ?, ?, ?)";
 	        stmtEndereco = con.prepareStatement(sqlEndereco, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -29,13 +31,16 @@ public class FornecedoresDAO {
 	        stmtEndereco.setString(5, f.getComplemento());
 	        stmtEndereco.setString(6, f.getCidadeUF());
 
+	        // Executa a inserção do endereço
 	        int affectedRows = stmtEndereco.executeUpdate();
 
 	        if (affectedRows > 0) {
+	            // Obtém o ID gerado do endereço inserido
 	            rsEndereco = stmtEndereco.getGeneratedKeys();
 	            if (rsEndereco.next()) {
 	                int idEndereco = rsEndereco.getInt(1);
 
+	                // SQL para inserir o fornecedor com o ID do endereço
 	                String sqlFornecedor = "INSERT INTO Fornecedores (nomeFornecedor, cnpj, email, telefone, id_Endereco) " +
 	                                       "VALUES (?, ?, ?, ?, ?)";
 	                stmtFornecedor = con.prepareStatement(sqlFornecedor);
@@ -43,8 +48,9 @@ public class FornecedoresDAO {
 	                stmtFornecedor.setString(2, f.getCnpj());
 	                stmtFornecedor.setString(3, f.getEmail());
 	                stmtFornecedor.setString(4, f.getTelefone());
-	                stmtFornecedor.setInt(5, idEndereco);  
+	                stmtFornecedor.setInt(5, idEndereco);  // Vincula o ID do endereço à inserção do fornecedor
 
+	                // Executa a inserção do fornecedor
 	                stmtFornecedor.executeUpdate();
 	            } else {
 	                throw new SQLException("Falha ao obter o ID do endereço inserido.");
@@ -53,31 +59,30 @@ public class FornecedoresDAO {
 	            throw new SQLException("Falha ao inserir o endereço.");
 	        }
 
-	        con.commit(); 
+	        // Confirma a transação
+	        con.commit();
 
 	    } catch (SQLException e) {
 	        try {
 	            if (con != null) {
-	                con.rollback(); 
+	                con.rollback();  // Reverte a transação em caso de erro
 	            }
 	        } catch (SQLException ex) {
-	            ex.printStackTrace(); 
+	            ex.printStackTrace();
 	        }
-	        e.printStackTrace(); 
+	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (rsEndereco != null) rsEndereco.close(); 
-	            if (stmtFornecedor != null) stmtFornecedor.close(); 
-	            if (stmtEndereco != null) stmtEndereco.close(); 
-	            if (con != null) con.setAutoCommit(true);
-	            if (con != null) con.close(); 
+	            if (rsEndereco != null) rsEndereco.close();
+	            if (stmtFornecedor != null) stmtFornecedor.close();
+	            if (stmtEndereco != null) stmtEndereco.close();
+	            if (con != null) con.setAutoCommit(true);  // Restaura o comportamento padrão de commit automático
+	            if (con != null) con.close();
 	        } catch (SQLException e) {
-	            e.printStackTrace(); 
+	            e.printStackTrace();
 	        }
 	    }
 	}
-
-
 
 
 
@@ -132,18 +137,16 @@ public class FornecedoresDAO {
 	    ArrayList<Fornecedores> fornecedores = new ArrayList<>();
 
 	    try {
-	        // SQL agora inclui a junção com a tabela Enderecos
 	        String sql = "SELECT f.*, e.cep, e.rua, e.numero, e.bairro, e.complemento, e.cidadeUF " +
 	                     "FROM Fornecedores f " +
 	                     "LEFT JOIN Enderecos e ON f.id_Endereco = e.idEndereco " +
 	                     "WHERE f.nomeFornecedor LIKE ?";
 
 	        stmt = con.prepareStatement(sql);
-	        stmt.setString(1, "%" + string + "%"); // Busca com o nome do fornecedor
+	        stmt.setString(1, "%" + string + "%");
 	        rs = stmt.executeQuery();
 
 	        while (rs.next()) {
-	            // Cria o objeto Fornecedores e preenche com os dados da consulta
 	            Fornecedores f = new Fornecedores();
 	            f.setIdFornecedor(rs.getString("idFornecedor"));
 	            f.setNomeFornecedor(rs.getString("nomeFornecedor"));
@@ -152,7 +155,6 @@ public class FornecedoresDAO {
 	            f.setTelefone(rs.getString("telefone"));
 	            f.setId_Endereço(rs.getString("id_Endereco"));
 
-	            // Preenche os dados do endereço, se disponíveis
 	            f.setCep(rs.getString("cep"));
 	            f.setRua(rs.getString("rua"));
 	            f.setNumero(rs.getString("numero"));
@@ -160,14 +162,12 @@ public class FornecedoresDAO {
 	            f.setComplemento(rs.getString("complemento"));
 	            f.setCidadeUF(rs.getString("cidadeUF"));
 
-	            // Adiciona o fornecedor à lista
 	            fornecedores.add(f);
 	        }
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
-	        // Fecha a conexão, preparedStatement e ResultSet
 	        ConnectionDatabase.closeConnection(con, stmt, rs);
 	    }
 
