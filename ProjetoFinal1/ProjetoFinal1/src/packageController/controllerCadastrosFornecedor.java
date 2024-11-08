@@ -59,6 +59,7 @@ public class controllerCadastrosFornecedor implements Initializable {
     private TextField txtTelefone;
 
     private EnderecoDAO enderecoDAO = new EnderecoDAO();  
+    
     private FornecedoresDAO fornecedoresDAO = new FornecedoresDAO();  
 
     @FXML
