@@ -62,9 +62,20 @@ public class controllerCadastrosClientes implements Initializable {
     public void OnbtnAddCliente(ActionEvent event) {
         try {
             if (validarCampos()) {
+                // Criar um novo endereço e preencher
+                Enderecos endereco = new Enderecos();
+                preencherEndereco(endereco);
+                
+                // Salvar o endereço no banco de dados
+                enderecoDAO.create(endereco);
+
+                // Agora, criar um novo cliente
                 Clientes novoCliente = new Clientes();
-                preencherCliente(novoCliente);
+                preencherCliente(novoCliente, endereco);  // Passar o endereço já salvo como objeto
+                
+                // Salvar o cliente no banco de dados
                 clienteDAO.create(novoCliente);
+                
                 mostrarMensagem("Cliente cadastrado com sucesso!", Alert.AlertType.INFORMATION);
                 
                 if (confirmarCadastroOutro()) {
@@ -79,15 +90,13 @@ public class controllerCadastrosClientes implements Initializable {
             mostrarMensagem("Erro ao cadastrar cliente: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
-    
+
     private void mostrarMensagem(String mensagem, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
         alert.setContentText(mensagem);
         alert.setHeaderText(null);
         alert.showAndWait();
     }
-
-
 
     private boolean validarCampos() {
         return !txtNomeCliente.getText().isEmpty() &&
@@ -100,7 +109,6 @@ public class controllerCadastrosClientes implements Initializable {
                !txtCidadeUF.getText().isEmpty() &&
                !txtCep.getText().isEmpty();
     }
-
 
     private boolean confirmarCadastroOutro() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -123,15 +131,14 @@ public class controllerCadastrosClientes implements Initializable {
         endereco.setCidadeUF(txtCidadeUF.getText());
     }
 
-    private void preencherCliente(Clientes cliente) {
+
+    private void preencherCliente(Clientes cliente, Enderecos endereco) {
         cliente.setNomeCliente(txtNomeCliente.getText());
         cliente.setCpf(txtCPF.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setTelefone(txtTelefone.getText());
         
-        // Aqui você deve criar o endereço para o cliente
-        Enderecos endereco = new Enderecos();
-        preencherEndereco(endereco);
+        cliente.setId_Endereco(endereco);  
     }
 
     @FXML
@@ -157,18 +164,6 @@ public class controllerCadastrosClientes implements Initializable {
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
         stage.close();
     }
-    
-    private Clientes coletarDadosDoCliente() {
-        Clientes cliente = new Clientes();
-        preencherCliente(cliente); 
-        return cliente;
-    }
-    
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -177,9 +172,17 @@ public class controllerCadastrosClientes implements Initializable {
             txtCPF.setText(controllerRelatorioClientes.clienteEditor.getCpf());
             txtEmail.setText(controllerRelatorioClientes.clienteEditor.getEmail());
             txtTelefone.setText(controllerRelatorioClientes.clienteEditor.getTelefone());
+
+            if (controllerRelatorioClientes.clienteEditor.getId_Endereco() != null) {
+                Enderecos endereco = controllerRelatorioClientes.clienteEditor.getId_Endereco();
+                txtRua.setText(endereco.getRua());
+                txtNumero.setText(endereco.getNumero());
+                txtBairro.setText(endereco.getBairro());
+                txtCidadeUF.setText(endereco.getCidadeUF());
+                txtCep.setText(endereco.getCep());
+                txtComplemento.setText(endereco.getComplemento());
+            }
         }
     }
 
-    private void carregarTabelaClientes() {
-    }
 }
