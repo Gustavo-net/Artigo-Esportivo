@@ -10,80 +10,39 @@ import packageConnection.ConnectionDatabase;
 import packageModel.Fornecedores;
 
 public class FornecedoresDAO {
-	public static void create(Fornecedores f) {
+	public static String create(Fornecedores fornecedor) {
+	    String idFornecedor = null;
 	    Connection con = ConnectionDatabase.getConnection();
-	    PreparedStatement stmtEndereco = null;
-	    PreparedStatement stmtFornecedor = null;
-	    ResultSet rsEndereco = null;
+	    PreparedStatement stmt = null;
 
 	    try {
-	        // Inicia a transação
-	        con.setAutoCommit(false);
+	        String sql = "INSERT INTO Fornecedores (nomeFornecedor, cnpj, email, telefone, id_Endereco) VALUES (?, ?, ?, ?, ?)";
+	        stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+	        stmt.setString(1, fornecedor.getNomeFornecedor());
+	        stmt.setString(2, fornecedor.getCnpj());
+	        stmt.setString(3, fornecedor.getEmail());
+	        stmt.setString(4, fornecedor.getTelefone());
+	        stmt.setString(5, fornecedor.getId_Endereço()); 
 
-	        // SQL para inserir o endereço
-	        String sqlEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) " +
-	                             "VALUES (?, ?, ?, ?, ?, ?)";
-	        stmtEndereco = con.prepareStatement(sqlEndereco, PreparedStatement.RETURN_GENERATED_KEYS);
-	        stmtEndereco.setString(1, f.getCep());
-	        stmtEndereco.setString(2, f.getRua());
-	        stmtEndereco.setString(3, f.getNumero());
-	        stmtEndereco.setString(4, f.getBairro());
-	        stmtEndereco.setString(5, f.getComplemento());
-	        stmtEndereco.setString(6, f.getCidadeUF());
-
-	        // Executa a inserção do endereço
-	        int affectedRows = stmtEndereco.executeUpdate();
-
+	        int affectedRows = stmt.executeUpdate();
 	        if (affectedRows > 0) {
-	            // Obtém o ID gerado do endereço inserido
-	            rsEndereco = stmtEndereco.getGeneratedKeys();
-	            if (rsEndereco.next()) {
-	                int idEndereco = rsEndereco.getInt(1);
-
-	                // SQL para inserir o fornecedor com o ID do endereço
-	                String sqlFornecedor = "INSERT INTO Fornecedores (nomeFornecedor, cnpj, email, telefone, id_Endereco) " +
-	                                       "VALUES (?, ?, ?, ?, ?)";
-	                stmtFornecedor = con.prepareStatement(sqlFornecedor);
-	                stmtFornecedor.setString(1, f.getNomeFornecedor());
-	                stmtFornecedor.setString(2, f.getCnpj());
-	                stmtFornecedor.setString(3, f.getEmail());
-	                stmtFornecedor.setString(4, f.getTelefone());
-	                stmtFornecedor.setInt(5, idEndereco);  // Vincula o ID do endereço à inserção do fornecedor
-
-	                // Executa a inserção do fornecedor
-	                stmtFornecedor.executeUpdate();
-	            } else {
-	                throw new SQLException("Falha ao obter o ID do endereço inserido.");
+	            ResultSet rs = stmt.getGeneratedKeys();
+	            if (rs.next()) {
+	                idFornecedor = rs.getString(1);  
 	            }
-	        } else {
-	            throw new SQLException("Falha ao inserir o endereço.");
 	        }
-
-	        // Confirma a transação
-	        con.commit();
-
 	    } catch (SQLException e) {
-	        try {
-	            if (con != null) {
-	                con.rollback();  // Reverte a transação em caso de erro
-	            }
-	        } catch (SQLException ex) {
-	            ex.printStackTrace();
-	        }
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (rsEndereco != null) rsEndereco.close();
-	            if (stmtFornecedor != null) stmtFornecedor.close();
-	            if (stmtEndereco != null) stmtEndereco.close();
-	            if (con != null) con.setAutoCommit(true);  // Restaura o comportamento padrão de commit automático
+	            if (stmt != null) stmt.close();
 	            if (con != null) con.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
+	    return idFornecedor; 
 	}
-
 
 
 	public ArrayList<Fornecedores> read() {

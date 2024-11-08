@@ -64,9 +64,7 @@ public class controllerCadastrosFornecedor implements Initializable {
             Enderecos endereco = new Enderecos();
             preencherEndereco(endereco);
 
-            EnderecoDAO.create(endereco);  
-
-            String idEndereco = endereco.getIdEndereço(); 
+            String idEndereco = EnderecoDAO.create(endereco);
 
             if (idEndereco == null) {
                 mostrarMensagem("Erro ao cadastrar o endereço. Tente novamente.", Alert.AlertType.ERROR);
@@ -76,9 +74,13 @@ public class controllerCadastrosFornecedor implements Initializable {
             Fornecedores fornecedor = new Fornecedores();
             preencherFornecedor(fornecedor, idEndereco); 
 
-            FornecedoresDAO.create(fornecedor);  
+            String idFornecedor = FornecedoresDAO.create(fornecedor);
 
-            mostrarMensagem("Fornecedor cadastrado com sucesso!", Alert.AlertType.INFORMATION);
+            if (idFornecedor != null) {
+                mostrarMensagem("Fornecedor cadastrado com sucesso!", Alert.AlertType.INFORMATION);
+            } else {
+                mostrarMensagem("Erro ao cadastrar o fornecedor. Tente novamente.", Alert.AlertType.ERROR);
+            }
 
             if (confirmarCadastroOutro()) {
                 limparCampos();
@@ -89,6 +91,7 @@ public class controllerCadastrosFornecedor implements Initializable {
             mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", Alert.AlertType.WARNING);
         }
     }
+
 
 
 

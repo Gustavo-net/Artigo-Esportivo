@@ -8,7 +8,7 @@ public class Venda {
     private String cpfCliente;
     private String cpfFuncionario;
     private Date dataVenda;
-    private double totalVenda;  // Alterado para double
+    private double totalVenda;
     private String formaPagamento;
     private List<ItemVenda> itensVenda;
 
@@ -40,17 +40,16 @@ public class Venda {
         return dataVenda;
     }
 
-    public void setDataVenda(java.util.Date date) {
-    	java.util.Date utilDate = date;  
-    	java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+    public void setDataVenda(Date dataVenda) {
+        this.dataVenda = dataVenda;
     }
 
     public double getTotalVenda() {
-        return totalVenda;  
+        return totalVenda;
     }
 
     public void setTotalVenda(double totalVenda) {
-        this.totalVenda = totalVenda;  
+        this.totalVenda = totalVenda;
     }
 
     public String getFormaPagamento() {

@@ -1,13 +1,13 @@
 package packageModel;
-
 public class ItemVenda {
     private int idItemVenda;
     private int idVenda;
     private String codigoProduto;
     private int quantidade;
-    private double precoUnitario;  
-    private double subtotal;  
+    private double precoUnitario;
+    private double subtotal;
 
+    // Getters e Setters
     public int getIdItemVenda() {
         return idItemVenda;
     }

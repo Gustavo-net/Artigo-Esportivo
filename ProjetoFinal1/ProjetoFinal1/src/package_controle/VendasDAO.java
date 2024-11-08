@@ -7,6 +7,7 @@ import java.util.List;
 import packageConnection.ConnectionDatabase;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import packageModel.ItemVenda;
 import packageModel.Produtos;
@@ -59,94 +60,110 @@ public class VendasDAO {
 
     public List<Venda> listarVendas() throws SQLException {
         List<Venda> vendas = new ArrayList<>();
-        String queryVendas = "SELECT * FROM Vendas";
-        String queryItensVenda = "SELECT * FROM ItensVenda WHERE idVenda = ?";
+        String sql = "SELECT v.idVenda, v.cpfCliente, v.cpfFuncionario, v.dataVenda, v.totalVenda, v.formaPagamento, " +
+                     "iv.idItemVenda, iv.codigoProduto, iv.quantidade, iv.precoUnitario, iv.subtotal " +
+                     "FROM Vendas v " +
+                     "INNER JOIN ItensVenda iv ON v.idVenda = iv.idVenda";
 
-        try (Statement stmtVendas = connection.createStatement();
-             ResultSet rsVendas = stmtVendas.executeQuery(queryVendas)) {
+        try (Connection conn = ConnectionDatabase.getConnection(); 
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
-            while (rsVendas.next()) {
-                Venda venda = new Venda();
-                venda.setIdVenda(rsVendas.getInt("idVenda"));
-                venda.setCpfCliente(rsVendas.getString("cpfCliente"));
-                venda.setCpfFuncionario(rsVendas.getString("cpfFuncionario"));
+            while (rs.next()) {
+                int idVenda = rs.getInt("idVenda");
+                Venda venda = null;
 
-                Timestamp timestamp = rsVendas.getTimestamp("dataVenda");
-                if (timestamp != null) {
-                    venda.setDataVenda(new Date(timestamp.getTime()));
-                }
-
-                venda.setTotalVenda(rsVendas.getDouble("totalVenda"));
-                venda.setFormaPagamento(rsVendas.getString("formaPagamento"));
-
-                try (PreparedStatement psItensVenda = connection.prepareStatement(queryItensVenda)) {
-                    psItensVenda.setInt(1, venda.getIdVenda());
-                    try (ResultSet rsItensVenda = psItensVenda.executeQuery()) {
-                        List<ItemVenda> itensVenda = new ArrayList<>();
-                        while (rsItensVenda.next()) {
-                            ItemVenda item = new ItemVenda();
-                            item.setIdItemVenda(rsItensVenda.getInt("idItemVenda"));
-                            item.setIdVenda(rsItensVenda.getInt("idVenda"));
-                            item.setCodigoProduto(rsItensVenda.getString("codigoProduto"));
-                            item.setQuantidade(rsItensVenda.getInt("quantidade"));
-                            item.setPrecoUnitario(rsItensVenda.getDouble("precoUnitario"));  
-                            item.setSubtotal(rsItensVenda.getDouble("subtotal"));
-                            itensVenda.add(item);
-                        }
-                        venda.setItensVenda(itensVenda);
+                for (Venda v : vendas) {
+                    if (v.getIdVenda() == idVenda) {
+                        venda = v; 
+                        break;
                     }
                 }
+                if (venda == null) {
+                    venda = new Venda();
+                    venda.setIdVenda(idVenda);
+                    venda.setCpfCliente(rs.getString("cpfCliente"));
+                    venda.setCpfFuncionario(rs.getString("cpfFuncionario"));
+                    venda.setDataVenda(rs.getDate("dataVenda"));
+                    venda.setTotalVenda(rs.getDouble("totalVenda"));
+                    venda.setFormaPagamento(rs.getString("formaPagamento"));
+                    venda.setItensVenda(new ArrayList<>());
+                    vendas.add(venda);
+                }
 
-                vendas.add(venda);
+                ItemVenda itemVenda = new ItemVenda();
+                itemVenda.setIdItemVenda(rs.getInt("idItemVenda"));
+                itemVenda.setIdVenda(idVenda);
+                itemVenda.setCodigoProduto(rs.getString("codigoProduto"));
+                itemVenda.setQuantidade(rs.getInt("quantidade"));
+                itemVenda.setPrecoUnitario(rs.getDouble("precoUnitario"));
+                itemVenda.setSubtotal(rs.getDouble("subtotal"));
+
+                venda.getItensVenda().add(itemVenda);
             }
         }
+
         return vendas;
     }
 
+
     public Venda buscarVendaPorId(int idVenda) throws SQLException {
-        String queryVenda = "SELECT * FROM Vendas WHERE idVenda = ?";
-        String queryItensVenda = "SELECT * FROM ItensVenda WHERE idVenda = ?";
+        String queryVenda = "SELECT v.idVenda, v.cpfCliente, v.cpfFuncionario, v.dataVenda, v.totalVenda, v.formaPagamento " +
+                             "FROM Vendas v WHERE v.idVenda = ?";
+        String queryItensVenda = "SELECT iv.idItemVenda, iv.idVenda, iv.codigoProduto, iv.quantidade, iv.precoUnitario, iv.subtotal " +
+                                 "FROM ItensVenda iv WHERE iv.idVenda = ?";
 
         try (PreparedStatement psVenda = connection.prepareStatement(queryVenda)) {
             psVenda.setInt(1, idVenda);
+            
             try (ResultSet rsVenda = psVenda.executeQuery()) {
                 if (rsVenda.next()) {
                     Venda venda = new Venda();
                     venda.setIdVenda(rsVenda.getInt("idVenda"));
                     venda.setCpfCliente(rsVenda.getString("cpfCliente"));
                     venda.setCpfFuncionario(rsVenda.getString("cpfFuncionario"));
-
+                    
                     Timestamp timestamp = rsVenda.getTimestamp("dataVenda");
                     if (timestamp != null) {
-                        venda.setDataVenda(new Date(timestamp.getTime()));
+                        venda.setDataVenda(new java.sql.Date(timestamp.getTime()));  
+                    } else {
+                        venda.setDataVenda(null); 
                     }
-
-                    venda.setTotalVenda(rsVenda.getDouble("totalVenda"));  
+                    
+                    venda.setTotalVenda(rsVenda.getDouble("totalVenda"));
                     venda.setFormaPagamento(rsVenda.getString("formaPagamento"));
-
+                    
                     try (PreparedStatement psItensVenda = connection.prepareStatement(queryItensVenda)) {
-                        psItensVenda.setInt(1, venda.getIdVenda());
+                        psItensVenda.setInt(1, idVenda); 
+                        
                         try (ResultSet rsItensVenda = psItensVenda.executeQuery()) {
                             List<ItemVenda> itensVenda = new ArrayList<>();
+                            
                             while (rsItensVenda.next()) {
                                 ItemVenda item = new ItemVenda();
                                 item.setIdItemVenda(rsItensVenda.getInt("idItemVenda"));
                                 item.setIdVenda(rsItensVenda.getInt("idVenda"));
                                 item.setCodigoProduto(rsItensVenda.getString("codigoProduto"));
                                 item.setQuantidade(rsItensVenda.getInt("quantidade"));
-                                item.setPrecoUnitario(rsItensVenda.getDouble("precoUnitario"));  
-                                item.setSubtotal(rsItensVenda.getDouble("subtotal")); 
+                                item.setPrecoUnitario(rsItensVenda.getDouble("precoUnitario"));
+                                item.setSubtotal(rsItensVenda.getDouble("subtotal"));
                                 itensVenda.add(item);
                             }
+                            
                             venda.setItensVenda(itensVenda);
                         }
                     }
-                    return venda;
+
+                    return venda; 
                 }
             }
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar a venda com ID: " + idVenda, e);
         }
-        return null;
+
+        return null;  
     }
+
 
     public void atualizarVenda(Venda venda) throws SQLException {
         String updateSQL = "UPDATE Vendas SET cpfCliente = ?, cpfFuncionario = ?, dataVenda = ?, totalVenda = ?, formaPagamento = ? WHERE idVenda = ?";
