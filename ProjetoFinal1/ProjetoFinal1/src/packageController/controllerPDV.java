@@ -1,91 +1,122 @@
 package packageController;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.util.converter.NumberStringConverter;
+import javafx.stage.Stage;
+import packageModel.Produtos;
 import packageModel.Vendas;
+import package_controle.ProdutoDAO;
+import package_controle.VendaDAO;
 
+import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.List;
+import java.util.ResourceBundle;
 
-public class controllerPDV {
+public class controllerPDV implements Initializable {
 
-    // FXML components
+    @FXML private Button btnCancelar;
     @FXML private TextField codigoProdutoField;
     @FXML private TextField quantidadeField;
     @FXML private TextField descontoField;
     @FXML private TextField clienteField;
     @FXML private TextField funcionarioField;
-    @FXML private TextField valorTotalField;
+    @FXML private Label labelValorTotal;
     @FXML private ComboBox<String> statusVendaCombo;
     @FXML private ComboBox<String> canalVendasCombo;
     @FXML private ComboBox<String> metodoPagamentoCombo;
-    @FXML private ComboBox<String> parcelasCombo;
     @FXML private TableView<Vendas> tableView;
     @FXML private TableColumn<Vendas, String> colCodigo;
     @FXML private TableColumn<Vendas, String> colProduto;
     @FXML private TableColumn<Vendas, String> colQuantidade;
     @FXML private TableColumn<Vendas, String> colDesconto;
     @FXML private TableColumn<Vendas, String> colSubtotal;
-    @FXML private Label labelValorTotal;
     @FXML private ComboBox<String> comboxParcelar;
 
     private ObservableList<Vendas> vendasList = FXCollections.observableArrayList();
     private double valorTotalVenda = 0.0;
 
     @FXML
-    public void initialize() {
-        statusVendaCombo.setItems(FXCollections.observableArrayList("Pendente", "Pago", "Cancelado"));
-        canalVendasCombo.setItems(FXCollections.observableArrayList("Online", "Loja Física", "Telemarketing"));
-        metodoPagamentoCombo.setItems(FXCollections.observableArrayList("Dinheiro", "Cartão de Crédito", "Cartão de Débito", "Boleto"));
-        comboxParcelar.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6"));
-
-        colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoProduto"));
-        colProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
-        colQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        colDesconto.setCellValueFactory(new PropertyValueFactory<>("desconto"));
-        colSubtotal.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
-
-        updateValorTotal();
-    }
-   
-    @FXML
     private void onAdicionarProduto(MouseEvent event) {
         String codigoProduto = codigoProdutoField.getText();
-        int quantidade = Integer.parseInt(quantidadeField.getText());
-        double desconto = Double.parseDouble(descontoField.getText());
+        
+        // Validações
+        if (codigoProduto.trim().isEmpty()) {
+            showErrorMessage("Código de produto não pode estar vazio.");
+            return;
+        }
 
-        double valorUnitario = 100.0; 
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        Produtos produto = produtoDAO.buscarProdutoPorCodigo(codigoProduto);
 
-        // Criar uma nova instância de Vendas
+        if (produto == null) {
+            showErrorMessage("Produto não encontrado.");
+            return;
+        }
+
+        if (quantidadeField.getText().isEmpty() || descontoField.getText().isEmpty()) {
+            showErrorMessage("Quantidade e desconto devem ser informados.");
+            return;
+        }
+
+        int quantidade;
+        double desconto;
+
+        try {
+            quantidade = Integer.parseInt(quantidadeField.getText());
+            desconto = Double.parseDouble(descontoField.getText());
+        } catch (NumberFormatException e) {
+            showErrorMessage("Quantidade ou desconto inválidos.");
+            return;
+        }
+
+        double valorUnitario = produto.getPrecoUnitario();
+        double subtotal = valorUnitario * quantidade * (1 - desconto / 100);
+
         Vendas venda = new Vendas();
-        venda.setCodigoProduto(codigoProduto);
+        venda.setCodigoProduto(produto.getCodigo());
+        venda.setNomeProduto(produto.getNome());
         venda.setQuantidade(quantidade);
         venda.setDesconto(desconto);
-        venda.calcularSubtotal(valorUnitario);
+        venda.setSubtotal(subtotal);
 
         vendasList.add(venda);
-        tableView.setItems(vendasList); 
+        tableView.setItems(vendasList);
+        tableView.refresh();
 
+        // Limpar campos
+        codigoProdutoField.clear();
+        quantidadeField.clear();
+        descontoField.clear();
+
+        // Atualizar valor total
         updateValorTotal();
     }
 
     private void updateValorTotal() {
         valorTotalVenda = vendasList.stream()
-                .mapToDouble(venda -> venda.getSubtotal())
+                .mapToDouble(Vendas::getSubtotal)
                 .sum();
 
         DecimalFormat df = new DecimalFormat("###,##0.00");
         labelValorTotal.setText("R$ " + df.format(valorTotalVenda));
     }
 
+    private void showErrorMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     @FXML
     private void OnbtnRegistrarVenda(MouseEvent event) {
-
         Vendas venda = new Vendas();
         venda.setCpf_Cliente(clienteField.getText());
         venda.setCpf_Funcionário(funcionarioField.getText());
@@ -95,7 +126,21 @@ public class controllerPDV {
         venda.setId_Pagamento(metodoPagamentoCombo.getValue());
         venda.setValorTotal(valorTotalVenda);
 
-        int parcelas = Integer.parseInt(parcelasCombo.getValue());
+        // Adiciona os produtos da lista de vendas
+        for (Vendas v : vendasList) {
+            venda.setCodigoProduto(v.getCodigoProduto());
+            venda.setQuantidade(v.getQuantidade());
+            venda.setDesconto(v.getDesconto());
+            venda.setSubtotal(v.getSubtotal());
+            venda.setNomeProduto(v.getNomeProduto());
+        }
+
+        // Persistir a venda
+        VendaDAO vendaDAO = new VendaDAO();
+        vendaDAO.create(venda);
+
+        // Parcelamento
+        int parcelas = Integer.parseInt(comboxParcelar.getValue());
         double valorParcela = valorTotalVenda / parcelas;
         for (int i = 1; i <= parcelas; i++) {
             System.out.println("Parcelamento: " + i + "x de R$ " + new DecimalFormat("###,##0.00").format(valorParcela));
@@ -106,12 +151,41 @@ public class controllerPDV {
 
     @FXML
     private void OnbtnCancelar(MouseEvent event) {
+        // Limpa campos
         codigoProdutoField.clear();
         quantidadeField.clear();
         descontoField.clear();
         clienteField.clear();
         funcionarioField.clear();
+
+        // Limpa a lista de vendas
         vendasList.clear();
-        updateValorTotal();  
+        updateValorTotal();
+    }
+
+    private void fecharJanela() {
+        Stage stage = (Stage) btnCancelar.getScene().getWindow();
+        stage.close();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Inicializa os ComboBoxes
+        statusVendaCombo.setItems(FXCollections.observableArrayList("Pendente", "Pago", "Cancelado"));
+        canalVendasCombo.setItems(FXCollections.observableArrayList("Online", "Loja Física", "Telemarketing"));
+        metodoPagamentoCombo.setItems(FXCollections.observableArrayList("Dinheiro", "Cartão de Crédito", "Cartão de Débito", "Boleto"));
+        comboxParcelar.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6"));
+
+        // Configura as colunas da TableView
+        colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoProduto"));
+        colProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
+        colQuantidade.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantidade())));
+        colDesconto.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getDesconto())));
+        colSubtotal.setCellValueFactory(cellData -> new SimpleStringProperty(new DecimalFormat("###,##0.00").format(cellData.getValue().getSubtotal())));
+
+        // Inicializa a lista de vendas e associa à TableView
+        vendasList = FXCollections.observableArrayList();
+        tableView.setItems(vendasList);
+        updateValorTotal();
     }
 }

@@ -141,4 +141,14 @@ public class Vendas {
         this.cpf_Cliente = cpf_Cliente;
         this.cpf_Funcionário = cpf_Funcionário;
     }
+
+	private String nomeProduto;
+	
+	public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
 }
