@@ -38,19 +38,10 @@
         <Text layoutX="219.0" layoutY="171.0" text="Quantidade:" />
         <TextField fx:id="quantidadeField" layoutX="222.0" layoutY="182.0" prefHeight="26.0" prefWidth="118.0" promptText="Quantidade" />
 
-        <Text layoutX="354.0" layoutY="171.0" text="Desconto:" />
-        <TextField fx:id="descontoField" layoutX="354.0" layoutY="182.0" prefHeight="26.0" prefWidth="105.0" promptText="Desconto" />
-
         <Text layoutX="446.0" layoutY="304.0" text="Valor Total:" />
 
-        <Text layoutX="190.0" layoutY="307.0" text="Status da Venda:" />
-        <ComboBox fx:id="statusVendaCombo" layoutX="189.0" layoutY="315.0" promptText="Selecione o Status" />
-
-        <Text layoutX="21.0" layoutY="240.0" text="Canal de Vendas:" />
-        <ComboBox fx:id="canalVendasCombo" layoutX="22.0" layoutY="254.0" prefHeight="26.0" prefWidth="139.0" promptText="Selecione o Canal" />
-
-        <Text layoutX="190.0" layoutY="242.0" text="Método de Pagamento:" />
-        <ComboBox fx:id="metodoPagamentoCombo" layoutX="183.0" layoutY="254.0" prefHeight="26.0" prefWidth="341.0" promptText="Selecione o Método" />
+        <Text layoutX="26.0" layoutY="242.0" text="Método de Pagamento:" />
+        <ComboBox fx:id="comboxFormaPagamento" layoutX="24.0" layoutY="254.0" prefHeight="26.0" prefWidth="341.0" promptText="Selecione o Método" />
 
         <Text layoutX="22.0" layoutY="305.0" text="Parcelar " />
 
@@ -64,18 +55,17 @@
      
      
       <DatePicker fx:id="dataVendaPicker" layoutX="210.0" layoutY="113.0" prefHeight="26.0" prefWidth="150.0" />
-      <TableView fx:id="tableView" layoutX="14.0" layoutY="421.0" prefHeight="154.0" prefWidth="514.0">
+      <TableView fx:id="tableView" layoutX="20.0" layoutY="384.0" prefHeight="154.0" prefWidth="514.0">
         <columns>
           <TableColumn fx:id="colCodigo" prefWidth="82.39996147155762" style="-fx-background-color: #ffffff;" text="Codigo" />
-          <TableColumn fx:id="colProduto" prefWidth="104.0" style="-fx-background-color: #ffffff;" text="Nome" />
-            <TableColumn fx:id="colQuantidade" prefWidth="96.80000305175781" style="-fx-background-color: #ffffff;" text="Quantidade" />
-            <TableColumn fx:id="colDesconto" prefWidth="124.0" style="-fx-background-color: #ffffff;" text="Descontos" />
-            <TableColumn fx:id="colSubtotal" prefWidth="104.0" style="-fx-background-color: #ffffff;" text="Subtotal" />
+          <TableColumn fx:id="colProduto" prefWidth="177.59996795654297" style="-fx-background-color: #ffffff;" text="Nome Produto" />
+            <TableColumn fx:id="colQuantidade" prefWidth="105.60003662109375" style="-fx-background-color: #ffffff;" text="Quantidade" />
+            <TableColumn fx:id="colSubtotal" prefWidth="148.79995727539062" style="-fx-background-color: #ffffff;" text="Subtotal" />
         </columns>
       </TableView>
       <Button fx:id="btnCancelar" layoutX="277.0" layoutY="598.0" onAction="#OnbtnCancelar" prefHeight="26.0" prefWidth="254.0" text="Cancelar Venda" />
       <Label fx:id="labelValorTotal" layoutX="446.0" layoutY="310.0" prefHeight="18.0" prefWidth="72.0" />
-      <Button layoutX="473.0" layoutY="182.0" mnemonicParsing="false" text="Add mais" />
+      <Button layoutX="353.0" layoutY="182.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" text="Add mais" />
       <ComboBox fx:id="comboxParcelar" layoutX="23.0" layoutY="316.0" prefHeight="26.0" prefWidth="139.0" />
     </children>
 </AnchorPane>
