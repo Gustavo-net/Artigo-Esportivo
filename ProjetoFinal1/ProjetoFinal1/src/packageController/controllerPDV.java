@@ -1,16 +1,217 @@
 package packageController;
 
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import javafx.scene.control.cell.PropertyValueFactory;
+import packageModel.ItemVenda;
+import packageModel.Produtos;
 import packageModel.Venda;
+import package_controle.VendasDAO;
 
-import java.text.DecimalFormat;
+public class controllerPDV implements Initializable {
+	
+    private VendasDAO vendasDAO;
+    
+    public controllerPDV() {
+        this.vendasDAO = new VendasDAO();  
+    }
+    @FXML
+    private Button btnCancelar;
+    @FXML
+    private Button bntAdicionar;
 
-public class controllerPDV {
+    @FXML
+    private Button btnRegistrarVenda;
+
+    @FXML
+    private TextField clienteField;
+
+    @FXML
+    private TextField codigoProdutoField;
+
+    @FXML
+    private TableColumn<ItemVenda, String> colCodigo;
+
+    @FXML
+    private TableColumn<ItemVenda, String> colProduto;
+
+    @FXML
+    private TableColumn<ItemVenda, Integer> colQuantidade;
+
+    @FXML
+    private TableColumn<ItemVenda, Double> colSubtotal;
+
+    @FXML
+    private ComboBox<String> comboxFormaPagamento;
+
+    @FXML
+    private ComboBox<String> comboxParcelar;
+
+    @FXML
+    private DatePicker dataVendaPicker;
+
+    @FXML
+    private TextField funcionarioField;
+
+    @FXML
+    private Label labelValorTotal;
+
+    @FXML
+    private TextField quantidadeField;
+
+    @FXML
+    private TableView<ItemVenda> tableView;
+
+    private double totalVenda = 0.0;
+
+    @FXML
+    void OnbtnAdicionarProduto(ActionEvent event) {
+        String codigoProduto = codigoProdutoField.getText();
+        String quantidadeStr = quantidadeField.getText();
+
+        if (codigoProduto.isEmpty()) {
+            showAlert("Erro", "Por favor, insira o código do produto.");
+            return;
+        }
+
+        if (quantidadeStr.isEmpty()) {
+            showAlert("Erro", "Por favor, insira a quantidade do produto.");
+            return;
+        }
+
+        int quantidade;
+        try {
+            quantidade = Integer.parseInt(quantidadeStr);
+            if (quantidade <= 0) {
+                showAlert("Erro", "A quantidade deve ser maior que zero.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Erro", "Quantidade inválida! Insira um número inteiro válido.");
+            return;
+        }
+
+        Produtos produto = buscarProdutoPorCodigo(codigoProduto);
+        if (produto == null) {
+            showAlert("Erro", "Produto não encontrado. Verifique o código e tente novamente.");
+            return;
+        }
+
+        double precoUnitario = produto.getPrecoUnitario();
+        if (precoUnitario <= 0) {
+            showAlert("Erro", "O preço do produto não está válido. Verifique o preço.");
+            return;
+        }
+
+        double subtotal = precoUnitario * quantidade;
+
+        ItemVenda item = new ItemVenda();
+        item.setCodigoProduto(produto.getCodigo());
+        item.setQuantidade(quantidade);
+        item.setPrecoUnitario(precoUnitario);
+        item.setSubtotal(subtotal);
+
+        ObservableList<ItemVenda> itens = tableView.getItems();
+        itens.add(item); 
+        totalVenda += subtotal;
+        labelValorTotal.setText(String.format("R$ %.2f", totalVenda)); 
+    }
+
+
+
+    @FXML
+    void OnbtnCancelar(ActionEvent event) {
+        clienteField.clear();
+        funcionarioField.clear();
+        codigoProdutoField.clear();
+        quantidadeField.clear();
+        comboxFormaPagamento.getSelectionModel().clearSelection();
+        comboxParcelar.getSelectionModel().clearSelection();
+        dataVendaPicker.setValue(null);
+        labelValorTotal.setText("R$ 0,00");
+
+        tableView.getItems().clear();
+        totalVenda = 0.0;
+    }
+
+    @FXML
+    void OnbtnRegistrarVenda(ActionEvent event) {
+        String cpfCliente = clienteField.getText();
+        String cpfFuncionario = funcionarioField.getText();
+        String formaPagamento = comboxFormaPagamento.getValue();
+        String parcela = comboxParcelar.getValue();
+        String dataVenda = dataVendaPicker.getValue() != null ? dataVendaPicker.getValue().toString() : "";
+
+        if (cpfCliente.isEmpty() || cpfFuncionario.isEmpty() || formaPagamento == null || dataVenda.isEmpty()) {
+            showAlert("Erro", "Por favor, preencha todos os campos obrigatórios.");
+            return;
+        }
+
+        // Criar a venda
+        Venda venda = new Venda();
+        venda.setCpfCliente(cpfCliente);
+        venda.setCpfFuncionario(cpfFuncionario);
+        venda.setFormaPagamento(formaPagamento);
+        venda.setTotalVenda(totalVenda);
+        venda.setDataVenda(java.sql.Date.valueOf(dataVenda));
+
+        // Adicionar os itens à venda
+        List<ItemVenda> itensVenda = tableView.getItems();
+
+        try {
+            vendasDAO.inserirVenda(venda, itensVenda);
+            showAlert("Sucesso", "Venda registrada com sucesso!");
+            OnbtnCancelar(event); 
+        } catch (SQLException e) {
+            showAlert("Erro", "Erro ao registrar a venda: " + e.getMessage());
+        }
+    }
+
+    private Produtos buscarProdutoPorCodigo(String codigoProduto) {
+        try {
+            return vendasDAO.buscarProdutoPorCodigo(codigoProduto);
+        } catch (SQLException e) {
+            showAlert("Erro", "Erro ao buscar o produto: " + e.getMessage());
+            return null;
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ObservableList<String> formasPagamento = FXCollections.observableArrayList("À vista", "Parcelado");
+        comboxFormaPagamento.setItems(formasPagamento);
+
+        ObservableList<String> parcelas = FXCollections.observableArrayList();
+        for (int i = 1; i <= 6; i++) {
+            parcelas.add(i + "x");
+        }
+        comboxParcelar.setItems(parcelas);
+        
+        colCodigo.setCellValueFactory(new PropertyValueFactory<ItemVenda, String>("codigoProduto"));
+        colProduto.setCellValueFactory(new PropertyValueFactory<ItemVenda, String>("descricao"));
+        colQuantidade.setCellValueFactory(new PropertyValueFactory<ItemVenda, Integer>("quantidade"));
+        colSubtotal.setCellValueFactory(new PropertyValueFactory<ItemVenda, Double>("subtotal"));
+
+        ObservableList<ItemVenda> listaItensVenda = FXCollections.observableArrayList();
+        tableView.setItems(listaItensVenda);  
+    }
+
 
 }

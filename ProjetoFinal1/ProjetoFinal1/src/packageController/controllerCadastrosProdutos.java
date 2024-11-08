@@ -185,7 +185,7 @@ public class controllerCadastrosProdutos implements Initializable {
             txtCodigo.setText(controllerRelatorioProduto.produtoEditor.getCodigo());
             txtMarca.setText(controllerRelatorioProduto.produtoEditor.getMarca());
             txtDescricao.setText(controllerRelatorioProduto.produtoEditor.getDescricao());
-            txtPreco.setText(Double.toString(controllerRelatorioProduto.produtoEditor.getPrecoUnitario()));
+            txtPreco.setText(String.format("%.2f", controllerRelatorioProduto.produtoEditor.getPrecoUnitario()));
             txtEstoqueAtual.setText(Integer.toString(controllerRelatorioProduto.produtoEditor.getEstoqueDisp()));
             boxCategoria.getSelectionModel().select(controllerRelatorioProduto.produtoEditor.getId_Categoria()); 
         }

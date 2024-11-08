@@ -1,16 +1,13 @@
 package packageModel;
 
-import java.math.BigDecimal;
-
 public class ItemVenda {
     private int idItemVenda;
     private int idVenda;
     private String codigoProduto;
     private int quantidade;
-    private BigDecimal precoUnitario;
-    private BigDecimal subtotal;
+    private double precoUnitario;  
+    private double subtotal;  
 
-    // Getters e Setters
     public int getIdItemVenda() {
         return idItemVenda;
     }
@@ -43,19 +40,19 @@ public class ItemVenda {
         this.quantidade = quantidade;
     }
 
-    public BigDecimal getPrecoUnitario() {
+    public double getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(BigDecimal precoUnitario) {
+    public void setPrecoUnitario(double precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
 
-    public BigDecimal getSubtotal() {
+    public double getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(BigDecimal subtotal) {
+    public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
 }

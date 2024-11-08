@@ -51,21 +51,21 @@
         <Text layoutX="26.0" layoutY="104.0" text="Funcionário:" />
         <TextField fx:id="funcionarioField" layoutX="26.0" layoutY="114.0" prefHeight="26.0" prefWidth="158.0" promptText="Funcionário (CPF)" />
 
-        <Button fx:id="btnRegistrarVenda" layoutX="17.0" layoutY="598.0" onAction="#OnbtnRegistrarVenda" prefHeight="26.0" prefWidth="245.0" text="Registrar Venda" />
+        <Button fx:id="btnRegistrarVenda" layoutX="20.0" layoutY="558.0" onAction="#OnbtnRegistrarVenda" prefHeight="26.0" prefWidth="245.0" text="Registrar Venda" />
      
      
       <DatePicker fx:id="dataVendaPicker" layoutX="210.0" layoutY="113.0" prefHeight="26.0" prefWidth="150.0" />
-      <TableView fx:id="tableView" layoutX="20.0" layoutY="384.0" prefHeight="154.0" prefWidth="514.0">
+      <TableView fx:id="tableView" layoutX="20.0" layoutY="384.0" prefHeight="154.0" prefWidth="530.0">
         <columns>
           <TableColumn fx:id="colCodigo" prefWidth="82.39996147155762" style="-fx-background-color: #ffffff;" text="Codigo" />
           <TableColumn fx:id="colProduto" prefWidth="177.59996795654297" style="-fx-background-color: #ffffff;" text="Nome Produto" />
-            <TableColumn fx:id="colQuantidade" prefWidth="105.60003662109375" style="-fx-background-color: #ffffff;" text="Quantidade" />
-            <TableColumn fx:id="colSubtotal" prefWidth="148.79995727539062" style="-fx-background-color: #ffffff;" text="Subtotal" />
+            <TableColumn fx:id="colQuantidade" prefWidth="130.39996337890625" style="-fx-background-color: #ffffff;" text="Quantidade" />
+            <TableColumn fx:id="colSubtotal" prefWidth="140.00009155273438" style="-fx-background-color: #ffffff;" text="Subtotal" />
         </columns>
       </TableView>
-      <Button fx:id="btnCancelar" layoutX="277.0" layoutY="598.0" onAction="#OnbtnCancelar" prefHeight="26.0" prefWidth="254.0" text="Cancelar Venda" />
+      <Button fx:id="btnCancelar" layoutX="285.0" layoutY="558.0" onAction="#OnbtnCancelar" prefHeight="26.0" prefWidth="254.0" text="Cancelar Venda" />
       <Label fx:id="labelValorTotal" layoutX="446.0" layoutY="310.0" prefHeight="18.0" prefWidth="72.0" />
-      <Button layoutX="353.0" layoutY="182.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" text="Add mais" />
+      <Button fx:id="bntAdicionar" layoutX="389.0" layoutY="182.0" mnemonicParsing="false" onAction="#OnbtnAdicionarProduto" prefHeight="26.0" prefWidth="139.0" text="Add mais" />
       <ComboBox fx:id="comboxParcelar" layoutX="23.0" layoutY="316.0" prefHeight="26.0" prefWidth="139.0" />
     </children>
 </AnchorPane>
