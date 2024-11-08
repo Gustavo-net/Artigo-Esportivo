@@ -141,15 +141,15 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	}
 
 	@FXML
-	void OnbtnEditar(ActionEvent event) {
+	void OnbtnEditar(ActionEvent event) throws IOException{
 		if (tableFuncionarios.getSelectionModel().getSelectedIndex() == -1) {
-            showAlert("Selecione um Cliente para Editar Primeiro!");
+            showAlert("Selecione um Funcionário para Editar Primeiro!");
         } else {
             int i = tableFuncionarios.getSelectionModel().getSelectedIndex();
             funcionariosEditor = tableFuncionarios.getItems().get(i);
             
             try {
-                Main.TelaCcadastroClientes();
+                Main.TelaCadastroFuncionarios();
             } catch (IOException e) {
                 e.printStackTrace();
                 showAlert("Erro ao abrir a tela de edição!");
