@@ -1,10 +1,12 @@
 package packageController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,9 +28,13 @@ public class controllerPDV implements Initializable {
     }
     @FXML
     private Button btnCancelar;
+    
     @FXML
     private Button bntAdicionar;
-
+    
+    @FXML
+    private Button btnAbrirCadastroCliente;
+    
     @FXML
     private Button btnRegistrarVenda;
 
@@ -50,9 +56,10 @@ public class controllerPDV implements Initializable {
     @FXML
     private TableColumn<ItemVenda, Double> colSubtotal;
 
+    
     @FXML
-    private ComboBox<String> comboxFormaPagamento;
-
+    private ComboBox<String> comboxMetodoPagamento;
+    
     @FXML
     private ComboBox<String> comboxParcelar;
 
@@ -65,6 +72,9 @@ public class controllerPDV implements Initializable {
     @FXML
     private Label labelValorTotal;
 
+    @FXML
+    private Button btnAbrirTabela;
+    
     @FXML
     private TextField quantidadeField;
 
@@ -124,9 +134,29 @@ public class controllerPDV implements Initializable {
         itens.add(item); 
         totalVenda += subtotal;
         labelValorTotal.setText(String.format("R$ %.2f", totalVenda)); 
+        
+        atualizarParcelas();
+    }
+    @FXML
+    private void atualizarParcelas() {
+        double total = totalVenda;  
+        ObservableList<String> parcelas = FXCollections.observableArrayList();
+
+        for (int i = 1; i <= 6; i++) {
+            double valorParcela = total / i;  
+            parcelas.add(i + "x de R$ " + String.format("%.2f", valorParcela));  
+        }
+        comboxParcelar.setItems(parcelas);
     }
 
-
+    @FXML
+    void OnbtnAbrirCadastroCliente(ActionEvent event) throws IOException {
+    	Main.TelaCcadastroClientes();
+    }
+    @FXML
+    void OnbtnAbrirTabela(ActionEvent event) throws IOException {
+    	Main.TelaTabelaProduto();
+    }
 
     @FXML
     void OnbtnCancelar(ActionEvent event) {
@@ -134,7 +164,7 @@ public class controllerPDV implements Initializable {
         funcionarioField.clear();
         codigoProdutoField.clear();
         quantidadeField.clear();
-        comboxFormaPagamento.getSelectionModel().clearSelection();
+        comboxMetodoPagamento.getSelectionModel().clearSelection();
         comboxParcelar.getSelectionModel().clearSelection();
         dataVendaPicker.setValue(null);
         labelValorTotal.setText("R$ 0,00");
@@ -147,24 +177,21 @@ public class controllerPDV implements Initializable {
     void OnbtnRegistrarVenda(ActionEvent event) {
         String cpfCliente = clienteField.getText();
         String cpfFuncionario = funcionarioField.getText();
-        String formaPagamento = comboxFormaPagamento.getValue();
+        String metodoPagamento = comboxMetodoPagamento.getValue();
         String parcela = comboxParcelar.getValue();
         String dataVenda = dataVendaPicker.getValue() != null ? dataVendaPicker.getValue().toString() : "";
 
-        if (cpfCliente.isEmpty() || cpfFuncionario.isEmpty() || formaPagamento == null || dataVenda.isEmpty()) {
+        if (cpfCliente.isEmpty() || cpfFuncionario.isEmpty()|| dataVenda.isEmpty()) {
             showAlert("Erro", "Por favor, preencha todos os campos obrigatórios.");
             return;
         }
 
-        // Criar a venda
         Venda venda = new Venda();
         venda.setCpfCliente(cpfCliente);
         venda.setCpfFuncionario(cpfFuncionario);
-        venda.setFormaPagamento(formaPagamento);
         venda.setTotalVenda(totalVenda);
         venda.setDataVenda(java.sql.Date.valueOf(dataVenda));
 
-        // Adicionar os itens à venda
         List<ItemVenda> itensVenda = tableView.getItems();
 
         try {
@@ -195,9 +222,10 @@ public class controllerPDV implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> formasPagamento = FXCollections.observableArrayList("À vista", "Parcelado");
-        comboxFormaPagamento.setItems(formasPagamento);
 
+        ObservableList<String> metodosPagamento = FXCollections.observableArrayList("Dinheiro", "Cartão de Crédito", "Cartão de Débito", "Pix");
+        comboxMetodoPagamento.setItems(metodosPagamento);
+       
         ObservableList<String> parcelas = FXCollections.observableArrayList();
         for (int i = 1; i <= 6; i++) {
             parcelas.add(i + "x");

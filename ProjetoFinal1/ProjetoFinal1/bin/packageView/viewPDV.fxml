@@ -30,32 +30,38 @@
             </font>
         </Text>
 
-        <Text layoutX="214.0" layoutY="104.0" text="Data da Venda:" />
+        <Text layoutX="211.0" layoutY="104.0" text="Data da Venda:" />
 
-        <Text layoutX="26.0" layoutY="172.0" text="Código do Produto:" />
-        <TextField fx:id="codigoProdutoField" layoutX="23.0" layoutY="182.0" prefHeight="26.0" prefWidth="182.0" promptText="Código do Produto" />
+        <Text layoutX="26.0" layoutY="168.0" text="Código do Produto:" />
+        <TextField fx:id="codigoProdutoField" layoutX="24.0" layoutY="176.0" prefHeight="26.0" prefWidth="176.0" promptText="Código do Produto" />
 
-        <Text layoutX="219.0" layoutY="171.0" text="Quantidade:" />
-        <TextField fx:id="quantidadeField" layoutX="222.0" layoutY="182.0" prefHeight="26.0" prefWidth="118.0" promptText="Quantidade" />
+        <Text layoutX="213.0" layoutY="169.0" text="Quantidade:" />
+        <TextField fx:id="quantidadeField" layoutX="211.0" layoutY="176.0" prefHeight="26.0" prefWidth="118.0" promptText="Quantidade" />
 
-        <Text layoutX="446.0" layoutY="304.0" text="Valor Total:" />
+        <Text layoutX="407.0" layoutY="247.0" text="Valor Total:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
 
-        <Text layoutX="26.0" layoutY="242.0" text="Método de Pagamento:" />
-        <ComboBox fx:id="comboxFormaPagamento" layoutX="24.0" layoutY="254.0" prefHeight="26.0" prefWidth="341.0" promptText="Selecione o Método" />
+        <Text layoutX="198.0" layoutY="247.0" text="Parcelar :" />
 
-        <Text layoutX="22.0" layoutY="305.0" text="Parcelar " />
+        <Text layoutX="377.0" layoutY="104.0" text="Cliente:" />
+        <TextField fx:id="clienteField" layoutX="376.0" layoutY="113.0" prefHeight="26.0" prefWidth="160.0" promptText="Cliente (CPF)" />
 
-        <Text layoutX="393.0" layoutY="104.0" text="Cliente:" />
-        <TextField fx:id="clienteField" layoutX="389.0" layoutY="113.0" prefHeight="26.0" prefWidth="139.0" promptText="Cliente (CPF)" />
+        <Text layoutX="26.0" layoutY="104.0" text="Funcionário:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+        <TextField fx:id="funcionarioField" layoutX="26.0" layoutY="114.0" prefHeight="26.0" prefWidth="176.0" promptText="Funcionário (CPF)" />
 
-        <Text layoutX="26.0" layoutY="104.0" text="Funcionário:" />
-        <TextField fx:id="funcionarioField" layoutX="26.0" layoutY="114.0" prefHeight="26.0" prefWidth="158.0" promptText="Funcionário (CPF)" />
-
-        <Button fx:id="btnRegistrarVenda" layoutX="20.0" layoutY="558.0" onAction="#OnbtnRegistrarVenda" prefHeight="26.0" prefWidth="245.0" text="Registrar Venda" />
+        <Button fx:id="btnRegistrarVenda" layoutX="24.0" layoutY="545.0" onAction="#OnbtnRegistrarVenda" prefHeight="26.0" prefWidth="250.0" style="-fx-background-color: #069c3a;" text="Registrar Venda" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
      
      
       <DatePicker fx:id="dataVendaPicker" layoutX="210.0" layoutY="113.0" prefHeight="26.0" prefWidth="150.0" />
-      <TableView fx:id="tableView" layoutX="20.0" layoutY="384.0" prefHeight="154.0" prefWidth="530.0">
+      <TableView fx:id="tableView" layoutX="24.0" layoutY="328.0" prefHeight="204.0" prefWidth="515.0">
         <columns>
           <TableColumn fx:id="colCodigo" prefWidth="82.39996147155762" style="-fx-background-color: #ffffff;" text="Codigo" />
           <TableColumn fx:id="colProduto" prefWidth="177.59996795654297" style="-fx-background-color: #ffffff;" text="Nome Produto" />
@@ -63,9 +69,40 @@
             <TableColumn fx:id="colSubtotal" prefWidth="140.00009155273438" style="-fx-background-color: #ffffff;" text="Subtotal" />
         </columns>
       </TableView>
-      <Button fx:id="btnCancelar" layoutX="285.0" layoutY="558.0" onAction="#OnbtnCancelar" prefHeight="26.0" prefWidth="254.0" text="Cancelar Venda" />
-      <Label fx:id="labelValorTotal" layoutX="446.0" layoutY="310.0" prefHeight="18.0" prefWidth="72.0" />
-      <Button fx:id="bntAdicionar" layoutX="389.0" layoutY="182.0" mnemonicParsing="false" onAction="#OnbtnAdicionarProduto" prefHeight="26.0" prefWidth="139.0" text="Add mais" />
-      <ComboBox fx:id="comboxParcelar" layoutX="23.0" layoutY="316.0" prefHeight="26.0" prefWidth="139.0" />
+      <Button fx:id="btnCancelar" layoutX="285.0" layoutY="545.0" onAction="#OnbtnCancelar" prefHeight="26.0" prefWidth="258.0" style="-fx-background-color: #d12121;" text="Cancelar Venda" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Label fx:id="labelValorTotal" layoutX="404.0" layoutY="255.0" prefHeight="26.0" prefWidth="106.0">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Button fx:id="bntAdicionar" layoutX="345.0" layoutY="174.0" mnemonicParsing="false" onAction="#OnbtnAdicionarProduto" prefHeight="26.0" prefWidth="190.0" style="-fx-background-color: #f78502;" text="Adicionar mais produtos" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <ComboBox fx:id="comboxParcelar" layoutX="198.0" layoutY="255.0" prefHeight="26.0" prefWidth="176.0" promptText="Selecione" />
+      <Text fill="#e79549" layoutX="379.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clique aqui para cadastrar novo cliente." wrappingWidth="175.99997558593736">
+         <font>
+            <Font name="System Italic" size="9.0" />
+         </font>
+      </Text>
+      <Button layoutX="319.0" layoutY="302.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #f1f1f1;" text="Alterar item " textFill="#130a0a">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="421.0" layoutY="301.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: #f1f1f1;" text="Remover item ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Text layoutX="25.0" layoutY="248.0" text="Metodo de Pagamento:" />
+      <ComboBox fx:id="comboxMetodoPagamento" layoutX="23.0" layoutY="255.0" prefHeight="26.0" prefWidth="160.0" promptText="Selecione " />
+      <Text fill="#ff8b2c" layoutX="24.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código não encontrado? Clique aqui e busque pelo nome do produto." wrappingWidth="175.99997558593736">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnAbrirTabela" layoutX="24.0" layoutY="204.0" mnemonicParsing="false" onAction="#OnbtnAbrirTabela" opacity="0.0" prefHeight="26.0" prefWidth="160.0" text="tableProdutos" />
+      <Button fx:id="btnAbrirCadastroCliente" layoutX="377.0" layoutY="140.0" mnemonicParsing="false" onAction="#OnbtnAbrirCadastroCliente" opacity="0.0" prefHeight="17.0" prefWidth="160.0" text="tableProdutos" />
     </children>
 </AnchorPane>

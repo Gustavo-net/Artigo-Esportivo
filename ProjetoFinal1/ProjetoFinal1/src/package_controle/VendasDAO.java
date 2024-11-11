@@ -24,7 +24,7 @@ public class VendasDAO {
     }
 
     public void inserirVenda(Venda venda, List<ItemVenda> itensVenda) throws SQLException {
-        String insertVendaSQL = "INSERT INTO Vendas (cpfCliente, cpfFuncionario, dataVenda, totalVenda, formaPagamento) VALUES (?, ?, ?, ?, ?)";
+        String insertVendaSQL = "INSERT INTO Vendas (cpfCliente, cpfFuncionario, dataVenda, totalVenda, formaPagamento, metodoPagamento) VALUES (?, ?, ?, ?, ?, ?)";
         String insertItemVendaSQL = "INSERT INTO ItensVenda (idVenda, codigoProduto, quantidade, precoUnitario) VALUES (?, ?, ?, ?)";  
 
         try (PreparedStatement psVenda = connection.prepareStatement(insertVendaSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -33,6 +33,7 @@ public class VendasDAO {
             psVenda.setTimestamp(3, new Timestamp(venda.getDataVenda().getTime()));
             psVenda.setDouble(4, venda.getTotalVenda());  
             psVenda.setString(5, venda.getFormaPagamento());
+            psVenda.setString(5, venda.getMetodoPagamento());
 
             int affectedRows = psVenda.executeUpdate();
 
@@ -56,10 +57,9 @@ public class VendasDAO {
             }
         }
     }
-
     public List<Venda> listarVendas() throws SQLException {
         List<Venda> vendas = new ArrayList<>();
-        String sql = "SELECT v.idVenda, v.cpfCliente, v.cpfFuncionario, v.dataVenda, v.totalVenda, v.formaPagamento, " +
+        String sql = "SELECT v.idVenda, v.cpfCliente, v.cpfFuncionario, v.dataVenda, v.totalVenda, v.formaPagamento, metodoPagamento," +
                      "iv.idItemVenda, iv.codigoProduto, iv.quantidade, iv.precoUnitario, iv.subtotal " +
                      "FROM Vendas v " +
                      "INNER JOIN ItensVenda iv ON v.idVenda = iv.idVenda";
@@ -74,7 +74,7 @@ public class VendasDAO {
 
                 for (Venda v : vendas) {
                     if (v.getIdVenda() == idVenda) {
-                        venda = v; 
+                        venda = v;
                         break;
                     }
                 }
@@ -86,6 +86,7 @@ public class VendasDAO {
                     venda.setDataVenda(rs.getDate("dataVenda"));
                     venda.setTotalVenda(rs.getDouble("totalVenda"));
                     venda.setFormaPagamento(rs.getString("formaPagamento"));
+                    venda.setMetodoPagamento(rs.getString("metodoPagamento"));
                     venda.setItensVenda(new ArrayList<>());
                     vendas.add(venda);
                 }
@@ -105,9 +106,8 @@ public class VendasDAO {
         return vendas;
     }
 
-
     public Venda buscarVendaPorId(int idVenda) throws SQLException {
-        String queryVenda = "SELECT v.idVenda, v.cpfCliente, v.cpfFuncionario, v.dataVenda, v.totalVenda, v.formaPagamento " +
+        String queryVenda = "SELECT v.idVenda, v.cpfCliente, v.cpfFuncionario, v.dataVenda, v.totalVenda, v.formaPagamento,  v.metodoPagamento " +
                              "FROM Vendas v WHERE v.idVenda = ?";
         String queryItensVenda = "SELECT iv.idItemVenda, iv.idVenda, iv.codigoProduto, iv.quantidade, iv.precoUnitario, iv.subtotal " +
                                  "FROM ItensVenda iv WHERE iv.idVenda = ?";
@@ -131,7 +131,9 @@ public class VendasDAO {
                     
                     venda.setTotalVenda(rsVenda.getDouble("totalVenda"));
                     venda.setFormaPagamento(rsVenda.getString("formaPagamento"));
-                    
+                    venda.setMetodoPagamento(rsVenda.getString("metodoPagamento"));
+
+
                     try (PreparedStatement psItensVenda = connection.prepareStatement(queryItensVenda)) {
                         psItensVenda.setInt(1, idVenda); 
                         
@@ -165,7 +167,7 @@ public class VendasDAO {
 
 
     public void atualizarVenda(Venda venda) throws SQLException {
-        String updateSQL = "UPDATE Vendas SET cpfCliente = ?, cpfFuncionario = ?, dataVenda = ?, totalVenda = ?, formaPagamento = ? WHERE idVenda = ?";
+        String updateSQL = "UPDATE Vendas SET cpfCliente = ?, cpfFuncionario = ?, dataVenda = ?, totalVenda = ?, formaPagamento = ?, formaPagamento = ? WHERE idVenda = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(updateSQL)) {
             ps.setString(1, venda.getCpfCliente());
@@ -173,7 +175,8 @@ public class VendasDAO {
             ps.setTimestamp(3, new Timestamp(venda.getDataVenda().getTime()));
             ps.setDouble(4, venda.getTotalVenda());
             ps.setString(5, venda.getFormaPagamento());
-            ps.setInt(6, venda.getIdVenda());
+            ps.setString(6, venda.getMetodoPagamento());
+            ps.setInt(7, venda.getIdVenda());
             ps.executeUpdate();
         }
     }

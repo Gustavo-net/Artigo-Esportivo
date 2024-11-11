@@ -9,6 +9,7 @@ public class Venda {
     private String cpfFuncionario;
     private Date dataVenda;
     private double totalVenda;
+    private String metodoPagamento;
     private String formaPagamento;
     private List<ItemVenda> itensVenda;
 
@@ -59,7 +60,13 @@ public class Venda {
     public void setFormaPagamento(String formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
+    public String getMetodoPagamento() {
+        return metodoPagamento;
+    }
 
+    public void setMetodoPagamento(String metodoPagamento) {
+        this.metodoPagamento = metodoPagamento;
+    }
     public List<ItemVenda> getItensVenda() {
         return itensVenda;
     }
