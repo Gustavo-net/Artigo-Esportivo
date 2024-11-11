@@ -21,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import packageModel.Fornecedores;
 import packageModel.Funcionarios;
+import packageModel.Tarefa;
 import package_controle.FornecedoresDAO;
 
 public class controllerRelatorioFornecedor implements Initializable {
@@ -133,7 +134,8 @@ public class controllerRelatorioFornecedor implements Initializable {
         Main.TelaCadastroFornecedores(); 
         carregarTableFornecedores(); 
     }
-
+    
+    static Fornecedores fornecedorEditar = new Fornecedores();
     @FXML
     void OnbtnEditar(ActionEvent event) {
         if (tableFornecedores.getSelectionModel().getSelectedIndex() == -1) {

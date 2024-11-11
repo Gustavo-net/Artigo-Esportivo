@@ -13,7 +13,7 @@ import packageModel.Funcionarios;
 
 public class FuncionarioDAO {
 
-	public void create(Funcionarios c) {
+	public static void create(Funcionarios c) {
 	    Connection con = ConnectionDatabase.getConnection();
 	    PreparedStatement stmt = null;
 	    ResultSet generatedKeys = null;
@@ -198,32 +198,37 @@ public class FuncionarioDAO {
 
         return funcionario;
     }
-    public void update(Funcionarios c) {
+    public static void update(Funcionarios funcionario) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 
         try {
+            con = ConnectionDatabase.getConnection();
+            con.setAutoCommit(false); // Inicia a transação
+
             String sql = "UPDATE Funcionarios SET nomeFuncionario = ?, cpf = ?, email = ?, telefone = ?, dataNasc = ?, dataCont = ?, cargo = ?, sexo = ?, senha = ?, id_Endereco = ? WHERE idFuncionario = ?";
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, c.getNomeFuncionario());
-            stmt.setString(2, c.getCpf());
-            stmt.setString(3, c.getEmail());
-            stmt.setString(4, c.getTelefone());
+            stmt.setString(1, funcionario.getNomeFuncionario());
+            stmt.setString(2, funcionario.getCpf());
+            stmt.setString(3, funcionario.getEmail());
+            stmt.setString(4, funcionario.getTelefone());
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            stmt.setString(5, sdf.format(java.sql.Date.valueOf(c.getDataNasc())));
-            stmt.setString(6, sdf.format(java.sql.Date.valueOf(c.getDataCont())));
+            stmt.setString(5, sdf.format(java.sql.Date.valueOf(funcionario.getDataNasc())));
+            stmt.setString(6, sdf.format(java.sql.Date.valueOf(funcionario.getDataCont())));
 
-            stmt.setString(7, c.getCargo());
-            stmt.setString(8, c.getSexo());
-            stmt.setString(9, c.getSenha());
-            stmt.setString(10, c.getId_Endereço());
-            stmt.setString(11, c.getIdFuncionario());
+            stmt.setString(7, funcionario.getCargo());
+            stmt.setString(8, funcionario.getSexo());
+            stmt.setString(9, funcionario.getSenha());
+            stmt.setString(10, funcionario.getId_Endereço()); // Se necessário
+            stmt.setString(11, funcionario.getIdFuncionario()); // Verifique o id do funcionário para garantir que a atualização ocorra corretamente
 
             stmt.executeUpdate();
+            con.commit(); // Confirma a transação
 
         } catch (SQLException e) {
             e.printStackTrace();
+
         } finally {
             ConnectionDatabase.closeConnection(con, stmt);
         }

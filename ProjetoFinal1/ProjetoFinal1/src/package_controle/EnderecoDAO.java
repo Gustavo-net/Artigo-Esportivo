@@ -118,7 +118,7 @@ public class EnderecoDAO {
         return enderecos;
     }
 
-    public void update(Enderecos end) {
+    public static void update(Enderecos end) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 

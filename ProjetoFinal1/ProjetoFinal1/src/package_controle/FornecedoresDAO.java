@@ -132,9 +132,9 @@ public class FornecedoresDAO {
 	}
 
 
-    public void update(Fornecedores f) {
+    public static void update(Fornecedores f) {
         Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
+        PreparedStatement stmt = null;	
 
         try {
             stmt = con.prepareStatement("UPDATE Fornecedores SET nomeFornecedor = ?, cnpj = ?, email = ?, telefone = ? WHERE idFornecedor = ?");

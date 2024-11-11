@@ -8,10 +8,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import packageConnection.ConnectionDatabase;
 import javafx.scene.control.ButtonType;
+import packageModel.Enderecos;
 import packageModel.Funcionarios;
+import package_controle.EnderecoDAO;
 import package_controle.FuncionarioDAO;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class controllerCadastrosFuncionario {
@@ -31,17 +36,28 @@ public class controllerCadastrosFuncionario {
     private FuncionarioDAO funcionariosDAO = new FuncionarioDAO();
 
     @FXML
-    public void onbtnAddFuncionario(ActionEvent event) {
+    public void onbtnAddFuncionario(ActionEvent event) throws SQLException {
+    	Connection con = null;
         if (validarCampos()) {
             Funcionarios funcionario = new Funcionarios();
+            Enderecos endereco = new Enderecos();
             preencherFuncionario(funcionario);
+            
+            con = ConnectionDatabase.getConnection();
+			con.setAutoCommit(false); // Inicia a transação
+
+			String idEndereco = EnderecoDAO.create(endereco);
+			if (idEndereco == null) {
+				throw new SQLException("Erro ao inserir endereço.");
+			}
+            
             
             try {
                 if (controllerRelatorioFuncionarios.funcionariosEditor == null) {
-                    funcionariosDAO.create(funcionario);
+                    FuncionarioDAO.create(funcionario);
                     mostrarMensagem("Funcionário cadastrado com sucesso!", Alert.AlertType.INFORMATION);
                 } else {
-                    funcionariosDAO.update(funcionario);
+                    FuncionarioDAO.update(funcionario);
                     mostrarMensagem("Funcionário atualizado com sucesso!", Alert.AlertType.INFORMATION);
                 }
             } catch (Exception e) {
