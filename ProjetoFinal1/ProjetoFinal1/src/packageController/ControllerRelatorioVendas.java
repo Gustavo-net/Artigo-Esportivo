@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Main;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,10 +20,10 @@ import package_controle.VendasDAO;
 public class ControllerRelatorioVendas implements Initializable {
 
     @FXML
-    private Button btnCadastros, btnClientes, btnSair, btnExcluir, btnEditar, btnInserir, btnPesquisar, btnProdutos, btnFuncionarios, btnVoltar;
+    private Button btnCadastros, btnClientes, btnSair, btnExcluir, btnInserir, btnPesquisar, btnProdutos, btnFuncionarios, btnVoltar;
 
     @FXML
-    private TableColumn<Venda, String> columnDataVenda, columnCodigoProduto, columnQuantidade, columnDesconto, columnSubTotal, columnValorTotal, columnCPF_Cliente;
+    private TableColumn<Venda, String> columnDataVenda, columnCodigoProduto, columnQuantidade, columnDesconto, columnSubTotal, columnValorTotal, columnCPF_Cliente, columnCPF_Funcionario;
 
     @FXML
     private TableView<Venda> tableRelatorioVenda;
@@ -47,13 +48,18 @@ public class ControllerRelatorioVendas implements Initializable {
         tableRelatorioVenda.setItems(vendas);
 
         columnDataVenda.setCellValueFactory(new PropertyValueFactory<>("dataVenda"));
-        columnCodigoProduto.setCellValueFactory(new PropertyValueFactory<>("codigoProduto"));
-        columnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        columnDesconto.setCellValueFactory(new PropertyValueFactory<>("desconto"));
-        columnSubTotal.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
-        columnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
         columnCPF_Cliente.setCellValueFactory(new PropertyValueFactory<>("cpfCliente"));
+        columnCPF_Funcionario.setCellValueFactory(new PropertyValueFactory<>("cpfFuncionario"));
+        columnValorTotal.setCellValueFactory(new PropertyValueFactory<>("totalVenda"));
+
+        columnCodigoProduto.setCellValueFactory(cellData -> 
+            new SimpleStringProperty(cellData.getValue().getItensVenda().get(0).getCodigoProduto()));
+        columnQuantidade.setCellValueFactory(cellData -> 
+            new SimpleStringProperty(String.valueOf(cellData.getValue().getItensVenda().get(0).getQuantidade())));
+        columnSubTotal.setCellValueFactory(cellData -> 
+            new SimpleStringProperty(String.valueOf(cellData.getValue().getItensVenda().get(0).getSubtotal())));
     }
+
 
     @FXML
     void OnbtnExcluir(ActionEvent event) {
@@ -110,19 +116,7 @@ public class ControllerRelatorioVendas implements Initializable {
 
     @FXML
     void OnbtnSair(ActionEvent event) {
-
-    }
-
-
-    @FXML
-    void OnbtnEditar(ActionEvent event) throws IOException {
-        if (tableRelatorioVenda.getSelectionModel().getSelectedIndex() == -1) {
-            showAlert("Selecione uma venda para editar primeiro!");
-        } else {
-            int i = tableRelatorioVenda.getSelectionModel().getSelectedIndex();
-            Venda vendaSelecionada = tableRelatorioVenda.getItems().get(i);
-            Main.TelaCadastroVenda(vendaSelecionada);
-        }
+    	Main.changeScreen("login");
     }
 
     @FXML

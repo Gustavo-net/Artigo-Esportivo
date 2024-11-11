@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -125,20 +124,14 @@
 		<Button fx:id="btnFornecedores" layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#OnbtnFornecedores" opacity="0.0" prefHeight="26.0" prefWidth="121.0" text="Button" />
 		<Button fx:id="btnFuncionários" layoutX="23.0" layoutY="343.0" mnemonicParsing="false" onAction="#OnbtnFuncionários" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
 		<Button fx:id="btnProdutos" layoutX="23.0" layoutY="379.0" mnemonicParsing="false" onAction="#OnbtnProdutos" opacity="0.0" prefHeight="26.0" prefWidth="115.0" text="Button" />
-		<Button fx:id="btnInserir" layoutX="241.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnbtnInserir" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" text="Adicionar" textFill="WHITE">
+		<Button fx:id="btnInserir" layoutX="241.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnbtnInserir" prefHeight="26.0" prefWidth="88.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" text="Adicionar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-		<ComboBox fx:id="boxFiltrar" layoutX="493.0" layoutY="178.0" prefHeight="27.0" prefWidth="155.0" promptText="Filtrar" style="-fx-background-color: #Ffffff; -fx-background-radius: 10; -fx-border-color: #b1b1b1; -fx-border-radius: 10;" />
 		<TextField fx:id="txtPesquisar" layoutX="659.0" layoutY="178.0" prefHeight="26.0" prefWidth="238.0" promptText="Pesquisar" style="-fx-background-radius: 10;" />
 		<Button layoutX="872.0" layoutY="177.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="38.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" />
       <Button fx:id="btnSair" layoutX="830.0" layoutY="15.0" mnemonicParsing="false" onAction="#OnbtnSair" opacity="0.0" prefHeight="26.0" prefWidth="74.0" text="Sair" />
-      <Button fx:id="btnExcluir" layoutX="326.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnbtnExcluir" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" text="Excluir" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEditar" layoutX="412.0" layoutY="178.0" mnemonicParsing="false" onAction="#OnbtnEditar" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" text="Editar" textFill="WHITE">
+      <Button fx:id="btnExcluir" layoutX="342.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnbtnExcluir" prefHeight="26.0" prefWidth="88.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" text="Excluir" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -148,10 +141,10 @@
         <TableColumn fx:id="columnDataVenda" prefWidth="70.4" style="-fx-background-color: #ffffff;" text="Data da Venda" />
         <TableColumn fx:id="columnCodigoProduto" prefWidth="76.0" style="-fx-background-color: #ffffff;" text="Código Produto" />
         <TableColumn fx:id="columnQuantidade" prefWidth="63.2" style="-fx-background-color: #ffffff;" text="Quantidade" />
-        <TableColumn fx:id="columnDesconto" prefWidth="116.0" style="-fx-background-color: #ffffff;" text="Desconto" />
         <TableColumn fx:id="columnSubTotal" prefWidth="122.4000244140625" style="-fx-background-color: #ffffff;" text="SubTotal" />
         <TableColumn fx:id="columnValorTotal" prefWidth="72.800048828125" style="-fx-background-color: #ffffff;" text="Valor Total" />
         <TableColumn fx:id="columnCPF_Cliente" prefWidth="172.0001220703125" style="-fx-background-color: #ffffff;" text="CPF Cliente" />
+            <TableColumn fx:id="columnCPF_Funcionario" prefWidth="172.0001220703125" style="-fx-background-color: #ffffff;" text="CPF Cliente" />
     </columns>
       </TableView>
       <Line endX="638.0" layoutX="267.0" layoutY="248.0" opacity="0.35" startX="-15.399978637695312" />

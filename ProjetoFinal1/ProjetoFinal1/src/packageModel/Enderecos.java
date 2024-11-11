@@ -9,7 +9,6 @@ public class Enderecos {
 	private String bairro;
 	private String complemento;
 	private String cidadeUF;
-
 	
 	public Enderecos () {
 		super();

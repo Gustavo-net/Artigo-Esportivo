@@ -178,6 +178,23 @@ public class Main extends Application {
 		cadastroVenda.setScene(scene4);
 		cadastroVenda.showAndWait();
 	}
+	
+	
+	private static Stage TableViewProdutos;
+	
+	public static void TelaTabelaProduto() throws IOException {
+		FXMLLoader tableProduto = new FXMLLoader();
+		tableProduto.setLocation(Main.class.getResource("/packageView/viewTabelaProdutos.fxml"));
+		Parent ViewTabela = tableProduto.load();
+		Scene scene5 = new Scene(ViewTabela);
+		
+		cadastroVenda = new Stage();
+		cadastroVenda.setTitle("Buscar Produto - Artigos Esportivos");
+		cadastroVenda.initModality(Modality.WINDOW_MODAL);
+		cadastroVenda.setScene(scene5);
+		cadastroVenda.showAndWait();
+	}
+	
 	public static void main(String[] args) {
 		
 	Connection con = ConnectionDatabase.getConnection();
