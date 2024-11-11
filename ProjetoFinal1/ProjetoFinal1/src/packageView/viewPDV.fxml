@@ -16,7 +16,7 @@
 <AnchorPane maxHeight="702.0" maxWidth="930.0" prefHeight="639.0" prefWidth="563.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerPDV">
 
 <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="639.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="562.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="639.0" layoutX="-3.0" layoutY="8.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="562.0">
             <effect>
                 <ColorAdjust />
             </effect>
@@ -87,11 +87,11 @@
             <Font name="System Italic" size="9.0" />
          </font>
       </Text>
-      <Button layoutX="319.0" layoutY="302.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #f1f1f1;" text="Alterar item " textFill="#130a0a">
+      <Button fx:id="btnAlterar" layoutX="319.0" layoutY="301.0" mnemonicParsing="false" onAction="#btnAlterar" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #f1f1f1;" text="Alterar item " textFill="#130a0a">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button layoutX="421.0" layoutY="301.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: #f1f1f1;" text="Remover item ">
+      <Button fx:id="btnRemover" layoutX="421.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnRemover" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: #f1f1f1;" text="Remover item ">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>

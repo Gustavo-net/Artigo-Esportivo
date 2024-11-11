@@ -33,7 +33,7 @@ public class VendasDAO {
             psVenda.setTimestamp(3, new Timestamp(venda.getDataVenda().getTime()));
             psVenda.setDouble(4, venda.getTotalVenda());  
             psVenda.setString(5, venda.getFormaPagamento());
-            psVenda.setString(5, venda.getMetodoPagamento());
+            psVenda.setString(6, venda.getMetodoPagamento());
 
             int affectedRows = psVenda.executeUpdate();
 

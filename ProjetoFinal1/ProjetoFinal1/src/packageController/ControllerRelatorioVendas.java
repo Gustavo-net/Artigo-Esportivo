@@ -20,7 +20,7 @@ import package_controle.VendasDAO;
 public class ControllerRelatorioVendas implements Initializable {
 
     @FXML
-    private Button btnCadastros, btnClientes, btnSair, btnExcluir, btnEditar, btnInserir, btnPesquisar, btnProdutos, btnFuncionarios, btnVoltar;
+    private Button btnCadastros, btnClientes, btnSair, btnExcluir, btnInserir, btnPesquisar, btnProdutos, btnFuncionarios, btnVoltar;
 
     @FXML
     private TableColumn<Venda, String> columnDataVenda, columnCodigoProduto, columnQuantidade, columnDesconto, columnSubTotal, columnValorTotal, columnCPF_Cliente, columnCPF_Funcionario;
@@ -116,19 +116,7 @@ public class ControllerRelatorioVendas implements Initializable {
 
     @FXML
     void OnbtnSair(ActionEvent event) {
-
-    }
-
-
-    @FXML
-    void OnbtnEditar(ActionEvent event) throws IOException {
-        if (tableRelatorioVenda.getSelectionModel().getSelectedIndex() == -1) {
-            showAlert("Selecione uma venda para editar primeiro!");
-        } else {
-            int i = tableRelatorioVenda.getSelectionModel().getSelectedIndex();
-            Venda vendaSelecionada = tableRelatorioVenda.getItems().get(i);
-            Main.TelaCadastroVenda(vendaSelecionada);
-        }
+    	Main.changeScreen("login");
     }
 
     @FXML

@@ -76,6 +76,12 @@ public class controllerPDV implements Initializable {
     private Button btnAbrirTabela;
     
     @FXML
+    private Button btnAlterar;
+
+    @FXML
+    private Button btnRemover;
+    
+    @FXML
     private TextField quantidadeField;
 
     @FXML
@@ -149,6 +155,66 @@ public class controllerPDV implements Initializable {
         comboxParcelar.setItems(parcelas);
     }
 
+    @FXML
+    void btnRemover(ActionEvent event) {
+        ItemVenda itemSelecionado = tableView.getSelectionModel().getSelectedItem();
+
+        if (itemSelecionado != null) {
+            tableView.getItems().remove(itemSelecionado);
+
+            totalVenda -= itemSelecionado.getSubtotal();
+            labelValorTotal.setText(String.format("R$ %.2f", totalVenda));
+
+            atualizarParcelas();
+        } else {
+            showAlert("Erro", "Por favor, selecione um item para remover.");
+        }
+    }
+
+    @FXML
+    void btnAlterar(ActionEvent event) {
+        ItemVenda itemSelecionado = tableView.getSelectionModel().getSelectedItem();
+
+        if (itemSelecionado != null) {
+            String novaQuantidadeStr = quantidadeField.getText();
+            
+            if (novaQuantidadeStr.isEmpty()) {
+                showAlert("Erro", "Por favor, insira a nova quantidade.");
+                return;
+            }
+
+            int novaQuantidade;
+            try {
+                novaQuantidade = Integer.parseInt(novaQuantidadeStr);
+                if (novaQuantidade <= 0) {
+                    showAlert("Erro", "A quantidade deve ser maior que zero.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Erro", "Quantidade inválida! Insira um número inteiro válido.");
+                return;
+            }
+
+            double precoUnitario = itemSelecionado.getPrecoUnitario();
+            double novoSubtotal = precoUnitario * novaQuantidade;
+            itemSelecionado.setQuantidade(novaQuantidade);
+            itemSelecionado.setSubtotal(novoSubtotal);
+
+            tableView.refresh();  
+
+            totalVenda = 0.0;
+            for (ItemVenda item : tableView.getItems()) {
+                totalVenda += item.getSubtotal();
+            }
+            labelValorTotal.setText(String.format("R$ %.2f", totalVenda));
+
+            atualizarParcelas();
+        } else {
+            showAlert("Erro", "Por favor, selecione um item para alterar.");
+        }
+    }
+
+    
     @FXML
     void OnbtnAbrirCadastroCliente(ActionEvent event) throws IOException {
     	Main.TelaCcadastroClientes();
