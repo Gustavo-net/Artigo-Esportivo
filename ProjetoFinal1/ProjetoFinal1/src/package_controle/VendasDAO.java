@@ -57,7 +57,6 @@ public class VendasDAO {
         }
     }
 
-
     public List<Venda> listarVendas() throws SQLException {
         List<Venda> vendas = new ArrayList<>();
         String sql = "SELECT v.idVenda, v.cpfCliente, v.cpfFuncionario, v.dataVenda, v.totalVenda, v.formaPagamento, " +
