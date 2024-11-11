@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="522.0" prefWidth="726.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerTabelaProduto">
+	<children>
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="38.0" layoutY="-1.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="726.0" />
+		<Rectangle arcHeight="19.0" arcWidth="20.0" fill="#f0891a" height="25.0" layoutX="14.0" layoutY="48.0" opacity="0.35" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
+			<cursor>
+				<Cursor fx:constant="HAND" />
+			</cursor>
+		</Rectangle>
+		<Text fill="#f18c16" layoutX="23.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tabela de Produtos " wrappingWidth="140.8000366210938">
+			<font>
+				<Font name="System Bold" size="14.0" />
+			</font>
+		</Text>
+		<ComboBox fx:id="boxFiltrar" layoutX="278.0" layoutY="47.0" prefHeight="27.0" prefWidth="155.0" promptText="Filtrar" style="-fx-background-color: #Ffffff; -fx-background-radius: 10; -fx-border-color: #b1b1b1; -fx-border-radius: 10;" />
+		<TextField fx:id="txtPesquisar" layoutX="445.0" layoutY="47.0" prefHeight="26.0" prefWidth="238.0" promptText="Pesquisar" style="-fx-background-radius: 10;" />
+		<Button layoutX="665.0" layoutY="47.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="38.0" style="-fx-background-color: #f18c16; -fx-background-radius: 10;" />
+      
+	<TableView fx:id="tableRelatorioProduto" layoutX="7.0" layoutY="84.0" prefHeight="429.0" prefWidth="714.0" style="-fx-background-color: #ffffff;">
+    <columns>
+        <TableColumn fx:id="columnNome" prefWidth="133.60000324249268" style="-fx-background-color: #ffffff;" text="Nome" />
+        <TableColumn fx:id="columnCodigo" prefWidth="91.99993896484375" style="-fx-background-color: #ffffff;" text="Código" />
+        <TableColumn fx:id="columnCategoria" prefWidth="120.00001525878906" style="-fx-background-color: #ffffff;" text="Categoria" />
+        <TableColumn fx:id="columnMarca" prefWidth="75.20001220703125" style="-fx-background-color: #ffffff;" text="Marca" />
+        <TableColumn fx:id="columnPrecoUn" prefWidth="83.20001220703125" style="-fx-background-color: #ffffff;" text="Preço Unit." />
+        <TableColumn fx:id="columnEstoqueAtual" prefWidth="108.79998779296875" style="-fx-background-color: #ffffff;" text="Estoque Disp" />
+        <TableColumn fx:id="columnDescricao" prefWidth="152.79998779296875" style="-fx-background-color: #ffffff;" text="Descrição" />
+    </columns>
+</TableView>
+
+      <Line endX="626.5999755859375" layoutX="64.0" layoutY="109.0" opacity="0.35" startX="-15.399978637695312" />
+      <ImageView fx:id="lupaPesquisar" fitHeight="19.0" fitWidth="38.0" layoutX="668.0" layoutY="50.0" onMouseClicked="#OnPesquisarImagem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../packageIcons/iconPesquisa.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="652.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #f18c16;" text="Voltar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+	</children>
+</AnchorPane>
