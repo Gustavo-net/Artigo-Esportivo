@@ -64,7 +64,7 @@ public class ClienteDAO {
             }
             String idEndereco = generatedKeys.getString(1);  
 
-            String sqlCliente = "INSERT INTO Clientes (nomeCliente, cpf, id_Endereco, email, telefone, dataNasc) VALUES (?, ?, ?, ?, ?, ?)";
+            String sqlCliente = "INSERT INTO Clientes (nomeCliente, cpf, id_Endereco, email, telefone) VALUES (?, ?, ?, ?, ?)";
             stmtCliente = con.prepareStatement(sqlCliente);
             stmtCliente.setString(1, c.getNomeCliente());
             stmtCliente.setString(2, c.getCpf());
