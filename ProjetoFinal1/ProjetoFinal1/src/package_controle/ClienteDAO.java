@@ -34,66 +34,39 @@ public class ClienteDAO {
         return false;
     }
 
-    public static String create(Clientes c) throws SQLException {
-        Connection con = null;
-        PreparedStatement stmtEndereco = null;
-        PreparedStatement stmtCliente = null;
-        ResultSet generatedKeys = null;
+    public static String create(Clientes cliente) throws SQLException {
+    	  String idCliente = null;
+  	    Connection con = ConnectionDatabase.getConnection();
+  	    PreparedStatement stmt = null;
 
-        try {
-            con = ConnectionDatabase.getConnection();
-            if (con == null) {
-                throw new SQLException("Falha ao conectar ao banco de dados.");
-            }
-            
-            con.setAutoCommit(false);  
-
-            String sqlEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
-            stmtEndereco = con.prepareStatement(sqlEndereco, PreparedStatement.RETURN_GENERATED_KEYS);
-            stmtEndereco.setString(1, c.getCep());
-            stmtEndereco.setString(2, c.getRua());
-            stmtEndereco.setString(3, c.getNumero());
-            stmtEndereco.setString(4, c.getBairro());
-            stmtEndereco.setString(5, c.getComplemento());
-            stmtEndereco.setString(6, c.getCidadeUF());
-            stmtEndereco.executeUpdate();  
-
-            generatedKeys = stmtEndereco.getGeneratedKeys();
-            if (!generatedKeys.next()) {
-                throw new SQLException("Erro ao recuperar ID do endereço.");
-            }
-            String idEndereco = generatedKeys.getString(1);  
-
-            String sqlCliente = "INSERT INTO Clientes (nomeCliente, cpf, id_Endereco, email, telefone) VALUES (?, ?, ?, ?, ?)";
-            stmtCliente = con.prepareStatement(sqlCliente);
-            stmtCliente.setString(1, c.getNomeCliente());
-            stmtCliente.setString(2, c.getCpf());
-            stmtCliente.setString(3, idEndereco); 
-            stmtCliente.setString(4, c.getEmail());
-            stmtCliente.setString(5, c.getTelefone());
-
-            stmtCliente.executeUpdate();
-
-            con.commit(); 
-
-            return idEndereco; 
-
-        } catch (SQLException e) {
-            if (con != null) {
-                try {
-                    con.rollback();  
-                } catch (SQLException rollbackEx) {
-                    rollbackEx.printStackTrace();
-                }
-            }
-            throw e;  
-        } finally {
-            if (stmtEndereco != null) stmtEndereco.close();
-            if (stmtCliente != null) stmtCliente.close();
-            if (generatedKeys != null) generatedKeys.close();
-            if (con != null) con.close();
-        }
-    }
+  	    try {
+  	        String sql = "INSERT INTO Clientes (nomeCliente, cpf, email, telefone, id_Endereco) VALUES (?, ?, ?, ?, ?)";
+  	        stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+  	        stmt.setString(1, cliente.getNomeCliente());
+  	        stmt.setString(2, cliente.getCpf());
+  	        stmt.setString(3, cliente.getEmail());
+  	        stmt.setString(4, cliente.getTelefone());
+  	        stmt.setString(5, cliente.getId_Endereco());
+  	       
+  	        int affectedRows = stmt.executeUpdate();
+  	        if (affectedRows > 0) {
+  	            ResultSet rs = stmt.getGeneratedKeys();
+  	            if (rs.next()) {
+  	            	idCliente = rs.getString(1);  
+  	            }
+  	        }
+  	    } catch (SQLException e) {
+  	        e.printStackTrace();
+  	    } finally {
+  	        try {
+  	            if (stmt != null) stmt.close();
+  	            if (con != null) con.close();
+  	        } catch (SQLException e) {
+  	            e.printStackTrace();
+  	        }
+  	    }
+  	    return idCliente; 
+  	}
 
 
     public static ArrayList<Clientes> read() {

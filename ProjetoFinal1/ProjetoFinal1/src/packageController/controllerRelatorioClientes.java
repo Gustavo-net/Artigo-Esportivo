@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.plaf.metal.MetalTabbedPaneUI.TabbedPaneLayout;
+
 import application.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -105,6 +107,8 @@ public class controllerRelatorioClientes implements Initializable {
     private void carregarTableCliente() {
         arrayCliente = FXCollections.observableArrayList(ClienteDAO.read());
         tableRelatorioCliente.setItems(arrayCliente);
+        
+        
     }
 
     @FXML
@@ -124,6 +128,7 @@ public class controllerRelatorioClientes implements Initializable {
             }
         }
     }
+    
 
     @FXML
     void OnbtnInserir(ActionEvent event) throws IOException {
