@@ -13,44 +13,57 @@ import packageModel.Funcionarios;
 
 public class FuncionarioDAO {
 
-    public void create(Funcionarios c) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
+	public void create(Funcionarios c) {
+	    Connection con = ConnectionDatabase.getConnection();
+	    PreparedStatement stmt = null;
+	    ResultSet generatedKeys = null;
 
-        try {
-            String insertEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
-            stmt = con.prepareStatement(insertEndereco);
-            stmt.setString(1, c.getCep());
-            stmt.setString(2, c.getRua());
-            stmt.setString(3, c.getNumero());
-            stmt.setString(4, c.getBairro());
-            stmt.setString(5, c.getComplemento());
-            stmt.setString(6, c.getCidadeUF());
-            stmt.executeUpdate();  
-            
-            String sqlFuncionario = "INSERT INTO Funcionarios (nomeFuncionario, cpf, email, telefone, dataNasc, dataCont, cargo, sexo, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            stmt = con.prepareStatement(sqlFuncionario);
-            stmt.setString(1, c.getNomeFuncionario());
-            stmt.setString(2, c.getCpf());
-            stmt.setString(3, c.getEmail());
-            stmt.setString(4, c.getTelefone());
+	    try {
+	        // Inserção na tabela Enderecos
+	        String insertEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
+	        stmt = con.prepareStatement(insertEndereco, PreparedStatement.RETURN_GENERATED_KEYS);
+	        stmt.setString(1, c.getCep());
+	        stmt.setString(2, c.getRua());
+	        stmt.setString(3, c.getNumero());
+	        stmt.setString(4, c.getBairro());
+	        stmt.setString(5, c.getComplemento());
+	        stmt.setString(6, c.getCidadeUF());
+	        stmt.executeUpdate();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            stmt.setString(5, sdf.format(java.sql.Date.valueOf(c.getDataNasc())));
-            stmt.setString(6, sdf.format(java.sql.Date.valueOf(c.getDataCont())));
+	        // Recupera o ID gerado para o endereço
+	        generatedKeys = stmt.getGeneratedKeys();
+	        String idEndereco = null;
+	        if (generatedKeys.next()) {
+	            idEndereco = generatedKeys.getString(1); // Assume que o ID gerado é o primeiro campo
+	        }
 
-            stmt.setString(7, c.getCargo());
-            stmt.setString(8, c.getSexo());
-            stmt.setString(9, c.getSenha());
+	        // Inserção na tabela Funcionarios
+	        String sqlFuncionario = "INSERT INTO Funcionarios (nomeFuncionario, cpf, email, telefone, dataNasc, dataCont, cargo, sexo, senha, id_Endereco) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        stmt = con.prepareStatement(sqlFuncionario);
+	        stmt.setString(1, c.getNomeFuncionario());
+	        stmt.setString(2, c.getCpf());
+	        stmt.setString(3, c.getEmail());
+	        stmt.setString(4, c.getTelefone());
 
-            stmt.executeUpdate();
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	        stmt.setString(5, sdf.format(java.sql.Date.valueOf(c.getDataNasc())));
+	        stmt.setString(6, sdf.format(java.sql.Date.valueOf(c.getDataCont())));
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
+	        stmt.setString(7, c.getCargo());
+	        stmt.setString(8, c.getSexo());
+	        stmt.setString(9, c.getSenha());
+
+	        // Passa o idEndereco para o campo id_Endereco
+	        stmt.setString(10, idEndereco);
+
+	        stmt.executeUpdate();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        ConnectionDatabase.closeConnection(con, stmt, generatedKeys);
+	    }
+	}
 
     public static ArrayList<Funcionarios> read() {
         Connection con = ConnectionDatabase.getConnection();

@@ -63,35 +63,29 @@ public class controllerCadastrosClientes implements Initializable {
 
     @FXML
     public void OnbtnAddCliente(ActionEvent event) {
-        Connection con = null;
+        Connection con = null; 
         try {
             if (validarCampos()) {
-                // Preencher o objeto Endereço com os dados da interface
                 Enderecos endereco = new Enderecos();
                 preencherEndereco(endereco);
 
-                // Estabelece conexão e inicia transação
                 con = ConnectionDatabase.getConnection();
-                con.setAutoCommit(false);  // Desabilitar auto commit para controlar transações manualmente
+                con.setAutoCommit(false); 
 
-                // Inserir o endereço no banco de dados
-                String idEndereco = EnderecoDAO.create(endereco); 
+                String idEndereco = EnderecoDAO.create(endereco);
                 if (idEndereco == null) {
-                    throw new SQLException("Erro ao inserir endereço no banco.");
+                    throw new SQLException("Erro ao inserir endereço.");
                 }
 
-                // Preencher o objeto Cliente com os dados da interface
                 Clientes novoCliente = new Clientes();
-                preencherCliente(novoCliente, idEndereco);  // Passa o idEndereco para o cliente
+                preencherCliente(novoCliente, idEndereco);  
 
-                // Inserir o cliente no banco de dados
                 String idCliente = ClienteDAO.create(novoCliente);
                 if (idCliente == null) {
-                    throw new SQLException("Erro ao inserir cliente no banco.");
+                    throw new SQLException("Erro ao inserir cliente.");
                 }
 
-                // Se tudo deu certo, comita a transação
-                con.commit();  
+                con.commit(); 
 
                 mostrarMensagem("Cliente cadastrado com sucesso!", Alert.AlertType.INFORMATION);
 
@@ -106,7 +100,7 @@ public class controllerCadastrosClientes implements Initializable {
         } catch (SQLException e) {
             if (con != null) {
                 try {
-                    con.rollback(); 
+                    con.rollback();  
                 } catch (SQLException rollbackEx) {
                     rollbackEx.printStackTrace();
                 }
@@ -115,11 +109,10 @@ public class controllerCadastrosClientes implements Initializable {
             e.printStackTrace();
             mostrarMensagem("Erro ao cadastrar cliente. Tente novamente.", Alert.AlertType.ERROR);
         } finally {
-            // Garante que a conexão será fechada
             if (con != null) {
                 try {
-                    con.setAutoCommit(true);  // Restaura o comportamento padrão da conexão
-                    con.close();  // Fecha a conexão
+                    con.setAutoCommit(true);  
+                    con.close();  
                 } catch (SQLException closeEx) {
                     closeEx.printStackTrace();
                 }
@@ -135,7 +128,6 @@ public class controllerCadastrosClientes implements Initializable {
     }
 
     private boolean validarCampos() {
-        // Verifica se todos os campos obrigatórios foram preenchidos
         return !txtNomeCliente.getText().isEmpty() &&
                !txtCPF.getText().isEmpty() &&
                !txtEmail.getText().isEmpty() &&
@@ -148,7 +140,6 @@ public class controllerCadastrosClientes implements Initializable {
     }
 
     private boolean confirmarCadastroOutro() {
-        // Pergunta se o usuário deseja cadastrar outro cliente
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Cadastrar Novo Cliente");
         alert.setHeaderText("Deseja cadastrar outro cliente?");
@@ -161,22 +152,22 @@ public class controllerCadastrosClientes implements Initializable {
     }
 
     private void preencherEndereco(Enderecos endereco) {
-        // Preenche o objeto Endereco com os dados da interface
         endereco.setCep(txtCep.getText());
         endereco.setRua(txtRua.getText());
         endereco.setNumero(txtNumero.getText());
         endereco.setBairro(txtBairro.getText());
         endereco.setComplemento(txtComplemento.getText());
         endereco.setCidadeUF(txtCidadeUF.getText());
+
+        System.out.println("Endereço: " + endereco.getRua() + ", " + endereco.getNumero() + ", " + endereco.getBairro() + ", " + endereco.getCidadeUF());
     }
 
     private void preencherCliente(Clientes cliente, String idEndereco) {
-        // Preenche o objeto Cliente com os dados da interface
         cliente.setNomeCliente(txtNomeCliente.getText());
         cliente.setCpf(txtCPF.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setTelefone(txtTelefone.getText());
-        cliente.setId_Endereco(idEndereco);  // Atribui o id do endereço ao cliente
+        cliente.setId_Endereco(idEndereco);  // Atribuindo o id do endereço ao cliente
     }
 
     @FXML
@@ -186,7 +177,6 @@ public class controllerCadastrosClientes implements Initializable {
     }
 
     private void limparCampos() {
-        // Limpa todos os campos da interface
         txtNomeCliente.clear();
         txtCPF.clear();
         txtEmail.clear();
@@ -218,5 +208,6 @@ public class controllerCadastrosClientes implements Initializable {
             txtCep.setText(controllerRelatorioClientes.clienteEditor.getCep());
             txtComplemento.setText(controllerRelatorioClientes.clienteEditor.getComplemento());
         }
+        
     }
 }

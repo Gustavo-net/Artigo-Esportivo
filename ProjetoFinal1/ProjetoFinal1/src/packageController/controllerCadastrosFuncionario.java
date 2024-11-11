@@ -36,12 +36,17 @@ public class controllerCadastrosFuncionario {
             Funcionarios funcionario = new Funcionarios();
             preencherFuncionario(funcionario);
             
-            if (controllerRelatorioFuncionarios.funcionariosEditor == null) {
-                funcionariosDAO.create(funcionario); 
-                mostrarMensagem("Funcionário cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-            } else {
-                funcionariosDAO.update(funcionario); 
-                mostrarMensagem("Funcionário atualizado com sucesso!", Alert.AlertType.INFORMATION);
+            try {
+                if (controllerRelatorioFuncionarios.funcionariosEditor == null) {
+                    funcionariosDAO.create(funcionario);
+                    mostrarMensagem("Funcionário cadastrado com sucesso!", Alert.AlertType.INFORMATION);
+                } else {
+                    funcionariosDAO.update(funcionario);
+                    mostrarMensagem("Funcionário atualizado com sucesso!", Alert.AlertType.INFORMATION);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                mostrarMensagem("Erro ao cadastrar o funcionário: " + e.getMessage(), Alert.AlertType.ERROR);
             }
 
             if (confirmarCadastroOutro()) {
