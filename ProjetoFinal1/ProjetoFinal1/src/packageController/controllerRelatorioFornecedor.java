@@ -21,7 +21,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import packageModel.Fornecedores;
 import packageModel.Funcionarios;
-import packageModel.Tarefa;
 import package_controle.FornecedoresDAO;
 
 public class controllerRelatorioFornecedor implements Initializable {
@@ -119,13 +118,13 @@ public class controllerRelatorioFornecedor implements Initializable {
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         columnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         columnCEP.setCellValueFactory(new PropertyValueFactory<>("cep"));
-		 columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
-		    columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
-		    columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
-		    columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
-		    columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
+		columnRua.setCellValueFactory(new PropertyValueFactory<>("rua"));
+		columnBairro.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+		columnCidadeUF.setCellValueFactory(new PropertyValueFactory<>("cidadeUF"));
+		columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+		columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
 
-        //    columnEndereco.setCellValueFactory(new PropertyValueFactory<>("id_Endereço"));
+        //columnEndereco.setCellValueFactory(new PropertyValueFactory<>("id_Endereço"));
     }
 
     @FXML
@@ -136,6 +135,7 @@ public class controllerRelatorioFornecedor implements Initializable {
     }
     
     static Fornecedores fornecedorEditar = new Fornecedores();
+    
     @FXML
     void OnbtnEditar(ActionEvent event) {
         if (tableFornecedores.getSelectionModel().getSelectedIndex() == -1) {
@@ -163,6 +163,7 @@ public class controllerRelatorioFornecedor implements Initializable {
             tableFornecedores.setItems(arrayFornecedores); 
             tableFornecedores.refresh();
         }
+       carregarTableFornecedores();
     }
 
 
