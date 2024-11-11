@@ -158,7 +158,7 @@ public class ClienteDAO {
         return clientes;
     }
 
-    public void update(Clientes c) {
+    public static void update(Clientes c) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 
