@@ -13,57 +13,56 @@ import packageModel.Funcionarios;
 
 public class FuncionarioDAO {
 
-	public static void create(Funcionarios c) {
-	    Connection con = ConnectionDatabase.getConnection();
-	    PreparedStatement stmt = null;
-	    ResultSet generatedKeys = null;
+    // Método de criação de Funcionário
+    public static void create(Funcionarios c) {
+        Connection con = ConnectionDatabase.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet generatedKeys = null;
 
-	    try {
-	        // Inserção na tabela Enderecos
-	        String insertEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
-	        stmt = con.prepareStatement(insertEndereco, PreparedStatement.RETURN_GENERATED_KEYS);
-	        stmt.setString(1, c.getCep());
-	        stmt.setString(2, c.getRua());
-	        stmt.setString(3, c.getNumero());
-	        stmt.setString(4, c.getBairro());
-	        stmt.setString(5, c.getComplemento());
-	        stmt.setString(6, c.getCidadeUF());
-	        stmt.executeUpdate();
+        try {
+            // Inserção na tabela Enderecos
+            String insertEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
+            stmt = con.prepareStatement(insertEndereco, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, c.getCep());
+            stmt.setString(2, c.getRua());
+            stmt.setString(3, c.getNumero());
+            stmt.setString(4, c.getBairro());
+            stmt.setString(5, c.getComplemento());
+            stmt.setString(6, c.getCidadeUF());
+            stmt.executeUpdate();
 
-	        // Recupera o ID gerado para o endereço
-	        generatedKeys = stmt.getGeneratedKeys();
-	        String idEndereco = null;
-	        if (generatedKeys.next()) {
-	            idEndereco = generatedKeys.getString(1); // Assume que o ID gerado é o primeiro campo
-	        }
+            generatedKeys = stmt.getGeneratedKeys();
+            int idEndereco = 0;
+            if (generatedKeys.next()) {
+                idEndereco = generatedKeys.getInt(1); 
+            }
 
-	        // Inserção na tabela Funcionarios
-	        String sqlFuncionario = "INSERT INTO Funcionarios (nomeFuncionario, cpf, email, telefone, dataNasc, dataCont, cargo, sexo, senha, id_Endereco) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	        stmt = con.prepareStatement(sqlFuncionario);
-	        stmt.setString(1, c.getNomeFuncionario());
-	        stmt.setString(2, c.getCpf());
-	        stmt.setString(3, c.getEmail());
-	        stmt.setString(4, c.getTelefone());
+            // Inserção na tabela Funcionarios
+            String sqlFuncionario = "INSERT INTO Funcionarios (nomeFuncionario, cpf, email, telefone, dataNasc, dataCont, cargo, sexo, senha, id_Endereco) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            stmt = con.prepareStatement(sqlFuncionario);
+            stmt.setString(1, c.getNomeFuncionario());
+            stmt.setString(2, c.getCpf());
+            stmt.setString(3, c.getEmail());
+            stmt.setString(4, c.getTelefone());
 
-	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	        stmt.setString(5, sdf.format(java.sql.Date.valueOf(c.getDataNasc())));
-	        stmt.setString(6, sdf.format(java.sql.Date.valueOf(c.getDataCont())));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            stmt.setString(5, sdf.format(java.sql.Date.valueOf(c.getDataNasc())));
+            stmt.setString(6, sdf.format(java.sql.Date.valueOf(c.getDataCont())));
 
-	        stmt.setString(7, c.getCargo());
-	        stmt.setString(8, c.getSexo());
-	        stmt.setString(9, c.getSenha());
+            stmt.setString(7, c.getCargo());
+            stmt.setString(8, c.getSexo());
+            stmt.setString(9, c.getSenha());
 
-	        // Passa o idEndereco para o campo id_Endereco
-	        stmt.setString(10, idEndereco);
+            stmt.setInt(10, idEndereco);  
 
-	        stmt.executeUpdate();
+            stmt.executeUpdate();
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        ConnectionDatabase.closeConnection(con, stmt, generatedKeys);
-	    }
-	}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDatabase.closeConnection(con, stmt, generatedKeys);
+        }
+    }
 
     public static ArrayList<Funcionarios> read() {
         Connection con = ConnectionDatabase.getConnection();
@@ -90,8 +89,8 @@ public class FuncionarioDAO {
                 f.setCargo(rs.getString("cargo"));
                 f.setSexo(rs.getString("sexo"));
                 f.setSenha(rs.getString("senha"));
-                f.setId_Endereço(rs.getString("id_Endereco"));
-
+                f.setIdEndereco(rs.getInt("id_Endereco")); 
+                
                 f.setCep(rs.getString("cep"));
                 f.setRua(rs.getString("rua"));
                 f.setNumero(rs.getString("numero"));
@@ -133,7 +132,7 @@ public class FuncionarioDAO {
                 f.setCargo(rs.getString("cargo"));
                 f.setSexo(rs.getString("sexo"));
                 f.setSenha(rs.getString("senha"));
-                f.setId_Endereço(rs.getString("id_Endereco"));
+                f.setIdEndereco(rs.getInt("id_Endereco")); 
                 funcionarios.add(f);
             }
 
@@ -161,6 +160,7 @@ public class FuncionarioDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
+
     public Funcionarios autenticarUser(String cpf, String senha) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
@@ -187,7 +187,7 @@ public class FuncionarioDAO {
                 funcionario.setCargo(rs.getString("cargo"));
                 funcionario.setSexo(rs.getString("sexo"));
                 funcionario.setSenha(rs.getString("senha"));
-                funcionario.setId_Endereço(rs.getString("id_Endereco"));
+                funcionario.setIdEndereco(rs.getInt("id_Endereco"));
             }
 
         } catch (SQLException e) {
@@ -198,13 +198,13 @@ public class FuncionarioDAO {
 
         return funcionario;
     }
+
     public static void update(Funcionarios funcionario) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            con = ConnectionDatabase.getConnection();
-            con.setAutoCommit(false); // Inicia a transação
+            con.setAutoCommit(false); 
 
             String sql = "UPDATE Funcionarios SET nomeFuncionario = ?, cpf = ?, email = ?, telefone = ?, dataNasc = ?, dataCont = ?, cargo = ?, sexo = ?, senha = ?, id_Endereco = ? WHERE idFuncionario = ?";
             stmt = con.prepareStatement(sql);
@@ -220,15 +220,19 @@ public class FuncionarioDAO {
             stmt.setString(7, funcionario.getCargo());
             stmt.setString(8, funcionario.getSexo());
             stmt.setString(9, funcionario.getSenha());
-            stmt.setString(10, funcionario.getId_Endereço()); // Se necessário
-            stmt.setString(11, funcionario.getIdFuncionario()); // Verifique o id do funcionário para garantir que a atualização ocorra corretamente
+            stmt.setInt(10, funcionario.getIdEndereco());  
+            stmt.setString(11, funcionario.getIdFuncionario()); 
 
             stmt.executeUpdate();
-            con.commit(); // Confirma a transação
+            con.commit(); 
 
         } catch (SQLException e) {
             e.printStackTrace();
-
+            try {
+                con.rollback(); 
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
         } finally {
             ConnectionDatabase.closeConnection(con, stmt);
         }
