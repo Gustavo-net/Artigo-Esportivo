@@ -5,26 +5,20 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.ColorInput?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="531.0" prefWidth="771.0" style="-fx-background-color: #f0891a; -fx-background-image: \@..\packageIcons\top-view-composition-with-neatly-arranged-organized-sport-items.jpg;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerLogin">
+<AnchorPane prefHeight="531.0" prefWidth="771.0" style="-fx-background-color: #f0891a;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerLogin">
    <children>
       <ToggleButton fx:id="verSenha" layoutX="481.0" layoutY="275.0" mnemonicParsing="false" onAction="#OnVerSenha" opacity="0.8" prefHeight="17.0" prefWidth="24.0" textFill="#e77d0c" />
-      <ImageView fitHeight="531.0" fitWidth="771.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true">
-         <image>
-            <Image url="@../../../../../../../../Pictures/Screenshots/Captura%20de%20tela%202024-11-01%20185535.png" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="338.0" layoutX="240.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 35; -fx-arc-width: 35; arc: ;" width="287.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="338.0" layoutX="240.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 35; -fx-arc-width: 35;" width="287.0" />
       <Button fx:id="btnLogar" layoutX="286.0" layoutY="313.0" mnemonicParsing="false" onAction="#btnActionLogar" prefHeight="26.0" prefWidth="194.0" style="-fx-background-color: #f0891a; -fx-background-radius: 20;" text="Entrar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
-         </font></Button>
+         </font>
+      </Button>
       <TextField fx:id="txtSenha" layoutX="258.0" layoutY="274.0" prefHeight="26.0" prefWidth="254.0" style="-fx-border-radius: 20; -fx-background-radius: 20;" />
       <PasswordField fx:id="txtPassword" layoutX="258.0" layoutY="274.0" prefHeight="26.0" prefWidth="254.0" promptText="Informe a senha" style="-fx-border-radius: 8; -fx-background-radius: 8;" />
       <TextField fx:id="txtUser" layoutX="259.0" layoutY="226.0" prefHeight="26.0" prefWidth="253.0" promptText="Informe o CPF  " style="-fx-background-color: #ffffff; -fx-border-color: #b1b1b1; -fx-border-radius: 8;" />
