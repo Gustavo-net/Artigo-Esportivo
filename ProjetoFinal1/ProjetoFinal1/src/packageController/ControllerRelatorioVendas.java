@@ -95,25 +95,25 @@ public class ControllerRelatorioVendas implements Initializable {
     }
 
     @FXML
-    void OnbtnClientes(ActionEvent event) {
-
-    }
-
-    @FXML
     void OnbtnFornecedores(ActionEvent event) {
-
+        Main.changeScreen("fornecedores");
     }
-
+    
+    @FXML
+    void OnbtnClientes(ActionEvent event) {
+        Main.changeScreen("clientes");
+    }
     @FXML
     void OnbtnFuncionários(ActionEvent event) {
-
+        Main.changeScreen("funcionarios");
     }
 
     @FXML
     void OnbtnProdutos(ActionEvent event) {
+        Main.changeScreen("produtos");
 
     }
-
+    
     @FXML
     void OnbtnSair(ActionEvent event) {
     	Main.changeScreen("login");
@@ -121,7 +121,7 @@ public class ControllerRelatorioVendas implements Initializable {
 
     @FXML
     void OnbtnInserir(ActionEvent event) throws IOException {
-        Main.TelaCadastroVenda(null);
+        Main.TelaCadastroVenda();
     }
 
     @FXML

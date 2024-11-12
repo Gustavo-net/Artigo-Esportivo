@@ -145,12 +145,12 @@
       </Button>
       <TableView fx:id="tableRelatorioCliente" layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" style="-fx-background-color: #ffffff;">
     <columns>
-        <TableColumn fx:id="columnNome" prefWidth="156.0" style="-fx-background-color: #ffffff;" text="Nome" />
-        <TableColumn fx:id="columnCPF" minWidth="5.6" prefWidth="93.6" style="-fx-background-color: #ffffff;" text="CPF" />
-        <TableColumn fx:id="columnEmail" prefWidth="97.6" style="-fx-background-color: #ffffff;" text="Email" />
-        <TableColumn fx:id="columnTelefone" prefWidth="104.8" style="-fx-background-color: #ffffff;" text="Telefone" />
-        <TableColumn fx:id="columnCEP" prefWidth="87.2" style="-fx-background-color: #ffffff;" text="CEP" />
-        <TableColumn fx:id="columnRua" prefWidth="82.4" style="-fx-background-color: #ffffff;" text="Rua" />
+        <TableColumn fx:id="columnNome" prefWidth="126.40010070800781" style="-fx-background-color: #ffffff;" text="Nome" />
+        <TableColumn fx:id="columnCPF" minWidth="5.6" prefWidth="100.800048828125" style="-fx-background-color: #ffffff;" text="CPF" />
+        <TableColumn fx:id="columnEmail" prefWidth="120.79998779296875" style="-fx-background-color: #ffffff;" text="Email" />
+        <TableColumn fx:id="columnTelefone" prefWidth="89.5999755859375" style="-fx-background-color: #ffffff;" text="Telefone" />
+        <TableColumn fx:id="columnCEP" prefWidth="79.2000732421875" style="-fx-background-color: #ffffff;" text="CEP" />
+        <TableColumn fx:id="columnRua" prefWidth="106.39990234375" style="-fx-background-color: #ffffff;" text="Rua" />
         <TableColumn fx:id="columnNumero" prefWidth="82.4" style="-fx-background-color: #ffffff;" text="Número" />
         <TableColumn fx:id="columnBairro" prefWidth="82.4" style="-fx-background-color: #ffffff;" text="Bairro" />
         <TableColumn fx:id="columnComplemento" prefWidth="82.4" style="-fx-background-color: #ffffff;" text="Complemento" />
@@ -178,5 +178,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
+      <Button fx:id="btnVoltar" layoutX="26.0" layoutY="236.0" mnemonicParsing="false" onAction="#OnbtnVoltar" opacity="0.0" prefHeight="26.0" prefWidth="66.0" text="Button" />
 	</children>
 </AnchorPane>

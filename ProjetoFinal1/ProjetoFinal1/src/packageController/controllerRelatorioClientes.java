@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.swing.plaf.metal.MetalTabbedPaneUI.TabbedPaneLayout;
 
 import application.Main;
 import javafx.collections.FXCollections;

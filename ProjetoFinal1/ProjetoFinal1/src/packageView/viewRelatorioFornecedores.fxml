@@ -143,21 +143,21 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView fx:id="tableFornecedores" layoutX="232.0" layoutY="223.0" prefHeight="414.0" prefWidth="692.0" style="-fx-background-color: #ffffff;">
+      <TableView fx:id="tableFornecedores" layoutX="233.0" layoutY="230.0" prefHeight="414.0" prefWidth="692.0" style="-fx-background-color: #ffffff;">
     <columns>
-        <TableColumn fx:id="columnNome" prefWidth="68.0" style="-fx-background-color: #ffffff;" text="Nome" />
-        <TableColumn fx:id="columnCNPJ" prefWidth="68.79998779296875" style="-fx-background-color: #ffffff;" text="CNPJ" />
-        <TableColumn fx:id="columnEmail" prefWidth="72.0" style="-fx-background-color: #ffffff;" text="Email" />
-        <TableColumn fx:id="columnTelefone" prefWidth="68.79998779296875" style="-fx-background-color: #ffffff;" text="Telefone" />
-            <TableColumn fx:id="columnCEP" prefWidth="61.60003662109375" style="-fx-background-color: #ffffff;" text="Cep" />
-            <TableColumn fx:id="columnRua" prefWidth="75.99993896484375" style="-fx-background-color: #ffffff;" text="Rua" />
-            <TableColumn fx:id="columnNumero" prefWidth="69.60003662109375" style="-fx-background-color: #ffffff;" text="Numero" />
-            <TableColumn fx:id="columnBairro" prefWidth="67.2000732421875" style="-fx-background-color: #ffffff;" text="Bairro" />
-            <TableColumn fx:id="columnComplemento" prefWidth="76.7999267578125" style="-fx-background-color: #ffffff;" text="Complemento" />
-            <TableColumn fx:id="columnCidadeUF" prefWidth="66.4000244140625" style="-fx-background-color: #ffffff;" text="CidadeUF" />
+        <TableColumn fx:id="columnNome" prefWidth="155.1999969482422" style="-fx-background-color: #ffffff;" text="Nome" />
+        <TableColumn fx:id="columnCNPJ" prefWidth="113.5999755859375" style="-fx-background-color: #ffffff;" text="CNPJ" />
+        <TableColumn fx:id="columnEmail" prefWidth="164.00006103515625" style="-fx-background-color: #ffffff;" text="Email" />
+            <TableColumn fx:id="columnTelefone" minWidth="0.0" prefWidth="109.60003662109375" style="-fx-background-color: #ffffff;" text="Telefone" />
+            <TableColumn fx:id="columnCEP" minWidth="0.0" prefWidth="93.5999755859375" style="-fx-background-color: #ffffff;" text="Cep" />
+            <TableColumn fx:id="columnCidadeUF" minWidth="0.0" prefWidth="141.5999755859375" style="-fx-background-color: #ffffff;" text="CidadeUF" />
+            <TableColumn fx:id="columnRua" minWidth="0.0" prefWidth="104.0" style="-fx-background-color: #ffffff;" text="Rua" />
+            <TableColumn fx:id="columnNumero" minWidth="0.0" prefWidth="104.0" style="-fx-background-color: #ffffff;" text="Numero" />
+            <TableColumn fx:id="columnBairro" minWidth="0.0" prefWidth="104.0" style="-fx-background-color: #ffffff;" text="Bairro" />
+            <TableColumn fx:id="columnComplemento" minWidth="0.0" prefWidth="104.0" style="-fx-background-color: #ffffff;" text="Complemento" />
     </columns>
 </TableView>
-      <Line endX="638.0" layoutX="267.0" layoutY="248.0" opacity="0.35" startX="-15.399978637695312" />
+      <Line endX="638.0" layoutX="267.0" layoutY="256.0" opacity="0.35" startX="-15.399978637695312" />
       <ImageView fx:id="lupaPesquisar" fitHeight="19.0" fitWidth="38.0" layoutX="875.0" layoutY="181.0" onMouseClicked="#OnPesquisarImagem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../packageIcons/iconPesquisa.png" />
@@ -178,5 +178,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
+      <Button fx:id="btnVoltar" layoutX="23.0" layoutY="235.0" mnemonicParsing="false" onAction="#OnbtnVoltar" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
 	</children>
 </AnchorPane>

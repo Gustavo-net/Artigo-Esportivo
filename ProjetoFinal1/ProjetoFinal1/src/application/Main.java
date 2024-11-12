@@ -61,6 +61,7 @@ public class Main extends Application {
 			 Parent fxmlVendas = 
 			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioVendas.fxml"));
 			 Vendas = new Scene(fxmlVendas);
+			 
 			// Parent fxmlRegistrarVenda = FXMLLoader
 			// .load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
 			// RegistrarVendas = new Scene(fxmlRegistrarVenda);
@@ -166,7 +167,7 @@ public class Main extends Application {
 	
 	private static Stage cadastroVenda;
 	
-	public static void TelaCadastroVenda(Venda vendaSelecionada) throws IOException {
+	public static void TelaCadastroVenda() throws IOException {
 		FXMLLoader VendaCadastro = new FXMLLoader();
 		VendaCadastro.setLocation(Main.class.getResource("/packageView/viewPDV.fxml"));
 		Parent cadastrarVenda = VendaCadastro.load();
@@ -198,42 +199,15 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		
 	Connection con = ConnectionDatabase.getConnection();
-// ConnectionDatabase.closeConnection(con);
-// ArrayList<Cliente> cliente = new ArrayList<>();
-// ClienteDAO cl = new ClienteDAO();
-// Cliente c = new Cliente();
-//
-// c.setNome("Pedro");
-// c.setCPF_CNPJ("12345698709");
-// c.setDataNasc("1987-04-03");
-// c.setDataPrimCom("2024-02-23");
-// c.setEmail("pedro@teste.com");
-// c.setEndereco("Rua tal, numero tal");
-// c.setTipoJurd("PF");
-// c.setTelefone("6399205-9085");
-//
-// ClienteDAO clt = new ClienteDAO();
-//
-// clt.update(c);
-//
-// cliente = cl.read();
-//
-// for (int i = 0; i < cliente.size(); i++) {
-// Cliente clte = cliente.get(i);
-// System.out.println();
-// System.out.print(clte.getIdCliente());
-// System.out.print(clte.getNome());
-// System.out.print(clte.getCPF_CNPJ());
-// System.out.print(clte.getEmail());
-// System.out.print(clte.getTelefone());
-// System.out.print(clte.getDataNasc());
-// System.out.print(clte.getDataPrimCom());
-// System.out.print(clte.getEndereco());
-// System.out.print(clte.getTipoJurd());
-// }
-//
 		launch(args);
+	}
 
+	public static Stage getTableViewProdutos() {
+		return TableViewProdutos;
+	}
+
+	public static void setTableViewProdutos(Stage tableViewProdutos) {
+		TableViewProdutos = tableViewProdutos;
 	}
 
 

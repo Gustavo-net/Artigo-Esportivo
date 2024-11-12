@@ -161,6 +161,7 @@ public class controllerRelatorioFuncionarios implements Initializable {
 	void OnbtnInserir(ActionEvent event) throws IOException {
 		funcionariosEditor = null;
 		Main.TelaCadastroFuncionarios();
+		carregarTableFuncionarios();
 	}
 	
 	@FXML

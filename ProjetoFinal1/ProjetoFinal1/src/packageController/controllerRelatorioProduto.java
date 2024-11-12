@@ -119,6 +119,12 @@ public class controllerRelatorioProduto implements Initializable {
         columnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoriaNome"));
     }
 
+
+    @FXML
+    void OnbtnVoltar(ActionEvent event) {
+        Main.changeScreen("main");
+    }
+
     @FXML
     void OnbtnCadastros(ActionEvent event) {
         Main.changeScreen("cadastros");

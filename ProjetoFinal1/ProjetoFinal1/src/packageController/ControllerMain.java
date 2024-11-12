@@ -1,7 +1,15 @@
 package packageController;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import application.Main;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,10 +25,6 @@ import package_controle.FuncionarioDAO;
 import package_controle.VendasDAO;
 import package_controle.baixoEstoqueDAO;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class ControllerMain {
 
     @FXML
@@ -35,7 +39,9 @@ public class ControllerMain {
     @FXML
     private Button btnFuncionários;
     @FXML
-    private Button btnVendas;
+    private Button btnVendas;    
+    @FXML
+    private Button btnSair;
     @FXML
     private Button btnProdutos;
 
@@ -61,6 +67,10 @@ public class ControllerMain {
     private FuncionarioDAO funcionarioDAO;
     private baixoEstoqueDAO baixoEstoqueDAO;
 
+    private DoubleProperty faturamentoTotal = new SimpleDoubleProperty(0.0);
+    private IntegerProperty numeroFuncionarios = new SimpleIntegerProperty(0);
+    private IntegerProperty numeroVendas = new SimpleIntegerProperty(0);
+
     public ControllerMain() {
         this.vendasDAO = new VendasDAO();
         this.funcionarioDAO = new FuncionarioDAO();
@@ -76,7 +86,23 @@ public class ControllerMain {
         columnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidadeEstoque"));
 
         carregarProdutos();
-        exibirRelatorio();  
+        monitorarLabels(); 
+        exibirRelatorio(); 
+    }
+
+    private void monitorarLabels() {
+
+        faturamentoTotal.addListener((observable, oldValue, newValue) -> {
+            labelFaturamento.setText(String.format("R$ %.2f", newValue));
+        });
+
+        numeroFuncionarios.addListener((observable, oldValue, newValue) -> {
+            labelFuncionarios.setText(String.valueOf(newValue));
+        });
+
+        numeroVendas.addListener((observable, oldValue, newValue) -> {
+            labelVendas.setText(String.valueOf(newValue));
+        });
     }
 
     private void carregarProdutos() {
@@ -86,13 +112,13 @@ public class ControllerMain {
 
     private void exibirRelatorio() {
         try {
-            double faturamentoTotal = calcularFaturamentoTotal();
-            int numeroFuncionarios = contarFuncionarios();
-            int numeroVendas = contarVendasRealizadas();
+            double faturamento = calcularFaturamentoTotal();
+            int funcionarios = contarFuncionarios();
+            int vendas = contarVendasRealizadas();
 
-            labelFaturamento.setText(String.format("R$ %.2f", faturamentoTotal));
-            labelFuncionarios.setText(""+numeroFuncionarios);
-            labelVendas.setText(""+ numeroVendas);
+            faturamentoTotal.set(faturamento);
+            numeroFuncionarios.set(funcionarios);
+            numeroVendas.set(vendas);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,15 +126,15 @@ public class ControllerMain {
     }
 
     public double calcularFaturamentoTotal() throws SQLException {
-        double faturamentoTotal = 0.0;
+        double faturamento = 0.0;
 
         List<Venda> vendas = vendasDAO.listarVendas();
 
         for (Venda venda : vendas) {
-            faturamentoTotal += venda.getTotalVenda();
+            faturamento += venda.getTotalVenda();
         }
 
-        return faturamentoTotal;
+        return faturamento;
     }
 
     public int contarFuncionarios() throws SQLException {
@@ -120,7 +146,10 @@ public class ControllerMain {
         List<Venda> vendas = vendasDAO.listarVendas();
         return vendas.size();
     }
-
+    @FXML
+    void OnbtnSair(ActionEvent event) {
+        Main.changeScreen("login");
+    }
     @FXML
     void OnbtnCadastros(ActionEvent event) {
         Main.changeScreen("cadastros");

@@ -189,7 +189,7 @@ public class controllerRelatorioFornecedor implements Initializable {
     
     @FXML
     void OnbtnVendas(ActionEvent event) {
-        // Implementar vendas
+        Main.changeScreen("vendas");
     }
 
     @FXML

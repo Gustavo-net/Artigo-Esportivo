@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import packageModel.ItemVenda;
 import packageModel.Produtos;
 import packageModel.Venda;
@@ -27,7 +28,7 @@ public class controllerPDV implements Initializable {
         this.vendasDAO = new VendasDAO();  
     }
     @FXML
-    private Button btnCancelar;
+    private Button btnCancelar, btnSair;
     
     @FXML
     private Button bntAdicionar;
@@ -223,7 +224,14 @@ public class controllerPDV implements Initializable {
     void OnbtnAbrirTabela(ActionEvent event) throws IOException {
     	Main.TelaTabelaProduto();
     }
-
+    private void fecharJanela() {
+		Stage stage = (Stage) btnSair.getScene().getWindow();
+		stage.close();
+	}
+    @FXML
+    void btnSair(ActionEvent event) throws IOException {
+    	fecharJanela();
+    }
     @FXML
     void OnbtnCancelar(ActionEvent event) {
         clienteField.clear();

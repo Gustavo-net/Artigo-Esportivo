@@ -145,13 +145,13 @@
       
 	<TableView fx:id="tableRelatorioProduto" layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" style="-fx-background-color: #ffffff;">
     <columns>
-        <TableColumn fx:id="columnNome" prefWidth="126.4" style="-fx-background-color: #ffffff;" text="Nome" />
-        <TableColumn fx:id="columnCodigo" prefWidth="71.2" style="-fx-background-color: #ffffff;" text="Código" />
-        <TableColumn fx:id="columnCategoria" prefWidth="137.6" style="-fx-background-color: #ffffff;" text="Categoria" />
-        <TableColumn fx:id="columnMarca" prefWidth="69.6" style="-fx-background-color: #ffffff;" text="Marca" />
-        <TableColumn fx:id="columnPrecoUn" prefWidth="97.6" style="-fx-background-color: #ffffff;" text="Preço Unit." />
-        <TableColumn fx:id="columnEstoqueAtual" prefWidth="86.4" style="-fx-background-color: #ffffff;" text="Estoque Disp" />
-        <TableColumn fx:id="columnDescricao" prefWidth="175.2" style="-fx-background-color: #ffffff;" text="Descrição" />
+        <TableColumn fx:id="columnNome" prefWidth="196.79998779296875" style="-fx-background-color: #ffffff;" text="Nome" />
+        <TableColumn fx:id="columnCodigo" prefWidth="60.800048828125" style="-fx-background-color: #ffffff;" text="Código" />
+        <TableColumn fx:id="columnCategoria" prefWidth="96.0" style="-fx-background-color: #ffffff;" text="Categoria" />
+        <TableColumn fx:id="columnMarca" prefWidth="73.5999755859375" style="-fx-background-color: #ffffff;" text="Marca" />
+        <TableColumn fx:id="columnPrecoUn" prefWidth="67.199951171875" style="-fx-background-color: #ffffff;" text="Preço Unit." />
+        <TableColumn fx:id="columnEstoqueAtual" prefWidth="82.39996337890625" style="-fx-background-color: #ffffff;" text="Estoque Disp" />
+        <TableColumn fx:id="columnDescricao" prefWidth="204.0" style="-fx-background-color: #ffffff;" text="Descrição" />
     </columns>
 </TableView>
 
@@ -192,5 +192,6 @@
          </cursor>
       </Rectangle>
       <Button fx:id="btnVendas" layoutX="22.0" layoutY="427.0" mnemonicParsing="false" onAction="#OnbtnVendas" opacity="0.0" prefHeight="29.0" prefWidth="88.0" text="Button" />
+      <Button fx:id="btnVoltar" layoutX="26.0" layoutY="237.0" mnemonicParsing="false" onAction="#OnbtnVoltar" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />
 	</children>
 </AnchorPane>

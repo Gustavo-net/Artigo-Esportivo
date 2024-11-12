@@ -57,6 +57,40 @@ public class VendasDAO {
             }
         }
     }
+    public String buscarNomeClientePorCPF(String cpfCliente) throws SQLException {
+        String nomeCliente = "";
+        String sql = "SELECT nomeCliente FROM Clientes WHERE cpf = ?";
+
+        try (Connection conn = ConnectionDatabase.getConnection(); 
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, cpfCliente);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    nomeCliente = rs.getString("nomeCliente");
+                }
+            }
+        }
+
+        return nomeCliente;
+    }
+    
+    public String buscarNomeFuncionarioPorCPF(String cpfFuncionario) throws SQLException {
+        String nomeFuncionario = null;
+        String sql = "SELECT nomeFuncionario FROM Funcionarios WHERE cpf = ?";
+
+        try (Connection conn = ConnectionDatabase.getConnection(); 
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, cpfFuncionario); 
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    nomeFuncionario = rs.getString("nomeFuncionario"); 
+                }
+            }
+        }
+        return nomeFuncionario;
+    }
+    
     public List<Venda> listarVendas() throws SQLException {
         List<Venda> vendas = new ArrayList<>();
         String sql = "SELECT v.idVenda, v.cpfCliente, v.cpfFuncionario, v.dataVenda, v.totalVenda, v.formaPagamento, metodoPagamento," +
@@ -105,6 +139,7 @@ public class VendasDAO {
 
         return vendas;
     }
+
 
     public Venda buscarVendaPorId(int idVenda) throws SQLException {
         String queryVenda = "SELECT v.idVenda, v.cpfCliente, v.cpfFuncionario, v.dataVenda, v.totalVenda, v.formaPagamento,  v.metodoPagamento " +

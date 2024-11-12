@@ -12,6 +12,8 @@ public class Venda {
     private String metodoPagamento;
     private String formaPagamento;
     private List<ItemVenda> itensVenda;
+    private String nomeCliente; 
+    private String nomeFuncionario; 
 
     public int getIdVenda() {
         return idVenda;
@@ -74,4 +76,20 @@ public class Venda {
     public void setItensVenda(List<ItemVenda> itensVenda) {
         this.itensVenda = itensVenda;
     }
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
+	}
+
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
+	}
 }

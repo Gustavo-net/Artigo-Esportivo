@@ -85,5 +85,5 @@ public class Produtos {
 	    public void setEstoqueDisp(Integer estoqueDisp) {
 	        this.estoqueDisp = estoqueDisp;
 	    }
-
+	    
 }

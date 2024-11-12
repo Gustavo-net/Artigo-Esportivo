@@ -37,7 +37,7 @@ public class controllerLogin {
             saudacao.setTitle("Bem-vindo");
             saudacao.setContentText("Seja bem-vindo de volta, " + funcionarios.getNomeFuncionario() + "!");
             saudacao.show();
-            Main.changeScreen("main");
+        	Main.changeScreen("main");
         } else {
             Alert erro = new Alert(Alert.AlertType.ERROR);
             erro.setTitle("Falha ao realizar o login");

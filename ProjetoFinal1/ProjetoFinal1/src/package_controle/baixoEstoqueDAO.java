@@ -1,4 +1,4 @@
-package package_controle; // Alterar para o pacote correto
+package package_controle; 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import packageConnection.ConnectionDatabase;
 import packageModel.ProdutoBaixoEstoque;
 
-public class baixoEstoqueDAO { // Nome da classe em CamelCase
+public class baixoEstoqueDAO {
 
-    public static ArrayList<ProdutoBaixoEstoque> read() {
+    public ArrayList<ProdutoBaixoEstoque> read() {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -34,7 +34,7 @@ public class baixoEstoqueDAO { // Nome da classe em CamelCase
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionDatabase.closeConnection(con, stmt, rs); // Verifique se esse método trata null
+            ConnectionDatabase.closeConnection(con, stmt, rs);
         }
         return produtosBaixoEstoque;
     }

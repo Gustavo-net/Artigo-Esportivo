@@ -196,4 +196,5 @@ public class ClienteDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
+
 }

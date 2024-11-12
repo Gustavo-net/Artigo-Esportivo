@@ -6,21 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import packageConnection.ConnectionDatabase;
 import packageModel.Funcionarios;
 
 public class FuncionarioDAO {
 
-    // Método de criação de Funcionário
-    public static void create(Funcionarios c) {
+    @SuppressWarnings("resource")
+	public static void create(Funcionarios c) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet generatedKeys = null;
 
         try {
-            // Inserção na tabela Enderecos
             String insertEndereco = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(insertEndereco, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(1, c.getCep());
@@ -237,4 +235,22 @@ public class FuncionarioDAO {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
+    
+    public String buscarNomeFuncionarioPorCPF(String cpfFuncionario) throws SQLException {
+        String nomeFuncionario = "";
+        String sql = "SELECT nome FROM Funcionarios WHERE cpf = ?"; 
+
+        try (Connection conn = ConnectionDatabase.getConnection(); 
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, cpfFuncionario);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    nomeFuncionario = rs.getString("nome");
+                }
+            }
+        }
+
+        return nomeFuncionario;
+    }
+
 }

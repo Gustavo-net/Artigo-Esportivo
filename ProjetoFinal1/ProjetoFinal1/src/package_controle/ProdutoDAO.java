@@ -86,7 +86,7 @@ public class ProdutoDAO {
                 p.setCodigo(rs.getString("codigo"));
                 p.setMarca(rs.getString("marca"));
                 p.setDescricao(rs.getString("descricao"));
-                p.setPrecoUnitario(rs.getDouble("precoUnitario"));  // Usando double diretamente
+                p.setPrecoUnitario(rs.getDouble("precoUnitario")); 
                 p.setEstoqueDisp(rs.getInt("estoqueDisp"));
                 produtos.add(p);
             }
@@ -117,7 +117,7 @@ public class ProdutoDAO {
                 p.setCodigo(rs.getString("codigo"));
                 p.setMarca(rs.getString("marca"));
                 p.setDescricao(rs.getString("descricao"));
-                p.setPrecoUnitario(rs.getDouble("precoUnitario"));  // Usando double diretamente
+                p.setPrecoUnitario(rs.getDouble("precoUnitario"));
                 p.setEstoqueDisp(rs.getInt("estoqueDisp"));
                 produtos.add(p);
             }
