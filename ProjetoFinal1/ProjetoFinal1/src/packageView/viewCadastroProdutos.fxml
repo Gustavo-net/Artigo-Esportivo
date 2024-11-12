@@ -9,6 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+
 <AnchorPane maxHeight="661.0" maxWidth="756.0" prefHeight="506.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerCadastrosProdutos">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="513.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="684.0">
