@@ -1,6 +1,7 @@
 package packageController;
 
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,6 @@ public class ControllerMain {
 
     @FXML
     private TableView<ProdutoBaixoEstoque> ViewProdutos;
-
     @FXML
     private Button btnCadastros;
     @FXML
@@ -39,7 +39,7 @@ public class ControllerMain {
     @FXML
     private Button btnFuncionários;
     @FXML
-    private Button btnVendas;    
+    private Button btnVendas;
     @FXML
     private Button btnSair;
     @FXML
@@ -71,6 +71,20 @@ public class ControllerMain {
     private IntegerProperty numeroFuncionarios = new SimpleIntegerProperty(0);
     private IntegerProperty numeroVendas = new SimpleIntegerProperty(0);
 
+    private void exibirRelatorio() {
+        try {
+            faturamentoTotal.set(calcularFaturamentoTotal());
+            numeroFuncionarios.set(contarFuncionarios());
+            numeroVendas.set(contarVendasRealizadas());
+
+            labelFaturamento.setText(String.format("R$ %.2f", faturamentoTotal.get()));
+            labelFuncionarios.setText(String.valueOf(numeroFuncionarios.get()));
+            labelVendas.setText(String.valueOf(numeroVendas.get()));
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public ControllerMain() {
         this.vendasDAO = new VendasDAO();
         this.funcionarioDAO = new FuncionarioDAO();
@@ -86,23 +100,7 @@ public class ControllerMain {
         columnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidadeEstoque"));
 
         carregarProdutos();
-        monitorarLabels(); 
-        exibirRelatorio(); 
-    }
-
-    private void monitorarLabels() {
-
-        faturamentoTotal.addListener((observable, oldValue, newValue) -> {
-            labelFaturamento.setText(String.format("R$ %.2f", newValue));
-        });
-
-        numeroFuncionarios.addListener((observable, oldValue, newValue) -> {
-            labelFuncionarios.setText(String.valueOf(newValue));
-        });
-
-        numeroVendas.addListener((observable, oldValue, newValue) -> {
-            labelVendas.setText(String.valueOf(newValue));
-        });
+        exibirRelatorio();
     }
 
     private void carregarProdutos() {
@@ -110,36 +108,20 @@ public class ControllerMain {
         ViewProdutos.setItems(FXCollections.observableArrayList(produtosBaixoEstoque));
     }
 
-    private void exibirRelatorio() {
-        try {
-            double faturamento = calcularFaturamentoTotal();
-            int funcionarios = contarFuncionarios();
-            int vendas = contarVendasRealizadas();
 
-            faturamentoTotal.set(faturamento);
-            numeroFuncionarios.set(funcionarios);
-            numeroVendas.set(vendas);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public double calcularFaturamentoTotal() throws SQLException {
         double faturamento = 0.0;
-
         List<Venda> vendas = vendasDAO.listarVendas();
-
         for (Venda venda : vendas) {
             faturamento += venda.getTotalVenda();
         }
-
         return faturamento;
     }
 
     public int contarFuncionarios() throws SQLException {
-        @SuppressWarnings("static-access")
-		List<Funcionarios> funcionarios = funcionarioDAO.read();
+        List<Funcionarios> funcionarios = funcionarioDAO.read();
         return funcionarios.size();
     }
 
@@ -147,6 +129,7 @@ public class ControllerMain {
         List<Venda> vendas = vendasDAO.listarVendas();
         return vendas.size();
     }
+
     @FXML
     void OnbtnSair(ActionEvent event) {
         Main.changeScreen("login");

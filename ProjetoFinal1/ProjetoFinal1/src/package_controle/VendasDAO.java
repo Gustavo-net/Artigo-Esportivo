@@ -248,5 +248,26 @@ public class VendasDAO {
         
         return produto;
     }
+    public static String buscarNomePorCodigo(String codigo) {
+        Connection con = ConnectionDatabase.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String nome = null;  
+        try {
+            stmt = con.prepareStatement("SELECT nome FROM Produtos WHERE codigo = ?");
+            stmt.setString(1, codigo);  
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                nome = rs.getString("nome");  
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDatabase.closeConnection(con, stmt, rs);
+        }
+        return nome; 
+    }
+
 
 }

@@ -130,7 +130,7 @@ public class Main extends Application {
 		cadastroFornecedores.setTitle("Cadastro de Fornecedores - Artigos Esportivos");
 		cadastroFornecedores.initModality(Modality.WINDOW_MODAL);
 		cadastroFornecedores.setScene(scene2);
-		cadastroProdutos.getIcons().addAll(stage.getIcons());
+		cadastroFornecedores.getIcons().addAll(stage.getIcons());
 		cadastroFornecedores.showAndWait();
 	}
 	
@@ -146,7 +146,7 @@ public class Main extends Application {
 		cadastroClientes.setTitle("Cadastro de Clientes - Artigos Esportivos");
 		cadastroClientes.initModality(Modality.WINDOW_MODAL);
 		cadastroClientes.setScene(scene3);
-		cadastroProdutos.getIcons().addAll(stage.getIcons());
+		cadastroClientes.getIcons().addAll(stage.getIcons());
 		cadastroClientes.showAndWait();
 	}
 	
@@ -162,7 +162,7 @@ public class Main extends Application {
 		cadastroFuncionarios.setTitle("Cadastro de Funcionarios - Artigos Esportivos");
 		cadastroFuncionarios.initModality(Modality.WINDOW_MODAL);
 		cadastroFuncionarios.setScene(scene3);
-		cadastroProdutos.getIcons().addAll(stage.getIcons());
+		cadastroFuncionarios.getIcons().addAll(stage.getIcons());
 		cadastroFuncionarios.showAndWait();
 	}
 	
@@ -178,7 +178,7 @@ public class Main extends Application {
 		cadastroVenda.setTitle("Ponto de Venda - Artigos Esportivos");
 		cadastroVenda.initModality(Modality.WINDOW_MODAL);
 		cadastroVenda.setScene(scene4);
-		cadastroProdutos.getIcons().addAll(stage.getIcons());
+		cadastroVenda.getIcons().addAll(stage.getIcons());
 		cadastroVenda.showAndWait();
 	}
 	
@@ -195,7 +195,7 @@ public class Main extends Application {
 		cadastroVenda.setTitle("Buscar Produto - Artigos Esportivos");
 		cadastroVenda.initModality(Modality.WINDOW_MODAL);
 		cadastroVenda.setScene(scene5);
-		cadastroProdutos.getIcons().addAll(stage.getIcons());
+		TableViewProdutos.getIcons().addAll(stage.getIcons());
 		cadastroVenda.showAndWait();
 	}
 	

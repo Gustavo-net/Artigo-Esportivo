@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import packageModel.ItemVenda;
 import packageModel.Produtos;
 import packageModel.Venda;
+import package_controle.ProdutoDAO;
 import package_controle.VendasDAO;
 
 public class controllerPDV implements Initializable {
@@ -117,13 +118,14 @@ public class controllerPDV implements Initializable {
             return;
         }
 
-        // Buscar o produto pelo código
-        Produtos produto = buscarProdutoPorCodigo(codigoProduto);
-        if (produto == null) {
+        String nomeProduto = vendasDAO.buscarNomePorCodigo(codigoProduto);
+        
+        if (nomeProduto == null) {
             showAlert("Erro", "Produto não encontrado. Verifique o código e tente novamente.");
             return;
         }
 
+        Produtos produto = buscarProdutoPorCodigo(codigoProduto); // Pega o produto completo
         double precoUnitario = produto.getPrecoUnitario();
         if (precoUnitario <= 0) {
             showAlert("Erro", "O preço do produto não está válido. Verifique o preço.");
@@ -132,20 +134,19 @@ public class controllerPDV implements Initializable {
 
         double subtotal = precoUnitario * quantidade;
 
-        
         ItemVenda item = new ItemVenda();
         item.setCodigoProduto(produto.getCodigo());
         item.setQuantidade(quantidade);
         item.setPrecoUnitario(precoUnitario);
         item.setSubtotal(subtotal);
-        item.setNomeProduto(produto.getNome()); 
+        item.setNomeProduto(nomeProduto);
 
         ObservableList<ItemVenda> itens = tableView.getItems();
         itens.add(item); 
 
         totalVenda += subtotal;
         labelValorTotal.setText(String.format("R$ %.2f", totalVenda)); 
-        
+
         atualizarParcelas();
     }
 
@@ -256,11 +257,9 @@ public class controllerPDV implements Initializable {
     void OnbtnRegistrarVenda(ActionEvent event) {
         String cpfCliente = clienteField.getText();
         String cpfFuncionario = funcionarioField.getText();
-//        String metodosPagamento = comboxMetodoPagamento.getValue();
-//        String parcela = comboxParcelar.getValue();
         String dataVenda = dataVendaPicker.getValue() != null ? dataVendaPicker.getValue().toString() : "";
 
-        if (cpfCliente.isEmpty() || cpfFuncionario.isEmpty()|| dataVenda.isEmpty()) {
+        if (cpfCliente.isEmpty() || cpfFuncionario.isEmpty() || dataVenda.isEmpty()) {
             showAlert("Erro", "Por favor, preencha todos os campos obrigatórios.");
             return;
         }
@@ -276,7 +275,20 @@ public class controllerPDV implements Initializable {
         try {
             vendasDAO.inserirVenda(venda, itensVenda);
             showAlert("Sucesso", "Venda registrada com sucesso!");
-            OnbtnCancelar(event); 
+
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Confirmar");
+            confirmAlert.setHeaderText("Venda registrada com sucesso!");
+            confirmAlert.setContentText("Deseja registrar outra venda?");
+
+            confirmAlert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.YES) {
+                    OnbtnCancelar(event);  
+               } else {
+                    fecharJanela(); 
+                }
+            });
+
         } catch (SQLException e) {
             showAlert("Erro", "Erro ao registrar a venda: " + e.getMessage());
         }
@@ -301,25 +313,32 @@ public class controllerPDV implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         ObservableList<String> metodosPagamento = FXCollections.observableArrayList("Dinheiro", "Cartão de Crédito", "Cartão de Débito", "Pix");
         comboxMetodoPagamento.setItems(metodosPagamento);
-       
+
         ObservableList<String> parcelas = FXCollections.observableArrayList();
         for (int i = 1; i <= 6; i++) {
             parcelas.add(i + "x");
         }
         comboxParcelar.setItems(parcelas);
-        
+
         colCodigo.setCellValueFactory(new PropertyValueFactory<ItemVenda, String>("codigoProduto"));
-        colProduto.setCellValueFactory(new PropertyValueFactory<ItemVenda, String>("nomeProduto")); 
+        colProduto.setCellValueFactory(new PropertyValueFactory<ItemVenda, String>("nomeProduto"));
         colQuantidade.setCellValueFactory(new PropertyValueFactory<ItemVenda, Integer>("quantidade"));
         colSubtotal.setCellValueFactory(new PropertyValueFactory<ItemVenda, Double>("subtotal"));
 
         ObservableList<ItemVenda> listaItensVenda = FXCollections.observableArrayList();
+
+        for (ItemVenda item : listaItensVenda) {
+            String codigoProduto = item.getCodigoProduto();
+            Produtos produto = buscarProdutoPorCodigo(codigoProduto);  
+            if (produto != null) {
+                item.setNomeProduto(produto.getNome()); 
+            }
+        }
+
         tableView.setItems(listaItensVenda);  
     }
-
 
 
 }

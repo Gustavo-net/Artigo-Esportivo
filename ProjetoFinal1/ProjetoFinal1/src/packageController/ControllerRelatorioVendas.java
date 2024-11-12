@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Main;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 import packageModel.Venda;
 import package_controle.VendasDAO;
 
@@ -33,6 +36,8 @@ public class ControllerRelatorioVendas implements Initializable {
 
     private ObservableList<Venda> arrayVendas;
     private VendasDAO vendaDAO = new VendasDAO();
+
+    private Timeline timeline;
 
     @FXML
     private void carregarTableVendas() throws SQLException {
@@ -59,7 +64,6 @@ public class ControllerRelatorioVendas implements Initializable {
         columnSubTotal.setCellValueFactory(cellData -> 
             new SimpleStringProperty(String.valueOf(cellData.getValue().getItensVenda().get(0).getSubtotal())));
     }
-
 
     @FXML
     void OnbtnExcluir(ActionEvent event) {
@@ -103,6 +107,7 @@ public class ControllerRelatorioVendas implements Initializable {
     void OnbtnClientes(ActionEvent event) {
         Main.changeScreen("clientes");
     }
+    
     @FXML
     void OnbtnFuncionários(ActionEvent event) {
         Main.changeScreen("funcionarios");
@@ -111,17 +116,17 @@ public class ControllerRelatorioVendas implements Initializable {
     @FXML
     void OnbtnProdutos(ActionEvent event) {
         Main.changeScreen("produtos");
-
     }
-    
+
     @FXML
     void OnbtnSair(ActionEvent event) {
-    	Main.changeScreen("login");
+        Main.changeScreen("login");
     }
 
     @FXML
-    void OnbtnInserir(ActionEvent event) throws IOException {
+    void OnbtnInserir(ActionEvent event) throws IOException, SQLException {
         Main.TelaCadastroVenda();
+        carregarTableVendas();
     }
 
     @FXML
@@ -135,6 +140,22 @@ public class ControllerRelatorioVendas implements Initializable {
             carregarTableVendas();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
+            try {
+                carregarTableVendas(); 
+            } catch (SQLException ex) {
+                showAlert("Erro ao atualizar vendas: " + ex.getMessage());
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE); 
+        timeline.play(); 
+    }
+
+    public void pararAtualizacao() {
+        if (timeline != null) {
+            timeline.stop();
         }
     }
 }
