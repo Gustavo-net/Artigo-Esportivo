@@ -136,7 +136,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView fx:id="tableRelatorioVenda" layoutX="250.0" layoutY="223.0" prefHeight="415.0" prefWidth="674.0" style="-fx-background-color: #ffffff;" stylesheets="@../estilo.css">
+      <TableView fx:id="tableRelatorioVenda" layoutX="250.0" layoutY="223.0" prefHeight="415.0" prefWidth="674.0" style="-fx-background-color: #ffffff;">
     <columns>
         <TableColumn fx:id="columnDataVenda" prefWidth="104.79998779296875" style="-fx-background-color: #ffffff;" text="Data da Venda" />
         <TableColumn fx:id="columnCodigoProduto" prefWidth="120.0" style="-fx-background-color: #ffffff;" text="Código Produto" />
