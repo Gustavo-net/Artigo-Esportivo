@@ -6,9 +6,6 @@ import java.util.List;
 
 import packageConnection.ConnectionDatabase;
 
-import java.util.Date;
-import java.util.HashMap;
-
 import packageModel.ItemVenda;
 import packageModel.Produtos;
 import packageModel.Venda;

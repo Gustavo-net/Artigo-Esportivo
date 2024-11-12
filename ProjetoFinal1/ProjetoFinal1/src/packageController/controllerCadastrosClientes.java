@@ -58,8 +58,6 @@ public class controllerCadastrosClientes implements Initializable {
 	@FXML
 	private TextField txtTelefone;
 
-	private ClienteDAO clienteDAO = new ClienteDAO();
-	private EnderecoDAO enderecoDAO = new EnderecoDAO();
 	private Clientes clienteEditor;
 
 	@FXML
@@ -67,12 +65,11 @@ public class controllerCadastrosClientes implements Initializable {
 		Connection con = null;
 		try {
 			if (validarCampos()) {
-				// Criação ou atualização de endereço
 				Enderecos endereco = new Enderecos();
 				preencherEndereco(endereco);
 
 				con = ConnectionDatabase.getConnection();
-				con.setAutoCommit(false); // Inicia a transação
+				con.setAutoCommit(false);
 
 				String idEndereco = EnderecoDAO.create(endereco);
 				if (idEndereco == null) {
@@ -80,10 +77,9 @@ public class controllerCadastrosClientes implements Initializable {
 				}
 
 				Clientes novoCliente = new Clientes();
-				preencherCliente(novoCliente, idEndereco); // Preenche os dados do cliente
+				preencherCliente(novoCliente, idEndereco); 
 
 				if (clienteEditor != null) {
-					// Edição de cliente
 					novoCliente.setIdCliente(clienteEditor.getIdCliente());
 					ClienteDAO.update(novoCliente);
 					mostrarMensagem("Cliente atualizada com sucesso!", Alert.AlertType.INFORMATION);
@@ -94,7 +90,7 @@ public class controllerCadastrosClientes implements Initializable {
 
 				}
 
-				con.commit(); // Confirma a transação
+				con.commit(); 
 
 
 				if (confirmarCadastroOutro()) {
@@ -108,7 +104,7 @@ public class controllerCadastrosClientes implements Initializable {
 		} catch (SQLException e) {
 			if (con != null) {
 				try {
-					con.rollback(); // Desfaz a transação em caso de erro
+					con.rollback(); 
 				} catch (SQLException rollbackEx) {
 					rollbackEx.printStackTrace();
 				}
@@ -119,8 +115,8 @@ public class controllerCadastrosClientes implements Initializable {
 		} finally {
 			if (con != null) {
 				try {
-					con.setAutoCommit(true); // Restaura o comportamento padrão
-					con.close(); // Fecha a conexão
+					con.setAutoCommit(true); 
+					con.close(); 
 				} catch (SQLException closeEx) {
 					closeEx.printStackTrace();
 				}
@@ -136,7 +132,6 @@ public class controllerCadastrosClientes implements Initializable {
 	}
 
 	private boolean validarCampos() {
-		// Verificação detalhada dos campos obrigatórios
 		return !txtNomeCliente.getText().isEmpty() && !txtCPF.getText().isEmpty() && !txtEmail.getText().isEmpty()
 				&& !txtTelefone.getText().isEmpty() && !txtRua.getText().isEmpty() && !txtNumero.getText().isEmpty()
 				&& !txtBairro.getText().isEmpty() && !txtCidadeUF.getText().isEmpty() && !txtCep.getText().isEmpty();
@@ -168,7 +163,7 @@ public class controllerCadastrosClientes implements Initializable {
 		cliente.setCpf(txtCPF.getText());
 		cliente.setEmail(txtEmail.getText());
 		cliente.setTelefone(txtTelefone.getText());
-		cliente.setId_Endereco(idEndereco); // Atribuindo o id do endereço ao cliente
+		cliente.setId_Endereco(idEndereco);
 	}
 
 	@FXML
@@ -199,7 +194,7 @@ public class controllerCadastrosClientes implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (controllerRelatorioClientes.clienteEditor != null) {
 			clienteEditor = controllerRelatorioClientes.clienteEditor;
-			// Preenche os campos com os dados do cliente para edição
+
 			txtNomeCliente.setText(clienteEditor.getNomeCliente());
 			txtCPF.setText(clienteEditor.getCpf());
 			txtEmail.setText(clienteEditor.getEmail());

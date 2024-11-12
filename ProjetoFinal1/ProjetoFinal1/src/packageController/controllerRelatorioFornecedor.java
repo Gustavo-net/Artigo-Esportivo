@@ -28,9 +28,6 @@ public class controllerRelatorioFornecedor implements Initializable {
     @FXML
     private TableView<Fornecedores> tableFornecedores;
 
-//    @FXML
-//    private TableColumn<Fornecedores, String> columnID;
-
     @FXML
     private TableColumn<Fornecedores, String> columnNome;
 
@@ -58,8 +55,6 @@ public class controllerRelatorioFornecedor implements Initializable {
     @FXML
     private TableColumn<Funcionarios, String> columnCidadeUF;
 
-//    @FXML
-//    private TableColumn<Fornecedores, String> columnEndereco;
     @FXML
     private Button btnCadastros;
     @FXML
@@ -107,12 +102,12 @@ public class controllerRelatorioFornecedor implements Initializable {
     private void carregarTableFornecedores() {
         arrayFornecedores = FXCollections.observableArrayList(fornecedorDAO.read());
         tableFornecedores.setItems(arrayFornecedores); 
+        atualizarTabela();
     }
 
 
 
     private void atualizarTabela() {
- //     columnID.setCellValueFactory(new PropertyValueFactory<>("idFornecedor"));
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nomeFornecedor"));
         columnCNPJ.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -124,7 +119,6 @@ public class controllerRelatorioFornecedor implements Initializable {
 		columnNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
 		columnComplemento.setCellValueFactory(new PropertyValueFactory<>("complemento"));
 
-        //columnEndereco.setCellValueFactory(new PropertyValueFactory<>("id_Endereço"));
     }
 
     @FXML

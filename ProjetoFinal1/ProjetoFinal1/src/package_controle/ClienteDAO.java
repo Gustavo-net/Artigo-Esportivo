@@ -1,6 +1,5 @@
 package package_controle;
 
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 
 import packageConnection.ConnectionDatabase;
 import packageModel.Clientes;
-import packageModel.Enderecos;
 
 public class ClienteDAO {
 
@@ -78,7 +76,7 @@ public class ClienteDAO {
         try {
             String sql = "SELECT f.idCliente, f.nomeCliente, f.cpf, f.email, f.telefone, e.cep, e.rua, e.numero, e.bairro, e.complemento, e.cidadeUF " +
                          "FROM Clientes f " +
-                         "JOIN Enderecos e ON f.id_Endereco = e.idEndereco";  // Join para obter os dados do endereço
+                         "JOIN Enderecos e ON f.id_Endereco = e.idEndereco";  
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
 
@@ -116,7 +114,6 @@ public class ClienteDAO {
         ArrayList<Clientes> clientes = new ArrayList<>();
 
         try {
-            // SQL com join para obter os dados de Cliente e Endereço
             String sql = "SELECT f.idCliente, f.nomeCliente, f.cpf, f.email, f.telefone, " +
                          "e.cep, e.rua, e.numero, e.bairro, e.complemento, e.cidadeUF " +
                          "FROM Clientes f " +
@@ -124,12 +121,11 @@ public class ClienteDAO {
                          "WHERE f.nomeCliente LIKE ? OR f.cpf LIKE ?";
 
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, "%" + string + "%"); // Busca no nomeCliente
-            stmt.setString(2, "%" + string + "%"); // Busca no cpf
+            stmt.setString(1, "%" + string + "%");
+            stmt.setString(2, "%" + string + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                // Cria o objeto Clientes e preenche com os dados da consulta
                 Clientes c = new Clientes();
                 c.setIdCliente(rs.getString("idCliente"));
                 c.setNomeCliente(rs.getString("nomeCliente"));
@@ -137,7 +133,6 @@ public class ClienteDAO {
                 c.setEmail(rs.getString("email"));
                 c.setTelefone(rs.getString("telefone"));
 
-                // Preenche os dados do endereço, se disponíveis
                 c.setCep(rs.getString("cep"));
                 c.setRua(rs.getString("rua"));
                 c.setNumero(rs.getString("numero"));
@@ -145,13 +140,11 @@ public class ClienteDAO {
                 c.setComplemento(rs.getString("complemento"));
                 c.setCidadeUF(rs.getString("cidadeUF"));
 
-                // Adiciona o cliente à lista
                 clientes.add(c);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            // Fecha a conexão, preparedStatement e ResultSet
             ConnectionDatabase.closeConnection(con, stmt, rs);
         }
 

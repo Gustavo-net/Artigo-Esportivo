@@ -31,7 +31,7 @@ public class Enderecos {
 
 
 	public void setCep(String cep) {
-		this.cep = cep;
+		Enderecos.cep = cep;
 	}
 
 
@@ -89,7 +89,7 @@ public class Enderecos {
 			String cidadeUF) {
 		super();
 		this.idEndereço = idEndereço;
-		this.cep = cep;
+		Enderecos.cep = cep;
 		this.rua = rua;
 		this.numero = numero;
 		this.bairro = bairro;

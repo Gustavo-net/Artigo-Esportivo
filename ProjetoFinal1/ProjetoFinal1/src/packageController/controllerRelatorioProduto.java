@@ -69,7 +69,8 @@ public class controllerRelatorioProduto implements Initializable {
     private ObservableList<Produtos> arrayProduto;
     private ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    public static Produtos produtoEditor = new Produtos();
+    @SuppressWarnings("exports")
+	public static Produtos produtoEditor = new Produtos();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -203,9 +204,7 @@ public class controllerRelatorioProduto implements Initializable {
             if (!pesquisa.isEmpty()) {
                 ArrayList<Produtos> produtosResultado = new ArrayList<>();
                 
-                // Simula a pesquisa em produtos fictícios
                 for (Produtos produto : arrayProduto) {
-                    // Verifica se o nome do produto contém a pesquisa
                     if (produto.getNome().toLowerCase().contains(pesquisa.toLowerCase())) {
                         produtosResultado.add(produto);
                     }
@@ -216,7 +215,7 @@ public class controllerRelatorioProduto implements Initializable {
                     showAlert("Nenhum produto encontrado.");
                 }
             } else {
-                carregarTableProduto(); // Carrega todos os produtos se a pesquisa estiver vazia
+                carregarTableProduto(); 
             }
         } catch (Exception e) {
             showAlert("Erro ao pesquisar produtos: " + e.getMessage());

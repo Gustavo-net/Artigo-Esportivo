@@ -7,12 +7,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packageConnection.ConnectionDatabase;
-import packageModel.Venda;
 
 public class Main extends Application {
 
@@ -61,14 +58,6 @@ public class Main extends Application {
 			 Parent fxmlVendas = 
 			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioVendas.fxml"));
 			 Vendas = new Scene(fxmlVendas);
-			 
-			// Parent fxmlRegistrarVenda = FXMLLoader
-			// .load(getClass().getResource("/packageView/viewRegistrarVendas.fxml"));
-			// RegistrarVendas = new Scene(fxmlRegistrarVenda);
-			//
-			// Parent fxmlTelaRelatorio =
-			// FXMLLoader.load(getClass().getResource("/packageView/viewTelaRelatorios.fxml"));
-			// TelaRelatorios = new Scene(fxmlTelaRelatorio);
 
 			primaryStage.setScene(Login);
 			primaryStage.show();
@@ -198,6 +187,7 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		
+	@SuppressWarnings("unused")
 	Connection con = ConnectionDatabase.getConnection();
 		launch(args);
 	}

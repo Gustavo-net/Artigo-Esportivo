@@ -23,7 +23,7 @@ public class EnderecoDAO {
             String sql = "INSERT INTO Enderecos (cep, rua, numero, bairro, complemento, cidadeUF) VALUES (?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS); 
 
-            stmt.setString(1, endereco.getCep());
+            stmt.setString(1, Enderecos.getCep());
             stmt.setString(2, endereco.getRua());
             stmt.setString(3, endereco.getNumero());
             stmt.setString(4, endereco.getBairro());
@@ -124,7 +124,7 @@ public class EnderecoDAO {
 
         try {
             stmt = con.prepareStatement("UPDATE Enderecos SET cep = ?, rua = ?, numero = ?, bairro = ?, complemento = ?, cidadeUF = ? WHERE idEndereco = ?");
-            stmt.setString(1, end.getCep());
+            stmt.setString(1, Enderecos.getCep());
             stmt.setString(2, end.getRua());
             stmt.setString(3, end.getNumero());
             stmt.setString(4, end.getBairro());

@@ -117,6 +117,7 @@ public class controllerPDV implements Initializable {
             return;
         }
 
+        // Buscar o produto pelo código
         Produtos produto = buscarProdutoPorCodigo(codigoProduto);
         if (produto == null) {
             showAlert("Erro", "Produto não encontrado. Verifique o código e tente novamente.");
@@ -131,19 +132,23 @@ public class controllerPDV implements Initializable {
 
         double subtotal = precoUnitario * quantidade;
 
+        
         ItemVenda item = new ItemVenda();
         item.setCodigoProduto(produto.getCodigo());
         item.setQuantidade(quantidade);
         item.setPrecoUnitario(precoUnitario);
         item.setSubtotal(subtotal);
+        item.setNomeProduto(produto.getNome()); 
 
         ObservableList<ItemVenda> itens = tableView.getItems();
         itens.add(item); 
+
         totalVenda += subtotal;
         labelValorTotal.setText(String.format("R$ %.2f", totalVenda)); 
         
         atualizarParcelas();
     }
+
     @FXML
     private void atualizarParcelas() {
         double total = totalVenda;  
@@ -251,8 +256,8 @@ public class controllerPDV implements Initializable {
     void OnbtnRegistrarVenda(ActionEvent event) {
         String cpfCliente = clienteField.getText();
         String cpfFuncionario = funcionarioField.getText();
-        String metodoPagamento = comboxMetodoPagamento.getValue();
-        String parcela = comboxParcelar.getValue();
+//        String metodosPagamento = comboxMetodoPagamento.getValue();
+//        String parcela = comboxParcelar.getValue();
         String dataVenda = dataVendaPicker.getValue() != null ? dataVendaPicker.getValue().toString() : "";
 
         if (cpfCliente.isEmpty() || cpfFuncionario.isEmpty()|| dataVenda.isEmpty()) {
@@ -307,13 +312,14 @@ public class controllerPDV implements Initializable {
         comboxParcelar.setItems(parcelas);
         
         colCodigo.setCellValueFactory(new PropertyValueFactory<ItemVenda, String>("codigoProduto"));
-        colProduto.setCellValueFactory(new PropertyValueFactory<ItemVenda, String>("descricao"));
+        colProduto.setCellValueFactory(new PropertyValueFactory<ItemVenda, String>("nomeProduto")); 
         colQuantidade.setCellValueFactory(new PropertyValueFactory<ItemVenda, Integer>("quantidade"));
         colSubtotal.setCellValueFactory(new PropertyValueFactory<ItemVenda, Double>("subtotal"));
 
         ObservableList<ItemVenda> listaItensVenda = FXCollections.observableArrayList();
         tableView.setItems(listaItensVenda);  
     }
+
 
 
 }

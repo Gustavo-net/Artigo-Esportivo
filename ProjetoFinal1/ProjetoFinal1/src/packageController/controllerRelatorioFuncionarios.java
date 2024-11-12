@@ -20,10 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-import packageModel.Clientes;
 import packageModel.Funcionarios;
-import package_controle.ClienteDAO;
 import package_controle.FuncionarioDAO;
 
 public class controllerRelatorioFuncionarios implements Initializable {

@@ -52,7 +52,7 @@ public class ProdutoDAO {
                 p.setMarca(rs.getString("marca"));
                 p.setDescricao(rs.getString("descricao"));
                 
-                p.setPrecoUnitario(rs.getDouble("precoUnitario"));  // Usando double diretamente
+                p.setPrecoUnitario(rs.getDouble("precoUnitario"));  
 
                 p.setEstoqueDisp(rs.getInt("estoqueDisp"));
                 p.setId_Categoria(rs.getString("id_Categoria"));

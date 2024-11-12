@@ -138,7 +138,8 @@ public class ControllerMain {
     }
 
     public int contarFuncionarios() throws SQLException {
-        List<Funcionarios> funcionarios = funcionarioDAO.read();
+        @SuppressWarnings("static-access")
+		List<Funcionarios> funcionarios = funcionarioDAO.read();
         return funcionarios.size();
     }
 

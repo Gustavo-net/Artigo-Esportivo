@@ -33,8 +33,6 @@ public class controllerCadastrosFuncionario {
     @FXML
     private Button btnAddFuncionario, btnCancelar;
     
-    private FuncionarioDAO funcionariosDAO = new FuncionarioDAO();
-
     @FXML
     public void onbtnAddFuncionario(ActionEvent event) throws SQLException {
     	Connection con = null;

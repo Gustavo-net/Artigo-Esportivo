@@ -6,8 +6,8 @@ public class ItemVenda {
     private int quantidade;
     private double precoUnitario;
     private double subtotal;
+    private String nomeProduto;
 
-    // Getters e Setters
     public int getIdItemVenda() {
         return idItemVenda;
     }
@@ -55,4 +55,13 @@ public class ItemVenda {
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
+
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
+
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+
 }

@@ -117,7 +117,8 @@ public class CategoriaDAO {
     
     public String obterIdCategoria(String nomeCategoria) {
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        ArrayList<Categorias> categorias = categoriaDAO.read();
+        @SuppressWarnings("static-access")
+		ArrayList<Categorias> categorias = categoriaDAO.read();
         
         for (Categorias categoria : categorias) {
             if (categoria.getNomeCategoria().equals(nomeCategoria)) {

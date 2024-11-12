@@ -56,15 +56,15 @@ public class ProdutoBaixoEstoque {
         this.categoria = categoria;
     }
 
-    public int getQuantidadeEstoque() { // Alterado para int
+    public int getQuantidadeEstoque() { 
         return quantidadeEstoque;
     }
 
-    public void setQuantidadeEstoque(int quantidadeEstoque) { // Alterado para int
+    public void setQuantidadeEstoque(int quantidadeEstoque) { 
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
     public static ArrayList<ProdutoBaixoEstoque> read() {
-        return new ArrayList<>(); // Retorna uma lista vazia por enquanto
+        return new ArrayList<>();
     }
 }
