@@ -16,102 +16,207 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-  
-  
-  
-<AnchorPane maxHeight="702.0" maxWidth="930.0" prefHeight="647.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerPDV">
+<AnchorPane maxHeight="702.0" maxWidth="930.0" prefHeight="528.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerPDV">
+
+
 
 <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="639.0" layoutX="-3.0" layoutY="8.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="523.0">
+
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffbf6" height="527.0" layoutX="-3.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-background-color: linear-gradient(to bottom, #FFFFFF 15%, #87CEEB 85%);" width="915.0">
+
             <effect>
+
                 <ColorAdjust />
+
             </effect>
+
         </Rectangle>
 
-        <Rectangle arcHeight="5.0" fill="#f78502" height="72.0" layoutY="-1.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="523.0" />
+
+
+        <Rectangle arcHeight="5.0" fill="#f78502" height="72.0" layoutY="-1.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="912.0" />
+
+
 
         <Text fill="WHITE" layoutX="20.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ponto de Venda" wrappingWidth="224.80003662109357">
+
             <font>
+
                 <Font name="System Bold" size="24.0" />
+
             </font>
+
         </Text>
 
-        <Text layoutX="192.0" layoutY="104.0" text="Data da Venda:" />
 
-        <Text layoutX="26.0" layoutY="168.0" text="Código do Produto:" />
-        <TextField fx:id="codigoProdutoField" layoutX="24.0" layoutY="176.0" prefHeight="26.0" prefWidth="150.0" promptText="Código do Produto" />
 
-        <Text layoutX="190.0" layoutY="168.0" text="Quantidade:" wrappingWidth="72.822265625" />
-        <TextField fx:id="quantidadeField" layoutX="190.0" layoutY="176.0" prefHeight="26.0" prefWidth="144.0" promptText="Quantidade" />
+        <Text layoutX="192.0" layoutY="101.0" text="Data da Venda" />
 
-        <Text layoutX="399.0" layoutY="254.0" text="Valor Total:" />
 
-        <Text layoutX="208.0" layoutY="253.0" text="Parcelar :" />
 
-        <Text layoutX="343.0" layoutY="104.0" text="Cliente:" />
-        <TextField fx:id="clienteField" layoutX="340.0" layoutY="113.0" prefHeight="26.0" prefWidth="158.0" promptText="Cliente (CPF)" />
+        <Text layoutX="547.0" layoutY="99.0" text="Código do Produto" />
 
-        <Text layoutX="26.0" layoutY="104.0" text="Funcionário:" />
-        <TextField fx:id="funcionarioField" layoutX="26.0" layoutY="114.0" prefHeight="26.0" prefWidth="150.0" promptText="Funcionário (CPF)" />
+        <TextField fx:id="codigoProdutoField" layoutX="547.0" layoutY="107.0" prefHeight="26.0" prefWidth="150.0" promptText="Código do Produto" />
 
-        <Button fx:id="btnRegistrarVenda" layoutX="25.0" layoutY="545.0" onAction="#OnbtnRegistrarVenda" prefHeight="26.0" prefWidth="236.0" style="-fx-background-color: #069c3a;" text="Registrar Venda" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
+
+
+        <Text layoutX="710.0" layoutY="100.0" text="Quantidade:" wrappingWidth="72.822265625" />
+
+        <TextField fx:id="quantidadeField" layoutX="711.0" layoutY="108.0" prefHeight="26.0" prefWidth="102.0" promptText="Quantidade" />
+
+
+
+        <Text layoutX="722.0" layoutY="200.0" text="Parcelar " />
+
+
+
+        <Text layoutX="343.0" layoutY="101.0" text="Cliente" />
+
+        <TextField fx:id="clienteField" layoutX="340.0" layoutY="108.0" prefHeight="26.0" prefWidth="158.0" promptText="Cliente (CPF)" />
+
+
+
+        <Text layoutX="26.0" layoutY="100.0" text="Funcionário" />
+
+        <TextField fx:id="funcionarioField" layoutX="26.0" layoutY="111.0" prefHeight="26.0" prefWidth="150.0" promptText="Funcionário (CPF)" />
+
      
+
      
-      <DatePicker fx:id="dataVendaPicker" layoutX="189.0" layoutY="113.0" prefHeight="26.0" prefWidth="134.0" />
-      <TableView fx:id="tableView" layoutX="24.0" layoutY="328.0" prefHeight="204.0" prefWidth="483.0">
+
+      <DatePicker fx:id="dataVendaPicker" layoutX="189.0" layoutY="111.0" prefHeight="26.0" prefWidth="134.0" />
+
+      <TableView fx:id="tableView" layoutY="206.0" prefHeight="321.0" prefWidth="516.0">
+
         <columns>
+
           <TableColumn fx:id="colCodigo" prefWidth="104.80005264282227" style="-fx-background-color: #ffffff;" text="Codigo" />
+
           <TableColumn fx:id="colProduto" prefWidth="162.40000915527344" style="-fx-background-color: #ffffff;" text="Nome Produto" />
-            <TableColumn fx:id="colQuantidade" prefWidth="96.79998779296875" style="-fx-background-color: #ffffff;" text="Quantidade" />
-            <TableColumn fx:id="colSubtotal" prefWidth="115.20001220703125" style="-fx-background-color: #ffffff;" text="SubTotal" />
+
+            <TableColumn fx:id="colQuantidade" prefWidth="135.199951171875" style="-fx-background-color: #ffffff;" text="Quantidade" />
+
+            <TableColumn fx:id="colSubtotal" prefWidth="118.40008544921875" style="-fx-background-color: #ffffff;" text="SubTotal" />
+
         </columns>
+
       </TableView>
-      <Label fx:id="labelValorTotal" layoutX="397.0" layoutY="259.0" prefHeight="26.0" prefWidth="106.0">
+
+      <Label fx:id="labelValorTotal" layoutX="706.0" layoutY="332.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="54.0" prefWidth="177.0">
+
          <font>
-            <Font name="System Bold" size="16.0" />
+
+            <Font name="System Bold" size="32.0" />
+
          </font></Label>
-      <Button fx:id="bntAdicionar" layoutX="340.0" layoutY="174.0" mnemonicParsing="false" onAction="#OnbtnAdicionarProduto" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: #f78502;" text="Adicionar mais produtos" textFill="WHITE">
+
+      <Button fx:id="bntAdicionar" layoutX="820.0" layoutY="108.0" mnemonicParsing="false" onAction="#OnbtnAdicionarProduto" prefHeight="26.0" prefWidth="78.0" style="-fx-background-color: #f78502;" text="Adicionar" textFill="WHITE">
+
          <font>
+
             <Font name="System Bold" size="12.0" />
+
          </font></Button>
-      <ComboBox fx:id="comboxParcelar" layoutX="207.0" layoutY="258.0" prefHeight="26.0" prefWidth="177.0" promptText="Selecione" style="-fx-background-color: #f1f1f1f1;" />
-      <Text fill="#e79549" layoutX="335.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clique aqui para cadastrar novo cliente." wrappingWidth="134.39999999999986">
+
+      <ComboBox fx:id="comboxParcelar" layoutX="722.0" layoutY="208.0" prefHeight="26.0" prefWidth="158.0" promptText="Selecione" style="-fx-background-color: #f1f1f1f1;" />
+
+      <Text fill="#e79549" layoutX="342.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clique aqui para cadastrar novo cliente." wrappingWidth="134.39999999999986">
+
          <font>
+
             <Font name="System Italic" size="9.0" />
+
          </font>
+
       </Text>
-      <Button fx:id="btnAlterar" layoutX="295.0" layoutY="301.0" mnemonicParsing="false" onAction="#btnAlterar" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #f1f1f1;" text="Alterar item " textFill="#130a0a">
+
+      <Button fx:id="btnAlterar" layoutX="310.0" layoutY="180.0" mnemonicParsing="false" onAction="#btnAlterar" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #ffebd4;" text="Alterar item " textFill="#130a0a">
+
          <font>
+
             <Font name="System Bold" size="12.0" />
+
          </font></Button>
-      <Button fx:id="btnRemover" layoutX="400.0" layoutY="301.0" mnemonicParsing="false" onAction="#btnRemover" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #f1f1f1;" text="Remover item ">
+
+      <Button fx:id="btnRemover" layoutX="409.0" layoutY="180.0" mnemonicParsing="false" onAction="#btnRemover" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #ffebd4;" text="Remover item ">
+
          <font>
+
             <Font name="System Bold" size="12.0" />
+
          </font></Button>
-      <Text layoutX="25.0" layoutY="252.0" text="Metodo de Pagamento:" />
-      <ComboBox fx:id="comboxMetodoPagamento" layoutX="23.0" layoutY="259.0" prefHeight="26.0" prefWidth="165.0" promptText="Selecione " style="-fx-background-color: #f1f1f1;" />
-      <Text fill="#ff8b2c" layoutX="24.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código não encontrado? Clique aqui e busque pelo nome do produto." wrappingWidth="150.39999999999986">
+
+      <Text layoutX="543.0" layoutY="200.0" text="Metodo de Pagamento" />
+
+      <ComboBox fx:id="comboxMetodoPagamento" layoutX="539.0" layoutY="208.0" prefHeight="26.0" prefWidth="165.0" promptText="Selecione " style="-fx-background-color: #f1f1f1;" />
+
+      <Text fill="#ff8b2c" layoutX="547.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código não encontrado? Clique aqui e busque pelo nome do produto." wrappingWidth="150.39999999999986">
+
          <font>
+
             <Font size="9.0" />
+
          </font>
+
       </Text>
-      <Button fx:id="btnAbrirTabela" layoutX="24.0" layoutY="204.0" mnemonicParsing="false" onAction="#OnbtnAbrirTabela" opacity="0.0" prefHeight="26.0" prefWidth="150.0" text="tableProdutos" />
-      <Button fx:id="btnAbrirCadastroCliente" layoutX="335.0" layoutY="142.0" mnemonicParsing="false" onAction="#OnbtnAbrirCadastroCliente" opacity="0.0" prefHeight="26.0" prefWidth="134.0" text="tableProdutos" />
-      <Button fx:id="btnCancelar" layoutX="272.0" layoutY="545.0" onAction="#OnbtnCancelar" prefHeight="26.0" prefWidth="236.0" style="-fx-background-color: #d12121;" text="Reiniciar Venda" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Line endX="95.00001525878906" layoutX="94.0" layoutY="285.0" opacity="0.47" startX="-70.0999984741211" />
-      <Line endX="76.5999755859375" endY="1.399993896484375" layoutX="306.0" layoutY="284.0" opacity="0.47" startX="-96.19999694824219" startY="1.399993896484375" />
-      <ImageView fitHeight="24.0" fitWidth="60.0" layoutX="442.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+
+      <Button fx:id="btnAbrirTabela" layoutX="547.0" layoutY="134.0" mnemonicParsing="false" onAction="#OnbtnAbrirTabela" opacity="0.0" prefHeight="26.0" prefWidth="150.0" text="tableProdutos" />
+
+      <Button fx:id="btnAbrirCadastroCliente" layoutX="342.0" layoutY="134.0" mnemonicParsing="false" onAction="#OnbtnAbrirCadastroCliente" opacity="0.0" prefHeight="26.0" prefWidth="125.0" text="tableProdutos" />
+
+      <Line endX="95.00001525878906" layoutX="609.0" layoutY="236.0" opacity="0.47" startX="-70.0999984741211" />
+
+      <Line endX="59.199951171875" endY="1.399993896484375" layoutX="820.0" layoutY="233.0" opacity="0.47" startX="-96.19999694824219" startY="1.399993896484375" />
+
+      <ImageView fitHeight="31.0" fitWidth="94.0" layoutX="801.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+
          <image>
+
             <Image url="@../packageIcons/iconSair.png" />
+
          </image>
+
       </ImageView>
-      <Button fx:id="btnSair" layoutX="438.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnSair" opacity="0.0" prefHeight="32.0" prefWidth="73.0" text="Button" />
+
+      <Button fx:id="btnSair" layoutX="795.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnSair" opacity="0.0" prefHeight="38.0" prefWidth="102.0" text="Button" />
+
+      <Rectangle arcHeight="5.0" fill="#f78502" height="16.0" layoutY="162.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="912.0" />
+
+      <Rectangle arcHeight="5.0" fill="#f78502" height="500.0" layoutX="515.0" layoutY="28.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="14.0" />
+
+      <Rectangle arcHeight="5.0" fill="#f78502" height="52.0" layoutX="522.0" layoutY="259.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="390.0" />
+
+
+
+        <Text fill="WHITE" layoutX="772.0" layoutY="293.0" text="Valor Total">
+
+         <font>
+
+            <Font name="System Bold" size="23.0" />
+
+         </font></Text>
+
+
+
+        <Button fx:id="btnRegistrarVenda" layoutX="539.0" layoutY="436.0" onAction="#OnbtnRegistrarVenda" prefHeight="31.0" prefWidth="359.0" style="-fx-background-color: #069c3a;" text="Registrar Venda" textFill="WHITE">
+
+         <font>
+
+            <Font name="System Bold" size="12.0" />
+
+         </font></Button>
+
+      <Button fx:id="btnCancelar" layoutX="539.0" layoutY="475.0" onAction="#OnbtnCancelar" prefHeight="32.0" prefWidth="359.0" style="-fx-background-color: #d12121;" text="Reiniciar Venda" textFill="WHITE">
+
+         <font>
+
+            <Font name="System Bold" size="12.0" />
+
+         </font>
+
+      </Button>
+      <Rectangle arcHeight="5.0" fill="#f78502" height="16.0" layoutX="529.0" layoutY="412.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="383.0" />
+
     </children>
+
 </AnchorPane>

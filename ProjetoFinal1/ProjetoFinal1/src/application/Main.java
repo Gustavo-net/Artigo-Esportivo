@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import packageConnection.ConnectionDatabase;
@@ -58,6 +59,10 @@ public class Main extends Application {
 			 Parent fxmlVendas = 
 			 FXMLLoader.load(getClass().getResource("/packageView/viewRelatorioVendas.fxml"));
 			 Vendas = new Scene(fxmlVendas);
+			 
+				
+			 stage.getIcons().add(new Image(getClass().getResourceAsStream("/packageIcons/LogoLoja.png")));
+				stage.setResizable(false);
 
 			primaryStage.setScene(Login);
 			primaryStage.show();
@@ -106,7 +111,11 @@ public class Main extends Application {
 		cadastroProdutos.setTitle("Cadastro de Produtos - Artigos Esportivos");
 		cadastroProdutos.initModality(Modality.WINDOW_MODAL);
 		cadastroProdutos.setScene(scene1);
+		cadastroProdutos.getIcons().addAll(stage.getIcons());
+
 		cadastroProdutos.showAndWait();
+		
+	
 	}
 	
 	private static Stage cadastroFornecedores;
@@ -121,6 +130,7 @@ public class Main extends Application {
 		cadastroFornecedores.setTitle("Cadastro de Fornecedores - Artigos Esportivos");
 		cadastroFornecedores.initModality(Modality.WINDOW_MODAL);
 		cadastroFornecedores.setScene(scene2);
+		cadastroProdutos.getIcons().addAll(stage.getIcons());
 		cadastroFornecedores.showAndWait();
 	}
 	
@@ -136,6 +146,7 @@ public class Main extends Application {
 		cadastroClientes.setTitle("Cadastro de Clientes - Artigos Esportivos");
 		cadastroClientes.initModality(Modality.WINDOW_MODAL);
 		cadastroClientes.setScene(scene3);
+		cadastroProdutos.getIcons().addAll(stage.getIcons());
 		cadastroClientes.showAndWait();
 	}
 	
@@ -151,6 +162,7 @@ public class Main extends Application {
 		cadastroFuncionarios.setTitle("Cadastro de Funcionarios - Artigos Esportivos");
 		cadastroFuncionarios.initModality(Modality.WINDOW_MODAL);
 		cadastroFuncionarios.setScene(scene3);
+		cadastroProdutos.getIcons().addAll(stage.getIcons());
 		cadastroFuncionarios.showAndWait();
 	}
 	
@@ -166,6 +178,7 @@ public class Main extends Application {
 		cadastroVenda.setTitle("Ponto de Venda - Artigos Esportivos");
 		cadastroVenda.initModality(Modality.WINDOW_MODAL);
 		cadastroVenda.setScene(scene4);
+		cadastroProdutos.getIcons().addAll(stage.getIcons());
 		cadastroVenda.showAndWait();
 	}
 	
@@ -182,6 +195,7 @@ public class Main extends Application {
 		cadastroVenda.setTitle("Buscar Produto - Artigos Esportivos");
 		cadastroVenda.initModality(Modality.WINDOW_MODAL);
 		cadastroVenda.setScene(scene5);
+		cadastroProdutos.getIcons().addAll(stage.getIcons());
 		cadastroVenda.showAndWait();
 	}
 	
@@ -199,7 +213,5 @@ public class Main extends Application {
 	public static void setTableViewProdutos(Stage tableViewProdutos) {
 		TableViewProdutos = tableViewProdutos;
 	}
-
-
 
 }
