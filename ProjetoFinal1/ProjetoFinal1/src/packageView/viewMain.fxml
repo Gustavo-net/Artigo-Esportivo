@@ -107,10 +107,10 @@
       <TableView fx:id="ViewProdutos" layoutX="244.0" layoutY="359.0" prefHeight="278.0" prefWidth="659.0" style="-fx-opacity: 0.90; -fx-background-color: #ffffff;">
         <columns>
           <TableColumn fx:id="columnNome" prefWidth="186.40003967285156" style="-fx-background-color: #ffffff;" text="Nome do Produto" />
-            <TableColumn fx:id="columnCodigo" prefWidth="148.0" style="-fx-background-color: #ffffff;" text="Codigo" />
+            <TableColumn fx:id="columnCodigo" prefWidth="148.0" style="-fx-background-color: #ffffff; -fx-alignment: CENTER;" text="Codigo" />
             <TableColumn fx:id="columnMarca" prefWidth="112.0" style="-fx-background-color: #ffffff;" text="Marca" />
             <TableColumn fx:id="columnCategoria" prefWidth="108.800048828125" style="-fx-background-color: #ffffff;" text="Categoria" />
-            <TableColumn fx:id="columnQuantidade" prefWidth="107.2000732421875" style="-fx-background-color: #ffffff;" text="Quant Estoque" />
+            <TableColumn fx:id="columnQuantidade" prefWidth="107.2000732421875" style="-fx-background-color: #ffffff; -fx-alignment: CENTER;" text="Quant Estoque" />
         </columns>
       </TableView>
       <Button fx:id="btnClientes" layoutX="23.0" layoutY="269.0" mnemonicParsing="false" onAction="#OnbtnClientes" opacity="0.0" prefHeight="26.0" prefWidth="102.0" text="Button" />

@@ -16,9 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-
-  <AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioProduto">
+<AnchorPane maxHeight="661.0" maxWidth="932.0" prefHeight="661.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packageController.controllerRelatorioProduto">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="474.0" layoutX="232.0" layoutY="165.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="692.0" />
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18c16" height="121.0" layoutY="-2.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 0; -fx-arc-width: 0;" width="940.0" />
@@ -148,11 +146,11 @@
 	<TableView fx:id="tableRelatorioProduto" layoutX="232.0" layoutY="223.0" prefHeight="415.0" prefWidth="692.0" style="-fx-background-color: #ffffff;">
     <columns>
         <TableColumn fx:id="columnNome" prefWidth="196.79998779296875" style="-fx-background-color: #ffffff;" text="Nome" />
-        <TableColumn fx:id="columnCodigo" prefWidth="60.800048828125" style="-fx-background-color: #ffffff;" text="Código" />
+        <TableColumn fx:id="columnCodigo" prefWidth="60.800048828125" style="-fx-background-color: #ffffff; -fx-alignment: CENTER;" text="Código" />
         <TableColumn fx:id="columnCategoria" prefWidth="96.0" style="-fx-background-color: #ffffff;" text="Categoria" />
         <TableColumn fx:id="columnMarca" prefWidth="73.5999755859375" style="-fx-background-color: #ffffff;" text="Marca" />
-        <TableColumn fx:id="columnPrecoUn" prefWidth="67.199951171875" style="-fx-background-color: #ffffff;" text="Preço Unit." />
-        <TableColumn fx:id="columnEstoqueAtual" prefWidth="82.39996337890625" style="-fx-background-color: #ffffff;" text="Estoque Disp" />
+        <TableColumn fx:id="columnPrecoUn" prefWidth="67.199951171875" style="-fx-background-color: #ffffff; -fx-alignment: CENTER;" text="Preço Unit." />
+        <TableColumn fx:id="columnEstoqueAtual" prefWidth="82.39996337890625" style="-fx-background-color: #ffffff; -fx-alignment: CENTER;" text="Estoque Disp" />
         <TableColumn fx:id="columnDescricao" prefWidth="204.0" style="-fx-background-color: #ffffff;" text="Descrição" />
     </columns>
 </TableView>
